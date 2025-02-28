@@ -480,6 +480,93 @@ KOMA-script documentation for details.}]{fancyhdr}
         \vfill\null
     }
 }
+
+
+%----------------------------------------------------------------------------------------
+%   MANAGEMENT SUMMARY PAGE DESIGN
+%----------------------------------------------------------------------------------------
+
+\DeclareDocumentCommand{\managementsummaryauthorfont}{}{}
+\DeclareDocumentCommand{\managementsummarytitlefont}{}{}
+\providecaptionname{german,ngerman,austrian,naustrian}{\byname}{von}
+\providecaptionname{american,australian,british,canadian,english,newzealand,UKenglish,USenglish}{\byname}{by}
+
+\newcommand{\managementsummaryname}{Management Summary English} % English abstract
+\newcommand{\extramanagementsummaryname}{Management Summary Deutsch} % German Zusammenfassung as extra abstract
+% Redefine the abstract name to always be in English
+\addto\captionsngerman{\renewcommand{\managementsummaryname}{Management Summary}}
+\addto\captionsgerman{\renewcommand{\managementsummaryname}{Management Summary}}
+\addto\captionsaustrian{\renewcommand{\managementsummaryname}{Management Summary}}
+\addto\captionsnaustrian{\renewcommand{\managementsummaryname}{Management Summary}}
+
+\ifbool{consistentlayout}{
+    \DeclareDocumentEnvironment{managementsummary}{ O{} }{%
+        \addchap*{\managementsummaryname}%
+    }%
+    {}%end alt-managementsummary
+}{%
+    \DeclareDocumentEnvironment{managementsummary}{ O{\null\vfill} }{
+        \checktoopen
+        \tttypeout{\managementsummaryname}
+        #1%added to be able to have managementsummary more than one page long
+        \thispagestyle{plain}
+        \begin{center}
+            % Make this floating box inert to the parskip setting
+            \setlength{\parskip}{0pt}
+            {\normalsize \MakeUppercase{\univname}\par}% University name in capitals
+            \bigskip
+            {\Huge\textit{\abstractname} \par}
+            \bigskip
+            {\normalsize \instname \par}% Institute name
+            {\normalsize \deptname \par}% Department name
+            \bigskip
+            {\normalsize \degreename\par}% Degree name
+            \bigskip
+            {\normalsize\bfseries \@title \par}% Thesis title
+            \medskip
+            {\normalsize \byname{} \authorname \par}% Author name
+            \bigskip
+        \end{center}
+    }
+    {
+        \vfill\null
+    }
+}
+
+\ifbool{consistentlayout}{
+    \DeclareDocumentEnvironment{extraManagementsummary}{ O{} }{%
+        \addchap*{\extramanagementsummaryname}%
+    }%
+    {}%end alt-abstract
+}{%
+    \DeclareDocumentEnvironment{extraManagementsummary}{ O{\null\vfill} }{
+        \checktoopen
+        \tttypeout{\extramanagementsummaryname}
+        #1%added to be able to have abstract more than one page long
+        \thispagestyle{empty}
+        \begin{center}
+            % Make this floating box inert to the parskip setting
+            \setlength{\parskip}{0pt}
+            {\normalsize \MakeUppercase{\univnameger} \par}% University name in capitals
+            \bigskip
+            {\Huge\textit{\extraabstractname} \par}
+            \bigskip
+            {\normalsize \instname \par}% Institute name
+            {\normalsize \deptname \par}% Department name
+            \bigskip
+            {\normalsize \degreename\par}% Degree name
+            \bigskip
+            {\normalsize\bfseries \@title \par}% Thesis title
+            \medskip
+            {\normalsize \vonname{} \authorname \par}% Author name
+            \bigskip
+        \end{center}
+    }
+    {
+        \vfill\null
+    }
+}
+
 %----------------------------------------------------------------------------------------
 %   ACKNOWLEDGEMENTS PAGE DESIGN
 %----------------------------------------------------------------------------------------
