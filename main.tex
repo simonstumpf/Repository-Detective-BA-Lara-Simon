@@ -57,7 +57,6 @@
 %----------------------------------------------------------------------------------------
 \input{preamble}
 
-
 %----------------------------------------------------------------------------------------
 % THESIS INFORMATION: MODIFY THIS SECTION!
 %----------------------------------------------------------------------------------------
@@ -69,7 +68,8 @@
 % - Meta information of PDF
 
 \thesistitle{Repository Detective}             % Thesis title,              command: \ttitle
-\thesistype{Track Module 1}             % Type of thesis (e.g. Master Thesis) \ttype
+\thesistype{Bachelorarbeit}             % Type of thesis (e.g. Master Thesis) \ttype
+
 \thesisdate{\today}                     % Date of submission                  \tdate
 \keywords{computer science, Repository, Git}
                                         % Keywords for the thesis,            \keywordnames
@@ -81,7 +81,7 @@
                                         % Link to study program               \studyproglink
 
 \supervisorA{Michael Wahler}       % Name of supervisor 1,               \supnameA
-\supervisorAmail{e=mc2@zhaw.ch}         % Email address of supervisor 1,      \supmailA
+\supervisorAmail{wahl@zhaw.ch}         % Email address of supervisor 1,      \supmailA
 \supervisorAweb{https://en.wikipedia.org/wiki/Albert\_Einstein}  %            \supwebA
 \supervisorAinfo{                       % Formatted info about supervisor 1:  \supinfoA
     \supnameA\\
@@ -134,7 +134,7 @@
 \pagestyle{plain}             % Default to the plain heading style until the thesis style 
                               % is called for the body content
 
-
+\selectlanguage{german}
 %----------------------------------------------------------------------------------------
 % TITLE PAGE AND IMPRINT
 %----------------------------------------------------------------------------------------
@@ -172,6 +172,8 @@
 % LIST OF CONTENTS/FIGURES/TABLES PAGES
 %----------------------------------------------------------------------------------------
 % Comment out if any of the following is not needed:
+\renewcommand{\contentsname}{Inhaltsverzeichnis}
+
 \tableofcontents  % Add main table of contents
 %\listoffigures    % Add list of figures
 %\listoftables     % Add list of tables
@@ -194,6 +196,8 @@
 %----------------------------------------------------------------------------------------
 \mainmatter % Begin numeric (1,2,3...) page numbering
 \pagestyle{thesis} % Return the page headers back to the "thesis" style
+\renewcommand{\chaptername}{Kapitel}
+
 
 
 % Include the chapters of the thesis as separate files from the Chapters folder
@@ -212,6 +216,7 @@
 %----------------------------------------------------------------------------------------
 % THESIS CONTENT - APPENDICES
 %----------------------------------------------------------------------------------------
+\renewcommand{\appendixname}{Anhang}
 \appendix % Cue to tell LaTeX that the following "chapters" are Appendices
 
 % Include the appendices of the thesis as separate files from the Appendices folder

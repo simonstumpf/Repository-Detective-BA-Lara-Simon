@@ -190,7 +190,6 @@
 %----------------------------------------------------------------------------------------
 %   REQUIRED PACKAGES
 %----------------------------------------------------------------------------------------
-
 \RequirePackage{babel} % Required for automatically changing names of document elements to languages besides english
 
 \RequirePackage{scrbase} % Required for handling language-dependent names of sections/document elements
@@ -228,6 +227,7 @@
 }
 \NewDocumentCommand{\thesistype}{m}{\newcommand{\ttype}{#1}}
 \NewDocumentCommand{\thesisdate}{m}{\newcommand{\tdate}{#1}}
+
 \DeclareDocumentCommand{\author}{m}{\newcommand{\authorname}{#1}\renewcommand{\@author}{#1}}
 \NewDocumentCommand{\supervisorA}{m}{\newcommand{\supnameA}{#1}}
 \NewDocumentCommand{\supervisorAmail}{m}{\newcommand{\supmailA}{#1}}
@@ -349,6 +349,7 @@
 \providepairofpagestyles[thesisSimple]{thesis}{%
     \automark*[section]{}%
 }
+
 \providepairofpagestyles[thesisSimple]{review}{%
     \ofoot[\shorttitle/\authorname]{\shorttitle/\authorname}
     \ifoot[\tdate]{\tdate}
@@ -381,7 +382,7 @@ KOMA-script documentation for details.}]{fancyhdr}
 %   ABBREVIATIONS PAGE DESIGN
 %----------------------------------------------------------------------------------------
 
-\newcommand{\abbrevname}{List of Abbreviations}
+\newcommand{\abbrevname}{Abk\"urzungsverzeichnis}
 \providecaptionname{english,british,american}{\abbrevname}{List of Abbreviations}
 \providecaptionname{ngerman,german,austrian,naustrian}{\abbrevname}{Abk\"urzungsverzeichnis}
 \NewDocumentEnvironment{abbreviations}{ m }{%
@@ -397,7 +398,7 @@ KOMA-script documentation for details.}]{fancyhdr}
 %----------------------------------------------------------------------------------------
 %   ABSTRACT PAGE DESIGN
 %----------------------------------------------------------------------------------------
-
+ 
 \DeclareDocumentCommand{\abstractauthorfont}{}{}
 \DeclareDocumentCommand{\abstracttitlefont}{}{}
 \newcommand{\byname}{by}
@@ -405,23 +406,24 @@ KOMA-script documentation for details.}]{fancyhdr}
 \providecaptionname{german,ngerman,austrian,naustrian}{\byname}{von}
 \providecaptionname{american,australian,british,canadian,english,newzealand,UKenglish,USenglish}{\byname}{by}
 
-\newcommand{\abstractname}{Abstract} % English abstract
-\newcommand{\extraabstractname}{Zusammenfassung} % German Zusammenfassung as extra abstract
+\newcommand{\abstractnames}{Abstract} % English abstract
+\newcommand{\extraabstractname}{Zusammenfassung} % German Zusammenfassung as extra 
+%abstract
 % Redefine the abstract name to always be in English
-\addto\captionsngerman{\renewcommand{\abstractname}{Abstract}}
-\addto\captionsgerman{\renewcommand{\abstractname}{Abstract}}
-\addto\captionsaustrian{\renewcommand{\abstractname}{Abstract}}
-\addto\captionsnaustrian{\renewcommand{\abstractname}{Abstract}}
+\addto\captionsngerman{\renewcommand{\abstractnames}{Abstract}}
+\addto\captionsgerman{\renewcommand{\abstractnames}{Abstract}}
+\addto\captionsaustrian{\renewcommand{\abstractnames}{Abstract}}
+\addto\captionsnaustrian{\renewcommand{\abstractnames}{Abstract}}
 
 \ifbool{consistentlayout}{
     \DeclareDocumentEnvironment{abstract}{ O{} }{%
-        \addchap*{\abstractname}%
+        \addchap*{\abstractnames}%
     }%
     {}%end alt-abstract
 }{%
     \DeclareDocumentEnvironment{abstract}{ O{\null\vfill} }{
         \checktoopen
-        \tttypeout{\abstractname}
+        \tttypeout{\abstractnames}
         #1%added to be able to have abstract more than one page long
         \thispagestyle{plain}
         \begin{center}
@@ -429,7 +431,7 @@ KOMA-script documentation for details.}]{fancyhdr}
             \setlength{\parskip}{0pt}
             {\normalsize \MakeUppercase{\univname}\par}% University name in capitals
             \bigskip
-            {\Huge\textit{\abstractname} \par}
+            {\Huge\textit{\abstractnames} \par}
             \bigskip
             {\normalsize \instname \par}% Institute name
             {\normalsize \deptname \par}% Department name
