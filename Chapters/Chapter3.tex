@@ -14,13 +14,28 @@
 % SECTION 1
 %----------------------------------------------------------------------------------------
 
-\section{Pull Request Dauer (Lara)}
-Es existieren bereits diverse Studien, die sich mit der Analyse von Pull Requests befassen. In der Literatur werden verschiedene Faktoren untersucht, die beispielsweise die Dauer von Pull Requests bestimmen. Ein Beispiel ist das Paper "Wait for It: Determinants of Pull Request Evaluation Latency on GitHub", welches relevante Faktoren bei GitHub-Projekten analysiert hat. Die Ergebnisse der Untersuchung legen nahe, dass die Faktoren, die den Pull Request selbst betreffen, wie die Grösse (d. h. die Anzahl der Änderungen des Pull Requests) oder die Länge der Diskussion über den Pull Request, sowie Entwicklerfaktoren wie seine Reputation, einen Einfluss auf die Dauer des Pull Request haben. Zusätzlich konnte ein Zusammenhang zwischen der initialen Reaktion und den Wartezeiten festgestellt werden. Ausserdem wurde das Warten auf automatisierte Tests als ein weiterer wichtiger Faktor identifiziert.\\
-Ein weiteres Paper befasst sich spezifischer mit dem Punkt der ersten Reaktion auf einen Pull Request anhand Open Source Projekten. Es wurde festgestellt, dass die erste Antwort eines Bots kaum einen Einfluss auf die Dauer hat, die erste Antwort eines Menschen jedoch einen grossen Einfluss hat. Die Dauer der ersten menschlichen Reaktion ist auf die oben genannten Faktoren zurückzuführen.
+\section{Pull Request Dauer}
+Es existieren bereits diverse Studien, die sich mit der Analyse von Pull Requests befassen. In der Literatur werden verschiedene Faktoren untersucht, die die Dauer von Pull Requests bestimmen. Ein Beispiel ist das Paper "Wait for It: Determinants of Pull Request Evaluation Latency on GitHub", welches  mittels linearer Regressionsmodelle relevante Faktoren bei GitHub-Projekten analysiert hat. Die Resultate der Untersuchung zeigen, dass Faktoren wie die Grösse – definiert als die Anzahl der Änderungen des Pull Requests – oder die Länge der Diskussion über den Pull Request die Laufzeit beeinflussen. Des Weiteren wurde ein Zusammenhang zwischen der Reputation des Stellers und der Dauer nachgewiesen. Darüber hinaus wurde ein Zusammenhang zwischen der Grösse des Teams, der Auslastung - definiert als Anzahl offener Pull Requests - sowie der Zeit bis zur ersten menschlichen Reaktion auf den Pull Request festgestellt. Zusätzlich wurde gezeigt, dass CI-Faktoren einen signifikanten Einfluss haben, wie beispielsweise das Warten auf automatisierte Tests. \parencite{yu_wait_2015}
+
+Ein weiteres Paper befasst sich spezifischer mit dem Punkt der ersten Reaktion auf einen Pull Request anhand von Open Source Projekten. Es wurde festgestellt, dass die erste Antwort eines Bots kaum Auswirkungen auf die Dauer hat, die erste Antwort eines Menschen jedoch einen grossen Einfluss hat. Die Dauer der ersten menschlichen Reaktion ist in der Hälfte der Fälle auf neun Faktoren zurückzuführen. Spezifisch auf die Punkte der Länge der Beschreibung und die Komplexität der Codeänderungen. //TODO Satz zu Last und Developer \parencite{hasan_understanding_2023} 
+
+Beide oben beschriebenen Studien haben einen Zusammenhang zwischen der Grösse eines Pull Requests und dessen Dauer festgestellt \parencite{yu_wait_2015}\parencite{hasan_understanding_2023}. Die Studie mit dem Titel "Do Small Code Changes Merge Faster", die sich spezifisch mit dieser Thematik befasst, gelangt zu dem Schluss, dass kein Zusammenhang zwischen diesen beiden Aspekten festgestellt werden konnte \parencite{kudrjavets_small_2022}.
+
+
+
 
 %----------------------------------------------------------------------------------------
 % SECTION 2
 %----------------------------------------------------------------------------------------
 
 \section{Pull Request Akzeptanz}
-Simon
+Die Akzeptanz eines Pull Requests bestimmt, ob ein Pull Request gemerded oder abgelehnt (rejected) wird. Über die Akzeptanz von Pull Request existieren bereits schon mehrere Studien. 
+So zeigen diverse Studien, dass die Akzeptanz eines Pull Requests von mehreren technischen als auch sozialen Faktoren abhängig ist \parencite{gousios_exploratory_2014}. \\
+Eine Studie welche über 40'000 Pull Requests in unterschiedlichen Programmiersprachen (Java, Python, C etc.) analysierte, stellte fest dass die Code-Qualität nur einen geringen Einfluss auf die Akzeptanzrate hat \parencite{kuhejda_pull_2023}.
+
+Die Grösse eines Pull Requests (Umfang der Code Änderungen) ist ein technisches Merkmal, welches in diversen Literaturen häufig erwähnt wird. Hierzu liegen der Forschung unterschiedliche Resultate vor. So stellte eine Studie welche manuell über 300 Pull Requests der Eclipse und Mozilla Foundation untersuchte fest, dass nur 0.3\% aller abgelehnten Pull Requests wegen ihrer zu grossen Grösse abgelehnt wurden \parencite{tao_writing_2014}. Andere Untersuchungen ergaben, dass umfangreiche Pull Requests tendenziell seltener akzeptiert werden. So zeigte ein statistisches Modell, dass mit jeder grösseren Grössenordnung die Chance auf eine Akzeptanz um 26\% sinkt. Allerdings wird erwähnt, dass die Grösse des Pull Requests allein selten der Ablehnungsgrund ist. Vielmehr erschweren grosse PRs die Bewertung und führen dann zu einer Ablehnung, wenn zusätzliche Kosten, Unklarheiten oder Qualitätsmängel auftreten könnten.  \\
+Eine Studie, welche sich auf Mozialle Projekte fokussierte, stellte fest, dass Entwickler oftmals glauben dass die Grösse eines Pull Requests ausschlaggebend für die Akzeptanz sei \parencite{kononenko_code_2016}.
+
+Darüber hinaus spielen auch die zeitlichen und prozessualen Faktoren einen grossen Einfluss auf die PR Akzeptanz. Eine Untersuchung der zeitlichen Dimension von PR-Entscheidungen zeigte, dass sich die Bedeutung einzelner Variablen im Verlauf eines PR-Lebenszyklus ändern kann. Die wichtigsten Variablen für die finale Merge Entscheidung (bei bereits schon abgeschlossenen PRs) sind zwar auch für offene Pull Requests relevant, jedoch können die Faktoren umgekehrt wirken. Dies bedeutet, dass gewisse Merkmale wie etwa die Grösse, Tests aber auch die Diskussion im PR in früheren Phasen anders bewertet werden als im Ergebnis. 
+
+Die sozialen Faktoren spielen ebenfalls eine wichtige Rolle. So werden Pull Requests von Benutzern, welche eine soziale Bindung zum Projekt haben (durch vorherige Mitarbeit oder durch den persönlichen Kontakt mit einem Projekt-Maintainer), deutlich häufiger akzeptiert \parencite{tsay_influence_2014}. 
