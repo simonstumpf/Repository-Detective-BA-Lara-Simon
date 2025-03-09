@@ -13,10 +13,18 @@
 %----------------------------------------------------------------------------------------
 % SECTION 1
 %----------------------------------------------------------------------------------------
-\begin{itemize}
-    \item Git \& Github Simon
-    \item Pull Request Simon
-    \item Pull Request Akzeptanz Lara
-\end{itemize}
 
+\section{Git \& Github}
+Die Nutzung eines Versionskontrollsystems (VCS) ist ein zentrales Element der Softwareentwicklung. Mit einem VCS können Änderungen am Sourcecode nachverfolgt und bei Bedarf eine frühere Version des Projektes wiederhergestellt werden. Die Nutzung eines VCS ermöglicht ausserdem, dass mehrere Entwickler parallel am gleichen Code arbeiten können, indem die Änderungen inklusive deren Urheber sowie Zeitpunkt festgehalten werden. 
+
+Mit der Nutzung einer verteilten Versionsverwaltung (DVCS), wird kein zentrales Repository mehr verwendet. Jeder Entwickler verfügt über eine Kopie des Projektes inklusive des gesamten Projektverlaufs. Änderungen können lokal implementiert werden. Eine Verbindung zum Server wird nur für das Synchronisieren von Änderungen notwendig. \parencite{noauthor_informationen_2025} 
+
+Git ist heute das am meist verbreitete DVCS System. Es wurde von Linus Torvalds für die Entwicklung des Linux-Kernels entwickelt. \parencite{zack_git_2018} Git bezeichnet ein Projekt als ein Git-Repository, wobei der Verlauf als eine Reihe von Snapshots (Commits) modelliert wird. Diese Commits sind in unterschiedlichen Branches organisiert, welche die parallele Entwicklung ermöglichen. Mit dem Verwenden von Branches kann parallel an Bugs, neuen Features etc. entwickelt werden, ohne sich gegenseitig zu stören. Diese unterschiedlichen Branches werden anschliessend gemerdet. 
+
+Mit dem Erfolg von Git entstanden Dienste und Anbieter, welche Git Repositories online hosten und zusätzliche Kollaborationstools anbieten. Github ist der bekannteste und auch am meist verwendete Hosting-Dienst. Auf Github können Entwickler ihr Git-Repository hosten, Änderungen vorschlagen und diskutieren, Fehler (Issues) tracken. Github bietet eine Weboberfläche, welche für das Einsehen des Codes, aber auch für das Erstellen von Pull Requests und Issues verwendet werden kann. Zusätzlich kann der CI/CD Prozess direkt mittels Github Actions abgebildet werden. 
+
+\section{Pull Request Simon} 
+\parencite{noauthor_about_nodate} 
+\section{Pull Request Akzeptanz}
+Am Ende eines Pull Requests wird dieser entweder akzeptiert und in den Haupt-Branch integriert (Merged) oder geschlossen werden (Close)\parencite{noauthor_merging_nodate}\parencite{noauthor_closing_nodate}. Die Akzeptanz kann dabei auf zwei Arten erfolgen. Entweder wird der Merge-Button durch den Antragsteller oder ein anderes Teammitglied direkt angeklickt oder es erfolgt eine Genehmigung (Approval) \parencite{noauthor_merging_nodate}\parencite{noauthor_reviewing_nodate}. Die Genehmigung ist eine Aktion welche auf einem Pull Request ausgeführt werden kann. Es besteht auch die Möglichkeit, diese Aktion zu erzwingen und somit dürfen die Änderungen erst zusammengeführt werden, wenn ein anderes Teammitglied den Pull Request genehmigt hat \parencite{noauthor_approving_nodate}.
 
