@@ -145,3 +145,7 @@
 %----------------------------------------------------------------------------------------
 
 \setlocalecaption{german}{figure}{Abbildung} 
+
+\newcommand{\secref}[1]{%
+  \hyperref[#1]{\getrefnumber{#1} \nameref*{#1}}%
+}
