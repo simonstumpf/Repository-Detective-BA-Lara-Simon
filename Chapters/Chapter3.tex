@@ -29,7 +29,50 @@ Damit keine Outliers die Datenanalyse beeinflussen, wurden diese vorgängig entf
 \section{Analyse Churn vs Latency}
 In der Literatur finden sich unterschiedliche Aussagen zum Einfluss der Code-Grösse (Churn) auf die Dauer von Pull Requests (PR Latency). Während einige Studien einen Zusammenhang feststellen, bleiben andere Untersuchungen uneindeutig \parencite{hasan_understanding_2023}\parencite{kudrjavets_small_2022}.
 
-Zur Analyse dieser Metriken wurde ein Jupyter Notebook \textit{latency-churn-analysis} erstellt \parencite{stumpf_simon_repo-detectivesba-metric-analysis-scripts_nodate}. 
+Zur Analyse dieser Metriken wurde ein Jupyter Notebook \textit{latency-churn-analysis} erstellt \parencite{stumpf_simon_repo-detectivesba-metric-analysis-scripts_nodate}. Für die Analyse wurden folgende Metriken via Mining extrahiert:
+\begin{itemize}
+    \item \textbf{Pull Request createTime:} Erstellungsdatum des PullRequests
+    \item \textbf{Pull Request closeTime:} Schliesszeit des PullRequests.
+    \item \textbf{Pull Request Additions:} Anzahl der hinzugefügten Codezeilen.
+    \item \textbf{Pull Request Deletions:} Anzahl der gelöschten Codezeilen
+\end{itemize}
+
+Daraus wurden die Metriken \textit{latency} und \textit{churn} berechnet. Die \textit{latency} wird anhand folgender Formel berechnet:
+\begin{equation}
+latency = closeTime - createTime
+\end{equation}
+
+Die Zusammensetzung des \textit{churn} ist wie folgt:
+\begin{equation}
+churn = additions + deletions
+\end{equation}
+
+Durch graphische Darstellung und Spearmans Rangkorrelation wurde geprüft, ob ein monotoner Zusammenhang zwischen den Metriken besteht. Die Formel stellt sich wie folgt zusammen:
+\begin{equation}
+\rho = 1 - \frac{6 \sum d_i^2}{n(n^2 - 1)}
+\end{equation}
+
+\noindent\textbf{Legende:}
+\begin{itemize}
+  \item[$\rho$] Spearman-Rangkorrelationskoeffizient
+  \item[$d_i$] Differenz der Ränge zwischen den zwei Beobachtungen 
+  \item[$n$] Anzahl der Beobachtungspaare
+\end{itemize}
+
+Des Weiteren wird eine Prüfung durchgeführt, um festzustellen, ob sich Unterschiede zwischen den Vollzeit- und Teilzeitklassen ergeben. Um zu analysieren, ob es Differenzen in der Handhabung von Pull-Requests gibt. Dafür wurden die bereits erwähnten Metriken \textit{latency} und \textit{churn} anhand deren Mittelwerte geprüft. Zudem wurde eine Analyse durchgeführt, um die Verteilung der \textit{latencies} über Teilzeit- und Vollzeitklassen zu ermitteln. Zu diesem Zweck wurden folgende Zeiträume definiert: [0min - 1min], [1min - 6min], [6min - 30min], [30min - 1h], [1h-2h], [2h-4h], [4h-8h], [8h-12h], [12h-24h], [24+]
+
+// TODO no dev branches?
+\subsection{Einfluss von Projektzeit}
+Ein signifikanter Faktor, der bei Projektmodulen eine Rolle spielt, ist die fest definierte Abgabefrist. Dies unterscheidet diese Projekte von den Open-Source-Projekten, die in der Literatur häufig untersucht werden. Es soll nun untersucht werden, ob der Zeitpunkt der Erstellung eines Pull-Requests innerhalb der Projektlaufzeit einen Einfluss auf die Bearbeitung und vor allem auf die Dauer hat. Dafür wurde zusätzlich zu den oben genannten Metriken noch das Abgabedatum der einzelnen Klassen ermittelt.
+
+Es wurden verschiedene Analysen anhand eines Phyton Notebooks vorgenommen. Die erste Untersuchung analysierte, ob generell ein Zusammenhang über die \textit{latency} und \textit{churn} im Verlauf der Projektzeit festgestellt werden kann.  Um der in der Einleitung formulierten Hypothese nachzugehen, wurden die Pull Requests, die innerhalb einer Minute gemerged wurden, ins Verhältnis zur Projektabgabe gesetzt und graphisch dargestellt. Darüber hinaus wurde analysiert, wie viele Pull Requests die Teams innerhalb des letzten Projekttages noch abgearbeitet haben.
 
 
 \section{Analyse Pull Request Akzeptanz}
+Die aktuelle Literatur zeigt, dass sowohl soziale und prozessbezogene Faktoren als auch technische Merkmale berücksichtigt werden müssen. 
+
+Für die Analyse der geschlossenen Pull Requests wurden zunächst alle Pull Requests eingelesen und gefiltert. Erste Auswertungen ergaben, dass 0,07\% aller Pull Requests geschlossen wurden. Von diesen 170 geschlossenen Pull Requests wurden anschliessend alle PRs mit einem Churn von mindestens 500 manuell analysiert. Ziel war es, die Beweggründe zu dokumentieren. Dabei wurden die Pull Requests in eine der folgende Kategorien klassifiziert:
+\begin{itemize}
+    \item \textbf{falscher Zielbranch:} Falls der PR mit einem falschen Zielbranch erstellt wurde und dies auch so im PR anschliessend vermerkt wurde. 
+    \item \textbf{falscher Zielbranch:} Fall
+\end{itemize}

@@ -13,38 +13,56 @@
 %----------------------------------------------------------------------------------------
 % SECTION 1
 %----------------------------------------------------------------------------------------
-
-\subsection{Ergebnisse der Churn-Analyse}
-
-Die initiale Auswertung zeigte, dass der durchschnittliche Churn-Wert in den PM2-Projekten deutlich variiert. Einzelne Pull Requests wiesen einen sehr hohen Churn auf (über 1000 Zeilen geändert), während viele Änderungen im Bereich von 10 bis 50 Zeilen lagen. 
-
-Die Datenanalyse ergab folgende Erkenntnisse:
-
-\begin{itemize}
-    \item \textbf{Korrelation:} Es konnte keine Korrelation zwischen dem Churn und der PR-Latenz festgestellt werden.
-    \item \textbf{Ausreisser:} Besonders umfangreiche Pull Requests führten teilweise zu aussergewöhnlich langen Latenzzeiten, was sich als typische Herausforderung im Code Review Prozess darstellt.
-    \item \textbf{Review-Aktivität:} Pull Requests mit geringem Churn wurden häufig schneller bearbeitet, was die Hypothese unterstützt, dass kleinere Changes leichter zu prüfen sind.
-    \item \textbf{Kein Unterschied zwischen den Klassen:} Es lässt sich kein wesentlicher Unterschied zwischen der Teilzeit- und der Vollzeitklasse feststellen.    
-\end{itemize}
-
-Die Ergebnisse der Scatterplots verdeutlichen diese Tendenzen. In Abbildung \ref{fig:pr-latency-churn-added-plus-deleting} ist die Korrelation grafisch dargestellt.
-
-
+In diesem Kapitel werden die Ergebnisse der verschiedenen Analysen erläutert.
+\section{Ergebnisse Racetrack}
+Erste Analysen zeigen....
+\section{Ergebnisse Latency vs. Churn}
+Die verschiedenen Farben in der  \autoref{fig:pr-latency-vs-churn-allgemein}  repräsentieren die einzelnen Projekte der Projektgruppen.
+Wie in der Abbildung ersichtlich, zeigt sich ein Cluster von Datenpunkten in der linken unteren Ecke. Dabei konzentrieren sich die Punkte vorallem bei einem Churn von unter 1000 Zeilen und unter 100 Stunden Latency. Es wird deutlich, dass sowohl hohe Churn-Werte schnell abgearbeitet werden, wie auch niedrige Churn-Werte hohe Latencies aufweisen. Die vorliegende Grafik gibt keinerlei Tendenzen zu einer Korrelation zwischen den Metriken Latency und Churn wieder.
 \begin{figure}[th]
-\centering
-\includegraphics[width=\textwidth]{Figures/pr-latency-churn.png}
-\decoRule
-\caption{Scatterplot der Churn-Werte in Relation zur PR-Latenz}
-\label{fig:pr-latency-churn-added-plus-deleting}
+    \centering
+    \includegraphics[width=\textwidth]{pr-latency-vs-churn-allgemein.png}
+    \caption{Scatterplot der Churn-Werte in Relation zur PR-Latenz}
+    \label{fig:pr-latency-vs-churn-allgemein}
 \end{figure}
 
+Dies wird ebenfalls durch die Berechnung des Spearman Rangkorrelationskoeffizienten deutlich, der bei einem Wert von 0,17 keine monotone Korrelation aufzeigt.
 
-Zusammenfassend liefert das erste Experiment Hinweise darauf, dass ein erhöhter Churn tatsächlich mit einer höheren PR-Latenz einhergeht. Um diese Hypothese jedoch weiter zu festigen, sind weitere Analysen und statistische Tests notwendig, die im nächsten Kapitel beschrieben werden.
+// TODO übergang
 
-%-----------------------------------
-% SUBSECTION 2 (optional)
-%-----------------------------------
+Die Auswertung der Daten ergibt, dass die Latency in den Vollzeitklassen mit 0.8 Stunden nahezu doppelt so hoch ist wie in den Teilzeitklassen, wo der Mittelwert bei 0.46 liegt. Bei den Churn-Werten ist hingegen kein signifikanter Unterschied erkennbar. Dies ist in der nachfolgenden \autoref{fig:vergleich-latency-churn} ersichtlich.
 
-\subsection{Fazit des ersten Experiments}
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/mittelwert-latency-t-v.png}
+        \caption{Mittelwerte Latency Vollzeit vs. Teilzeit}
+        \label{fig:mittelwert-latency-t-v}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/mittelwert-churn-t-v.png}
+        \caption{Mittelwerte Churn Vollzeit vs. Teilzeit}
+        \label{fig:mittelwert-churn-t-v}
+    \end{subfigure}
+    \caption{Vergleich von Latency und Churn zwischen Vollzeit und Teilzeit}
+    \label{fig:vergleich-latency-churn}
+\end{figure}
 
-Das Experiment zur Churn-Metrik bildete die Grundlage für unsere weiteren Analysen. Es zeigte sich, dass in den studentischen Projekten ähnliche Muster auftreten wie in professionellen Softwareentwicklungsprozessen, was die Relevanz und Generalisierbarkeit der Untersuchung unterstreicht.
+Eine detaillierte Analyse der Latencies von Teilzeit- und Vollzeitstudierenden offenbart, dass Teilzeitklassen eine signifikant höhere Anzahl an Pull Requests aufweisen, die innerhalb einer Minute abgeschlossen werden. Dies zeigt sich im ersten Säulenpaar bei der \autoref{fig:anz-prs-vs-latency-tv}. Der Anteil der innerhalb einer Minute abgeschlossenen Pull Requests beläuft sich auf 16.8 Prozent der Gesamtzahl der Pull Requests bei den Teilzeitstudierenden, während dieser Anteil bei den Vollzeitstudierenden 9.9 Prozent beträgt. Bei allen Zeitabschnitten ausser 4–8 Stunden und 8–12 Stunden zeigen die Teilzeitklassen eine grössere Anzahl an Pull Requests, jedoch sind die grössten Differenzen bei den ersten drei und dem letzten Säulenpaar erkennbar. Eine Zusammenfassung der Pull Requests von 0 bis 30 Minuten ergibt, dass diese bei den Teilzeitklassen 50.7 Prozent und bei den Vollzeitklassen 44.7 Prozent ausmachen. Die letzte Säule zeigt einen Anteil von 18.6 Prozent für Teilzeitklassen und 19.7 Prozent für Vollzeitklassen. 
+\begin{figure}[htbp]
+    \includegraphics[width=\textwidth]{Figures/anz-prs-vs-latency-tv.png}
+    \caption{Anzahl PullRequests vs. Latency (Teilzeit, Vollzeit)}
+    \label{fig:anz-prs-vs-latency-tv}
+\end{figure}
+
+// TODO keine dev branches?
+\newpage
+\subsection{Ergebnisse Einfluss Projektzeit}
+\begin{figure}[htbp]
+    \includegraphics[width=\textwidth]{Figures/anz-prs-under-1-min.png}
+    \caption{Anzahl PullRequests unter einer Minute}
+    \label{fig:anz-prs-under-1-min}
+\end{figure}
