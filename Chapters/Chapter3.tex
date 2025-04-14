@@ -71,8 +71,11 @@ Es wurden verschiedene Analysen anhand eines Phyton Notebooks vorgenommen. Die e
 \section{Analyse Pull Request Akzeptanz}
 Die aktuelle Literatur zeigt, dass sowohl soziale und prozessbezogene Faktoren als auch technische Merkmale berücksichtigt werden müssen. 
 
-Für die Analyse der geschlossenen Pull Requests wurden zunächst alle Pull Requests eingelesen und gefiltert. Erste Auswertungen ergaben, dass 0,07\% aller Pull Requests geschlossen wurden. Von diesen 170 geschlossenen Pull Requests wurden anschliessend alle PRs mit einem Churn von mindestens 500 manuell analysiert. Ziel war es, die Beweggründe zu dokumentieren. Dabei wurden die Pull Requests in eine der folgende Kategorien klassifiziert:
+Um die Ursache des geschlossenen PRs zu gruppieren, wurden folgende Gruppen erstellt: 
 \begin{itemize}
-    \item \textbf{falscher Zielbranch:} Falls der PR mit einem falschen Zielbranch erstellt wurde und dies auch so im PR anschliessend vermerkt wurde. 
-    \item \textbf{falscher Zielbranch:} Fall
+    \item \textbf{PRs ohne erkennbaren Grund}: Die PRs wurden ohne Kommentar geschlossen. Die Churn Grösse ist kleiner als 500. 
+    \item \textbf{Issue / Feature durch anderen PR implementiert}: Das Feature wurde durch einen anderen PR implementiert und anschliessend dann geschlossen. 
+    \item \textbf{PRs mit falschem Zielbranch}: Der Autor des PRs wählte den falschen Zielbranch aus. Der PR wurde anschliessend in einen anderen Branch gemerdet. 
+    \item \textbf{Feature wird nicht mehr benötigt}: Das Feature wird nicht mehr benötigt. Diess muss so im PR vermerkt sein. 
+    \item \textbf{Implementierung abgelehnt}: Die Implementierung wurde abgelehnt. 
 \end{itemize}
