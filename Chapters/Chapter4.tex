@@ -26,10 +26,9 @@ Wie in der Abbildung ersichtlich, zeigt sich ein Cluster von Datenpunkten in der
     \label{fig:pr-latency-vs-churn-allgemein}
 \end{figure}
 
-Dies wird ebenfalls durch die Berechnung des Spearman Rangkorrelationskoeffizienten deutlich, der bei einem Wert von 0,17 keine monotone Korrelation aufzeigt.
+Dies wird ebenfalls durch die Berechnung des Spearman Rangkorrelationskoeffizienten deutlich, der bei einem Wert von 0.17 keine monotone Korrelation aufzeigt.
 
-// TODO übergang
-
+\subsection{Teilzeit vs. Vollzeit}
 Die Auswertung der Daten ergibt, dass die Latency in den Vollzeitklassen mit 0.8 Stunden nahezu doppelt so hoch ist wie in den Teilzeitklassen, wo der Mittelwert bei 0.46 liegt. Bei den Churn-Werten ist hingegen kein signifikanter Unterschied erkennbar. Dies ist in der nachfolgenden \autoref{fig:vergleich-latency-churn} ersichtlich.
 
 \begin{figure}[ht]
@@ -51,6 +50,7 @@ Die Auswertung der Daten ergibt, dass die Latency in den Vollzeitklassen mit 0.8
     \label{fig:vergleich-latency-churn}
 \end{figure}
 
+\newpage
 Eine detaillierte Analyse der Latencies von Teilzeit- und Vollzeitstudierenden offenbart, dass Teilzeitklassen eine signifikant höhere Anzahl an Pull Requests aufweisen, die innerhalb einer Minute abgeschlossen werden. Dies zeigt sich im ersten Säulenpaar bei der \autoref{fig:anz-prs-vs-latency-tv}. Der Anteil der innerhalb einer Minute abgeschlossenen Pull Requests beläuft sich auf 16.8 Prozent der Gesamtzahl der Pull Requests bei den Teilzeitstudierenden, während dieser Anteil bei den Vollzeitstudierenden 9.9 Prozent beträgt. Bei allen Zeitabschnitten ausser 4–8 Stunden und 8–12 Stunden zeigen die Teilzeitklassen eine grössere Anzahl an Pull Requests, jedoch sind die grössten Differenzen bei den ersten drei und dem letzten Säulenpaar erkennbar. Eine Zusammenfassung der Pull Requests von 0 bis 30 Minuten ergibt, dass diese bei den Teilzeitklassen 50.7 Prozent und bei den Vollzeitklassen 44.7 Prozent ausmachen. Die letzte Säule zeigt einen Anteil von 18.6 Prozent für Teilzeitklassen und 19.7 Prozent für Vollzeitklassen. 
 \begin{figure}[htbp]
     \includegraphics[width=\textwidth]{Figures/anz-prs-vs-latency-tv.png}
@@ -58,13 +58,94 @@ Eine detaillierte Analyse der Latencies von Teilzeit- und Vollzeitstudierenden o
     \label{fig:anz-prs-vs-latency-tv}
 \end{figure}
 
-// TODO keine dev branches?
+Die Entfernung der Datensätze, welche Merges zwischen Developer-Branches und Main-Branches abbilden, verändert die Resultate marginal. Dies ist in der \autoref{fig:anz-prs-vs-latency-tv-no-dev} ersichtlich. Ebenso überwiegen in den ersten drei Spaltenpaaren und im letzten Paar die Teilzeitklassen. Am auffälligsten ist wiederum das erste Säulenpaar. Hier beträgt der Anteil der Teilzeitstudierenden an der Gesamtzahl der Teilzeitstudierenden 16 Prozent und bei den Vollzeitklassen 9.3 Prozent. Die Anzahl der Pull-Requests, die in weniger als einer Minute bearbeitet werden, ist also in beiden Klassen zurückgegangen, liegt aber in beiden Fällen unter einem Prozent.
+Addiert man die ersten drei Säulenpaare, so ergibt sich für die Teilzeitklassen ein Wert von 49.7 Prozent und für die Vollzeitklassen ein Wert von 43.3 Prozent. Damit liegen die Werte für die Teilzeit um genau ein Prozent und für die Vollzeit um 1.4 Prozent niedriger. Bei den 24 Stunden plus beträgt der Wert bei den Teilzeitklassen 19 Prozent, was einer Differenz von 0.4 Prozent entspricht. Bei den Vollzeitklassen beträgt der Wert 20.2 Prozent, was einem Anstieg von 0.5 Prozent gleichkommt.
+
+\begin{figure}[htbp]
+    \includegraphics[width=\textwidth]{Figures/anz-prs-vs-latency-tv-no-dev.png}
+    \caption{Anzahl PullRequests vs. Latency (Teilzeit, Vollzeit) ohne Dev zu Main}
+    \label{fig:anz-prs-vs-latency-tv-no-dev}
+\end{figure}
+
 \newpage
 \subsection{Ergebnisse Einfluss Projektzeit}
+
 \begin{figure}[htbp]
-    \includegraphics[width=\textwidth]{Figures/anz-prs-under-1-min.png}
-    \caption{Anzahl PullRequests unter einer Minute}
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/mittelwert-woche-lateny.png}
+        \caption{Mittelwerte Woche des Projektes vs. Latency}
+        \label{fig:mittelwert-woche-lateny}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/mittelwert-woche-churn.png}
+        \caption{Mittelwerte Woche des Projektes vs. Churn}
+        \label{fig:mittelwert-woche-churn}
+    \end{subfigure}
+    \caption{Vergleich von Latency und Churn innerhalb der Projektzeit}
+    \label{fig:vergleich-latency-churn-projektzeit}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/mittelwert-woche-lateny-v.png}
+        \caption{Mittelwerte Woche des Projektes vs. Latency Vollzeit}
+        \label{fig:mittelwert-woche-lateny-v}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/mittelwert-woche-churn-v.png}
+        \caption{Mittelwerte Woche des Projektes vs. Churn Vollzeit}
+        \label{fig:mittelwert-woche-churn-v}
+    \end{subfigure}
+    \caption{Vergleich von Latency und Churn innerhalb der Projektzeit Vollzeit}
+    \label{fig:vergleich-latency-churn-projektzeit-v}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/mittelwert-woche-lateny-t.png}
+        \caption{Mittelwerte Woche des Projektes vs. Latency Teilzeit}
+        \label{fig:mittelwert-woche-lateny-t}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/mittelwert-woche-churn-t.png}
+        \caption{Mittelwerte Woche des Projektes vs. Churn Teilzeit}
+        \label{fig:mittelwert-woche-churn-t}
+    \end{subfigure}
+    \caption{Vergleich von Latency und Churn innerhalb der Projektzeit Teilzeit}
+    \label{fig:vergleich-latency-churn-projektzeit-t}
+\end{figure}
+\newpage
+Die Analyse der Daten, die in der \autoref{fig:anz-prs-vs-latency-tv} dargestellt sind, zeigt, dass eine Vielzahl von PullRequests innerhalb einer halben Stunde bearbeitet wurde. Eine detaillierte Analyse dieser kurz geöffneten PullRequests offenbart, dass der überwiegende Teil davon in den letzten drei Tagen und insbesondere am Tag der Abgabe erstellt wurde. Eine weitere Restriktion der Pull Requests auf jene, die innerhalb einer Minute abgearbeitet wurden, resultiert in einer ähnlichen Situation. Es ist jedoch festzustellen, dass der Tag der Abgabe sich stärker abhebt, wobei auch ein Anstieg zwei Tage vor Abgabe zu erkennen ist.  Die Resultate sind in \autoref{fig:anz-prs-under-x-mins} dargestellt.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/anz-prs-under-30-min.png}
+    \caption{Anzahl PullRequests unter 30 Minuten im Verhältnis zur Abgabe}
+    \label{fig:anz-prs-under-30-min}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/anz-prs-under-1-min.png}
+    \caption{Anzahl PullRequests unter einer Minute im Verhältnis zur Abgabe}
     \label{fig:anz-prs-under-1-min}
+    \end{subfigure}
+    \caption{Anzahl PullRequests im Verhältnis zur Abgabe}
+    \label{fig:anz-prs-under-x-mins}
 \end{figure}
 
 \newpage
