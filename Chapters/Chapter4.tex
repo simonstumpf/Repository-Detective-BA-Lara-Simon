@@ -15,7 +15,14 @@
 %----------------------------------------------------------------------------------------
 In diesem Kapitel werden die Ergebnisse der verschiedenen Analysen erläutert.
 \section{Ergebnisse Racetrack}
-Erste Analysen zeigen....
+Die ersten Analysen zeigen, dass pro Repository durchschnittlich 34.3 PRs erstellt werden. Die Vollzeitklassen erfassen mit durchschnittlich 39.5 PRs pro Projekt mehr PRs als die Teilzeitklassen, die im Schnitt 31.8 erzeugen. Der Median liegt bei 34 PRs.
+
+Bezüglich des Churns weisen die PRs der Racetrack Repos 278.2 geänderte Zeilen auf, wobei der Median bei 94 Zeilen liegt. Die Vollzeitklassen verfügen mit 301.3 über grössere PRs als die Teilzeitklassen mit 260.3 Zeilen. Auch beim Median zeigt sich ein leichter Unterschied: 97 geänderte Zeilen bei den Vollzeit- gegenüber 93 bei den Teilzeitklassen. 
+
+Die durchschnittliche PR-Latenz beträgt insgesamt rund 18 Stunden und 34 Minuten. Die durchschnittliche Latenz in den Teilzeitklassen liegt bei knapp 19 Stunden und 53 Minuten, in den Vollzeitklassen bei etwa 16 Stunden und 53 Minuten. Der Median der Latenzzeit fällt jedoch deutlich kürzer aus und beträgt insgesamt nur rund 37 Minuten. Interessanterweise zeigen die Teilzeitklassen mit einem Median von 28 Minuten eine schnellere Reaktionszeit als die Vollzeitklassen, deren Median bei 48 Minuten liegt.
+
+Auch die Struktur der PRs unterscheidet sich leicht zwischen den Unterrichtsmodellen: Die durchschnittliche Anzahl bearbeiteter Dateien pro PR liegt insgesamt bei 5.66 Dateien. Teilzeitklassen weisen mit 5.85 im Schnitt mehr betroffene Dateien auf als Vollzeitklassen mit 5.42 Dateien. Ebenso zeigt sich bei der durchschnittlichen Anzahl Commits pro PR ein Unterschied: Insgesamt liegt der Durchschnitt bei 7.03 Commits pro PR, wobei Teilzeitklassen auf 6.50 und Vollzeitklassen auf 7.70 Commits pro PR kommen.
+
 \section{Ergebnisse Latency vs. Churn}
 Die verschiedenen Farben in der  \autoref{fig:pr-latency-vs-churn-allgemein}  repräsentieren die einzelnen Projekte der Projektgruppen.
 Wie in der Abbildung ersichtlich, zeigt sich ein Cluster von Datenpunkten in der linken unteren Ecke. Dabei konzentrieren sich die Punkte vorallem bei einem Churn von unter 1000 Zeilen und unter 100 Stunden Latency. Es wird deutlich, dass sowohl hohe Churn-Werte schnell abgearbeitet werden, wie auch niedrige Churn-Werte hohe Latencies aufweisen. Die vorliegende Grafik gibt keinerlei Tendenzen zu einer Korrelation zwischen den Metriken Latency und Churn wieder.
@@ -150,17 +157,32 @@ Die Analyse der Daten, die in der \autoref{fig:anz-prs-vs-latency-tv} dargestell
     \caption{Anzahl PullRequests unter einer Minute im Verhältnis zur Abgabe}
     \label{fig:anz-prs-under-1-min}
     \end{subfigure}
-    \caption{Anzahl PullRequests im Verhältnis zur Abgabe}
+    \caption{Anzahl PullRequests unter 30 / 1 Minute im Verhältnis zur Abgabe}
     \label{fig:anz-prs-under-x-mins}
 \end{figure}
 
+Die Untersuchung von Pull Requests im Verhältnis zur Abgabe zeigt, dass am Tag der Abgabe die meisten Pull Requests abgearbeitet wurden. Dies ist aus der \autoref{fig:anz-prs-days-away-from-end} ersichtlich. Von den 2427 untersuchten Pull Requests wurden 523 am Tag der Abgabe erstellt und abgeschlossen. Dieser Wert entspricht einer Quote von 21.5 Prozent.  Die zweitmeisten Pull Request wurden am Tag vor der Abgabe bearbeitet mit einer Anzahl von 309. Am drittletzten Tag wurde ein erhöhter Wert festgestellt, der jedoch nicht mehr signifikant hervorsticht. Es wurden 154 Pull Requests bearbeitet. Eine Zusammenfassung der letzten drei Tage der Projekte ergibt eine Gesamtzahl von 986 bearbeiteten Pull Requests, was einem Prozentsatz von 40.6 Prozent entspricht. Über die restliche Projektzeit variieren die Anzahl bearbeiteten Pull Rquests. Es lassen sich erhöhte Werte sieben, acht und 15 Tage vor der Abgabe feststellen, die sich von den Werten der übrigen Tage abheben.
+\begin{figure}[htbp]
+    \includegraphics[width=\textwidth]{Figures/anz-prs-days-away-from-end.png}
+    \caption{Anzahl geschlossene Pull Requests im Verhältnis zur Abgabe}
+    \label{fig:anz-prs-days-away-from-end}
+\end{figure}
 \newpage
+Eine detaillierte Analyse der Pull Requests in den einzelnen Teams zeigt, dass in 19 von 71 Teams mehr als 50 Prozent aller Pull Requests in den letzten drei Projekttagen eröffnet und abgeschlossen wurden. Es lässt sich feststellen, dass vier der analysierten Teams einen Anteil von über 75 Prozent ihrer Pull Requests in diesem Zeitraum bearbeitet haben. Zudem ist eine Gruppe zu identifizieren, die sämtliche ihrer Pull Requests innerhalb des definierten Zeitraums erstellt und geschlossen hat. Eine detaillierte Analyse des Projektes ergab, dass die genannte Gruppe insgesamt zwei Pull Requests hatte, die beide am Tag vor der Abgabe erstellt wurden. Wenn diese Analyse auf den letzten Projekttag beschränkt wird, dann sind es drei Teams, die mehr als 50 Prozent ihrer Pull Requests am Abgabetag erledigt haben.
+
 \section{Ergebnisse Pull Reqeust Akzeptanz}
 Für die Analyse der geschlossenen Pull Requests (PRs) wurden zunächst alle verfügbaren PRs eingelesen und entsprechend gefiltert. Erste Auswertungen ergaben, dass lediglich 0,07\% aller Pull Requests geschlossen wurden. Von den insgesamt 170 geschlossenen PRs entfallen 95 auf die Vollzeitklassen und 75 auf die Teilzeitklassen, obwohl der analysierte Datenbestand 27 Vollzeitprojekte und 43 Teilzeitprojekte umfasst. Der durchschnittliche Churn der PRs liegt in den Teilzeitklassen ebenfalls niedriger (137 im Vergleich zu 188 bei den Vollzeitklassen).
 
 Abbildung \autoref{fig:anz-clsd-prs-nach-churn} zeigt die Anzahl geschlossener PRs, gruppiert nach ihrer Churn-Grösse. Dabei wird deutlich, dass in den Teilzeitklassen vor allem kleinere PRs abgelehnt wurden. Eine manuelle Analyse der Gründe für das Scheitern dieser PRs ergab, dass viele ohne jeglichen Kommentar abgelehnt wurden. Ob dies daran lag, dass die Implementierung nicht mehr benötigt wurde oder fehlerhaft war, lässt sich im Nachhinein nicht eindeutig klären.
 
-Die manuelle Analyse der geschlossenen PRs mit einem Churn von über 500 zeigte hingegen ein anderes Bild: Diese PRs wurden häufig aufgrund eines falschen Zielbranches erstellt. In mehreren Fällen konnte ausserdem beobachtet werden, dass das vorgeschlagene Feature bereits durch einen anderen Branch implementiert worden war.
+\begin{figure}[htbp]
+    \includegraphics[width=\textwidth]{Figures/anzahl-geschlossene-prs-nach-churn.png}
+    \caption{Anzahl geschlossene Pull Requests nach Churn Grösse}
+    \label{fig:anz-clsd-prs-nach-churn}
+\end{figure}
+
+
+Die manuelle Analyse der geschlossenen PRs mit einem Churn von über 500 zeigte hingegen ein anderes Bild: Diese PRs wurden häufig aufgrund eines falschen Zielbranches erstellt. In mehreren Fällen konnte ausserdem beobachtet werden, dass das vorgeschlagene Feature bereits durch einen anderen Branch implementiert worden war. Gewisse PRs wurden auch für grosse Refactoring Arbeiten verwendet. 
 
 Die Kategorie 'divers' beinhaltet hauptsächlich Feedback-PRs, welche von gewissen Dozenten für die Notenvergabe verwendet wurden. Ausserdem sind einige refactor Branches zu sehen, welche Ausschliesslich für den Refactoren erstellt wurden und anschliessend geschlossen wurden. 
 
@@ -185,24 +207,134 @@ V > 500& 8 & 0 & 1 & 4 & 6 & 0 \\
 \bottomrule
 \end{tabular}
 \end{table}
-
-\begin{figure}
-    \includegraphics[width=\textwidth]{Figures/anzahl-geschlossene-prs-nach-churn.png}
-    \caption{Anzahl geschlossene Pull Requests nach Churn Grösse}
-    \label{fig:anz-clsd-prs-nach-churn}
-\end{figure}
+\newpage
+\noindent\textbf{Legende:}
+\begin{itemize}
+\item[$T$] Alle Teilzeitklassen
+\item[$V$] Alle Vollzeitklassen
+\item[$< 100$] Churn kleiner 100
+\item[$> 500$] Churn größer 500
+\end{itemize}
 
 \subsection{Ergebnisse Einfluss Projektzeit}
 Wie in Abbildung \autoref{fig:closed-prs-projektkeit-teilzeit} deutlich wird, wurden die meisten Pull Requests (PRs) in den Teilzeitklassen am letzten Tag vor der Projektabgabe geschlossen. Dieser Effekt ist zwar auch in den Vollzeitklassen erkennbar, jedoch weniger ausgeprägt. In Abbildung \autoref{fig:closed-prs-projektkeit-vollzeit} wird zudem deutlich, dass die geschlossenen PRs in den Vollzeitklassen gleichmässiger über den gesamten Projektzeitraum verteilt sind.
 
 \begin{figure}[htbp]
-    \includegraphics[width=\textwidth]{Figures/closed-prs-projektzeit-vollzeit.png}
-    \caption{Anzahl geschlossene PRs Vollzeitklassen nach Tagen entfernt von Abgabe}
-    \label{fig:closed-prs-projektkeit-vollzeit}
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/closed-prs-projektzeit-vollzeit.png}
+        \caption{Anzahl geschlossene PRs Vollzeitklassen nach Tagen entfernt von Abgabe}
+        \label{fig:closed-prs-projektkeit-vollzeit}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/closed-prs-projektzeit-teilzeit.png}
+         \caption{Anzahl geschlossene PRs Teilzeitklassen nach Tagen entfernt von Abgabe}
+        \label{fig:closed-prs-projektkeit-teilzeit}
+    \end{subfigure}
+    \caption{Vergleich Anzahl geschlossene PRs Teilzeit vs Vollzeit nach Tagen entfernt von Abgabe}
+    \label{fig:vergleich-latency-churn-projektzeit}
 \end{figure}
 
+
+\section{Ergebnisse Entwicklungsaktivität}
+Empirische Studien zeigen, dass die Entwicklungsaktivität in Open-Source-Projekten auf Plattformen wie GitHub charakteristische Muster im Wochenverlauf aufweist. Insbesondere an Wochenenden ist die Aktivität signifikant geringer als unter der Woche. Innerhalb der Arbeitswoche fallen Montag und Freitag häufig als die Tage mit der geringsten Aktivität auf. Das Phänomen des Rückgangs der Entwicklungsaktivität wird oftmals auch \textit{Friday Effect} genannt. \parencite{claes_programmers_2018}
+
+Da sich während der Analyse deutliche Differenzen zwischen den Voll- und Teilzeitklassen ergaben, wurden diese in der Analyse geteilt angeschaut. 
+
+Auch in den vorliegenden Daten zeigt sich eine Tendenz zur Konzentration der Aktivitäten auf spezifische Wochentage, insbesondere auf die jeweiligen Unterrichtstage. So wurden bei den Vollzeitklassen rund 24\,\% aller Pull Requests (PRs) am Projekttag erstellt. Bei den Teilzeitklassen liegt dieser Wert mit 34\,\% deutlich höher. Dies unterstreicht die Bedeutung des Unterrichtstages für die praktische Arbeit im Rahmen des Projekts.
+
+Abbildung \autoref{fig:anz-prs-teilzeit-pro-wochentag} zeigt exemplarisch die Verteilung der PR-Erstellungen über die Wochentage für zwei Teilzeitklassen. Deutlich erkennbar ist ein Aktivitätspeak am jeweiligen Unterrichtstag. An den darauffolgenden Tagen nimmt die Aktivität deutlich ab. Auffällig ist zudem, dass PRs nicht nur am Unterrichtstag erstellt, sondern auch überprüft und geschlossen wurden. Insgesamt wurden 27.7\,\% aller PRs der Teilzeitklassen am Wochenende erstellt – ein vergleichsweise hoher Wert.
+
 \begin{figure}[htbp]
-    \includegraphics[width=\textwidth]{Figures/closed-prs-projektzeit-teilzeit.png}
-    \caption{Anzahl geschlossene PRs Teilzeitklassen nach Tagen entfernt von Abgabe}
-    \label{fig:closed-prs-projektkeit-teilzeit}
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/pr-klasse-per-wochentag-it21ta.png}
+         \caption{Anzahl geöffneter PRs pro Wochentag der Teilzeitklasse It21ta}
+        \label{fig:anzahl-prs-pro-wochentag-it21ta}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/pr-klasse-per-wochentag-21tb.png}
+         \caption{Anzahl geöffneter PRs pro Wochentag der Teilzeitklasse It21tb}
+        \label{fig:anzahl-prs-pro-wochentag-it21tb}
+    \end{subfigure}
+    \caption{Anzahl geöffneter PRs pro Wochentag von 2 Teilzeitklassen}
+    \label{fig:anz-prs-teilzeit-pro-wochentag}
 \end{figure}
+
+Ein kontrastierendes Bild zeigt sich bei den Vollzeitklassen. Abbildung \autoref{fig:anz-prs-vollzeit-pro-wochentag} zeigt die Verteilung der PR-Erstellungen bei zwei exemplarischen Klassen. 
+Hier zeigt sich eine insgesamt gleichmässigere Verteilung der Aktivitäten über die Woche. Zwar ist auch hier der Projekttag der aktivste, jedoch in geringerem Ausmass als bei den Teilzeitklassen. Zudem wurden nur 16.8\% der PRs am Wochenende erstellt.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/pr-klasse-per-wochentag-23a.png}
+         \caption{Anzahl geöffneter PRs pro Wochentag der Vollzeitklasse It23a}
+        \label{fig:anzahl-prs-pro-wochentag-it23a}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/pr-klasse-per-wochentag-24a.png}
+         \caption{Anzahl geöffneter PRs pro Wochentag der Vollzeitklasse It24a}
+        \label{fig:anzahl-prs-pro-wochentag-it24a}
+    \end{subfigure}
+    \caption{Anzahl geöffneter PRs pro Wochentag von 2 Vollzeitklassen}
+    \label{fig:anz-prs-vollzeit-pro-wochentag}
+\end{figure}
+
+\subsection{Ereignisse Analyse Commits}
+Da nicht nur die PRs sondern auch die einzelnen Commits interessant für die Entwicklungsanalyse ist, wurden die Commits der PRs angeschaut. 
+Die Analyse bestätigte die Resultate, welche in der PR Analyse bereits schon gefunden wurden. 
+
+So wurden bei den Vollzeitklassen 23.7\,\% aller Commits am jeweiligen Unterrichtstag durchgeführt. Bei den Teilzeitklassen liegt dieser Anteil mit 33.9\,\% deutlich höher. Abbildung \autoref{fig:anz-commits-teilzeit-pro-wochentag} zeigt die Verteilung der Commits über die Wochentage exemplarisch für zwei Teilzeitklassen. Erkennbar ist – analog zur PR-Verteilung – ein deutlicher Peak an den jeweiligen Projekttagen. Insgesamt wurden 25.9\,\% aller Commits der Teilzeitklassen an einem Samstag oder Sonntag durchgeführt.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/commits-klasse-per-wochentag-21ta.png}
+         \caption{Anzahl Commits pro Wochentag der Teilzeitklasse It21ta}
+        \label{fig:anzahl-commits-pro-wochentag-it21ta}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/commits-klasse-per-wochentag-21tb.png}
+         \caption{Anzahl Commits pro Wochentag der Teilzeitklasse It21tb}
+        \label{fig:anzahl-commits-pro-wochentag-it21tb}
+    \end{subfigure}
+    \caption{Anzahl Commits pro Wochentag von 2 Teilzeitklassen}
+    \label{fig:anz-commits-teilzeit-pro-wochentag}
+\end{figure}
+
+Ein ähnliches Bild ergibt sich bei den Vollzeitklassen. Abbildung \autoref{fig:anz-commits-vollzeit-pro-wochentag} zeigt die Commits zweier exemplarischer Klassen. Hier wurden 23.7\,\% der Commits am jeweiligen Projekttag durchgeführt – identisch mit dem PR-Anteil. Am Wochenende hingegen wurden nur 19.4\,\% der Commits verzeichnet, was deutlich unter dem Wert der Teilzeitklassen liegt.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/commits-klasse-per-wochentag-23a.png}
+         \caption{Anzahl Commits pro Wochentag der Teilzeitklasse It23a}
+        \label{fig:anzahl-commits-pro-wochentag-it23a}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/commits-klasse-per-wochentag-24a.png}
+         \caption{Anzahl Commits pro Wochentag der Teilzeitklasse It24a}
+        \label{fig:anzahl-commits-pro-wochentag-it24a}
+    \end{subfigure}
+    \caption{Anzahl Commits pro Wochentag von 2 Vollzeitklassen}
+    \label{fig:anz-commits-vollzeit-pro-wochentag}
+\end{figure}
+
+\section{Projektmodul Ergebnisse bei Open Source Projekten}
+\subsection{Latency und Churn}
+\subsection{Allgemeine Korrelationen}

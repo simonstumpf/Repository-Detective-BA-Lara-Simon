@@ -59,13 +59,14 @@ Durch graphische Darstellung und Spearmans Rangkorrelation wurde geprüft, ob ei
   \item[$n$] Anzahl der Beobachtungspaare
 \end{itemize}
 
-Des Weiteren wird eine Prüfung durchgeführt, um festzustellen, ob sich Unterschiede zwischen den Vollzeit- und Teilzeitklassen ergeben. Um zu analysieren, ob es Differenzen in der Handhabung von Pull-Requests gibt. Dafür wurden die bereits erwähnten Metriken \textit{latency} und \textit{churn} anhand deren Mittelwerte geprüft. Zudem wurde eine Analyse durchgeführt, um die Verteilung der \textit{latencies} über Teilzeit- und Vollzeitklassen zu ermitteln. Zu diesem Zweck wurden folgende Zeiträume definiert: [0min - 1min], [1min - 6min], [6min - 30min], [30min - 1h], [1h-2h], [2h-4h], [4h-8h], [8h-12h], [12h-24h], [24+]
+Des Weiteren wird eine Prüfung durchgeführt, um festzustellen, ob sich Unterschiede zwischen den Vollzeit- und Teilzeitklassen ergeben. Um zu analysieren, ob es Differenzen in der Handhabung von Pull-Requests gibt. Dafür wurden die bereits erwähnten Metriken \textit{latency} und \textit{churn} anhand deren Mittelwerte geprüft. Zudem wurde eine Analyse durchgeführt, um die Verteilung der \textit{latencies} über Teilzeit- und Vollzeitklassen zu ermitteln. Zu diesem Zweck wurden folgende Zeiträume definiert: [0min - 1min], [1min - 6min], [6min - 30min], [30min - 1h], [1h-2h], [2h-4h], [4h-8h], [8h-12h], [12h-24h], [24+].
 
-// TODO no dev branches?
+Einige Teams haben die GitHub Flow Branching Strategie verwendet, während andere Teams die Git-Flow Strategie angewendet haben. Von der Git-Flow Strategie wurden jedoch nur die Branches Feature, Develop und Main genutzt. Um festzustellen, ob die Pull-Requests von Developer Branches in den Main-Branch die Verteilung der \textit{latencies} beeinflussen, wurde die obige Analyse zusätzlich ohne die Pull-Requests von den Developer Branches zu den Main Branches durchgeführt.
+
 \subsection{Einfluss von Projektzeit}
-Ein signifikanter Faktor, der bei Projektmodulen eine Rolle spielt, ist die fest definierte Abgabefrist. Dies unterscheidet diese Projekte von den Open-Source-Projekten, die in der Literatur häufig untersucht werden. Es soll nun untersucht werden, ob der Zeitpunkt der Erstellung eines Pull-Requests innerhalb der Projektlaufzeit einen Einfluss auf die Bearbeitung und vor allem auf die Dauer hat. Dafür wurde zusätzlich zu den oben genannten Metriken noch das Abgabedatum der einzelnen Klassen ermittelt.
+Ein signifikanter Faktor, der bei Projektmodulen eine Rolle spielt, ist die fest definierte Abgabefrist. Dies unterscheidet diese Projekte von den Open-Source-Projekten, die in der Literatur häufig untersucht werden. Es soll nun untersucht werden, ob der Zeitpunkt der Erstellung eines Pull-Requests innerhalb der Projektlaufzeit einen Einfluss auf die Bearbeitung und vor allem auf die Dauer hat. Dafür wurde zusätzlich zu den oben genannten Metriken noch das Abgabedatum der einzelnen Klassen ermittelt. Da einige Dozenten ihr Feedback mittels Pull Request abgegeben haben, wurden alle Pull Requests herausgefiltert, die von einem Dozenten erstellt wurden. Dies wurde über das Attribut \textit{Author} ermittelt.
 
-Es wurden verschiedene Analysen anhand eines Phyton Notebooks vorgenommen. Die erste Untersuchung analysierte, ob generell ein Zusammenhang über die \textit{latency} und \textit{churn} im Verlauf der Projektzeit festgestellt werden kann.  Um der in der Einleitung formulierten Hypothese nachzugehen, wurden die Pull Requests, die innerhalb einer Minute gemerged wurden, ins Verhältnis zur Projektabgabe gesetzt und graphisch dargestellt. Darüber hinaus wurde analysiert, wie viele Pull Requests die Teams innerhalb des letzten Projekttages noch abgearbeitet haben.
+Es wurden verschiedene Analysen anhand eines Phyton Notebooks vorgenommen. Die erste Untersuchung analysierte, ob generell ein Zusammenhang über die \textit{latency} und \textit{churn} im Verlauf der Projektzeit festgestellt werden kann.  Um der in der Einleitung formulierten Hypothese nachzugehen, wurden die Pull Requests, die innerhalb von 30 Minuten und einer Minute gemerged wurden, ins Verhältnis zur Projektabgabe gesetzt und graphisch dargestellt. Des Weiteren wurden alle Pull Requests in Verbindung zur Abgabe gesetzt, um herauszufinden, wann die Pull Requests generell erstellt und bearbeitet wurden.  Darüber hinaus wurde analysiert, wie viele Pull Requests die Teams innerhalb der letzten 3 Projekttage und des letzten Projekttages noch abgearbeitet haben.
 
 
 \section{Analyse Pull Request Akzeptanz}
@@ -79,3 +80,42 @@ Um die Ursache des geschlossenen PRs zu gruppieren, wurden folgende Gruppen erst
     \item \textbf{Feature wird nicht mehr benötigt}: Das Feature wird nicht mehr benötigt. Diess muss so im PR vermerkt sein. 
     \item \textbf{Implementierung abgelehnt}: Die Implementierung wurde abgelehnt. 
 \end{itemize}
+\pagebreak
+\section{Analyse Entwicklungsaktivität}
+Für die Analyse der Entwicklungsaktivität wurde das Jupyter Notebook \textit{analyse-wochen-latency-churn.ipynb} erstellt \parencite{stumpf_simon_repo-detectivesba-metric-analysis-scripts_nodate}. 
+
+Um die Entwicklungsaktivität messbar machen zu können, mussten für alle Klassen die Projektmodul-Unterrichtstage ermittelt werden:
+\begin{table}[ht]
+\caption{Projektmodul-Unterrichtstage der Klassen}
+\label{tab:stundenplan}
+\centering
+\begin{tabular}{l l l}
+\toprule
+\textbf{Klasse} & \textbf{Ort} & \textbf{Tag} \\
+\midrule
+It21tb   & Zürich      & Montag      \\
+It21ta   & Zürich      & Montag      \\
+It21a    & Zürich      & Mittwoch    \\
+It21tb   & Winterthur  & Donnerstag  \\
+It21a    & Winterthur  & Freitag     \\
+It21b    & Winterthur  & Freitag     \\
+It21ta   & Winterthur  & Freitag     \\
+\midrule
+It23tb   & Zürich      & Montag      \\
+It23ta   & Zürich      & Montag      \\
+It23a    & Zürich      & Mittwoch    \\
+It23b    & Zürich      & Mittwoch    \\
+It23a    & Winterthur  & Freitag     \\
+It23ta   & Winterthur  & Freitag     \\
+It23tb   & Winterthur  & Freitag     \\
+\midrule
+It24tb   & Zürich      & Montag      \\
+It24ta   & Zürich      & Montag      \\
+It24a    & Zürich      & Mittwoch    \\
+It24a    & Winterthur  & Freitag     \\
+It24ta   & Winterthur  & Freitag     \\
+It24tb   & Winterthur  & Freitag     \\
+\bottomrule
+\end{tabular}
+\end{table}
+
