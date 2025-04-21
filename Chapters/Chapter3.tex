@@ -15,7 +15,7 @@
 %----------------------------------------------------------------------------------------
 
 \section{Mining der Repositories}
-Für die ersten Experimente wurden die Repositories der Racetrack-Projekte ausgewertet. Wie im Kapitel \secref{sec:Projektmodule} erwähnt, findet dieses Projekt im Kontext des Projektmoduls 2 als erstes Projekt statt. Dieses dauert ungefähr vier Wochen, wobei die genaue Anzahl der Tage pro Klasse variieren kann. Das Grundgerüst des Sourcecodes wird in der Aufgabenstellung mitgeliefert, was die Vergleichbarkeit der Projekte erhöht. Ausserdem haben die Studenten schon Erfahrung mit der Handhabung von PullRequests. 
+
 
 Damit alle Analysen durchgeführt werden konnten, musste das Mining der Projekte erweitert werden. So wurde die GraphQL Abfrage für die PullRequests erweitert, um zusätzlich den Churn als auch die Commits auf den Pull Requests zu speichern. Die Abfrage der Daten wurde durch einen neuen PullRequest Statistik API Controller ermöglicht, welcher sämtliche Daten der einzelnen PullRequests, wie etwa der Churn, die einzelnen Commits des PullRequests als auch die Anzahl geänderter Dateien zurückgibt. 
 
@@ -47,16 +47,17 @@ Die Zusammensetzung des \textit{churn} ist wie folgt:
 churn = additions + deletions
 \end{equation}
 
-Durch graphische Darstellung und Spearmans Rangkorrelation wurde geprüft, ob ein monotoner Zusammenhang zwischen den Metriken besteht. Die Formel stellt sich wie folgt zusammen:
+Mittels der Rangkorrelation nach Spearman kann überprüft werden, ob ein Zusammenhang zwischen zwei Variablen besteht. Dabei verwendet Spearman die Rangplätze der Daten und nicht deren Wert. Der daraus resultierende Korrelationskoeffizient r\textsubscript{s} kann zwischen -1 und 1 liegen, wobei dieser bei eins ein starker positiver Zusammenhang und bei -1 ein starker negativer Zusammenhang zwischen den zwei Variablen besteht. Wenn der Korrelationskoeffizient bei null liegt, besteht keine Korrelation. \parencite{noauthor_t-test_nodate}  \\
+Die Formel \parencite{noauthor_t-test_nodate} stellt sich wie folgt zusammen: 
 \begin{equation}
-\rho = 1 - \frac{6 \sum d_i^2}{n(n^2 - 1)}
+r_s = 1 - \frac{6 \sum d_i^2}{n(n^2 - 1)}
 \end{equation}
 
 \noindent\textbf{Legende:}
 \begin{itemize}
-  \item[$\rho$] Spearman-Rangkorrelationskoeffizient
-  \item[$d_i$] Differenz der Ränge zwischen den zwei Beobachtungen 
-  \item[$n$] Anzahl der Beobachtungspaare
+  \item [$r_s$] Spearman-Rangkorrelationskoeffizient
+  \item[$d_i$] Differenz der Ränge zwischen den zwei Variablen 
+  \item[$n$] Anzahl der beobachteten Fälle
 \end{itemize}
 
 Des Weiteren wird eine Prüfung durchgeführt, um festzustellen, ob sich Unterschiede zwischen den Vollzeit- und Teilzeitklassen ergeben. Um zu analysieren, ob es Differenzen in der Handhabung von Pull-Requests gibt. Dafür wurden die bereits erwähnten Metriken \textit{latency} und \textit{churn} anhand deren Mittelwerte geprüft. Zudem wurde eine Analyse durchgeführt, um die Verteilung der \textit{latencies} über Teilzeit- und Vollzeitklassen zu ermitteln. Zu diesem Zweck wurden folgende Zeiträume definiert: [0min - 1min], [1min - 6min], [6min - 30min], [30min - 1h], [1h-2h], [2h-4h], [4h-8h], [8h-12h], [12h-24h], [24+].

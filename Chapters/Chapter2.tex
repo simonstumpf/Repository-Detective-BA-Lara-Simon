@@ -15,13 +15,13 @@
 %----------------------------------------------------------------------------------------
 
 \section{Git \& Github}
-Die Nutzung eines Versionskontrollsystems (VCS) ist ein zentrales Element der Softwareentwicklung. Mit einem VCS können Änderungen am Sourcecode nachverfolgt und bei Bedarf eine frühere Version des Projektes wiederhergestellt werden. Die Nutzung eines VCS ermöglicht ausserdem, dass mehrere Entwickler parallel am gleichen Code arbeiten können, indem die Änderungen inklusive deren Urheber sowie Zeitpunkt festgehalten werden. 
+Die Nutzung eines Versionskontrollsystems (VCS - version control system) ist ein zentrales Element der Softwareentwicklung. Mit einem VCS können Änderungen am Sourcecode nachverfolgt und bei Bedarf eine frühere Version des Projektes wiederhergestellt werden. Die Nutzung eines VCS ermöglicht ausserdem, dass mehrere Entwickler parallel am gleichen Code arbeiten können, indem die Änderungen inklusive deren Urheber sowie Zeitpunkt festgehalten werden. 
 
-Mit der Nutzung einer verteilten Versionsverwaltung (DVCS), wird kein zentrales Repository mehr verwendet. Jeder Entwickler verfügt über eine Kopie des Projektes inklusive des gesamten Projektverlaufs. Änderungen können lokal implementiert werden. Eine Verbindung zum Server wird nur für das Synchronisieren von Änderungen notwendig. \parencite{noauthor_informationen_2025} 
+Mit der Nutzung einer verteilten Versionsverwaltung (DVCS - distributed version control system), wird kein zentrales Repository mehr verwendet. Jeder Entwickler verfügt über eine Kopie des Projektes inklusive des gesamten Projektverlaufs. Änderungen können lokal implementiert werden. Eine Verbindung zum Server wird nur für das Synchronisieren von Änderungen notwendig. \parencite{noauthor_informationen_2025} 
 
-Git ist heute das am meisten verbreitete DVCS-System. Es wurde von Linus Torvalds für die Entwicklung des Linux-Kernels entwickelt. \parencite{zack_git_2018} Git bezeichnet ein Projekt als ein Git-Repository, wobei der Verlauf als eine Reihe von Snapshots (Commits) modelliert wird. Diese Commits sind in unterschiedlichen Branches organisiert, welche die parallele Entwicklung ermöglichen. Mit dem Verwenden von Branches kann parallel an Bugs, neuen Features etc. entwickelt werden, ohne sich gegenseitig zu stören. Diese unterschiedlichen Branches werden anschliessend gemerded. 
+Git ist heute das am meisten verbreitete DVCS-System. Es wurde von Linus Torvalds für die Entwicklung des Linux-Kernels entwickelt. \parencite{zack_git_2018} Git bezeichnet ein Projekt als ein Git-Repository, wobei der Verlauf als eine Reihe von Snapshots (Commits) modelliert wird. Diese Commits sind in unterschiedlichen Branches organisiert, welche die parallele Entwicklung ermöglichen. Die Verwendung von Branches ermöglicht die parallele Entwicklung von Bugs, neuen Features etc., ohne dass es zu gegenseitigen Beeinträchtigungen kommt. Diese unterschiedlichen Branches werden anschliessend gemerged. 
 
-Mit dem Erfolg von Git entstanden Dienste und Anbieter, welche Git Repositories online hosten und zusätzliche Kollaborationstools anbieten. Github ist der bekannteste und auch am meist verwendete Hosting-Dienst. Auf Github können Entwickler ihr Git-Repository hosten, Änderungen vorschlagen und diskutieren, Fehler (Issues) tracken. Github bietet eine Weboberfläche, welche für das Einsehen des Codes, aber auch für das Erstellen von Pull Requests und Issues verwendet werden kann. Zusätzlich kann der CI/CD Prozess direkt mittels Github Actions abgebildet werden. \parencite{noauthor_informationen_2025}  
+Mit dem Erfolg von Git entstanden Dienste und Anbieter, welche Git Repositories online zur Verfügung stellen und zusätzliche Kollaborationstools anbieten. Github ist der bekannteste und auch am meisten verwendete Hosting-Dienst. Auf Github können Entwickler ihr Git-Repository hosten, Änderungen vorschlagen und diskutieren, Fehler (Issues) tracken. Github bietet eine Weboberfläche, welche für das Einsehen des Codes, aber auch für das Erstellen von Pull Requests und Issues verwendet werden kann. Zusätzlich kann der CI/CD Prozess direkt mittels Github Actions abgebildet werden. \parencite{noauthor_informationen_2025}  
 
 \section{Pull Request} 
 Ein Pull Request ist ein Vorschlag, Änderungen von einem Branch oder Fork in einen anderen Branch zusammenzuführen. In einem typischen Entwicklungsworkflow erstellt der Entwickler für eine Änderung einen neuen Branch, committet dort seine Arbeit und erstellt anschliessend einen Pull Request. Ein Pull Request enthält dabei die durchgeführten Codeänderungen sowie eine Beschreibung zur Änderung. Die Unterschiede (Diffs) zwischen Quell- und Zielbranch werden dabei übersichtlich aufgezeigt \parencite{noauthor_about_nodate}.
@@ -31,11 +31,12 @@ Pull Requests spielen für den Code-Review und die Diskussion innerhalb des Entw
 Durch das Konfigurieren von automatischen Checks mittels CI/CD können sowohl Anforderungen an die Softwarequalität (zum Beispiel durch das automatisierte Ausführen von Tests oder statischen Codeanalysen) als auch an den Entwicklungsprozess automatisiert überprüft werden \parencite{kinsman_how_2021}. Dazu gehört beispielsweise die Überprüfung, ob alle Commits mit einem Signed-off-by versehen sind, was in vielen Projekten zur Einhaltung des Developer Certificate of Origin (DCO) verpflichtend ist \parencite{holtgrave_attributing_2025}. Diese Massnahmen stellen sicher, dass sowohl die technische Qualität des Codes als auch rechtliche Rahmenbedingungen eingehalten werden, bevor ein Pull Request gemergt wird \parencite{noauthor_about_nodate}. 
 
 \section{Pull Request Akzeptanz}
-Am Ende eines Pull Requests wird dieser entweder akzeptiert und in den Haupt-Branch integriert (Merged) oder geschlossen werden (Close)\parencite{noauthor_merging_nodate}\parencite{noauthor_closing_nodate}. Die Akzeptanz kann dabei auf zwei Arten erfolgen. Entweder wird der Merge-Button durch den Antragsteller oder ein anderes Teammitglied direkt angeklickt oder es erfolgt eine Genehmigung (Approval) \parencite{noauthor_merging_nodate}\parencite{noauthor_reviewing_nodate}. Die Genehmigung ist eine Aktion welche auf einem Pull Request ausgeführt werden kann. Es besteht auch die Möglichkeit, diese Aktion zu erzwingen und somit dürfen die Änderungen erst zusammengeführt werden, wenn ein anderes Teammitglied den Pull Request genehmigt hat \parencite{noauthor_approving_nodate}.
+Am Ende eines Pull Requests wird dieser entweder akzeptiert und in den zuvor ausgewählten Branch integriert (Merged) oder geschlossen (Close)\parencite{noauthor_merging_nodate}\parencite{noauthor_closing_nodate}. Die Akzeptanz kann dabei auf zwei Arten erfolgen. Entweder wird der Merge-Button durch den Antragsteller oder ein anderes Teammitglied direkt angeklickt oder es erfolgt eine Genehmigung (Approval) \parencite{noauthor_merging_nodate}\parencite{noauthor_reviewing_nodate}. Die Genehmigung ist eine Aktion welche auf einem Pull Request ausgeführt werden kann. Es besteht auch die Möglichkeit, diese Aktion zu erzwingen und somit dürfen die Änderungen erst zusammengeführt werden, wenn ein anderes Teammitglied den Pull Request genehmigt hat \parencite{noauthor_approving_nodate}.
 
 \section{Branching Strategien}
-Es existieren verschiedene Branching-Strategien. Die vier bekanntesten sind der Git Flow, GitHub Flow, GitLab Flow und Trunked-based Development. \parencite{priyanka_gowdaashwath_narayana_gowda_git-branching-and-release-strategies_2022} \parencite{atlassian_trunk-based_nodate}
+Es existieren verschiedene Branching-Strategien. Die für diese Studie erwähnenswerten Strategien sind der Git Flow und der GitHub Flow. \parencite{priyanka_gowdaashwath_narayana_gowda_git-branching-and-release-strategies_2022} 
 \subsection{Git Flow}
+Der Git Flow wurde 2010 von Vincent Driessen vorgestellt, als ein robustes Branching-Konzept, welches für jedes Projekt passen soll \parencite{priyanka_gowdaashwath_narayana_gowda_git-branching-and-release-strategies_2022}.
 Diese Strategie besteht aus zwei Hauptbranches:
 \begin{itemize}
     \item Master: Beinhaltet den produktionsreifen Code  
@@ -59,25 +60,28 @@ Die GitHub Flow Strategie ist eine vereinfachte und leichtgewichtige Methode. Si
 Auch in dieser Strategie werden neue Funktionen in einem Feature Branch entwickelt. Diese werden jedoch nach Abschluss, via Pull Requests, direkt in den Main gemerged.
 \parencite{priyanka_gowdaashwath_narayana_gowda_git-branching-and-release-strategies_2022}
 
-\subsection{GitHub Flow}
-Der GitLab Flow befindet sich zwischen der Git- und der GitHub-Flow-Methode. 
-\begin{itemize}
-    \item Production: Beinhaltet den produktiven Code  
-    \item Staging: Umgebungsspezifischeebene
-    \item Development: Integrationsebene für neue Funktionen
-    \item Feature: Entwicklung von neuen Funktionen
-\end{itemize}
-Neue Funktionen werden ebenfalls in den Feature Branches entwickelt. Diese werden dann in den Development Branch gemerged. Danach werden sie in die entsprechenden Staging Branches gemerged und sobald sie produktionsreif sind, in den Production Branch gemerged.
-\parencite{priyanka_gowdaashwath_narayana_gowda_git-branching-and-release-strategies_2022}
+% Weiss nicht ob wir diese reinnehmen wollen oder nicht
+% \subsection{GitLab Flow}
+% Der GitLab Flow befindet sich zwischen der Git- und der GitHub-Flow-Methode. 
+% \begin{itemize}
+%     \item Production: Beinhaltet den produktiven Code  
+%     \item Staging: Umgebungsspezifischeebene
+%     \item Development: Integrationsebene für neue Funktionen
+%     \item Feature: Entwicklung von neuen Funktionen
+% \end{itemize}
+% Neue Funktionen werden ebenfalls in den Feature Branches entwickelt. Diese werden dann in den Development Branch gemerged. Danach werden sie in die entsprechenden Staging Branches gemerged und sobald sie produktionsreif sind, in den Production Branch gemerged.
+% \parencite{priyanka_gowdaashwath_narayana_gowda_git-branching-and-release-strategies_2022}
 
-\subsection{Trunked-based development}
-Diese Strategie basiert auf kurzlebigen Branches, welche dann in den Main-Branch integriert werden.
-\begin{itemize}
-    \item Main: Beinhaltet den Produktionsreifen Code 
-    \item Kurzlebiger Branch: Kleine Änderungen, keine ganzen Features
-\end{itemize}
-Bei dieser Strategie werden kleine Änderungen über kurzlebige Branches in den Main Branch gebracht. Dabei werden nicht ganze Features in einem Branch implementiert, sondern diese werden in kleine Stückchen aufgeteilt.
-\parencite{atlassian_trunk-based_nodate}
+% \subsection{Trunked-based development}
+% Diese Strategie basiert auf kurzlebigen Branches, welche dann in den Main-Branch integriert werden.
+% \begin{itemize}
+%     \item Main: Beinhaltet den Produktionsreifen Code 
+%     \item Kurzlebiger Branch: Kleine Änderungen, keine ganzen Features
+% \end{itemize}
+% Bei dieser Strategie werden kleine Änderungen über kurzlebige Branches in den Main Branch gebracht. Dabei werden nicht ganze Features in einem Branch implementiert, sondern diese werden in kleine Stückchen aufgeteilt.
+% \parencite{atlassian_trunk-based_nodate}
+
+
 
 \section{Projektmodule}
 \label{sec:Projektmodule} 
@@ -89,9 +93,11 @@ Der Kenntnisstand der Studierenden ist unterschiedlich. Die ZHAW verlangt mindes
 
 Der Studiengang Informatik wird sowohl als Vollzeit- als auch als Teilzeitstudium angeboten. Die Dauer eines Vollzeitstudiums beläuft sich auf sechs Semester, während das Teilzeitstudium eine Dauer von acht Semestern beträgt. Bei den Teilzeitstudierenden kann aufgrund von persönlichen Erfahrungen der Autoren davon ausgegangen werden, dass die Mehrheit im Bereich der Informatik arbeitet. Das Studium wird an den Standorten Winterthur und Zürich durchgeführt. Dabei unterscheiden sich die Unterrichtsmodelle bei den Teilzeitstudierenden an den zwei Standorten. In Winterthur wird ein Tagesmodell angeboten. Dies bedeutet, dass der Unterricht an zwei vollen Arbeitstagen und am Samstagvormittag durchgeführt wird. In Zürich gilt ein Mischmodell, dort findet der Unterricht an einem Arbeitstag und an zwei Abenden statt. Dies hat zur Folge, dass die Projektmodule für die verschiedenen Klassen an unterschiedlichen Tagen erfolgen. Sie finden jedoch für alle Studierenden im selben Semester statt. \parencite{noauthor_bachelorstudium_nodate}\parencite{noauthor_teilzeitstudium_nodate}
 
+Zusätzlich zu den Untersuchungen der Projektmodule wurden auch Analysen an Open Source Projekten durchgeführt. Um zu sehen, ob die Ergebnisse verallgemeinerbar sind oder sich nur auf die Projektmodule beziehen.
+
 \section{ Open Source Projekte}
 Vergleicht man die Git-Repositories der Projektmodule mit Open-Source-Projekten, so lassen sich wesentliche Unterschiede feststellen. Während die Lebensdauer eines PM-Git-Repositories strikt auf ein Semester begrenzt ist, sind Open-Source-Projekte in der Regel langfristig angelegt und haben keinen festen Endpunkt. Viele dieser Projekte entwickeln sich über Jahre oder gar Jahrzehnte hinweg weiter, da ihre Entwicklungsziele flexibel angepasst werden.
 
 Ein weiterer Unterschied liegt im Entwicklungstempo. Open-Source-Projekte folgen keinem festen Zeitplan, sondern entwickeln sich in einem unregelmässigen Rhythmus, da die Beteiligung stark von der Verfügbarkeit der Maintainers abhängt. Gewisse Features werden schnell implementiert, während andere über längere Zeiträume hinweg stagnieren. In akademischen Projektmodulen hingegen ist der Arbeitsaufwand gleichmässiger verteilt, da die Studierenden festen Abgabefristen folgen müssen. Dies führt zu einer planbaren, wenn auch vergleichsweise langsamen Entwicklungsgeschwindigkeit.
 
-In den OpenSource-Projekten spielen die User-Metriken des Contributors eine wichtige Rolle. So wird beispielsweise die Anzahl der Followers des Entwicklers als ein Hinweis auf seinen Status und Ruf in der Community gewertet. Untersuchungen zeigen, dass Beiträge von Nutzern mit vielen Followern eine höhere Chance, akzeptiert zu werden (pro Standardabweichung an zusätzlichen Followern steigt die Wahrscheinlichkeit der Merge-Annahme um 18\%). Auch projektbezogene Metriken wie eine hohe Anzahl Stars des Projektes spielen hierbei eine Rolle. \parencite{tsay_influence_2014}
+In den OpenSource-Projekten spielen die User-Metriken der Contributors eine wichtige Rolle. So wird beispielsweise die Anzahl der Followers des Entwicklers als ein Hinweis auf seinen Status und Ruf in der Community gewertet. Untersuchungen zeigen, dass Beiträge von Nutzern mit vielen Followern eine höhere Chance, akzeptiert zu werden (pro Standardabweichung an zusätzlichen Followern steigt die Wahrscheinlichkeit der Merge-Annahme um 18\%). Auch projektbezogene Metriken wie eine hohe Anzahl Stars des Projektes spielen hierbei eine Rolle. \parencite{tsay_influence_2014}
