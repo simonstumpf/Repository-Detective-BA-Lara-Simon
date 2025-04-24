@@ -13,9 +13,91 @@
 %----------------------------------------------------------------------------------------
 % SECTION 1
 %----------------------------------------------------------------------------------------
-Für die ersten Experimente wurden die Repositories der Racetrack-Projekte ausgewertet. Wie im Kapitel \secref{sec:Projektmodule} erwähnt, findet dieses Projekt im Kontext des Projektmoduls 2 als erstes Projekt statt. Dieses dauert ungefähr vier Wochen, wobei die genaue Anzahl der Tage pro Klasse variieren kann. Das Grundgerüst des Sourcecodes wird in der Aufgabenstellung mitgeliefert, was die Vergleichbarkeit der Projekte erhöht. Ausserdem haben die Studenten schon Erfahrung mit der Handhabung von PullRequests. 
+In diesem Kapitel erfolgt eine Erläuterung der Resultate, die durch die Durchführung der oben beschriebenen Methoden erzielt werden. Dafür stehen, wie bereits im Kapitel \secref{sec:Datengrundlagen} erwähnt, 71 Repositories zur Verfügung. 
 
-\section{Ergebnisse Racetrack}
+Des Weiteren sollen die folgenden Hypothesen anhand von Projekten der Studierenden untersucht werden.
+
+\hypothese{hypothese1}{
+Gegen Ende des Projekts werden Pull Requests schneller gemergt.
+}
+
+Die Projekte haben ein festes Ziel und einen festen Abgabetermin. Aus eigener Erfahrung der Autoren schieben Studierende gerne Arbeiten vor sich her und generieren dadurch mehr Arbeit für das Ende des Projektes. Aus diesem Grund gehen wir davon aus, dass Pull Requests gegen Ende des Projekts schneller bearbeitet werden.
+
+\hypothese{hypothese2}{
+Teilzeitstudierende nutzen Pull Requests effizienter als Vollzeitstudierende.
+
+}
+
+
+Wir gehen davon aus, dass Teilzeitstudierende durch ihre Arbeit mehr Erfahrung in der Durchführung von Softwareprojekten und somit auch in der Verwendung von Pull Requests haben. Dies kann sich in Anzahl, Grösse aber auch Kommentare unterscheiden. 
+
+
+\section{Churn vs Latency}
+Zur Klärung der \fref{forschungsfrage1}: "\textit{Besteht ein Zusammenhang zwischen der Latency eines Pull
+Requests (Zeit bis zum Merge oder Schliessung) und dem Churn (Anzahl geänderter Codezeilen) des jeweiligen Pull Requests?}" werden die geminten Repository Daten in einem Jupiter Notebook aufbereitet und graphisch dargestellt. Dazu werden die im Kapitel \secref{sec:Metriken} erwähnten Metriken \textit{createTime} und \textit{closeTime} gemined und damit die einzelnen Latencies berechnet. Um die Latency-Daten besser vergleichen zu können, werden diese noch vom Datumsformat in Stunden umgerechnet. Des Weiteren werden die Metriken  \textit{additions} und  \textit{deleteions} aus den Pull Requests extrahiert, um den Churn zu berechnen.
+
+\subsection{Datenanalyse}
+Zum besseren Verständnis der \textit{latency}- und \textit{churn}- Werte wird zunächst eine allgemeine Analyse der Daten durchgeführt.
+Die Analyse basiert auf 2435 extrahierten Pull Requests. In der folgenden Tabelle werden die wichtigsten Kennzahlen aufgezeigt.
+
+
+\begin{table}[htbp]
+    \centering
+    \caption{Kennzahlen zu \textit{Latency} und \textit{Churn}}
+    \begin{tabular}{@{}lrr@{}}
+        \toprule
+        \textbf & \textbf{Latency (in Stunden)} & \textbf{Churn} \\
+         \midrule
+        Mittelwert & 18.6 & 278.2 \\
+        Standardabweichung &  42.0  & 815.8 \\
+        Minimum & 0.0008 & 0.0 \\
+        1. Quartil (Q1) & 0.05 & 28.0 \\
+        Median & 0.6 & 94.0 \\
+        3. Quartil (Q3) &  16.4   & 251.0 \\
+        Maximum & 416.3 & 17299.0 \\
+        \bottomrule
+    \end{tabular}
+    \label{tab:deskriptive-kennzahlen}
+\end{table}
+
+Die Analyse zeigt, dass ein durchschnittlicher Pull Request eine Bearbeitungszeit von 18.6 Stunden hat, während der Median bei 0.6 Stunden liegt. Dies deutet darauf hin, dass die meisten Pull-Requests sehr schnell bearbeitet werden und nur wenige eine sehr lange Bearbeitungszeit haben. Das wird auch durch die Standardabweichung von 42 Stunden deutlich.
+
+Ein ähnliches Bild zeigt sich beim Churn. Auch hier liegt der Mittelwert mit 278 Codezeilenänderungen höher und der Median bei nur 94 Änderungen. Die Standardabweichung zeigt ebenfalls eine grosse Streuung der Daten.
+
+Diese Werte sind zusätzlich in den Boxplots in den Abbildungen \autoref{fig:boxplot-latency} und \autoref{fig:boxplot-churn} ersichtlich. 
+In beiden Abbildungen ist der Box-Bereich auf der linken Seite kompakt und nahe bei Null. 
+Die \autoref{fig:boxplot-latency} zeigt ebenfalls, dass viele Pull Requests schnell abgearbeitet werden, während wenige längere Bearbeitungszeiten aufweisen. Es zeigt ausserdem auf, dass es eine Reihe von Ausreissern gibt. Diese belaufen sich auf 14\,\% aller \textit{latencies}.
+
+\begin{figure}[htbp]
+    \includegraphics[width=0.8\textwidth]{Figures/boxplot-latency.png}
+    \centering
+    \caption{Boxplot Latency}
+    \label{fig:boxplot-latency}
+\end{figure}
+
+Der Boxplot in der \autoref{fig:boxplot-churn} zeigt, dass es viele kleine Pull Requests mit wenigen Codezeilenänderungen gibt. Wie bereits bei der \textit{latency} wurde festgestellt, dass es eine Reihe von Ausreissern gibt, von denen einige besonders hervorstechen. Diese befinden sich bei über 10'000 Zeilenänderungen. In diesem Fall liegt die Anzahl der Ausreisser bei 9.6\,\%.
+
+\begin{figure}[htbp]
+    \includegraphics[width=0.8\textwidth]{Figures/boxplot-churn.png}
+      \centering
+    \caption{Boxplot Churn}
+    \label{fig:boxplot-churn}
+\end{figure}
+
+Werden die Ausreisser beider Metriken kumulativ aus allen Datensätzen herausgefiltert, bleiben 1887 Pull Requests übrig, was 77.5\,\% entspricht. Das Herausfiltern dieser Daten stellt einen erheblichen Eingriff in die Datenbasis dar und wird daher nicht pauschal vorgenommen.
+
+\subsection{Erbnisse}
+Um festzustellen, ob zwischen den Metriken \textit{latency} und \textit{churn} ein Zusammenhang besteht wird die Spearman Rangkorrelation angewendet. Dafür wird die oben erwähnte \autoref{eqn:spearman} verwendet. Diese wird anhand der Phython Library \textit{pandas} berechnet. Als Ergebnis erreichte der Rangkorrelationskoeffizient einen Wert von 0.17. Dieser Wert liegt sehr Nahe bei null und zeigt somit keinen spezifischen Zusammenhang zwischen den beiden Metriken auf. 
+
+Wie bereits erwähnt, weisen die Daten einen hohen Anteil an Ausreissern auf. Deshalb soll überprüft werden, ob die Metriken eine Korrelation besitzen, wenn diese Ausreisser herausgefiltert werden. In diesem Fall erhöht sich der Koeffizient auf 0.2\,\% zeigt aber weiterhin keinen eindeutigen Zusammenhang zwischen den Metriken.
+
+\textbf{Zusammenfassend kann zur \fref{forschungsfrage1} festgestellt werden, dass die Metriken \textit{latency} und \textit{churn} keinen Zusammenhang aufweisen.}
+
+\section{Hypothese 2: Teilzeitstudierende nutzen Pull Requests effizienter als Vollzeitstudierende}
+Zur detaillierten Analyse der Hypothese erfolgt eine Aufteilung der Repository-Daten auf Teilzeit- und Vollzeitklassen.
+
+// TODO überarbeiten
+
 Die ersten Analysen zeigen, dass pro Repository durchschnittlich 34.3 PRs erstellt werden. Die Vollzeitklassen erfassen mit durchschnittlich 39.5 PRs pro Projekt mehr PRs als die Teilzeitklassen, die im Schnitt 31.8 erzeugen. Der Median liegt bei 34 PRs.
 
 Bezüglich des Churns weisen die PRs der Racetrack Repos 278.2 geänderte Zeilen auf, wobei der Median bei 94 Zeilen liegt. Die Vollzeitklassen verfügen mit 301.3 über grössere PRs als die Teilzeitklassen mit 260.3 Zeilen. Auch beim Median zeigt sich ein leichter Unterschied: 97 geänderte Zeilen bei den Vollzeit- gegenüber 93 bei den Teilzeitklassen. 
@@ -24,17 +106,13 @@ Die durchschnittliche PR-Latenz beträgt insgesamt rund 18 Stunden und 34 Minute
 
 Auch die Struktur der PRs unterscheidet sich leicht zwischen den Unterrichtsmodellen: Die durchschnittliche Anzahl bearbeiteter Dateien pro PR liegt insgesamt bei 5.66 Dateien. Teilzeitklassen weisen mit 5.85 im Schnitt mehr betroffene Dateien auf als Vollzeitklassen mit 5.42 Dateien. Ebenso zeigt sich bei der durchschnittlichen Anzahl Commits pro PR ein Unterschied: Insgesamt liegt der Durchschnitt bei 7.03 Commits pro PR, wobei Teilzeitklassen auf 6.50 und Vollzeitklassen auf 7.70 Commits pro PR kommen.
 
-\section{Ergebnisse Latency vs. Churn}
-Die verschiedenen Farben in der  \autoref{fig:pr-latency-vs-churn-allgemein}  repräsentieren die einzelnen Projekte der Projektgruppen.
-Wie in der Abbildung ersichtlich, zeigt sich ein Cluster von Datenpunkten in der linken unteren Ecke. Dabei konzentrieren sich die Punkte vorallem bei einem Churn von unter 1000 Zeilen und unter 100 Stunden Latency. Es wird deutlich, dass sowohl hohe Churn-Werte schnell abgearbeitet werden, wie auch niedrige Churn-Werte hohe Latencies aufweisen. Die vorliegende Grafik gibt keinerlei Tendenzen zu einer Korrelation zwischen den Metriken Latency und Churn wieder.
-\begin{figure}[th]
-    \centering
-    \includegraphics[width=\textwidth]{pr-latency-vs-churn-allgemein.png}
-    \caption{Scatterplot der Churn-Werte in Relation zur PR-Latenz}
-    \label{fig:pr-latency-vs-churn-allgemein}
-\end{figure}
+TODO: Verweis auf \hyref{hypothese2}
+Des Weiteren wird eine Prüfung durchgeführt, um festzustellen, ob sich Unterschiede zwischen den Vollzeit- und Teilzeitklassen ergeben. Um zu analysieren, ob es Differenzen in der Handhabung von Pull-Requests gibt. Dafür wurden die bereits erwähnten Metriken \textit{latency} und \textit{churn} anhand deren Mittelwerte geprüft. Zudem wurde eine Analyse durchgeführt, um die Verteilung der \textit{latencies} über Teilzeit- und Vollzeitklassen zu ermitteln. Zu diesem Zweck wurden folgende Zeiträume definiert: [0min - 1min], [1min - 6min], [6min - 30min], [30min - 1h], [1h-2h], [2h-4h], [4h-8h], [8h-12h], [12h-24h], [24+].
 
-Dies wird ebenfalls durch die Berechnung des Spearman Rangkorrelationskoeffizienten deutlich, der bei einem Wert von 0.17 keine monotone Korrelation aufzeigt.
+Einige Teams haben die GitHub Flow Branching Strategie verwendet, während andere Teams die Git-Flow Strategie angewendet haben. Von der Git-Flow Strategie wurden jedoch nur die Branches Feature, Develop und Main genutzt. Um festzustellen, ob die Pull-Requests von Developer Branches in den Main-Branch die Verteilung der \textit{latencies} beeinflussen, wurde die obige Analyse zusätzlich ohne die Pull-Requests von den Developer Branches zu den Main Branches durchgeführt.
+
+
+\section{Ergebnisse Latency vs. Churn}
 
 \subsection{Teilzeit vs. Vollzeit}
 Die Auswertung der Daten ergibt, dass die Latency in den Vollzeitklassen mit 0.8 Stunden nahezu doppelt so hoch ist wie in den Teilzeitklassen, wo der Mittelwert bei 0.46 liegt. Bei den Churn-Werten ist hingegen kein signifikanter Unterschied erkennbar. Dies ist in der nachfolgenden \autoref{fig:vergleich-latency-churn} ersichtlich.
@@ -172,6 +250,18 @@ Die Untersuchung von Pull Requests im Verhältnis zur Abgabe zeigt, dass am Tag 
 Eine detaillierte Analyse der Pull Requests in den einzelnen Teams zeigt, dass in 19 von 71 Teams mehr als 50 Prozent aller Pull Requests in den letzten drei Projekttagen eröffnet und abgeschlossen wurden. Es lässt sich feststellen, dass vier der analysierten Teams einen Anteil von über 75 Prozent ihrer Pull Requests in diesem Zeitraum bearbeitet haben. Zudem ist eine Gruppe zu identifizieren, die sämtliche ihrer Pull Requests innerhalb des definierten Zeitraums erstellt und geschlossen hat. Eine detaillierte Analyse des Projektes ergab, dass die genannte Gruppe insgesamt zwei Pull Requests hatte, die beide am Tag vor der Abgabe erstellt wurden. Wenn diese Analyse auf den letzten Projekttag beschränkt wird, dann sind es drei Teams, die mehr als 50 Prozent ihrer Pull Requests am Abgabetag erledigt haben.
 
 \section{Ergebnisse Pull Reqeust Akzeptanz}
+Die aktuelle Literatur zeigt, dass sowohl soziale und prozessbezogene Faktoren als auch technische Merkmale berücksichtigt werden müssen. 
+
+Um die Ursache des geschlossenen PRs zu gruppieren, wurden folgende Gruppen erstellt: 
+\begin{itemize}
+    \item \textbf{PRs ohne erkennbaren Grund}: Die PRs wurden ohne Kommentar geschlossen. Die Churn Grösse ist kleiner als 500. 
+    \item \textbf{Issue / Feature durch anderen PR implementiert}: Das Feature wurde durch einen anderen PR implementiert und anschliessend dann geschlossen. 
+    \item \textbf{PRs mit falschem Zielbranch}: Der Autor des PRs wählte den falschen Zielbranch aus. Der PR wurde anschliessend in einen anderen Branch gemerdet. 
+    \item \textbf{Feature wird nicht mehr benötigt}: Das Feature wird nicht mehr benötigt. Diess muss so im PR vermerkt sein. 
+    \item \textbf{Implementierung abgelehnt}: Die Implementierung wurde abgelehnt. 
+\end{itemize}
+
+
 Für die Analyse der geschlossenen Pull Requests (PRs) wurden zunächst alle verfügbaren PRs eingelesen und entsprechend gefiltert. Erste Auswertungen ergaben, dass lediglich 0,07\% aller Pull Requests geschlossen wurden. Von den insgesamt 170 geschlossenen PRs entfallen 95 auf die Vollzeitklassen und 75 auf die Teilzeitklassen, obwohl der analysierte Datenbestand 27 Vollzeitprojekte und 43 Teilzeitprojekte umfasst. Der durchschnittliche Churn der PRs liegt in den Teilzeitklassen ebenfalls niedriger (137 im Vergleich zu 188 bei den Vollzeitklassen).
 
 Abbildung \autoref{fig:anz-clsd-prs-nach-churn} zeigt die Anzahl geschlossener PRs, gruppiert nach ihrer Churn-Grösse. Dabei wird deutlich, dass in den Teilzeitklassen vor allem kleinere PRs abgelehnt wurden. Eine manuelle Analyse der Gründe für das Scheitern dieser PRs ergab, dass viele ohne jeglichen Kommentar abgelehnt wurden. Ob dies daran lag, dass die Implementierung nicht mehr benötigt wurde oder fehlerhaft war, lässt sich im Nachhinein nicht eindeutig klären.
@@ -214,7 +304,7 @@ V > 500& 8 & 0 & 1 & 4 & 6 & 0 \\
 \item[$T$] Alle Teilzeitklassen
 \item[$V$] Alle Vollzeitklassen
 \item[$< 100$] Churn kleiner 100
-\item[$> 500$] Churn größer 500
+\item[$> 500$] Churn grösser 500
 \end{itemize}
 
 \subsection{Ergebnisse Einfluss Projektzeit}
@@ -339,3 +429,51 @@ Ein ähnliches Bild ergibt sich bei den Vollzeitklassen. Abbildung \autoref{fig:
 \section{Projektmodul Ergebnisse bei Open Source Projekten}
 \subsection{Latency und Churn}
 \subsection{Allgemeine Korrelationen}
+
+
+
+\subsection{Einfluss von Projektzeit}
+Ein signifikanter Faktor, der bei Projektmodulen eine Rolle spielt, ist die fest definierte Abgabefrist. Dies unterscheidet diese Projekte von den Open-Source-Projekten, die in der Literatur häufig untersucht werden. Es soll nun untersucht werden, ob der Zeitpunkt der Erstellung eines Pull-Requests innerhalb der Projektlaufzeit einen Einfluss auf die Bearbeitung und vor allem auf die Dauer hat. Dafür wurde zusätzlich zu den oben genannten Metriken noch das Abgabedatum der einzelnen Klassen ermittelt. Da einige Dozenten ihr Feedback mittels Pull Request abgegeben haben, wurden alle Pull Requests herausgefiltert, die von einem Dozenten erstellt wurden. Dies wurde über das Attribut \textit{Author} ermittelt.
+
+Es wurden verschiedene Analysen anhand eines Phyton Notebooks vorgenommen. Die erste Untersuchung analysierte, ob generell ein Zusammenhang über die \textit{latency} und \textit{churn} im Verlauf der Projektzeit festgestellt werden kann.  Um der in der Einleitung formulierten Hypothese nachzugehen, wurden die Pull Requests, die innerhalb von 30 Minuten und einer Minute gemerged wurden, ins Verhältnis zur Projektabgabe gesetzt und graphisch dargestellt. Des Weiteren wurden alle Pull Requests in Verbindung zur Abgabe gesetzt, um herauszufinden, wann die Pull Requests generell erstellt und bearbeitet wurden.  Darüber hinaus wurde analysiert, wie viele Pull Requests die Teams innerhalb der letzten 3 Projekttage und des letzten Projekttages noch abgearbeitet haben.
+
+
+
+\pagebreak
+\section{Analyse Entwicklungsaktivität}
+Für die Analyse der Entwicklungsaktivität wurde das Jupyter Notebook \textit{analyse-wochen-latency-churn.ipynb} erstellt \parencite{stumpf_simon_repo-detectivesba-metric-analysis-scripts_nodate}. 
+
+Um die Entwicklungsaktivität messbar machen zu können, mussten für alle Klassen die Projektmodul-Unterrichtstage ermittelt werden:
+\begin{table}[ht]
+\caption{Projektmodul-Unterrichtstage der Klassen}
+\label{tab:stundenplan}
+\centering
+\begin{tabular}{l l l}
+\toprule
+\textbf{Klasse} & \textbf{Ort} & \textbf{Tag} \\
+\midrule
+It21tb   & Zürich      & Montag      \\
+It21ta   & Zürich      & Montag      \\
+It21a    & Zürich      & Mittwoch    \\
+It21tb   & Winterthur  & Donnerstag  \\
+It21a    & Winterthur  & Freitag     \\
+It21b    & Winterthur  & Freitag     \\
+It21ta   & Winterthur  & Freitag     \\
+\midrule
+It23tb   & Zürich      & Montag      \\
+It23ta   & Zürich      & Montag      \\
+It23a    & Zürich      & Mittwoch    \\
+It23b    & Zürich      & Mittwoch    \\
+It23a    & Winterthur  & Freitag     \\
+It23ta   & Winterthur  & Freitag     \\
+It23tb   & Winterthur  & Freitag     \\
+\midrule
+It24tb   & Zürich      & Montag      \\
+It24ta   & Zürich      & Montag      \\
+It24a    & Zürich      & Mittwoch    \\
+It24a    & Winterthur  & Freitag     \\
+It24ta   & Winterthur  & Freitag     \\
+It24tb   & Winterthur  & Freitag     \\
+\bottomrule
+\end{tabular}
+\end{table}
