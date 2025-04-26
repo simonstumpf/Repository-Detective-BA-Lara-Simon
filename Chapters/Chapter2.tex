@@ -66,6 +66,7 @@ Am Ende eines Pull Requests wird dieser entweder akzeptiert und in den zuvor aus
 \section{Branching Strategien}
 Es existieren verschiedene Branching-Strategien. Die für diese Studie erwähnenswerten Strategien sind der Git Flow und der GitHub Flow. \parencite{priyanka_gowdaashwath_narayana_gowda_git-branching-and-release-strategies_2022} 
 \subsection{Git Flow}
+\label{sec:GitFlow}
 Der Git Flow wurde 2010 von Vincent Driessen vorgestellt, als ein robustes Branching-Konzept, welches für jedes Projekt passen soll \parencite{priyanka_gowdaashwath_narayana_gowda_git-branching-and-release-strategies_2022}.
 Diese Strategie besteht aus zwei Hauptbranches:
 \begin{itemize}
@@ -82,6 +83,7 @@ Neue Funktionen werden in Feature Branches entwickelt und nach Beendigung in den
 \parencite{priyanka_gowdaashwath_narayana_gowda_git-branching-and-release-strategies_2022}
 
 \subsection{GitHub Flow}
+\label{sec:GitHubFlow}
 Die GitHub Flow Strategie ist eine vereinfachte und leichtgewichtige Methode. Sie besteht aus den folgenden Branches:
 \begin{itemize}
     \item Main: Beinhaltet den produktionsreifen Code  
@@ -130,7 +132,7 @@ Vergleicht man die Git-Repositories der Projektmodule mit Open-Source-Projekten,
 
 Ein weiterer Unterschied liegt im Entwicklungstempo. Open-Source-Projekte folgen keinem festen Zeitplan, sondern entwickeln sich in einem unregelmässigen Rhythmus, da die Beteiligung stark von der Verfügbarkeit der Maintainers abhängt. Gewisse Features werden schnell implementiert, während andere über längere Zeiträume hinweg stagnieren. In akademischen Projektmodulen hingegen ist der Arbeitsaufwand gleichmässiger verteilt, da die Studierenden festen Abgabefristen folgen müssen. Dies führt zu einer planbaren, wenn auch vergleichsweise langsamen Entwicklungsgeschwindigkeit.
 
-In den OpenSource-Projekten spielen die User-Metriken der Contributors eine wichtige Rolle. So wird beispielsweise die Anzahl der Followers des Entwicklers als ein Hinweis auf seinen Status und Ruf in der Community gewertet. Untersuchungen zeigen, dass Beiträge von Nutzern mit vielen Followern eine höhere Chance, akzeptiert zu werden (pro Standardabweichung an zusätzlichen Followern steigt die Wahrscheinlichkeit der Merge-Annahme um 18\%). Auch projektbezogene Metriken wie eine hohe Anzahl Stars des Projektes spielen hierbei eine Rolle. \parencite{tsay_influence_2014}
+In den OpenSource-Projekten spielen die User-Metriken der Contributors eine wichtige Rolle. So wird beispielsweise die Anzahl der Followers des Entwicklers als ein Hinweis auf seinen Status und Ruf in der Community gewertet. Untersuchungen zeigen, dass Beiträge von Nutzern mit vielen Followern eine höhere Chance haben, akzeptiert zu werden (pro Standardabweichung an zusätzlichen Followern steigt die Wahrscheinlichkeit der Merge-Annahme um 18\%). Auch projektbezogene Metriken wie eine hohe Anzahl Stars des Projektes spielen hierbei eine Rolle. \parencite{tsay_influence_2014}. Mit einem Github Star kann der Benutzer einem Repository / Organisation folgen und wird somit auf Neuigkeiten aufmerksam gemacht. Ausserdem ist es in der Community oftmals ein Zeichen, um die Wertschätzung für ein Projekt zu zeigen \parencite{noauthor_saving_nodate}.
 
 \section{Einführung GitGauge}
 Das in der ZHAW entwickelte Tool \textit{GitGauge} ist ein Repository-Mining- und Analyse-Tool zur Auswertung von GitHub-Repositories. Das Tool wurde von Joel Grand mit Betreuung von Michael Wahler im Rahmen seines Masterstudiums entwickelt . \parencite{grand_joel_wahler_michael_waspe_lara_stumpf_simon_repo_nodate}.
@@ -166,11 +168,3 @@ Die Analyse der Daten erfolgt jeweils bei Abfrage der Statistik API Endpoints de
     \caption{Übersicht Mining Prozess \parencite{grand_joel_vt1_joelgrand_repository_2024}}
     \label{fig:overview-mining-steps}
 \end{figure}
-
-
-alter Text:
-Für die ersten Experimente wurden die Repositories der Racetrack-Projekte ausgewertet. Wie im Kapitel \secref{sec:Projektmodule} erwähnt, findet dieses Projekt im Kontext des Projektmoduls 2 als erstes Projekt statt. Dieses dauert ungefähr vier Wochen, wobei die genaue Anzahl der Tage pro Klasse variieren kann. Das Grundgerüst des Sourcecodes wird in der Aufgabenstellung mitgeliefert, was die Vergleichbarkeit der Projekte erhöht. Ausserdem haben die Studenten schon Erfahrung mit der Handhabung von PullRequests. 
-
-
-
-
