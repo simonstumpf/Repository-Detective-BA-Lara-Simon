@@ -232,51 +232,61 @@ Die \autoref{fig:anz-avg-prs-vs-latency-tv-no-dev} zeigt kaum Differenzen zur \a
 \end{figure}
 \newpage
 
-Somit zeigt sich, dass Dev-Branches keinen Einfluss auf die \textit{latencies} haben.
+//TODO churn ohne dev
+
+// TODO finales statement zu churn hinzufügen\\
+Somit zeigt sich, dass Dev-Branches keinen Einfluss auf die \textit{latencies} haben. 
+
+// TODO Abschluss kapitel
+
+\section{Hypothese 1 Einfluss von Projektzeit}
+Als nächstes wurde der Zusammenhang zwischen der laufenden Projektzeit und der \textit{latency} untersucht. Um zu ermitteln, ob die fortschreitende Projektzeit einen Einfluss auf das Bearbeiten der Pull Requests hat und um zu sehen, ob die \hyref{hypothese2} "\textit{Gegen Ende des Projekts werden Pull Requests schneller gemergt.}" zutrifft. Zusätzlich werden auch die \textit{churns} untersucht, um zu sehen, wie sich diese im Verlauf der Projektzeit verändern. 
+
+Ein signifikanter Faktor, der bei den Projektmodulen eine Rolle spielt, ist der fest definierte Abgabetermin. Dies unterscheidet diese Projekte von Open-Source-Projekten, die in der Literatur häufig untersucht werden. Um diese Untersuchung durchführen zu können, wird zusätzlich zu den oben genannten Metriken der Abgabetermin der einzelnen Klassen ermittelt. Dazu wird für jede Klasse der zuletzt erstellte Pull Request gezogen. Da einige Dozierende ihr Feedback per Pull Request abgeben, werden alle Pull Requests eines Dozierenden herausgefiltert. Dies wird über das Attribut \textit{Author} ermittelt. Die Verifizierung dieser Methode erfolgte unter Zuhilfenahme der bekannten <nr> Abgabetermine von Klassen.
+
+Zur initialen Analyse werden die Projekte in die entsprechenden Projektwochen aufgeteilt und die Mediane der \textit{latenncies} und \textit{churns} der entsprechenden Wochen ermittelt. Dies soll eine allgemeine Übersicht der Veränderungen der Metriken aufzeigen.
+
+\subsection{Projektwochen im Verhältnis zu Latency und Churn}
+\label{sec:ProjektwochenLatencyChurn}
+In welcher Woche ein Pull Request stattfindet wird ermittelt indem die im Kapitel \secref{sec:Metriken} erwähnten Metriken \textit{Pull Request createTime} und \textit{Repository createTime} gemined werden und die Erstellungszeit des Repositroies abgezogen wird von der Eröffnungszeit des Pull Requests. 
 
 
-
-\subsection{Einfluss von Projektzeit}
-Ein signifikanter Faktor, der bei Projektmodulen eine Rolle spielt, ist die fest definierte Abgabefrist. Dies unterscheidet diese Projekte von den Open-Source-Projekten, die in der Literatur häufig untersucht werden. Es soll nun untersucht werden, ob der Zeitpunkt der Erstellung eines Pull-Requests innerhalb der Projektlaufzeit einen Einfluss auf die Bearbeitung und vor allem auf die Dauer hat. Dafür wurde zusätzlich zu den oben genannten Metriken noch das Abgabedatum der einzelnen Klassen ermittelt. Da einige Dozenten ihr Feedback mittels Pull Request abgegeben haben, wurden alle Pull Requests herausgefiltert, die von einem Dozenten erstellt wurden. Dies wurde über das Attribut \textit{Author} ermittelt.
-
-Es wurden verschiedene Analysen anhand eines Phyton Notebooks vorgenommen. Die erste Untersuchung analysierte, ob generell ein Zusammenhang über die \textit{latency} und \textit{churn} im Verlauf der Projektzeit festgestellt werden kann.  Um der in der Einleitung formulierten Hypothese nachzugehen, wurden die Pull Requests, die innerhalb von 30 Minuten und einer Minute gemerged wurden, ins Verhältnis zur Projektabgabe gesetzt und graphisch dargestellt. Des Weiteren wurden alle Pull Requests in Verbindung zur Abgabe gesetzt, um herauszufinden, wann die Pull Requests generell erstellt und bearbeitet wurden.  Darüber hinaus wurde analysiert, wie viele Pull Requests die Teams innerhalb der letzten 3 Projekttage und des letzten Projekttages noch abgearbeitet haben.
-\subsection{Ergebnisse Einfluss Projektzeit}
-Anhand der \autoref{fig:mittelwert-woche-lateny} ist ersichtlich, dass die Latency gegen Ende der Projektzeit abnimmt. Während die Churn (\autoref{fig:mittelwert-woche-churn}) bis zur 5. Woche ansteigt. 
+Anhand der \autoref{fig:mittelwert-woche-lateny} ist ersichtlich, dass die Latency gegen Ende der Projektzeit abnimmt, während die Churn (\autoref{fig:mittelwert-woche-churn}) bis zur 5. Woche ansteigt. 
 Zu beachten ist, dass, wie bereits im Kapitel \secref{sec:Projektmodule} erwähnt, die Projekte nicht exakt 28 Tage dauern. Die ermittelten Projektlaufzeiten liegen zwischen 20 und 36 Tagen.
-Wobei die Klassen aus den Jahren 2021 und 2022 bei einem Durchschnitt von 21 Tagen liegen. Die neueren Klassen ab dem Jahr 2023 haben eine Projektlaufzeitspannweite von 28 bis 36 Tagen. Wovon eine Klasse die 35 Tage überschreitet. In dieser Klasse haben fünf Teams eine Laufzeit von 29 Tagen und drei Teams eine Laufzeit von 35 oder 36 Tagen. Somit widerspiegeln diese drei Teams die Woche sechs in der folgenden \autoref{fig:vergleich-latency-churn-projektzeit}. Die Latency nimmt im Laufe der Zeit zweimal stark ab. Das erste Mal von der ersten zur zweiten Projektwoche, wobei sie in der ersten Woche bei einem Mittelwert von 3.5 Stunden und in der zweiten Woche bei 2 Stunden liegt. Zum zweiten Mal nimmt die Latenz in der vierten Projektwoche stark ab, und zwar von 1.7 Stunden auf 0.5 Stunden. In der sechsten Woche ist die Latency nahezu 0. Der Churn steigt bis zur 5. Woche kontinuierlich von 72 Zeilenwechseln auf 115 an und sinkt dann in der 6. Woche auf 98.
+Wobei die Klassen aus den Jahren 2021 und 2022 bei einem Durchschnitt von 21 Tagen liegen. Die neueren Klassen ab dem Jahr 2023 haben eine Projektlaufzeitspannweite von 28 bis 36 Tagen, wobei eine Klasse 35 Tage überschreitet. In dieser Klasse haben fünf Teams eine Laufzeit von 29 Tagen und drei Teams eine Laufzeit von 35 oder 36 Tagen. Somit widerspiegeln diese drei Teams die Woche sechs in der folgenden \autoref{fig:vergleich-latency-churn-projektzeit}. Die Latency nimmt im Laufe der Zeit zweimal stark ab. Das erste Mal von der ersten zur zweiten Projektwoche, wobei sie in der ersten Woche bei einem Median von 3.5 Stunden und in der zweiten Woche bei 2 Stunden liegt. Zum zweiten Mal nimmt die Latenz in der vierten Projektwoche stark ab, und zwar von 1.7 Stunden auf 0.5 Stunden. In der sechsten Woche ist die Latency nahezu 0. Der Churn steigt bis zur 5. Woche kontinuierlich von 72 Zeilenwechseln auf 115 an und sinkt dann in der 6. Woche auf 98.
 \begin{figure}[htbp]
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Figures/mittelwert-woche-lateny.png}
-        \caption{Mittelwerte Woche des Projektes vs. Latency}
+        \caption{Mediane Woche des Projektes vs. Latency}
         \label{fig:mittelwert-woche-lateny}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Figures/mittelwert-woche-churn.png}
-        \caption{Mittelwerte Woche des Projektes vs. Churn}
+        \caption{Mediane Woche des Projektes vs. Churn}
         \label{fig:mittelwert-woche-churn}
     \end{subfigure}
     \caption{Vergleich von Latency und Churn innerhalb der Projektzeit}
     \label{fig:vergleich-latency-churn-projektzeit}
 \end{figure}
 
-Werden die Daten nach Vollzeit- und Teilzeitstudierenden aufgeteilt, zeigt sich bei den Vollzeitklassen ein ähnliches Bild. Veranschaulicht wird dies in der \autoref{fig:vergleich-latency-churn-projektzeit-v}. Allerdings ist der Mittelwert der Latecy in der ersten Woche mit 7.4 Stunden mehr als doppelt so hoch wie in der Gesamtauswertung. Ebenso nimmt die Latency von der ersten zur zweiten Woche stark ab. Der Wert sinkt um mehr als die Hälfte und liegt anschliessend bei 3.4 Stunden. Ab der vierten Woche ist der Mittelwert unter einer halben Stunde. Zeitgleich ist der Churn in der ersten Woche mit 71 Zeilenänderungen am geringsten, steigt mit Ausnahme der dritten Woche an und erreicht in der fünften Woche mit 121 Änderungen seinen Höhepunkt. Im Gegensatz zur Latency liegen diese Werte sehr nahe bei der Gesamtanalyse.
+Werden die Daten nach Vollzeit- und Teilzeitstudierenden aufgeteilt, zeigt sich bei den Vollzeitklassen ein ähnliches Bild. Veranschaulicht wird dies in der \autoref{fig:vergleich-latency-churn-projektzeit-v}. Allerdings ist der Median der Latency in der ersten Woche mit 7.4 Stunden mehr als doppelt so hoch wie in der Gesamtauswertung. Ebenso nimmt die Latency von der ersten zur zweiten Woche stark ab. Der Wert sinkt um mehr als die Hälfte und liegt anschliessend bei 3.4 Stunden. Ab der vierten Woche ist der Median unter einer halben Stunde. Zeitgleich ist der Churn in der ersten Woche mit 71 Zeilenänderungen am geringsten, steigt mit Ausnahme der dritten Woche an und erreicht in der fünften Woche mit 121 Änderungen seinen Höhepunkt. Im Gegensatz zur Latency liegen diese Werte sehr nahe bei der Gesamtanalyse.
 \begin{figure}[htbp]
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Figures/mittelwert-woche-lateny-v.png}
-        \caption{Mittelwerte Woche des Projektes vs. Latency Vollzeit}
+        \caption{Mediane Woche des Projektes vs. Latency Vollzeit}
         \label{fig:mittelwert-woche-lateny-v}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Figures/mittelwert-woche-churn-v.png}
-        \caption{Mittelwerte Woche des Projektes vs. Churn Vollzeit}
+        \caption{Mediane Woche des Projektes vs. Churn Vollzeit}
         \label{fig:mittelwert-woche-churn-v}
     \end{subfigure}
     \caption{Vergleich von Latency und Churn innerhalb der Projektzeit Vollzeit}
@@ -290,50 +300,80 @@ In der \autoref{fig:vergleich-latency-churn-projektzeit-t} ist zu erkennen, dass
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Figures/mittelwert-woche-lateny-t.png}
-        \caption{Mittelwerte Woche des Projektes vs. Latency Teilzeit}
+        \caption{Mediane Woche des Projektes vs. Latency Teilzeit}
         \label{fig:mittelwert-woche-lateny-t}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Figures/mittelwert-woche-churn-t.png}
-        \caption{Mittelwerte Woche des Projektes vs. Churn Teilzeit}
+        \caption{Mediane Woche des Projektes vs. Churn Teilzeit}
         \label{fig:mittelwert-woche-churn-t}
     \end{subfigure}
     \caption{Vergleich von Latency und Churn innerhalb der Projektzeit Teilzeit}
     \label{fig:vergleich-latency-churn-projektzeit-t}
 \end{figure}
+Zusammenfassend lässt sich feststellen, dass die Latency im Laufe der Zeit abnimmt, während der Churn zunimmt. Es ist auch ersichtlich, dass Vollzeitstudierende vor allem in der ersten Woche einen deutlich höheren Wert bei der Bearbeitungszeit der Pull Requests haben. Jedoch gilt zu beachten, dass wie bereits erwähnt, nicht alle Projekte gleich lange dauerten und somit waren bei den Wochen vier, fünf und sechs nicht mehr alle Projekte am laufen. Deshalb wurde ermittelt, wie die Pull Requests Verteilung über die Projektwochen ist.
+
+\begin{table}[ht]
+\caption{Anzahl Pull Requests pro Woche}
+\label{tab:anz_pr_per_week}
+\centering
+\begin{tabular}{rrrr}
+\toprule
+\textbf{Woche} & \textbf{Vollzeit} & \textbf{Teilzeit} & \textbf{Gesamt} \\
+\midrule
+1 & 94 & 107 & 201 \\
+2 & 158 & 174 & 332\\
+3 & 275 & 317 & 592\\
+4 & 298 & 363 & 661\\
+5 & 241 & 341 & 582 \\
+6 & 0 & 67 & 67\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \newpage
-Die Analyse der Daten, die in der \autoref{fig:anz-prs-vs-latency-tv} dargestellt sind, zeigt, dass eine Vielzahl von PullRequests innerhalb einer halben Stunde bearbeitet wurde. Eine detaillierte Analyse dieser kurz geöffneten PullRequests offenbart, dass der überwiegende Teil davon in den letzten drei Tagen und insbesondere am Tag der Abgabe erstellt wurde. Eine weitere Restriktion der Pull Requests auf jene, die innerhalb einer Minute abgearbeitet wurden, resultiert in einer ähnlichen Situation. Es ist jedoch festzustellen, dass der Tag der Abgabe sich stärker abhebt, wobei auch ein Anstieg zwei Tage vor Abgabe zu erkennen ist.  Die Resultate sind in \autoref{fig:anz-prs-under-x-mins} dargestellt.
+Wie in der \autoref{tab:anz_pr_per_week} ersichtlich wurden die wenigsten Pull Requests in der sechsten Woche erstellt. Zu diesem Zeitpunkt liefen jedoch nur noch drei Projekte. Abgesehen davon werden in der ersten Projektwoche die wenigsten Pull Requests erstellt. Diese Zahl steigt dann kontinuierlich bis zur 4. Woche an, obwohl in der 4. Woche nicht mehr alle Projekte am Laufen waren. In der fünften Woche ist ein Rückgang der Pull Requests zu beobachten, wobei diese in der Gesamtzahl nur geringfügig unter der dritten Woche und bei den Teilzeitstudierenden sogar leicht darüber liegt. 
+
+Die Erstellung von Pull Requests ist in den letzten Wochen der Projekte sehr hoch. Allerdings ist nicht genau ersichtlich, wie sich die Pull Requests über die Laufzeit der einzelnen Projekte verteilen. Deshalb wird in einer weiteren Untersuchung analysiert, wie die Verteilung der Pull Requests im Verhältnis zu den Abgabefristen der einzelnen Projekte aussieht.
+
+\subsection{Pull Requests im Verhältnis zum Abgabetermin}
+Die Untersuchung von Pull Requests im Verhältnis zur Abgabe zeigt, dass am Tag der Abgabe die meisten Pull Requests abgearbeitet werden. Dies ist aus der \autoref{fig:anz-prs-days-away-from-end} ersichtlich. Von den 2427 untersuchten Pull Requests wurden 523 am Tag der Abgabe erstellt und abgeschlossen. Dieser Wert entspricht einer Quote von 21.5\,\%.  Die zweitmeisten Pull Requests wurden am Tag vor der Abgabe bearbeitet mit einer Anzahl von 309. Am drittletzten Tag wurde ein erhöhter Wert festgestellt, der jedoch nicht mehr signifikant hervorsticht. Eine Zusammenfassung der letzten drei Tage der Projekte ergibt eine Gesamtzahl von 986 bearbeiteten Pull Requests, was einem Prozentsatz von 40.6\,\% entspricht. Über die restliche Projektzeit variieren die Anzahl bearbeiteter Pull Requests. Es lassen sich erhöhte Werte sieben, acht und 15 Tage vor der Abgabe feststellen, die sich von den Werten der übrigen Tage abheben.
+\begin{figure}[htbp]
+    \includegraphics[width=\textwidth]{Figures/anz-prs-days-away-from-end.png}
+    \caption{Anzahl eröffneter Pull Requests im Verhältnis zur Abgabe}
+    \label{fig:anz-prs-days-away-from-end}
+\end{figure}
+\newpage
+Eine detaillierte Analyse der Pull Requests in den einzelnen Teams zeigt, dass in 19 von 71 Teams mehr als 50 Prozent aller Pull Requests in den letzten drei Projekttagen eröffnet und abgeschlossen wurden. Es lässt sich feststellen, dass vier der analysierten Teams einen Anteil von über 75 Prozent ihrer Pull Requests in diesem Zeitraum bearbeitet haben. Zudem ist eine Gruppe zu identifizieren, die sämtliche ihrer Pull Requests innerhalb des definierten Zeitraums erstellt und geschlossen hat. Eine detaillierte Analyse des Projektes ergab, dass die genannte Gruppe insgesamt zwei Pull Requests hatte, die beide am Tag vor der Abgabe erstellt wurden. Wenn diese Analyse auf den letzten Projekttag beschränkt wird, dann sind es drei Teams, die mehr als 50 Prozent ihrer Pull Requests am Abgabetag erledigt haben.
+
+Viele Pull Requests werden gegen Ende der Projekte erstellt und wie im Kapitel \secref{sec:ProjektwochenLatencyChurn} aufgezeigt, nehmen die Latencies gegen Ende der Projekte ab. Jedoch ist dort nicht genau ersichtlich, wie dies bei den einzelnen Projekten aussieht. Deshalb werden die Latencies unter 30 Minuten und die ganz kurzen Latencies von unter einer Minute im Verhältnis zu den Abgaben gestellt.
+
+\newpage
+\subsection{Analyse kurze Pull Request Latency im Verhältnis zur Abgabe }
+Eine detaillierte Analyse der kurz geöffneten Pull Requests (kleiner als 30 Minuten) offenbart, dass der überwiegende Teil davon in den letzten drei Tagen und insbesondere am Tag der Abgabe erstellt werden. Eine weitere Restriktion der Pull Requests auf jene, die innerhalb einer Minute abgearbeitet werden, resultiert in einer ähnlichen Situation. Es ist jedoch festzustellen, dass der Tag der Abgabe sich stärker abhebt, wobei auch ein Anstieg zwei Tage vor Abgabe zu erkennen ist.  Die Resultate sind in \autoref{fig:anz-prs-under-x-mins} dargestellt.
 
 \begin{figure}[htbp]
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Figures/anz-prs-under-30-min.png}
-    \caption{Anzahl PullRequests unter 30 Minuten im Verhältnis zur Abgabe}
+    \caption{Anzahl Pull Requests unter 30 Minuten im Verhältnis zur Abgabe}
     \label{fig:anz-prs-under-30-min}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Figures/anz-prs-under-1-min.png}
-    \caption{Anzahl PullRequests unter einer Minute im Verhältnis zur Abgabe}
+    \caption{Anzahl Pull Requests unter einer Minute im Verhältnis zur Abgabe}
     \label{fig:anz-prs-under-1-min}
     \end{subfigure}
-    \caption{Anzahl PullRequests unter 30 / 1 Minute im Verhältnis zur Abgabe}
+    \caption{Anzahl Pull Requests unter 30 / 1 Minute im Verhältnis zur Abgabe}
     \label{fig:anz-prs-under-x-mins}
 \end{figure}
 
-Die Untersuchung von Pull Requests im Verhältnis zur Abgabe zeigt, dass am Tag der Abgabe die meisten Pull Requests abgearbeitet wurden. Dies ist aus der \autoref{fig:anz-prs-days-away-from-end} ersichtlich. Von den 2427 untersuchten Pull Requests wurden 523 am Tag der Abgabe erstellt und abgeschlossen. Dieser Wert entspricht einer Quote von 21.5 Prozent.  Die zweitmeisten Pull Request wurden am Tag vor der Abgabe bearbeitet mit einer Anzahl von 309. Am drittletzten Tag wurde ein erhöhter Wert festgestellt, der jedoch nicht mehr signifikant hervorsticht. Es wurden 154 Pull Requests bearbeitet. Eine Zusammenfassung der letzten drei Tage der Projekte ergibt eine Gesamtzahl von 986 bearbeiteten Pull Requests, was einem Prozentsatz von 40.6 Prozent entspricht. Über die restliche Projektzeit variieren die Anzahl bearbeiteten Pull Rquests. Es lassen sich erhöhte Werte sieben, acht und 15 Tage vor der Abgabe feststellen, die sich von den Werten der übrigen Tage abheben.
-\begin{figure}[htbp]
-    \includegraphics[width=\textwidth]{Figures/anz-prs-days-away-from-end.png}
-    \caption{Anzahl geschlossene Pull Requests im Verhältnis zur Abgabe}
-    \label{fig:anz-prs-days-away-from-end}
-\end{figure}
-\newpage
-Eine detaillierte Analyse der Pull Requests in den einzelnen Teams zeigt, dass in 19 von 71 Teams mehr als 50 Prozent aller Pull Requests in den letzten drei Projekttagen eröffnet und abgeschlossen wurden. Es lässt sich feststellen, dass vier der analysierten Teams einen Anteil von über 75 Prozent ihrer Pull Requests in diesem Zeitraum bearbeitet haben. Zudem ist eine Gruppe zu identifizieren, die sämtliche ihrer Pull Requests innerhalb des definierten Zeitraums erstellt und geschlossen hat. Eine detaillierte Analyse des Projektes ergab, dass die genannte Gruppe insgesamt zwei Pull Requests hatte, die beide am Tag vor der Abgabe erstellt wurden. Wenn diese Analyse auf den letzten Projekttag beschränkt wird, dann sind es drei Teams, die mehr als 50 Prozent ihrer Pull Requests am Abgabetag erledigt haben.
+
 
 \section{Ergebnisse Pull Reqeust Akzeptanz}
 Die aktuelle Literatur zeigt, dass sowohl soziale und prozessbezogene Faktoren als auch technische Merkmale berücksichtigt werden müssen. 
