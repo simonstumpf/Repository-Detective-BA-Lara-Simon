@@ -200,7 +200,7 @@ Abbildung \autoref{fig:anz-prs-vs-churn-size-tz-vz} zeigt die Pull Request der V
     \label{fig:anz-prs-vs-churn-size-tz-vz}
 \end{figure}
 
-Eine Normalisierung der Daten pro Repo zeigt, dass die Vollzeitklassen entweder gleich viel oder mehr PRs pro Kategorie erstellen. Die Teilzeitklassen erstellen jedochh 
+Eine Normalisierung der Daten, welche nun die durchschnittliche Anzahl PRs pro Repo zeigt, dass die Vollzeitklassen entweder gleich viel oder mehr PRs pro Kategorie erstellen. Die Teilzeitklassen erstellen jedoch fast gleich viele PRs in den Kategorien \textit{XS} und \textit{XL}, dort erstellen die Vollzeitklassen jeweils 1,12 und 1,18 so viele PRs. 
 
 \begin{figure}[htbp]
     \includegraphics[width=\textwidth]{Figures/avg-anz-prs-vs-churn-size-tz-vz-pro-repo.png}
@@ -232,10 +232,25 @@ Die \autoref{fig:anz-avg-prs-vs-latency-tv-no-dev} zeigt kaum Differenzen zur \a
 \end{figure}
 \newpage
 
-//TODO churn ohne dev
+Nach der Entfernung der Pull Requests, die von Dev-Branches auf Main- oder Master-Branches gemerged wurden, verändert sich das Bild in Bezug auf die Churn-Grössen leicht.
 
-// TODO finales statement zu churn hinzufügen\\
-Somit zeigt sich, dass Dev-Branches keinen Einfluss auf die \textit{latencies} haben. 
+Abbildung \autoref{fig:anz-prs-vs-churn-size-tz-vz-ohne-dev} zeigt die durchschnittliche Anzahl Pull Requests pro Repository, nun ohne Dev-Branch-Merges. Sichbar ist, dass die Vollzeitklassen in allen Churn-Kategorien tendenziell mehr Pull Requests pro Repository erstellen als die Teilzeitklassen. Besonders in den Kategorien \textit{M} (50–199 Änderungen) und \textit{L} (200–999 Änderungen) ist der Unterschied deutlich ausgeprägt. In den Kategorien \textit{XS} (0–9 Änderungen) und \textit{S} (10–49 Änderungen) ist der Abstand zwischen Teilzeit- und Vollzeitklassen etwas geringer, aber dennoch zugunsten der Vollzeitklassen.
+
+\begin{figure}[htbp]
+    \includegraphics[width=\textwidth]{Figures/avg-anz-prs-vs-churn-size-tz-vz-pro-repo-ohne-dev.png}
+    \caption{Durchschnittliche Anzahl PullRequests vs. Churn Grösse pro Projekt(Teilzeit, Vollzeit) ohne Dev zu Main}
+    \label{fig:anz-prs-vs-churn-size-tz-vz-ohne-dev}
+\end{figure}
+
+Zum Vergleich zeigt die Abbildung \autoref{fig:anz-prs-vs-churn-size-tz-vz-nur-dev} nur die PRs, die von Dev-Branches auf Main-Branches gemerged wurden. Hier zeigt sich, dass diese Pull Requests insbesondere in den grösseren Churn-Kategorien (\textit{L} bis \textit{XXL}) auftreten. Auffällig ist zudem, dass in dieser Betrachtung die Vollzeitstudierenden mehr grosse Dev-Branch Pull Requests erzeugen als die Teilzeitstudierenden.
+
+\begin{figure}[htbp]
+    \includegraphics[width=\textwidth]{Figures/avg-anz-prs-vs-churn-size-tz-vz-pro-repo-nur-dev.png}
+    \caption{Durchschnittliche Anzahl PullRequests vs. Churn Grösse pro Projekt(Teilzeit, Vollzeit) nur Dev zu Main}
+    \label{fig:anz-prs-vs-churn-size-tz-vz-nur-dev}
+\end{figure}
+
+Zusammengefasst zeigt sich, dass die Herausfilterung der Dev-Branch-Merges einen Einfluss auf die Ergebnisse der Churn-Verteilung hat, insbesondere bei grossen Pull Requests. Insgesamt bestätigt sich jedoch, dass Vollzeitstudierende – unabhängig von der Herausfilterung – in den meisten Kategorien durchschnittlich mehr Pull Requests pro Repository erstellen als Teilzeitstudierende.
 
 // TODO Abschluss kapitel
 
@@ -374,23 +389,28 @@ Eine detaillierte Analyse der kurz geöffneten Pull Requests (kleiner als 30 Min
 \end{figure}
 
 
-
+\newpage
 \section{Ergebnisse Pull Reqeust Akzeptanz}
-Die aktuelle Literatur zeigt, dass sowohl soziale und prozessbezogene Faktoren als auch technische Merkmale berücksichtigt werden müssen. 
+In diesem Abschnitt wird die Akzeptanz von PRs untersucht. Ziel ist es, die Gründe für die Ablehnung oder das Schliessen von PRs systematisch zu erfassen und mögliche Muster zwischen Vollzeit- und Teilzeitklassen herauszuarbeiten.
 
-Um die Ursache des geschlossenen PRs zu gruppieren, wurden folgende Gruppen erstellt: 
+\subsection{Kategorisierung der geschlossenen Pull Requests}
+\label{sec:KategorienGeschlossenePRs} 
+Um die Ursache des geschlossenen PRs klassifizieren zu können, müssen zuerst Kategorien erstellt werden. Diese Kategorien wurden aufgrund einer manuellen Analyse des Datensatzes erreicht. Dabei wurden alle 39 PRs mit einem Churn von mindestens 500 manuell angeschaut als auch eine Stichprobe von 50 geschlossenen PRs mit einem kleinerem Churn.
 \begin{itemize}
-    \item \textbf{PRs ohne erkennbaren Grund}: Die PRs wurden ohne Kommentar geschlossen. Die Churn Grösse ist kleiner als 500. 
-    \item \textbf{Issue / Feature durch anderen PR implementiert}: Das Feature wurde durch einen anderen PR implementiert und anschliessend dann geschlossen. 
-    \item \textbf{PRs mit falschem Zielbranch}: Der Autor des PRs wählte den falschen Zielbranch aus. Der PR wurde anschliessend in einen anderen Branch gemerdet. 
-    \item \textbf{Feature wird nicht mehr benötigt}: Das Feature wird nicht mehr benötigt. Diess muss so im PR vermerkt sein. 
-    \item \textbf{Implementierung abgelehnt}: Die Implementierung wurde abgelehnt. 
+    \item \textbf{PRs ohne erkennbaren Grund (OG)}: Die PRs wurden ohne Kommentar geschlossen. Die Churn-Grösse ist kleiner als 500.
+    \item \textbf{Feature durch anderen PR implementiert (FPI)}: Das Feature wurde durch einen anderen PR implementiert und der ursprüngliche PR anschliessend geschlossen.
+    \item \textbf{PRs mit falschem Zielbranch (FZB)}: Der Autor des PRs wählte den falschen Zielbranch aus. Der PR wurde anschliessend in den korrekten Branch gemerged.
+    \item \textbf{Feature wird nicht mehr benötigt (FNN)}: Das Feature wird nicht mehr benötigt. Dies muss explizit im PR vermerkt sein.
+    \item \textbf{Implementierung abgelehnt (IA)}: Die vorgeschlagene Implementierung wurde abgelehnt.
+    \item \textbf{Divers (DIV)}: Beinhaltet hauptsächlich Feedback-PRs, welche von gewissen Dozenten für die Notenvergabe verwendet wurden. Ausserdem sind einige Refactor-Branches zu sehen, welche ausschliesslich für den Refactoren erstellt wurden und anschliessend geschlossen wurden. 
 \end{itemize}
 
+\subsection{Deskriptive Analyse}
+Insgesamt wurden 2427 Pull Requests untersucht, wovon 170 PRs geschlossen wurden (7,0,\%). Von den geschlossenen PRs entfielen 95 auf Vollzeitklassen und 75 auf Teilzeitklassen.
 
-Für die Analyse der geschlossenen Pull Requests (PRs) wurden zunächst alle verfügbaren PRs eingelesen und entsprechend gefiltert. Erste Auswertungen ergaben, dass lediglich 0,07\% aller Pull Requests geschlossen wurden. Von den insgesamt 170 geschlossenen PRs entfallen 95 auf die Vollzeitklassen und 75 auf die Teilzeitklassen, obwohl der analysierte Datenbestand 27 Vollzeitprojekte und 43 Teilzeitprojekte umfasst. Der durchschnittliche Churn der PRs liegt in den Teilzeitklassen ebenfalls niedriger (137 im Vergleich zu 188 bei den Vollzeitklassen).
+Der durchschnittliche Churn bei geschlossenen PRs beträgt: \begin{itemize} \item Teilzeitklassen: 137 Zeilenänderungen \item Vollzeitklassen: 188 Zeilenänderungen \end{itemize}
 
-Abbildung \autoref{fig:anz-clsd-prs-nach-churn} zeigt die Anzahl geschlossener PRs, gruppiert nach ihrer Churn-Grösse. Dabei wird deutlich, dass in den Teilzeitklassen vor allem kleinere PRs abgelehnt wurden. Eine manuelle Analyse der Gründe für das Scheitern dieser PRs ergab, dass viele ohne jeglichen Kommentar abgelehnt wurden. Ob dies daran lag, dass die Implementierung nicht mehr benötigt wurde oder fehlerhaft war, lässt sich im Nachhinein nicht eindeutig klären.
+Eine Aufteilung der geschlossenen Pull Requests nach Churn-Grösse zeigt, dass in Teilzeitklassen vorwiegend kleinere PRs geschlossen wurden, während in Vollzeitklassen die Spannweite der Churn-Grössen etwas grösser ist.
 
 \begin{figure}[htbp]
     \includegraphics[width=\textwidth]{Figures/anzahl-geschlossene-prs-nach-churn.png}
@@ -398,24 +418,26 @@ Abbildung \autoref{fig:anz-clsd-prs-nach-churn} zeigt die Anzahl geschlossener P
     \label{fig:anz-clsd-prs-nach-churn}
 \end{figure}
 
+\pagebreak
+\subsection{Ursachenanalyse der geschlossenen PRs}
+---
+Für die Ursachenanalyse wurden alle PRs mit einem Churn-Wert grösser als 500 sowie alle mit einem Churn-Wert kleiner als 100 manuell untersucht und den in Kapitel \secref{sec:KategorienGeschlossenePRs} definierten Kategorien zugeordnet. 
+Die Verteilung der Ursachen geschlossener PRs ist in Tabelle \autoref{tab:treatments} dargestellt.
 
-Die manuelle Analyse der geschlossenen PRs mit einem Churn von über 500 zeigte hingegen ein anderes Bild: Diese PRs wurden häufig aufgrund eines falschen Zielbranches erstellt. In mehreren Fällen konnte ausserdem beobachtet werden, dass das vorgeschlagene Feature bereits durch einen anderen Branch implementiert worden war. Gewisse PRs wurden auch für grosse Refactoring Arbeiten verwendet. 
 
-Die Kategorie 'divers' beinhaltet hauptsächlich Feedback-PRs, welche von gewissen Dozenten für die Notenvergabe verwendet wurden. Ausserdem sind einige refactor Branches zu sehen, welche Ausschliesslich für den Refactoren erstellt wurden und anschliessend geschlossen wurden. 
-
-\begin{table}
+\begin{table}[htbp]
 \caption{Geschlossene PRs gruppiert nach Ursache}
 \label{tab:treatments}
 \centering
 \begin{tabular}{l l l l l l l}
 \toprule
 \textbf{Klasse} & 
-\makecell{\textbf{PR abgelehnt} \\ \textbf{ohne Grund}} & 
-\makecell{\textbf{Feat. durch} \\ \textbf{anderen PR impl.}} & 
-\makecell{\textbf{Feat. nicht} \\ \textbf{mehr benötigt}} & 
-\makecell{\textbf{Impl.} \\ \textbf{abgelehnt}} & 
-\makecell{\textbf{falscher} \\ \textbf{Zielbranch}} &
-\makecell{\textbf{divers}} \\
+\makecell{\textbf{OG}} & 
+\makecell{\textbf{FPI}} & 
+\makecell{\textbf{FNN}} & 
+\makecell{\textbf{IA}} & 
+\makecell{\textbf{FZB}} & 
+\makecell{\textbf{DIV}} \\
 \midrule
 T < 100& 35 & 1 & 3 & 2 & 0 & 0\\
 V < 100& 22 & 1 & 0 & 1 & 1 & 0 \\
@@ -433,27 +455,35 @@ V > 500& 8 & 0 & 1 & 4 & 6 & 0 \\
 \item[$> 500$] Churn grösser 500
 \end{itemize}
 
-\subsection{Ergebnisse Einfluss Projektzeit}
-Wie in Abbildung \autoref{fig:closed-prs-projektkeit-teilzeit} deutlich wird, wurden die meisten Pull Requests (PRs) in den Teilzeitklassen am letzten Tag vor der Projektabgabe geschlossen. Dieser Effekt ist zwar auch in den Vollzeitklassen erkennbar, jedoch weniger ausgeprägt. In Abbildung \autoref{fig:closed-prs-projektkeit-vollzeit} wird zudem deutlich, dass die geschlossenen PRs in den Vollzeitklassen gleichmässiger über den gesamten Projektzeitraum verteilt sind.
+Die wichtigsten Erkenntnisse aus der Ursachenanalyse sind folgende: Bei kleinen PRs (Churn $<$ 100) dominieren Fälle ohne nachvollziehbaren Schliessungsgrund. Bei grossen PRs (Churn $>$ 500) treten hingegen häufiger strukturierte Gründe auf, etwa ein falscher Zielbranch oder der Ersatz durch einen anderen PR. Teilzeitklassen haben insgesamt mehr PRs ohne klar dokumentierten Grund geschlossen, während Vollzeitklassen etwas häufiger explizite Ablehnungen oder Korrekturen von Branch-Fehlern zeigen.
 
-\begin{figure}[htbp]
-    \centering
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{Figures/closed-prs-projektzeit-vollzeit.png}
-        \caption{Anzahl geschlossene PRs Vollzeitklassen nach Tagen entfernt von Abgabe}
-        \label{fig:closed-prs-projektkeit-vollzeit}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{Figures/closed-prs-projektzeit-teilzeit.png}
-         \caption{Anzahl geschlossene PRs Teilzeitklassen nach Tagen entfernt von Abgabe}
-        \label{fig:closed-prs-projektkeit-teilzeit}
-    \end{subfigure}
-    \caption{Vergleich Anzahl geschlossene PRs Teilzeit vs Vollzeit nach Tagen entfernt von Abgabe}
-    \label{fig:vergleich-latency-churn-projektzeit}
+
+\subsection{Zeitliche Analyse geschlossener PRs}
+
+Eine Analyse der geschlossenen PRs im zeitlichen Verlauf der Projektlaufzeit zeigt deutliche Unterschiede zwischen Vollzeit- und Teilzeitklassen.
+
+\begin{figure}[htbp] 
+\centering \begin{subfigure}[b]{0.48\textwidth} 
+\centering \includegraphics[width=\textwidth]{Figures/closed-prs-projektzeit-vollzeit.png} 
+\caption{Geschlossene PRs Vollzeitklassen} 
+\label{fig:closed-prs-projektkeit-vollzeit}
+\end{subfigure} 
+\hfill 
+\begin{subfigure}[b]{0.48\textwidth} 
+\centering \includegraphics[width=\textwidth]{Figures/closed-prs-projektzeit-teilzeit.png} 
+\caption{Geschlossene PRs Teilzeitklassen} 
+\label{fig:closed-prs-projektkeit-teilzeit} 
+\end{subfigure} 
+\caption{Anzahl geschlossener PRs nach Tagen vor Abgabetermin} 
+\label{fig:closed-prs-projektzeit} 
 \end{figure}
+
+Die wichtigsten Beobachtungen sind folgende: In Teilzeitklassen konzentrieren sich die geschlossenen PRs stark auf die letzten Projekttage, insbesondere auf den Tag der Abgabe. In Vollzeitklassen hingegen verteilen sich die geschlossenen PRs gleichmässiger über den gesamten Projektverlauf.
+
+
+\subsection{Zusammenfassung}
+
+Zusammenfassend lässt sich festhalten, dass Teilzeitklassen tendenziell mehr kleine PRs ohne ausführliche Begründung schliessen, während Vollzeitklassen grössere PRs strukturierter ablehnen oder gezielt korrigieren. Auffällig ist zudem, dass viele geschlossene PRs, insbesondere in Teilzeitklassen, vermehrt gegen Ende des Projekts auftreten. Darüber hinaus zeigt sich, dass bei PRs mit hohen Churn-Werten Schliessungen häufiger auf Branch-Fehler oder redundante Implementierungen zurückzuführen sind.
 
 
 \section{Ergebnisse Entwicklungsaktivität}
