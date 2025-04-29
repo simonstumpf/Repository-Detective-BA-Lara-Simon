@@ -232,9 +232,9 @@ Die \autoref{fig:anz-avg-prs-vs-latency-tv-no-dev} zeigt kaum Differenzen zur \a
 \end{figure}
 \newpage
 
-Nach der Entfernung der Pull Requests, die von Dev-Branches auf Main- oder Master-Branches gemerged wurden, verändert sich das Bild in Bezug auf die Churn-Grössen leicht.
+Nach der Entfernung der Pull Requests, die von Dev-Branches auf Main- oder Master-Branches gemerged wurden, bleibt das Bild in Bezug auf die Churn-Grössen weitgehend unverändert.
 
-Abbildung \autoref{fig:anz-prs-vs-churn-size-tz-vz-ohne-dev} zeigt die durchschnittliche Anzahl Pull Requests pro Repository, nun ohne Dev-Branch-Merges. Sichbar ist, dass die Vollzeitklassen in allen Churn-Kategorien tendenziell mehr Pull Requests pro Repository erstellen als die Teilzeitklassen. Besonders in den Kategorien \textit{M} (50–199 Änderungen) und \textit{L} (200–999 Änderungen) ist der Unterschied deutlich ausgeprägt. In den Kategorien \textit{XS} (0–9 Änderungen) und \textit{S} (10–49 Änderungen) ist der Abstand zwischen Teilzeit- und Vollzeitklassen etwas geringer, aber dennoch zugunsten der Vollzeitklassen.
+Abbildung \autoref{fig:anz-prs-vs-churn-size-tz-vz-ohne-dev} zeigt die durchschnittliche Anzahl von Pull Requests pro Repository, diesmal unter Einbeziehung der Dev-Branch-Merges. Es ist ersichtlich, dass die Vollzeitklassen in allen Churn-Kategorien tendenziell mehr Pull Requests pro Repository erstellen als die Teilzeitklassen. Besonders in den Kategorien \textit{M} (50–199 Änderungen) und \textit{L} (200–999 Änderungen) ist der Unterschied deutlich ausgeprägt. In den Kategorien \textit{XS} (0–9 Änderungen) und \textit{S} (10–49 Änderungen) ist der Abstand zwischen Teilzeit- und Vollzeitklassen zwar etwas geringer, aber immer noch zugunsten der Vollzeitklassen.
 
 \begin{figure}[htbp]
     \includegraphics[width=\textwidth]{Figures/avg-anz-prs-vs-churn-size-tz-vz-pro-repo-ohne-dev.png}
@@ -395,6 +395,7 @@ In diesem Abschnitt wird die Akzeptanz von PRs untersucht. Ziel ist es, die Grü
 
 \subsection{Kategorisierung der geschlossenen Pull Requests}
 \label{sec:KategorienGeschlossenePRs} 
+// TODO: mit literatur vergleichen
 Um die Ursache des geschlossenen PRs klassifizieren zu können, müssen zuerst Kategorien erstellt werden. Diese Kategorien wurden aufgrund einer manuellen Analyse des Datensatzes erreicht. Dabei wurden alle 39 PRs mit einem Churn von mindestens 500 manuell angeschaut als auch eine Stichprobe von 50 geschlossenen PRs mit einem kleinerem Churn.
 \begin{itemize}
     \item \textbf{PRs ohne erkennbaren Grund (OG)}: Die PRs wurden ohne Kommentar geschlossen. Die Churn-Grösse ist kleiner als 500.
@@ -420,7 +421,6 @@ Eine Aufteilung der geschlossenen Pull Requests nach Churn-Grösse zeigt, dass i
 
 \pagebreak
 \subsection{Ursachenanalyse der geschlossenen PRs}
----
 Für die Ursachenanalyse wurden alle PRs mit einem Churn-Wert grösser als 500 sowie alle mit einem Churn-Wert kleiner als 100 manuell untersucht und den in Kapitel \secref{sec:KategorienGeschlossenePRs} definierten Kategorien zugeordnet. 
 Die Verteilung der Ursachen geschlossener PRs ist in Tabelle \autoref{tab:treatments} dargestellt.
 
@@ -487,9 +487,12 @@ Zusammenfassend lässt sich festhalten, dass Teilzeitklassen tendenziell mehr kl
 
 
 \section{Ergebnisse Entwicklungsaktivität}
-Für die Analyse der Entwicklungsaktivität wurde das Jupyter Notebook \textit{analyse-wochen-latency-churn.ipynb} erstellt \parencite{stumpf_simon_repo-detectivesba-metric-analysis-scripts_nodate}. 
+Empirische Studien zeigen, dass die Entwicklungsaktivität in Open-Source-Projekten auf Plattformen wie GitHub charakteristische Muster im Wochenverlauf aufweist. Insbesondere an Wochenenden ist die Aktivität signifikant geringer als unter der Woche. Innerhalb der Arbeitswoche fallen Montag und Freitag häufig als die Tage mit der geringsten Aktivität auf. Das Phänomen des Rückgangs der Entwicklungsaktivität wird oftmals auch \textit{Friday Effect} genannt. \parencite{claes_programmers_2018}
 
-Um die Entwicklungsaktivität messbar machen zu können, mussten für alle Klassen die Projektmodul-Unterrichtstage ermittelt werden:
+Dies soll nun im Zusammenhang mit der \fref{forschungsfrage3} "\textit{Lassen sich Patterns der Zusammenarbeit im Team erkennen,
+hinsichtlich der Tage, an denen die Studierenden an den Projekten arbeiten?}" anhand der Projektmodule analysiert werden. Um diese Analyse durchführen zu können, werden die Klassen einzeln nach ihren Arbeitstagen analysiert. Die Arbeitstage werden anhand der offenen und geschlossenen Pull Requests und der Commit-Daten definiert. Für dies wird das Mining um die im Kapitel \secref{sec:Metriken} erwähnte Metrik \textit{commit} ergänzt.
+
+Um die Entwicklungsaktivität messbar machen zu können, mussten für alle Klassen die Projektmodul-Unterrichtstage nachgeschlagen werden:
 \begin{table}[ht]
 \caption{Projektmodul-Unterrichtstage der Klassen}
 \label{tab:stundenplan}
@@ -524,10 +527,11 @@ It24tb   & Winterthur  & Freitag     \\
 \end{tabular}
 \end{table}
 
-Empirische Studien zeigen, dass die Entwicklungsaktivität in Open-Source-Projekten auf Plattformen wie GitHub charakteristische Muster im Wochenverlauf aufweist. Insbesondere an Wochenenden ist die Aktivität signifikant geringer als unter der Woche. Innerhalb der Arbeitswoche fallen Montag und Freitag häufig als die Tage mit der geringsten Aktivität auf. Das Phänomen des Rückgangs der Entwicklungsaktivität wird oftmals auch \textit{Friday Effect} genannt. \parencite{claes_programmers_2018}
 
-Da sich während der Analyse deutliche Differenzen zwischen den Voll- und Teilzeitklassen ergaben, wurden diese in der Analyse geteilt angeschaut. 
 
+Da sich während der Analyse deutliche Differenzen zwischen den Voll- und Teilzeitklassen ergaben, werden diese geteilt angeschaut. 
+
+// TODO\\
 Auch in den vorliegenden Daten zeigt sich eine Tendenz zur Konzentration der Aktivitäten auf spezifische Wochentage, insbesondere auf die jeweiligen Unterrichtstage. So wurden bei den Vollzeitklassen rund 24\,\% aller Pull Requests (PRs) am Projekttag erstellt. Bei den Teilzeitklassen liegt dieser Wert mit 34\,\% deutlich höher. Dies unterstreicht die Bedeutung des Unterrichtstages für die praktische Arbeit im Rahmen des Projekts.
 
 Abbildung \autoref{fig:anz-prs-teilzeit-pro-wochentag} zeigt exemplarisch die Verteilung der PR-Erstellungen über die Wochentage für zwei Teilzeitklassen. Deutlich erkennbar ist ein Aktivitätspeak am jeweiligen Unterrichtstag. An den darauffolgenden Tagen nimmt die Aktivität deutlich ab. Auffällig ist zudem, dass PRs nicht nur am Unterrichtstag erstellt, sondern auch überprüft und geschlossen wurden. Insgesamt wurden 27.7\,\% aller PRs der Teilzeitklassen am Wochenende erstellt – ein vergleichsweise hoher Wert.
@@ -551,7 +555,7 @@ Abbildung \autoref{fig:anz-prs-teilzeit-pro-wochentag} zeigt exemplarisch die Ve
     \label{fig:anz-prs-teilzeit-pro-wochentag}
 \end{figure}
 
-Ein kontrastierendes Bild zeigt sich bei den Vollzeitklassen. Abbildung \autoref{fig:anz-prs-vollzeit-pro-wochentag} zeigt die Verteilung der PR-Erstellungen bei zwei exemplarischen Klassen. 
+Ein kontrastierendes Bild zeigt sich bei den Vollzeitklassen. Die \autoref{fig:anz-prs-vollzeit-pro-wochentag} zeigt die Verteilung der PR-Erstellungen bei zwei exemplarischen Klassen. 
 Hier zeigt sich eine insgesamt gleichmässigere Verteilung der Aktivitäten über die Woche. Zwar ist auch hier der Projekttag der aktivste, jedoch in geringerem Ausmass als bei den Teilzeitklassen. Zudem wurden nur 16.8\% der PRs am Wochenende erstellt.
 
 \begin{figure}[htbp]
@@ -620,6 +624,21 @@ Ein ähnliches Bild ergibt sich bei den Vollzeitklassen. Abbildung \autoref{fig:
 \end{figure}
 
 \section{Projektmodul Ergebnisse bei Open Source Projekten}
+\subsection{Vorstellung der GitHub-Organisationen im Vergleich zu Racetrack-Projekten}
+Im Rahmen dieser Analyse werden die Ergebnisse des Racetrack-Projektmoduls mit den Metriken von Open-Source-Projekten verglichen. Hierführ werden drei unterschiedliche Github Organisationen betrachtet, welche eine unterschiedliche Grösse und Komplextität aufweisen: \textit{Ubique}, \textit{Swiss Federal Railways (SBB)} und \textit{
+Zalando SE} angeschaut \parencite{noauthor_ubique_nodate} \parencite{noauthor_swiss_nodate} \parencite{noauthor_zalando_nodate}. 
+
+
+\textit{Ubique Innovation AG} ist ein Schweizer Unternehmen mit Sitz in Zürich, das sich auf die Entwicklung von Softwarelösungen mit Fokus auf Mobile-App-Entwicklung spezialisiert hat. Im Jahr 2021 beschäftigte die Firma rund 50 Mitarbeiter \cite{noauthor_mathias_2021}. Zu den bekanntesten Projekten von Ubique gehören unter anderem die Mobile App der \textbf{Schweizerischen Bundesbahnen (SBB)}, die Kartenapplikation \textbf{Swisstopo} des Bundesamt für Landestopografie sowie die \textbf{Rega App}. \parencite{noauthor_apps_nodate}.
+
+todo: mit 8knot github org aluege (aktuell down) 
+https://metrix.chaoss.io/
+
+Die \textit{Schweizerische Bundesbahnen (SBB)} ist die staatliche Eisenbahngesellschaft der Schweiz \parencite{uvek_schweizerische_nodate}. Die SBB repräsentiert eine mittelgrosse Organisation im Bereich der Open Source Entwicklung mit 104 Projekten und 137 Followers auf Github. \parencite{noauthor_swiss_nodate} 
+todo: same 8knot analyse
+
+Zalando ist eine grosse Github Organisation, die für ihre umfangreichen Open-Source-Projekte im Bereich der E-Commerce- und Cloud-Computing-Technologien bekannt ist. So besitzt Zalando 50 Repositories mit 835 Follower. \parencite{noauthor_zalando_nodate}
+
 \subsection{Latency und Churn}
 \subsection{Allgemeine Korrelationen}
 

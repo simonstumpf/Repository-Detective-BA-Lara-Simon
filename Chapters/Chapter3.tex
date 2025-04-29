@@ -23,16 +23,8 @@ Für die einzelnen Analysen wurde jeweils ein neues Jupyter Notebook erstellt. D
 \label{sec:Metriken}
 \begin{itemize}
     \item \textbf{Repository createTime:} Erstellungsdatum des Repositories
+     \item \textbf{Commits:} // TODO
 \end{itemize}
-
-\section{Architekturbeschreibung GitGauge}
-// TODO 
-
-\section{Analyse Churn vs Latency}
-\label{sec:Metriken}
-Wie in Kapitel \secref{sec:PullRequestDauer} beschrieben, finden sich in der Literatur unterschiedliche Aussagen zum Einfluss der Code-Grösse (Churn) auf die Dauer von Pull Requests (PR Latency). Während einige Studien einen Zusammenhang feststellen, bleiben andere Untersuchungen uneindeutig \parencite{hasan_understanding_2023}\parencite{kudrjavets_small_2022}.
-
-Da das GitGauge noch nicht über alle notwendigen Metriken verfügte, welche für den Zusammenhang zwischen Latency und Churn notwendig sind, müssen diese implementiert werden. Für diese Analyse wurden folgende Metriken via Mining extrahiert:
 \begin{itemize}
     \item \textbf{Pull Request createTime:} Erstellungsdatum des PullRequests
     \item \textbf{Pull Request closeTime:} Schliesszeit des PullRequests.
@@ -40,7 +32,15 @@ Da das GitGauge noch nicht über alle notwendigen Metriken verfügte, welche fü
     \item \textbf{Pull Request Deletions:} Anzahl der gelöschten Codezeilen
 \end{itemize}
 
-Daraus wurden die Metriken \textit{latency} und \textit{churn} berechnet. Die \textit{latency} wird anhand folgender Formel berechnet:
+\section{Architekturbeschreibung GitGauge}
+// TODO 
+
+\section{Analyse Churn vs Latency}
+\label{sec:AnalyseChurnvsLatency}
+Wie in Kapitel \secref{sec:PullRequestDauer} beschrieben, finden sich in der Literatur unterschiedliche Aussagen zum Einfluss der Code-Grösse (Churn) auf die Dauer von Pull Requests (PR Latency). Während einige Studien einen Zusammenhang feststellen, bleiben andere Untersuchungen uneindeutig \parencite{hasan_understanding_2023}\parencite{kudrjavets_small_2022}.
+
+
+Aus den im Kapitel \secref{sec:Metriken} Metriken werden die Metriken \textit{latency} und \textit{churn} berechnet. Die \textit{latency} wird anhand folgender Formel berechnet:
 \begin{equation}
 latency = closeTime - createTime
 \end{equation}
