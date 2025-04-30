@@ -529,12 +529,12 @@ It24tb   & Winterthur  & Freitag     \\
 
 
 
-Da sich während der Analyse deutliche Differenzen zwischen den Voll- und Teilzeitklassen ergaben, werden diese geteilt angeschaut. 
+Da sich während der Analyse  Differenzen zwischen den Voll- und Teilzeitklassen ergaben, werden diese geteilt angeschaut. 
 
-// TODO\\
-Auch in den vorliegenden Daten zeigt sich eine Tendenz zur Konzentration der Aktivitäten auf spezifische Wochentage, insbesondere auf die jeweiligen Unterrichtstage. So wurden bei den Vollzeitklassen rund 24\,\% aller Pull Requests (PRs) am Projekttag erstellt. Bei den Teilzeitklassen liegt dieser Wert mit 34\,\% deutlich höher. Dies unterstreicht die Bedeutung des Unterrichtstages für die praktische Arbeit im Rahmen des Projekts.
+\subsection{Arbeitstage Pull Requests}
+Als erstes werden die Wochentage der Pull Request Erstellungs- und Schliessungsdaten ermittelt und auf die Wochentage aufgeteilt. Diese Aufteilung wird pro Klasse vorgenommen. In den vorliegenden Daten zeigt sich eine Tendenz zur Konzentration der Aktivitäten auf spezifische Wochentage, insbesondere auf die jeweiligen Unterrichtstage. So wurden bei den Vollzeitklassen rund 24\,\% aller Pull Requests (PRs) am Projekttag erstellt. Bei den Teilzeitklassen liegt dieser Wert mit 34\,\% deutlich höher. Dies unterstreicht die Bedeutung des Unterrichtstages für die praktische Arbeit im Rahmen des Projekts.
 
-Abbildung \autoref{fig:anz-prs-teilzeit-pro-wochentag} zeigt exemplarisch die Verteilung der PR-Erstellungen über die Wochentage für zwei Teilzeitklassen. Deutlich erkennbar ist ein Aktivitätspeak am jeweiligen Unterrichtstag. An den darauffolgenden Tagen nimmt die Aktivität deutlich ab. Auffällig ist zudem, dass PRs nicht nur am Unterrichtstag erstellt, sondern auch überprüft und geschlossen wurden. Insgesamt wurden 27.7\,\% aller PRs der Teilzeitklassen am Wochenende erstellt – ein vergleichsweise hoher Wert.
+Die \autoref{fig:anz-prs-teilzeit-pro-wochentag} zeigt exemplarisch die Verteilung der PR-Erstellungen auf die Wochentage für zwei Teilzeitklassen. Deutlich erkennbar ist eine Aktivitätsspitze am jeweiligen Unterrichtstag. An den folgenden Tagen nimmt die Aktivität deutlich ab. Auffällig ist auch, dass am Unterrichtstag nicht nur PRs erstellt, sondern auch überprüft und geschlossen wurden. Insgesamt ist der Anteil der am Wochenende erstellten PRs mit 27.7\,\% vergleichsweise hoch.
 
 \begin{figure}[htbp]
     \centering
@@ -555,8 +555,8 @@ Abbildung \autoref{fig:anz-prs-teilzeit-pro-wochentag} zeigt exemplarisch die Ve
     \label{fig:anz-prs-teilzeit-pro-wochentag}
 \end{figure}
 
-Ein kontrastierendes Bild zeigt sich bei den Vollzeitklassen. Die \autoref{fig:anz-prs-vollzeit-pro-wochentag} zeigt die Verteilung der PR-Erstellungen bei zwei exemplarischen Klassen. 
-Hier zeigt sich eine insgesamt gleichmässigere Verteilung der Aktivitäten über die Woche. Zwar ist auch hier der Projekttag der aktivste, jedoch in geringerem Ausmass als bei den Teilzeitklassen. Zudem wurden nur 16.8\% der PRs am Wochenende erstellt.
+Ein gegensätzliches Bild zeigt sich bei den Vollzeitklassen. Die \autoref{fig:anz-prs-vollzeit-pro-wochentag} zeigt die Verteilung der PR-Erstellungen und Schliessungen für zwei exemplarische Klassen.
+Hier zeigt sich eine insgesamt gleichmässigere Verteilung der Aktivitäten über die Woche. Zwar ist auch hier der Projekttag am aktivsten, jedoch meist in geringerem Ausmass als bei den Teilzeitklassen. Zudem wurden nur 16.8\% der PR am Wochenende erstellt.
 
 \begin{figure}[htbp]
     \centering
@@ -577,11 +577,11 @@ Hier zeigt sich eine insgesamt gleichmässigere Verteilung der Aktivitäten übe
     \label{fig:anz-prs-vollzeit-pro-wochentag}
 \end{figure}
 
-\subsection{Ereignisse Analyse Commits}
-Da nicht nur die PRs sondern auch die einzelnen Commits interessant für die Entwicklungsanalyse ist, wurden die Commits der PRs angeschaut. 
-Die Analyse bestätigte die Resultate, welche in der PR Analyse bereits schon gefunden wurden. 
+\subsection{Arbeitstage Commits}
+Da sowohl die PRs als auch die einzelnen Commits für die Entwicklungsanalyse von Interesse sind, wurden die Commits der PRs analysiert.
+Die Analyse bestätigt die in der PR-Analyse bereits festgestellten Ergebnisse.
 
-So wurden bei den Vollzeitklassen 23.7\,\% aller Commits am jeweiligen Unterrichtstag durchgeführt. Bei den Teilzeitklassen liegt dieser Anteil mit 33.9\,\% deutlich höher. Abbildung \autoref{fig:anz-commits-teilzeit-pro-wochentag} zeigt die Verteilung der Commits über die Wochentage exemplarisch für zwei Teilzeitklassen. Erkennbar ist – analog zur PR-Verteilung – ein deutlicher Peak an den jeweiligen Projekttagen. Insgesamt wurden 25.9\,\% aller Commits der Teilzeitklassen an einem Samstag oder Sonntag durchgeführt.
+So wurden bei den Vollzeitklassen 23.7\,\% aller Commits am jeweiligen Unterrichtstag durchgeführt. Bei den Teilzeitklassen liegt dieser Anteil mit 33.9\,\% deutlich höher. Die \autoref{fig:anz-commits-teilzeit-pro-wochentag} zeigt die Verteilung der Commits über die Wochentage exemplarisch für zwei Teilzeitklassen. Analog zur PR-Verteilung ist eine deutliche Spitze an den jeweiligen Projekttagen erkennbar. Insgesamt wurden 25.9\,\% aller Commits der Teilzeitklassen an einem Samstag oder Sonntag durchgeführt.
 
 \begin{figure}[htbp]
     \centering
@@ -602,7 +602,7 @@ So wurden bei den Vollzeitklassen 23.7\,\% aller Commits am jeweiligen Unterrich
     \label{fig:anz-commits-teilzeit-pro-wochentag}
 \end{figure}
 
-Ein ähnliches Bild ergibt sich bei den Vollzeitklassen. Abbildung \autoref{fig:anz-commits-vollzeit-pro-wochentag} zeigt die Commits zweier exemplarischer Klassen. Hier wurden 23.7\,\% der Commits am jeweiligen Projekttag durchgeführt – identisch mit dem PR-Anteil. Am Wochenende hingegen wurden nur 19.4\,\% der Commits verzeichnet, was deutlich unter dem Wert der Teilzeitklassen liegt.
+Ein ähnliches Bild ergibt sich auch bei den Vollzeitklassen zwischen Pull Requests und Commits. Die \autoref{fig:anz-commits-vollzeit-pro-wochentag} zeigt die Commits zweier exemplarischer Klassen. Hier wurden 23.7\,\% der Commits am jeweiligen Projekttag durchgeführt – identisch mit dem PR-Anteil. Am Wochenende hingegen wurden nur 19.4\,\% der Commits verzeichnet, was deutlich unter dem Wert der Teilzeitklassen liegt.
 
 \begin{figure}[htbp]
     \centering
@@ -622,6 +622,8 @@ Ein ähnliches Bild ergibt sich bei den Vollzeitklassen. Abbildung \autoref{fig:
     \caption{Anzahl Commits pro Wochentag von 2 Vollzeitklassen}
     \label{fig:anz-commits-vollzeit-pro-wochentag}
 \end{figure}
+
+Zusammenfassend lässt sich festhalten, dass es klare Tendenzen gibt, dass die Studierenden vor allem an den Projekttagen arbeiten, wobei die Teilzeitstudierenden noch häufiger am Wochenende arbeiten und die Vollzeitstudierenden die Arbeit eher unter der Woche aufteilen.
 
 \section{Projektmodul Ergebnisse bei Open Source Projekten}
 \subsection{Vorstellung der GitHub-Organisationen im Vergleich zu Racetrack-Projekten}
