@@ -14,22 +14,24 @@
 % SECTION 1
 %----------------------------------------------------------------------------------------
 
-\section{Mining}
+\section{Repository Mining}
 Damit alle Analysen durchgeführt werden konnten, musste das Mining der Projekte erweitert werden. So wurde die GraphQL Abfrage für die PullRequests erweitert, um zusätzlich den Churn als auch die Commits auf den Pull Requests zu speichern. Die Abfrage der Daten wurde durch einen neuen PullRequest Statistik API Controller ermöglicht, welcher sämtliche Daten der einzelnen PullRequests, wie etwa der Churn, die einzelnen Commits des PullRequests als auch die Anzahl geänderter Dateien zurückgibt. 
 
 Für die einzelnen Analysen wurde jeweils ein neues Jupyter Notebook erstellt. Dieser ermöglichen eine schnelle und unkomplizierte (graphische) Auswertung der Daten. \parencite{stumpf_simon_repo-detectivesba-metric-analysis-scripts_nodate}
 
 \section{Benötigte Metriken}
+Um die Forschungsfragen beantworten zu können werden folgende Metriken gebraucht.
 \label{sec:Metriken}
 \begin{itemize}
-    \item \textbf{Repository createTime:} Erstellungsdatum des Repositories
-     \item \textbf{Commits:} // TODO
-\end{itemize}
-\begin{itemize}
-    \item \textbf{Pull Request createTime:} Erstellungsdatum des PullRequests
-    \item \textbf{Pull Request closeTime:} Schliesszeit des PullRequests.
+    \item \textbf{Repository createTime:} Das Erstellungsdatum des Repository.
+    \item \textbf{Pull Request createTime:} Das Erstellungsdatum des PullRequests.
+    \item \textbf{Pull Request closeTime:} Die Schliesszeit(Closed / Merged) des Pull Requests.
     \item \textbf{Pull Request Additions:} Anzahl der hinzugefügten Codezeilen.
     \item \textbf{Pull Request Deletions:} Anzahl der gelöschten Codezeilen
+      \item \textbf{Pull Request Commits:} Alle Commits die auf den Pull Requests gemacht werden.
+     \begin{itemize}
+        \item \textbf{CommittedDate:} Das Datum an welchem der Commit gemacht wird.
+    \end{itemize}
 \end{itemize}
 
 \section{Architekturbeschreibung GitGauge}
@@ -66,6 +68,6 @@ r_s = 1 - \frac{6 \sum d_i^2}{n(n^2 - 1)}
 
 \section{Datengrundlagen}
 \label{sec:Datengrundlagen}
-Als Datengrundlage dienten uns die Repositories mehrerer Schulklassen aus unterschiedlichen Jahrgängen. Es wurden 7 Teilzeit- als auch 5 Vollzeitklassen aus den Jahren 2021 - 2024 analysiert. Insgesamt wurden 71 Racetrack Repositories analysiert. 
+Als Datengrundlage dienen uns die Repositories mehrerer Schulklassen aus unterschiedlichen Jahrgängen. Es werden 7 Teilzeit- und 5 Vollzeitklassen aus den Jahren 2021 - 2024 analysiert. Insgesamt werden 71 Racetrack Repositories untersucht. 
 
 

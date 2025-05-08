@@ -32,7 +32,7 @@ Teilzeitstudierende nutzen Pull Requests effizienter als Vollzeitstudierende.
 Wir gehen davon aus, dass Teilzeitstudierende durch ihre Arbeit mehr Erfahrung in der Durchführung von Softwareprojekten und somit auch in der Verwendung von Pull Requests haben. Dies kann sich in Anzahl, Grösse aber auch Kommentare unterscheiden. 
 
 
-Für die ersten Experimente wurden die Repositories der Racetrack-Projekte ausgewertet. Wie im Kapitel \secref{sec:Projektmodule} erwähnt, findet dieses Projekt im Kontext des Projektmoduls 2 als erstes Projekt statt. Dieses dauert ungefähr vier Wochen, wobei die genaue Anzahl der Tage pro Klasse variieren kann. Das Grundgerüst des Sourcecodes wird in der Aufgabenstellung mitgeliefert, was die Vergleichbarkeit der Projekte erhöht. Ausserdem haben die Studenten schon Erfahrung mit der Handhabung von PullRequests. 
+Für die ersten Experimente wurden die Repositories der Racetrack-Projekte ausgewertet. Wie im Kapitel \secref{sec:Projektmodule} erwähnt, findet dieses Projekt im Kontext des Projektmoduls 2 als erstes Projekt statt. Dieses dauert ungefähr vier Wochen, wobei die genaue Anzahl der Tage pro Klasse variieren kann. Das Grundgerüst des Sourcecodes wird in der Aufgabenstellung mitgeliefert, was die Vergleichbarkeit der Projekte erhöht. Ausserdem haben die Studenten schon Erfahrung mit der Handhabung von Pull Requests. 
 
 \newpage
 \section{Churn vs Latency}
@@ -78,7 +78,7 @@ Die \autoref{fig:boxplot-latency} zeigt ebenfalls, dass viele Pull Requests schn
     \label{fig:boxplot-latency}
 \end{figure}
  \newpage
-Der Boxplot in der \autoref{fig:boxplot-churn} zeigt, dass es viele kleine Pull Requests mit wenigen Codezeilenänderungen gibt. Wie bereits bei der \textit{latency} wurde festgestellt, dass es eine Reihe von Ausreissern gibt, von denen einige besonders hervorstechen. Diese befinden sich bei über 10'000 Zeilenänderungen. In diesem Fall liegt die Anzahl der Ausreisser bei 9.6\,\%.
+Der Boxplot in der \autoref{fig:boxplot-churn} zeigt, dass es viele kleine Pull Requests mit wenigen Codezeilenänderungen gibt. Wie bereits bei der \textit{latency} wird festgestellt, dass es eine Reihe von Ausreissern gibt, von denen einige besonders hervorstechen. Diese befinden sich bei über 10'000 Zeilenänderungen. In diesem Fall liegt die Anzahl der Ausreisser bei 9.6\,\%.
 
 \begin{figure}[htbp]
     \includegraphics[width=0.8\textwidth]{Figures/boxplot-churn.png}
@@ -166,7 +166,6 @@ Die \autoref{fig:anz-avg-prs-vs-latency-tv} zeigt nun, dass die Teilzeitstudiere
 \newpage
 Insgesamt bestätigen die Abbildungen \autoref{fig:anz-prs-vs-latency-tv} und \autoref{fig:anz-avg-prs-vs-latency-tv}, dass die meisten Pull Requests schnell bearbeitet werden. Des Weiteren zeigt es, dass die Teilzeitstudierenden eine stärkere Streuung aufweisen als Vollzeitstudierende, da sie die Vollzeitstudierenden im ersten und letzten Intervall übertreffen.
 
-// TODO Churn Latency
 \newpage
 Zur Klassifikation der Churn Grösse werden die von Doğan und Tüzün vorgeschlagenen Grössenkateogrien (XS, S, M, L, XL) verwendet. Diese Einteilung basiert auf empirischen Studien und industriellen Standards. \parencite{dogan_towards_2022}
 
@@ -252,14 +251,17 @@ Zum Vergleich zeigt die Abbildung \autoref{fig:anz-prs-vs-churn-size-tz-vz-nur-d
 
 Zusammengefasst zeigt sich, dass die Herausfilterung der Dev-Branch-Merges einen Einfluss auf die Ergebnisse der Churn-Verteilung hat, insbesondere bei grossen Pull Requests. Insgesamt bestätigt sich jedoch, dass Vollzeitstudierende – unabhängig von der Herausfilterung – in den meisten Kategorien durchschnittlich mehr Pull Requests pro Repository erstellen als Teilzeitstudierende.
 
-// TODO Abschluss kapitel
+//TODO ok / nok?
+
+\textbf{Anhand der vorliegenden Untersuchungen bezüglich Vollzeit- und Teilzeitstudierenden kann die \hyref{hypothese2} nicht belegt werden.}
 
 \section{Hypothese 1 Einfluss von Projektzeit}
 Als nächstes wurde der Zusammenhang zwischen der laufenden Projektzeit und der \textit{latency} untersucht. Um zu ermitteln, ob die fortschreitende Projektzeit einen Einfluss auf das Bearbeiten der Pull Requests hat und um zu sehen, ob die \hyref{hypothese2} "\textit{Gegen Ende des Projekts werden Pull Requests schneller gemergt.}" zutrifft. Zusätzlich werden auch die \textit{churns} untersucht, um zu sehen, wie sich diese im Verlauf der Projektzeit verändern. 
 
-Ein signifikanter Faktor, der bei den Projektmodulen eine Rolle spielt, ist der fest definierte Abgabetermin. Dies unterscheidet diese Projekte von Open-Source-Projekten, die in der Literatur häufig untersucht werden. Um diese Untersuchung durchführen zu können, wird zusätzlich zu den oben genannten Metriken der Abgabetermin der einzelnen Klassen ermittelt. Dazu wird für jede Klasse der zuletzt erstellte Pull Request gezogen. Da einige Dozierende ihr Feedback per Pull Request abgeben, werden alle Pull Requests eines Dozierenden herausgefiltert. Dies wird über das Attribut \textit{Author} ermittelt. Die Verifizierung dieser Methode erfolgte unter Zuhilfenahme der bekannten <nr> Abgabetermine von Klassen.
 
-Zur initialen Analyse werden die Projekte in die entsprechenden Projektwochen aufgeteilt und die Mediane der \textit{latenncies} und \textit{churns} der entsprechenden Wochen ermittelt. Dies soll eine allgemeine Übersicht der Veränderungen der Metriken aufzeigen.
+Ein signifikanter Faktor, der bei den Projektmodulen eine Rolle spielt, ist der fest definierte Abgabetermin. Dies unterscheidet diese Projekte von Open-Source-Projekten, die in der Literatur häufig untersucht werden. Um diese Untersuchung durchführen zu können, wird zusätzlich zu den oben genannten Metriken der Abgabetermin der einzelnen Klassen nachgeschlagen.
+
+Zur initialen Analyse werden die Projekte in die entsprechenden Projektwochen aufgeteilt und die Mediane der \textit{latencies} und \textit{churns} der entsprechenden Wochen ermittelt. Dies soll eine allgemeine Übersicht der Veränderungen der Metriken aufzeigen.
 
 \subsection{Projektwochen im Verhältnis zu Latency und Churn}
 \label{sec:ProjektwochenLatencyChurn}
@@ -365,7 +367,6 @@ Eine detaillierte Analyse der Pull Requests in den einzelnen Teams zeigt, dass i
 
 Viele Pull Requests werden gegen Ende der Projekte erstellt und wie im Kapitel \secref{sec:ProjektwochenLatencyChurn} aufgezeigt, nehmen die Latencies gegen Ende der Projekte ab. Jedoch ist dort nicht genau ersichtlich, wie dies bei den einzelnen Projekten aussieht. Deshalb werden die Latencies unter 30 Minuten und die ganz kurzen Latencies von unter einer Minute im Verhältnis zu den Abgaben gestellt.
 
-\newpage
 \subsection{Analyse kurze Pull Request Latency im Verhältnis zur Abgabe }
 Eine detaillierte Analyse der kurz geöffneten Pull Requests (kleiner als 30 Minuten) offenbart, dass der überwiegende Teil davon in den letzten drei Tagen und insbesondere am Tag der Abgabe erstellt werden. Eine weitere Restriktion der Pull Requests auf jene, die innerhalb einer Minute abgearbeitet werden, resultiert in einer ähnlichen Situation. Es ist jedoch festzustellen, dass der Tag der Abgabe sich stärker abhebt, wobei auch ein Anstieg zwei Tage vor Abgabe zu erkennen ist.  Die Resultate sind in \autoref{fig:anz-prs-under-x-mins} dargestellt.
 
@@ -388,10 +389,11 @@ Eine detaillierte Analyse der kurz geöffneten Pull Requests (kleiner als 30 Min
     \label{fig:anz-prs-under-x-mins}
 \end{figure}
 
+\textbf{Die durchgeführten Analysen stützen, die in diesem Kapitel erforschte \hyref{hypothese1}.}
 
 \newpage
-\section{Ergebnisse Pull Reqeust Akzeptanz}
-In diesem Abschnitt wird die Akzeptanz von PRs untersucht. Ziel ist es, die Gründe für die Ablehnung oder das Schliessen von PRs systematisch zu erfassen und mögliche Muster zwischen Vollzeit- und Teilzeitklassen herauszuarbeiten.
+\section{Pull Request Akzeptanz}
+In diesem Abschnitt wird die \fref{forschungsfrage2} "\textit{Können die Schliessungsgründe der PRs in den Projekten ermittelt und klassifiziert werden?}" untersucht. Ziel ist es, die Gründe für die Ablehnung oder das Schliessen von PRs systematisch zu erfassen und mögliche Muster zwischen Vollzeit- und Teilzeitklassen herauszuarbeiten.
 
 \subsection{Kategorisierung der geschlossenen Pull Requests}
 \label{sec:KategorienGeschlossenePRs} 
@@ -625,8 +627,20 @@ Ein ähnliches Bild ergibt sich auch bei den Vollzeitklassen zwischen Pull Reque
 
 Zusammenfassend lässt sich festhalten, dass es klare Tendenzen gibt, dass die Studierenden vor allem an den Projekttagen arbeiten, wobei die Teilzeitstudierenden noch häufiger am Wochenende arbeiten und die Vollzeitstudierenden die Arbeit eher unter der Woche aufteilen.
 
-\section{Projektmodul Ergebnisse bei Open Source Projekten}
-\subsection{Vorstellung der GitHub-Organisationen im Vergleich zu Racetrack-Projekten}
+\section{Korrelationsanalyse verschiedener Metriken}
+\subsection{Korrelationsanalyse der Racetrack Repositories}
+Um die \fref{forschungsfrage4} klären
+
+\begin{figure}[htbp]
+    \includegraphics[width=\textwidth]{Figures/racetrack-korrelationsmatrix.png}
+    \caption{Korrelations-Heatmap der Metriken der Racetrack Repositories}
+    \label{fig:korrelationsmatrix-racetrack}
+\end{figure}
+
+
+\subsection{Korrelationsanalyse von OpenSource Projekten}
+todo: einführung warum opensource repos, warum macht vergleich sinn
+\subsubsection{Vorstellung der GitHub-Organisationen im Vergleich zu Racetrack-Projekten}
 Im Rahmen dieser Analyse werden die Ergebnisse des Racetrack-Projektmoduls mit den Metriken von Open-Source-Projekten verglichen. Hierführ werden drei unterschiedliche Github Organisationen betrachtet, welche eine unterschiedliche Grösse und Komplextität aufweisen: \textit{Ubique}, \textit{Swiss Federal Railways (SBB)} und \textit{
 Zalando SE} angeschaut \parencite{noauthor_ubique_nodate} \parencite{noauthor_swiss_nodate} \parencite{noauthor_zalando_nodate}. 
 
@@ -641,6 +655,56 @@ todo: same 8knot analyse
 
 Zalando ist eine grosse Github Organisation, die für ihre umfangreichen Open-Source-Projekte im Bereich der E-Commerce- und Cloud-Computing-Technologien bekannt ist. So besitzt Zalando 50 Repositories mit 835 Follower. \parencite{noauthor_zalando_nodate}
 
+
+// alter text
 \subsection{Latency und Churn}
+Um die \fref{forschungsfrage1} im Kontext der Open-Source-Projekte zu untersuchen, werden Latency und Churn in den Repositories der drei GitHub-Organisationen analysiert. 
+
+Die Tabelle \autoref{tab:latency-churn-open-source} zeigt die wichtigsten statistischen Kennzahlen für \textit{latency} und \textit{churn} getrennt nach Organisationen.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Kennzahlen zu \textit{Latency} und \textit{Churn} in Open-Source-Projekten}
+    \label{tab:latency-churn-open-source}
+    \begin{tabular}{@{}lrrrrrr@{}}
+        \toprule
+        \textbf{Organisation} & \textbf{Mittelwert} & \textbf{Median} & \textbf{Q1} & \textbf{Q3} & \textbf{Std.-abw.} & \textbf{Max} \\
+        \midrule
+        \multicolumn{7}{l}{\textit{Latency (in Stunden)}} \\
+        Ubique & XX & XX & XX & XX & XX & XX \\
+        SBB & XX & XX & XX & XX & XX & XX \\
+        Zalando & XX & XX & XX & XX & XX & XX \\
+        \addlinespace
+        \multicolumn{7}{l}{\textit{Churn (Zeilenänderungen)}} \\
+        Ubique & 720.3 & 11.5 & XX & XX & XX & XX \\
+        SBB & 2042 & 41 & XX & XX & XX & XX \\
+        Zalando & 282.1 & 4 & XX & XX & XX & XX \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
 \subsection{Allgemeine Korrelationen}
+Zur besseren Einschätzung der Zusammenhänge zwischen den verschiedenen Metriken wird jeweils eine Korrelationsmatrix der verschiedenen GitHub-Organisationen erstellt. Die Analyse basiert auf der Spearman-Rangkorrelation. 
+
+Die Korrelationsmatrix der Ubique Github Organisation ist in Abbildung \autoref{fig:korrelationsmatrix-ubique} dargestelltt. 
+
+\begin{figure}[htbp]
+    \includegraphics[width=\textwidth]{Figures/ubique-korrelationsmatrix.png}
+    \caption{Korrelations-Heatmap der Metriken der Ubique Innovation AG}
+    \label{fig:korrelationsmatrix-ubique}
+\end{figure}
+
+
+\autoref{fig:korrelationsmatrix-sbb} zeigt die Korrelationsmatrix der Metriken der Github Organisation der Schweizerischen Bundesbahn (SBB). 
+\begin{figure}[htbp]
+    \includegraphics[width=\textwidth]{Figures/sbb-korrelationsmatrix.png}
+    \caption{Korrelations-Heatmap der Metriken der Schweizerischen Bundesbahn (SBB)}
+    \label{fig:korrelationsmatrix-sbb}
+\end{figure}
+
+\begin{figure}[htbp]
+    \includegraphics[width=\textwidth]{Figures/zalando-korrelationsmatrix.png}
+    \caption{Korrelations-Heatmap der Metriken von Zalando}
+    \label{fig:korrelationsmatrix-zalando}
+\end{figure}
 

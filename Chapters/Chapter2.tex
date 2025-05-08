@@ -135,11 +135,11 @@ Ein weiterer Unterschied liegt im Entwicklungstempo. Open-Source-Projekte folgen
 In den OpenSource-Projekten spielen die User-Metriken der Contributors eine wichtige Rolle. So wird beispielsweise die Anzahl der Followers des Entwicklers als ein Hinweis auf seinen Status und Ruf in der Community gewertet. Untersuchungen zeigen, dass Beiträge von Nutzern mit vielen Followern eine höhere Chance haben, akzeptiert zu werden (pro Standardabweichung an zusätzlichen Followern steigt die Wahrscheinlichkeit der Merge-Annahme um 18\%). Auch projektbezogene Metriken wie eine hohe Anzahl Stars des Projektes spielen hierbei eine Rolle. \parencite{tsay_influence_2014}. Mit einem Github Star kann der Benutzer einem Repository / Organisation folgen und wird somit auf Neuigkeiten aufmerksam gemacht. Ausserdem ist es in der Community oftmals ein Zeichen, um die Wertschätzung für ein Projekt zu zeigen \parencite{noauthor_saving_nodate}.
 
 \section{Einführung GitGauge}
-Das in der ZHAW entwickelte Tool \textit{GitGauge} ist ein Repository-Mining- und Analyse-Tool zur Auswertung von GitHub-Repositories. Das Tool wurde von Joel Grand mit Betreuung von Michael Wahler im Rahmen seines Masterstudiums entwickelt . \parencite{grand_joel_wahler_michael_waspe_lara_stumpf_simon_repo_nodate}.
+Das an der ZHAW entwickelte Tool \textit{GitGauge} ist ein Repository-Mining- und Analyse-Tool zur Auswertung von GitHub-Repositories. Das Tool wurde von Joel Grand mit Betreuung von Michael Wahler im Rahmen seines Masterstudiums entwickelt \parencite{grand_joel_wahler_michael_waspe_lara_stumpf_simon_repo_nodate}.
 
 In den Projektmodulen der ZHAW nutzen die Studierende GitHub als Plattform für Quellcode und Projektmanagement. Dabei steht nicht nur das Entwickeln von qualitativ hochwertigem Code im Vordergrund, sondern auch Praktiken wie Issue-Tracking, Code Reviews und strukturierte Branching-Workflows. Um die Leistung der Studierenden in diesen Projekten zu beurteilen und Einblicke in ihre Zusammenarbeit zu gewinnen, entstand die Motivation für GitGauge. Eine Plattform, die GitHub-Daten der Projekten auswertet und daraus Schlüsselkennzahlen (Key Performance Indicators, KPIs) visuell aufbereitet. GitGauge erleichtert somit die Analyse solcher GitHub-Repositories und bietet einen Überblick über wichtige Projektkennzahlen.Dadurch können Betreuende und Studierende erkennen, wie effektiv ein Team zusammenarbeitet und wo eventuell Verbesserungsbedarf besteht. \parencite{grand_joel_vt1_joelgrand_repository_2024}
 
-\subsection{Systemarchitektur GitGauge}
+\subsection{Systemarchitektur}
 GitGauge ist als Webanwendung mit einer Client-Server-Architektur entwickelt. Die 3 Hauptkomponten sind in Abbildung \autoref{fig:container-diagram-gitgauge} ersichtlich. 
 TODO: joel nach original fragen
 \begin{figure}[htbp]
@@ -155,7 +155,7 @@ Das \textit{Backend} ist eine REST-API, welche in C\# mit Hilfe von \textit{.NET
 
 Die \textit{Datenbank} speichert sämtliche Daten, welche über die Projekte gesammelt wuerden. Als Datenbank wird ein MSSQL Server 2019 eingesetzt. \parencite{grand_joel_vt1_joelgrand_repository_2024}
 
-\subsection{Mining}
+\subsection{Repository Mining}
 Das Mining der Daten wird in GitGauge mittels einer \textit{Mining Pipeline} abgebildet. Wie in Abbildung \autoref{fig:overview-mining-steps} ersichtlich, besteht das Minen aus folgenden Phasen: Datenextraktion, Datenverarbeitung und Datenanalyse. 
 In der Datenextraktionsphase werden alle relevanten Informationen aus dem GitHub Repository ermittelt. Dabei werden 3 zentrale Datenquellen verwendet: Commits, Issues und PRs. Für das Analysieren der Commits wird mittels der Bibliothek LibGit2Sharp das Repository geklont. Dadurch können eventuelle API-Beschränkungen (Rate Limits) reduziert oder umgangen werden. Die Issues und PRs werden über die GraphQL API von GitHub abgefragt. Im Vergleich zur klassischen REST API performte die GraphQL API deutlich besser, auch schon bei kleineren Projekten.  
 
@@ -168,3 +168,15 @@ Die Analyse der Daten erfolgt jeweils bei Abfrage der Statistik API Endpoints de
     \caption{Übersicht Mining Prozess \parencite{grand_joel_vt1_joelgrand_repository_2024}}
     \label{fig:overview-mining-steps}
 \end{figure}
+
+\section{Verwendete Python Libraries}
+Um die Analysen durchzuführen, werden die folgenden Python-Libraries verwendet:
+TODO simon
+\textbf{NumPy}\\
+NumPy ist eine Open-Source-Python-Library, um wissenschaftliche Berechnungen durchzuführen. Es ist spezialisiert auf effiziente numerische Berechnungen insbesondere bei grossen Datenmengen. \parencite{noauthor_numpy_nodate} \\
+\textbf{Matplotlib}\\
+Mit dieser Library können statistische, animierte und interaktive Visualisierungen vorgenommen werden. \parencite{noauthor_matplotlib_nodate} \\
+\textbf{pandas}\\
+Pandas ist eine Open-Source-Library, die Datenstrukturen und Datenanalysewerkzeuge zur Verfügung stellt \parencite{noauthor_pandas_nodate}.
+
+
