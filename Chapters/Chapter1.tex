@@ -20,7 +20,7 @@
 Code Reviews sind ein wichtiger Bestandteil der modernen Softwareentwicklung. Reviews fördern nicht nur die Qualität des Codes, sondern auch die Zusammenarbeit im Team \parencite{dos_santos_investigating_2018}. In der Praxis werden Code Reviews häufig über Plattformen wie GitHub oder Gitlab durchgeführt. Dabei werden auf der Plattform sogenannte Pull Requests / Merge Requests erstellt, welche dann als Grundlage für die Reviews dienen. Die Bezeichnung kann sich von Plattform zu Plattform ändern, beschreibt aber jeweils dasselbe Konzept. \parencite{kansab_analyzing_2025}
 
 
-Die Analyse der Code Review Daten kann wertvolle Informationen über die Zusammenarbeit und den Fortschritt innerhalb eines Softwareprojekts liefern. Eine automatisierte Auswertung bietet die Möglichkeit, Probleme oder Verbesserungsmöglichkeiten zu erkennen. Diese können sowohl auf technischer als auch sozialer Ebene sein. 
+Die Analyse der Code-Review-Daten kann wertvolle Informationen über die Zusammenarbeit und den Fortschritt innerhalb eines Softwareprojekts liefern. Eine automatisierte Auswertung bietet die Möglichkeit, Probleme oder Verbesserungsmöglichkeiten zu erkennen. Diese können sowohl auf technischer als auch sozialer Ebene sein. 
 
 An der Zürcher Hochschule für Angewandte Wissenschaften (ZHAW) lernen die Studierenden in Projektmodulen, wie man Projekte erfolgreich durchführt. Für die Zusammenarbeit der Teams wird GitHub eingesetzt. Eine automatisierte Auswertung der Code Reviews kann den Dozierenden helfen, Probleme bei den Studierenden frühzeitig zu erkennen.
 
@@ -58,13 +58,13 @@ Es existieren bereits mehrere Git-Analyse-Tools, die die Untersuchung von Reposi
 \end{figure}
 
 \newpage
-// TODO: Schauen ob wir Literatur über Grösse und Latency von PRs finden. (zum vergleich mit uns) (aktuell für uns umklar was hier hin soll)
 
 %----------------------------------------------------------------------------------------
 % SECTION 2
 %----------------------------------------------------------------------------------------
 
-\section{Zielsetzung / Aufgabenstellung / Anforderungen}
+\section{Zielsetzung /\allowbreak Aufgabenstellung /\allowbreak Anforderungen}
+\label{sec:Zielsetzung}
 
 Ziel dieser Arbeit ist es, Pull Requests aus Projekten zu untersuchen und deren Eigenschaften hinsichtlich verschiedener Einflussfaktoren zu analysieren. Dabei stehen folgende Forschungsfragen im Vordergrund:
 
@@ -76,11 +76,18 @@ Besteht ein Zusammenhang zwischen der Latency eines Pull Requests (Zeit bis zum 
 Können die Schliessungsgründe der PRs in den Projekten ermittelt und klassifiziert werden?
 }
 
-\forschungsfrage{forschungsfrage3}{
+\forschungsfrage{forschungsfrage3}{Besteht ein Zusammenhang zwischen dem Zeitpunkt im Projektverlauf und der Review-Dauer von Pull Requests?}
+
+
+\forschungsfrage{forschungsfrage4}{
 Lassen sich Patterns der Zusammenarbeit im Team erkennen, hinsichtlich der Tage, an denen die Studierenden an den Projekten arbeiten?
 }
 
-\forschungsfrage{forschungsfrage4}{
+\forschungsfrage{forschungsfrage5}{
+Welche Unterschiede zeigen sich in der Nutzung von Pull Requests zwischen Teilzeit- und Vollzeitstudierenden hinsichtlich Anzahl und Umfang?
+}
+
+\forschungsfrage{forschungsfrage6}{
 Welche Unterschiede zeigen sich in den Repository Metriken zwischen den Studentenprojekten und profesionellen Github Organisationen?
 }
 

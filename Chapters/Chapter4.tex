@@ -10,34 +10,15 @@
 
 \label{Chapter4} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
 
+In diesem Kapitel werden die in Kapitel \secref{sec:Zielsetzung} formulierten sechs Forschungsfragen untersucht. Dazu wurden die in Kapitel \secref{sec:Metriken} definierten Metriken mittels Mining-Verfahren auf den erwähnten 71 Racetrack-Repositories erhoben. Die Berechnungen der relevanten Metriken erfolgten nach der in Kapitel \secref{sec:AnalyseChurnvsLatency} beschriebenen Methodik. Darauf aufbauend wurden Zusammenhänge und Unterschiede im Pull-Request-Verhalten untersucht.
+
+
 %----------------------------------------------------------------------------------------
 % SECTION 1
 %----------------------------------------------------------------------------------------
-In diesem Kapitel erfolgt eine Erläuterung der Resultate, die durch die Durchführung der oben beschriebenen Methoden erzielt werden. Dafür stehen, wie bereits im Kapitel \secref{sec:Datengrundlagen} erwähnt, 71 Repositories zur Verfügung. 
-
-Des Weiteren sollen die folgenden Hypothesen anhand von Projekten der Studierenden untersucht werden.
-
-\hypothese{hypothese1}{
-Gegen Ende des Projekts werden Pull Requests schneller gemergt.
-}
-
-Die Projekte haben ein festes Ziel und einen festen Abgabetermin. Aus eigener Erfahrung der Autoren schieben Studierende gerne Arbeiten vor sich her und generieren dadurch mehr Arbeit für das Ende des Projektes. Aus diesem Grund gehen wir davon aus, dass Pull Requests gegen Ende des Projekts schneller bearbeitet werden.
-
-\hypothese{hypothese2}{
-Teilzeitstudierende nutzen Pull Requests effizienter als Vollzeitstudierende.
-
-}
-
-
-Wir gehen davon aus, dass Teilzeitstudierende durch ihre Arbeit mehr Erfahrung in der Durchführung von Softwareprojekten und somit auch in der Verwendung von Pull Requests haben. Dies kann sich in Anzahl, Grösse aber auch Kommentare unterscheiden. 
-
-
-Für die ersten Experimente wurden die Repositories der Racetrack-Projekte ausgewertet. Wie im Kapitel \secref{sec:Projektmodule} erwähnt, findet dieses Projekt im Kontext des Projektmoduls 2 als erstes Projekt statt. Dieses dauert ungefähr vier Wochen, wobei die genaue Anzahl der Tage pro Klasse variieren kann. Das Grundgerüst des Sourcecodes wird in der Aufgabenstellung mitgeliefert, was die Vergleichbarkeit der Projekte erhöht. Ausserdem haben die Studenten schon Erfahrung mit der Handhabung von Pull Requests. 
-
-\newpage
 \section{Churn vs Latency}
 Zur Klärung der \fref{forschungsfrage1}: "\textit{Besteht ein Zusammenhang zwischen der Latency eines Pull
-Requests (Zeit bis zum Merge oder Schliessung) und dem Churn (Anzahl geänderter Codezeilen) des jeweiligen Pull Requests?}" werden die geminten Repository Daten in einem Jupiter Notebook aufbereitet und graphisch dargestellt. Dazu werden die im Kapitel \secref{sec:Metriken} erwähnten Metriken \textit{createTime} und \textit{closeTime} gemined und damit die einzelnen Latencies berechnet. Um die Latency-Daten besser vergleichen zu können, werden diese noch vom Datumsformat in Stunden umgerechnet. Des Weiteren werden die Metriken  \textit{additions} und  \textit{deleteions} aus den Pull Requests extrahiert, um den Churn zu berechnen.
+Requests (Zeit bis zum Merge oder Schliessung) und dem Churn (Anzahl geänderter Codezeilen) des jeweiligen Pull Requests?}" wurden die geminten\footnote{Abgeleitet vom englischen Verb to mine.} Repository Daten in einem Jupiter Notebook aufbereitet und graphisch dargestellt. Dazu wurden die im Kapitel \secref{sec:Metriken} erwähnten Metriken \textit{createTime} und \textit{closeTime} gemint und damit die einzelnen Latencies berechnet. Um die Latency-Daten besser vergleichen zu können, wurden diese noch vom Datumsformat in Stunden umgerechnet. Des Weiteren wurden die Metriken  \textit{additions} und  \textit{deleteions} aus den Pull Requests extrahiert, um den Churn zu berechnen.
 
 \subsection{Datenanalyse}
 Zum besseren Verständnis der \textit{latency}- und \textit{churn}- Werte wird zunächst eine allgemeine Analyse der Daten durchgeführt.
@@ -74,7 +55,7 @@ Die \autoref{fig:boxplot-latency} zeigt ebenfalls, dass viele Pull Requests schn
 \begin{figure}[htbp]
     \includegraphics[width=0.8\textwidth]{Figures/boxplot-latency.png}
     \centering
-    \caption{Boxplot Latency}
+    \caption{Verteilung der Latencies von den Pull Requests}
     \label{fig:boxplot-latency}
 \end{figure}
  \newpage
@@ -83,7 +64,7 @@ Der Boxplot in der \autoref{fig:boxplot-churn} zeigt, dass es viele kleine Pull 
 \begin{figure}[htbp]
     \includegraphics[width=0.8\textwidth]{Figures/boxplot-churn.png}
       \centering
-    \caption{Boxplot Churn}
+    \caption{Verteilung der Churns von den Pull Requests}
     \label{fig:boxplot-churn}
 \end{figure}
 \newpage
@@ -96,8 +77,392 @@ Wie bereits erwähnt, weisen die Daten einen hohen Anteil an Ausreissern auf. De
 
 \textbf{Zusammenfassend kann zur \fref{forschungsfrage1} festgestellt werden, dass die Metriken \textit{latency} und \textit{churn} keinen Zusammenhang aufweisen.}
 
-\section{Hypothese 2: Teilzeitstudierende nutzen Pull Requests effizienter als Vollzeitstudierende}
-Zur detaillierten Analyse der Hypothese erfolgt eine Aufteilung der Repository-Daten auf Teilzeit- und Vollzeitklassen. Die Anzahl der Pull Requests der Teilzeitklassen beläuft sich auf 1369 und jene der Vollzeitklassen auf 1066. Dabei werden durchschnittlich 31.8 Pull Requests von den Teilzeitstudierenden erstellt und 39.5 von den Vollzeitstudierenden. In der folgenden Tabelle werden die wichtigsten Kennzahlen aufgezeigt.
+%----------------------------------------------------------------------------------------
+% SECTION 2
+%----------------------------------------------------------------------------------------
+\section{Schliessungsgründe der Pull Requests}
+In diesem Abschnitt wird die \fref{forschungsfrage2} "\textit{Können die Schliessungsgründe der PRs in den Projekten ermittelt und klassifiziert werden?}" untersucht. Ziel ist es, die Gründe für die Ablehnung oder das Schliessen von PRs systematisch zu erfassen und im Hinblick auf \fref{forschungsfrage5} mögliche Muster zwischen Vollzeit- und Teilzeitklassen herauszuarbeiten.
+
+\subsection{Kategorisierung der geschlossenen Pull Requests}
+\label{sec:KategorienGeschlossenePRs} 
+// TODO: mit literatur vergleichen\\
+Um die Ursache des geschlossenen PRs klassifizieren zu können, müssen zuerst Kategorien erstellt werden. Diese Kategorien wurden aufgrund einer manuellen Analyse des Datensatzes erreicht. Dabei wurden alle 39 PRs mit einem Churn von mindestens 500 manuell angeschaut als auch eine Stichprobe von 50 geschlossenen PRs mit einem kleinerem Churn.
+\begin{itemize}
+    \item \textbf{PRs ohne erkennbaren Grund (OG)}: Die PRs wurden ohne Kommentar geschlossen. Die Churn-Grösse ist kleiner als 500.
+    \item \textbf{Feature durch anderen PR implementiert (FPI)}: Das Feature wurde durch einen anderen PR implementiert und der ursprüngliche PR anschliessend geschlossen.
+    \item \textbf{PRs mit falschem Zielbranch (FZB)}: Der Autor des PRs wählte den falschen Zielbranch aus. Der PR wurde anschliessend in den korrekten Branch gemerged.
+    \item \textbf{Feature wird nicht mehr benötigt (FNN)}: Das Feature wird nicht mehr benötigt. Dies muss explizit im PR vermerkt sein.
+    \item \textbf{Implementierung abgelehnt (IA)}: Die vorgeschlagene Implementierung wurde abgelehnt.
+    \item \textbf{Divers (DIV)}: Beinhaltet hauptsächlich Feedback-PRs, welche von gewissen Dozenten für die Notenvergabe verwendet wurden. Ausserdem sind einige Refactor-Branches zu sehen, welche ausschliesslich für den Refactoren erstellt wurden und anschliessend geschlossen wurden. 
+\end{itemize}
+
+\subsection{Deskriptive Analyse}
+Insgesamt wurden 2427 Pull Requests untersucht, wovon 170 PRs geschlossen wurden (7,0,\%). Von den geschlossenen PRs entfielen 95 auf Vollzeitklassen und 75 auf Teilzeitklassen.
+
+Der durchschnittliche Churn bei geschlossenen PRs beträgt: \begin{itemize} \item Teilzeitklassen: 137 Zeilenänderungen \item Vollzeitklassen: 188 Zeilenänderungen \end{itemize}
+
+Eine Aufteilung der geschlossenen Pull Requests nach Churn-Grösse zeigt, dass in Teilzeitklassen vorwiegend kleinere PRs geschlossen wurden, während in Vollzeitklassen die Spannweite der Churn-Grössen etwas grösser ist.
+
+\begin{figure}[htbp]
+    \includegraphics[width=\textwidth]{Figures/anzahl-geschlossene-prs-nach-churn.png}
+    \caption{Anzahl geschlossene Pull Requests nach Churn Grösse}
+    \label{fig:anz-clsd-prs-nach-churn}
+\end{figure}
+
+\pagebreak
+\subsection{Ursachenanalyse der geschlossenen PRs}
+Für die Ursachenanalyse wurden alle PRs mit einem Churn-Wert grösser als 500 sowie alle mit einem Churn-Wert kleiner als 100 manuell untersucht und den in Kapitel \secref{sec:KategorienGeschlossenePRs} definierten Kategorien zugeordnet. 
+Die Verteilung der Ursachen geschlossener PRs ist in Tabelle \autoref{tab:treatments} dargestellt.
+
+
+\begin{table}[htbp]
+\caption{Geschlossene PRs gruppiert nach Ursache}
+\label{tab:treatments}
+\centering
+\begin{tabular}{l l l l l l l}
+\toprule
+\textbf{Klasse} & 
+\makecell{\textbf{OG}} & 
+\makecell{\textbf{FPI}} & 
+\makecell{\textbf{FNN}} & 
+\makecell{\textbf{IA}} & 
+\makecell{\textbf{FZB}} & 
+\makecell{\textbf{DIV}} \\
+\midrule
+T < 100& 35 & 1 & 3 & 2 & 0 & 0\\
+V < 100& 22 & 1 & 0 & 1 & 1 & 0 \\
+T > 500& 22 & 8 & 0 & 2 & 4 & 5 \\
+V > 500& 8 & 0 & 1 & 4 & 6 & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\newpage
+\noindent\textbf{Legende:}
+\begin{itemize}
+\item[$T$] Alle Teilzeitklassen
+\item[$V$] Alle Vollzeitklassen
+\item[$< 100$] Churn kleiner 100
+\item[$> 500$] Churn grösser 500
+\end{itemize}
+
+Die wichtigsten Erkenntnisse aus der Ursachenanalyse sind folgende: Bei kleinen PRs (Churn $<$ 100) dominieren Fälle ohne nachvollziehbaren Schliessungsgrund. Bei grossen PRs (Churn $>$ 500) treten hingegen häufiger strukturierte Gründe auf, etwa ein falscher Zielbranch oder der Ersatz durch einen anderen PR. Teilzeitklassen haben insgesamt mehr PRs ohne klar dokumentierten Grund geschlossen, während Vollzeitklassen etwas häufiger explizite Ablehnungen oder Korrekturen von Branch-Fehlern zeigen.
+
+
+\subsection{Zeitliche Analyse geschlossener PRs}
+
+Eine Analyse der geschlossenen PRs im zeitlichen Verlauf der Projektlaufzeit zeigt deutliche Unterschiede zwischen Vollzeit- und Teilzeitklassen.
+
+\begin{figure}[htbp] 
+\centering \begin{subfigure}[b]{0.48\textwidth} 
+\centering \includegraphics[width=\textwidth]{Figures/closed-prs-projektzeit-vollzeit.png} 
+\caption{Geschlossene PRs Vollzeitklassen} 
+\label{fig:closed-prs-projektkeit-vollzeit}
+\end{subfigure} 
+\hfill 
+\begin{subfigure}[b]{0.48\textwidth} 
+\centering \includegraphics[width=\textwidth]{Figures/closed-prs-projektzeit-teilzeit.png} 
+\caption{Geschlossene PRs Teilzeitklassen} 
+\label{fig:closed-prs-projektkeit-teilzeit} 
+\end{subfigure} 
+\caption{Anzahl geschlossener PRs nach Tagen vor Abgabetermin} 
+\label{fig:closed-prs-projektzeit} 
+\end{figure}
+
+Die wichtigsten Beobachtungen sind folgende: In Teilzeitklassen konzentrieren sich die geschlossenen PRs stark auf die letzten Projekttage, insbesondere auf den Tag der Abgabe. In Vollzeitklassen hingegen verteilen sich die geschlossenen PRs gleichmässiger über den gesamten Projektverlauf.
+
+
+\subsection{Zusammenfassung}
+
+Zusammenfassend lässt sich festhalten, dass Teilzeitklassen tendenziell mehr kleine PRs ohne ausführliche Begründung schliessen, während Vollzeitklassen grössere PRs strukturierter ablehnen oder gezielt korrigieren. Auffällig ist zudem, dass viele geschlossene PRs, insbesondere in Teilzeitklassen, vermehrt gegen Ende des Projekts auftreten. Darüber hinaus zeigt sich, dass bei PRs mit hohen Churn-Werten Schliessungen häufiger auf Branch-Fehler oder redundante Implementierungen zurückzuführen sind.
+
+%----------------------------------------------------------------------------------------
+% SECTION 3
+%----------------------------------------------------------------------------------------
+\section{Einfluss von Projektzeit}
+Als nächstes wurde die \fref{forschungsfrage3} "\textit{Besteht ein Zusammenhang zwischen dem Zeitpunkt im Projektverlauf und der Review-Dauer von Pull Requests?}" untersucht. Um zu ermitteln, ob die fortschreitende Projektzeit einen Einfluss auf das Bearbeiten der Pull Requests hat. Zusätzlich werden auch die \textit{churns} untersucht, um zu sehen, wie sich diese im Verlauf der Projektzeit verändern. 
+
+
+Ein signifikanter Faktor, der bei den Projektmodulen eine Rolle spielt, ist der fest definierte Abgabetermin. Dies unterscheidet diese Projekte von Open-Source-Projekten, die in der Literatur häufig untersucht werden. Um diese Untersuchung durchführen zu können, wird zusätzlich zu den oben genannten Metriken der Abgabetermin der einzelnen Klassen nachgeschlagen.
+
+Zur initialen Analyse werden die Projekte in die entsprechenden Projektwochen aufgeteilt und die Mediane der \textit{latencies} und \textit{churns} der entsprechenden Wochen ermittelt. Dies soll eine allgemeine Übersicht der Veränderungen der Metriken aufzeigen.
+
+\subsection{Projektwochen im Verhältnis zu Latency und Churn}
+\label{sec:ProjektwochenLatencyChurn}
+In welcher Woche ein Pull Request stattfindet wird ermittelt indem die im Kapitel \secref{sec:Metriken} erwähnten Metriken \textit{Pull Request createTime} und \textit{Repository createTime} gemined werden und die Erstellungszeit des Repositroies abgezogen wird von der Eröffnungszeit des Pull Requests. 
+
+
+Anhand der \autoref{fig:mittelwert-woche-lateny} ist ersichtlich, dass die Latency gegen Ende der Projektzeit abnimmt, während die Churn (\autoref{fig:mittelwert-woche-churn}) bis zur 5. Woche ansteigt. 
+Zu beachten ist, dass, wie bereits im Kapitel \secref{sec:Projektmodule} erwähnt, die Projekte nicht exakt 28 Tage dauern. Die ermittelten Projektlaufzeiten liegen zwischen 20 und 36 Tagen.
+Wobei die Klassen aus den Jahren 2021 und 2022 bei einem Durchschnitt von 21 Tagen liegen. Die neueren Klassen ab dem Jahr 2023 haben eine Projektlaufzeitspannweite von 28 bis 36 Tagen, wobei eine Klasse 35 Tage überschreitet. In dieser Klasse haben fünf Teams eine Laufzeit von 29 Tagen und drei Teams eine Laufzeit von 35 oder 36 Tagen. Somit widerspiegeln diese drei Teams die Woche sechs in der folgenden \autoref{fig:vergleich-latency-churn-projektzeit}. Die Latency nimmt im Laufe der Zeit zweimal stark ab. Das erste Mal von der ersten zur zweiten Projektwoche, wobei sie in der ersten Woche bei einem Median von 3.5 Stunden und in der zweiten Woche bei 2 Stunden liegt. Zum zweiten Mal nimmt die Latenz in der vierten Projektwoche stark ab, und zwar von 1.7 Stunden auf 0.5 Stunden. In der sechsten Woche ist die Latency nahezu 0. Der Churn steigt bis zur 5. Woche kontinuierlich von 72 Zeilenwechseln auf 115 an und sinkt dann in der 6. Woche auf 98.
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/mittelwert-woche-lateny.png}
+        \caption{Mediane Woche des Projektes vs. Latency}
+        \label{fig:mittelwert-woche-lateny}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/mittelwert-woche-churn.png}
+        \caption{Mediane Woche des Projektes vs. Churn}
+        \label{fig:mittelwert-woche-churn}
+    \end{subfigure}
+    \caption{Vergleich von Latency und Churn innerhalb der Projektzeit}
+    \label{fig:vergleich-latency-churn-projektzeit}
+\end{figure}
+
+Werden die Daten nach Vollzeit- und Teilzeitstudierenden aufgeteilt, zeigt sich bei den Vollzeitklassen ein ähnliches Bild. Veranschaulicht wird dies in der \autoref{fig:vergleich-latency-churn-projektzeit-v}. Allerdings ist der Median der Latency in der ersten Woche mit 7.4 Stunden mehr als doppelt so hoch wie in der Gesamtauswertung. Ebenso nimmt die Latency von der ersten zur zweiten Woche stark ab. Der Wert sinkt um mehr als die Hälfte und liegt anschliessend bei 3.4 Stunden. Ab der vierten Woche ist der Median unter einer halben Stunde. Zeitgleich ist der Churn in der ersten Woche mit 71 Zeilenänderungen am geringsten, steigt mit Ausnahme der dritten Woche an und erreicht in der fünften Woche mit 121 Änderungen seinen Höhepunkt. Im Gegensatz zur Latency liegen diese Werte sehr nahe bei der Gesamtanalyse.
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/mittelwert-woche-lateny-v.png}
+        \caption{Mediane Woche des Projektes vs. Latency Vollzeit}
+        \label{fig:mittelwert-woche-lateny-v}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/mittelwert-woche-churn-v.png}
+        \caption{Mediane Woche des Projektes vs. Churn Vollzeit}
+        \label{fig:mittelwert-woche-churn-v}
+    \end{subfigure}
+    \caption{Vergleich von Latency und Churn innerhalb der Projektzeit Vollzeit}
+    \label{fig:vergleich-latency-churn-projektzeit-v}
+\end{figure}
+
+In der \autoref{fig:vergleich-latency-churn-projektzeit-t} ist zu erkennen, dass auch bei den Teilzeitstudierenden die Latency in der ersten Woche am höchsten ist, sich aber weniger stark von den Wochen zwei und drei unterscheidet. Zusätzlich ist der Wert der ersten Woche im Gegensatz zur Gesamtanalyse und vor allem den Vollzeitstudierenden tiefer bei einem Wert von knapp 2 Stunden. Zudem steigt bei den Teilzeitklassen in der dritten Woche die Latency nochmals an, aber dies nur mit einem Unterschied von 0.1 Stunden. Danach sinkt die Latency ebenso und liegt in Woche vier unter einer Stunde. Der Churn steigt ebenfalls an und erreicht in Woche fünf seinen Höhepunkt bei 110 Codezeilenänderungen. Die Werte der Churn befinden sich im gleichen Rahmen wie bei den Vollzeitstudierenden.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/mittelwert-woche-lateny-t.png}
+        \caption{Mediane Woche des Projektes vs. Latency Teilzeit}
+        \label{fig:mittelwert-woche-lateny-t}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/mittelwert-woche-churn-t.png}
+        \caption{Mediane Woche des Projektes vs. Churn Teilzeit}
+        \label{fig:mittelwert-woche-churn-t}
+    \end{subfigure}
+    \caption{Vergleich von Latency und Churn innerhalb der Projektzeit Teilzeit}
+    \label{fig:vergleich-latency-churn-projektzeit-t}
+\end{figure}
+Zusammenfassend lässt sich feststellen, dass die Latency im Laufe der Zeit abnimmt, während der Churn zunimmt. Es ist auch ersichtlich, dass Vollzeitstudierende vor allem in der ersten Woche einen deutlich höheren Wert bei der Bearbeitungszeit der Pull Requests haben. Jedoch gilt zu beachten, dass wie bereits erwähnt, nicht alle Projekte gleich lange dauerten und somit waren bei den Wochen vier, fünf und sechs nicht mehr alle Projekte am laufen. Deshalb wurde zusätzlich ermittelt, wie die Pull Requests Verteilung über die Projektwochen ist.
+
+\begin{table}[ht]
+\caption{Anzahl Pull Requests pro Woche}
+\label{tab:anz_pr_per_week}
+\centering
+\begin{tabular}{rrrr}
+\toprule
+\textbf{Woche} & \textbf{Vollzeit} & \textbf{Teilzeit} & \textbf{Gesamt} \\
+\midrule
+1 & 94 & 107 & 201 \\
+2 & 158 & 174 & 332\\
+3 & 275 & 317 & 592\\
+4 & 298 & 363 & 661\\
+5 & 241 & 341 & 582 \\
+6 & 0 & 67 & 67\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\newpage
+Wie in der \autoref{tab:anz_pr_per_week} ersichtlich wurden die wenigsten Pull Requests in der sechsten Woche erstellt. Zu diesem Zeitpunkt liefen jedoch nur noch drei Projekte. Abgesehen davon werden in der ersten Projektwoche die wenigsten Pull Requests erstellt. Diese Zahl steigt dann kontinuierlich bis zur 4. Woche an, obwohl in der 4. Woche nicht mehr alle Projekte am Laufen waren. In der fünften Woche ist ein Rückgang der Pull Requests zu beobachten, wobei diese in der Gesamtzahl nur geringfügig unter der dritten Woche und bei den Teilzeitstudierenden sogar leicht darüber liegt. 
+
+Die Erstellung von Pull Requests ist in den letzten Wochen der Projekte sehr hoch. Allerdings ist nicht genau ersichtlich, wie sich die Pull Requests über die Laufzeit der einzelnen Projekte verteilen. Deshalb wird in einer weiteren Untersuchung analysiert, wie die Verteilung der Pull Requests im Verhältnis zu den Abgabefristen der einzelnen Projekte aussieht.
+
+\subsection{Pull Requests im Verhältnis zum Abgabetermin}
+Die Untersuchung von Pull Requests im Verhältnis zur Abgabe zeigt, dass am Tag der Abgabe die meisten Pull Requests abgearbeitet werden. Dies ist aus der \autoref{fig:anz-prs-days-away-from-end} ersichtlich. Von den 2427 untersuchten Pull Requests wurden 523 am Tag der Abgabe erstellt und abgeschlossen. Dieser Wert entspricht einer Quote von 21.5\,\%.  Die zweitmeisten Pull Requests wurden am Tag vor der Abgabe bearbeitet mit einer Anzahl von 309. Am drittletzten Tag wurde ein erhöhter Wert festgestellt, der jedoch nicht mehr signifikant hervorsticht. Eine Zusammenfassung der letzten drei Tage der Projekte ergibt eine Gesamtzahl von 986 bearbeiteten Pull Requests, was einem Prozentsatz von 40.6\,\% entspricht. Über die restliche Projektzeit variieren die Anzahl bearbeiteter Pull Requests. Es lassen sich erhöhte Werte sieben, acht und 15 Tage vor der Abgabe feststellen, die sich von den Werten der übrigen Tage abheben.
+\begin{figure}[htbp]
+    \includegraphics[width=\textwidth]{Figures/anz-prs-days-away-from-end.png}
+    \caption{Anzahl eröffneter Pull Requests im Verhältnis zur Abgabe}
+    \label{fig:anz-prs-days-away-from-end}
+\end{figure}
+\newpage
+Eine detaillierte Analyse der Pull Requests in den einzelnen Teams zeigt, dass in 19 von 71 Teams mehr als 50 Prozent aller Pull Requests in den letzten drei Projekttagen eröffnet und abgeschlossen wurden. Es lässt sich feststellen, dass vier der analysierten Teams einen Anteil von über 75 Prozent ihrer Pull Requests in diesem Zeitraum bearbeitet haben. Zudem ist eine Gruppe zu identifizieren, die sämtliche ihrer Pull Requests innerhalb des definierten Zeitraums erstellt und geschlossen hat. Eine detaillierte Analyse des Projektes ergab, dass die genannte Gruppe insgesamt zwei Pull Requests hatte, die beide am Tag vor der Abgabe erstellt wurden. Wenn diese Analyse auf den letzten Projekttag beschränkt wird, dann sind es drei Teams, die mehr als 50 Prozent ihrer Pull Requests am Abgabetag erledigt haben.
+
+Viele Pull Requests werden gegen Ende der Projekte erstellt und wie im Kapitel \secref{sec:ProjektwochenLatencyChurn} aufgezeigt, nehmen die Latencies gegen Ende der Projekte ab. Jedoch ist dort nicht genau ersichtlich, wie dies bei den einzelnen Projekten aussieht. Deshalb werden die Latencies unter 30 Minuten und die ganz kurzen Latencies von unter einer Minute im Verhältnis zu den Abgaben gestellt.
+
+\subsection{Analyse kurze Pull Request Latency im Verhältnis zur Abgabe }
+Eine detaillierte Analyse der kurz geöffneten Pull Requests (kleiner als 30 Minuten) offenbart, dass der überwiegende Teil davon in den letzten drei Tagen und insbesondere am Tag der Abgabe erstellt werden. Eine weitere Restriktion der Pull Requests auf jene, die innerhalb einer Minute abgearbeitet werden, resultiert in einer ähnlichen Situation. Es ist jedoch festzustellen, dass der Tag der Abgabe sich stärker abhebt, wobei auch ein Anstieg zwei Tage vor Abgabe zu erkennen ist.  Die Resultate sind in \autoref{fig:anz-prs-under-x-mins} dargestellt.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/anz-prs-under-30-min.png}
+    \caption{Anzahl Pull Requests unter 30 Minuten im Verhältnis zur Abgabe}
+    \label{fig:anz-prs-under-30-min}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/anz-prs-under-1-min.png}
+    \caption{Anzahl Pull Requests unter einer Minute im Verhältnis zur Abgabe}
+    \label{fig:anz-prs-under-1-min}
+    \end{subfigure}
+    \caption{Anzahl Pull Requests unter 30 / 1 Minute im Verhältnis zur Abgabe}
+    \label{fig:anz-prs-under-x-mins}
+\end{figure}
+
+\textbf{Die durchgeführten Analysen stellen einen wie in der \fref{forschungsfrage3} gestellten Zusammenhang fest. Die Review-Zeiten für Pull Requests nehmen gegen Ende der Projekte stark ab, insbesondere in den letzten Tagen der Projekte.}
+
+\newpage
+
+%----------------------------------------------------------------------------------------
+% SECTION 4
+%----------------------------------------------------------------------------------------
+\section{Ergebnisse Entwicklungsaktivität}
+Empirische Studien zeigen, dass die Entwicklungsaktivität in Open-Source-Projekten auf Plattformen wie GitHub charakteristische Muster im Wochenverlauf aufweist. Insbesondere an Wochenenden ist die Aktivität signifikant geringer als unter der Woche. Innerhalb der Arbeitswoche fallen Montag und Freitag häufig als die Tage mit der geringsten Aktivität auf. Das Phänomen des Rückgangs der Entwicklungsaktivität wird oftmals auch \textit{Friday Effect} genannt. \parencite{claes_programmers_2018}
+
+Dies soll nun im Zusammenhang mit der \fref{forschungsfrage4} "\textit{Lassen sich Patterns der Zusammenarbeit im Team erkennen,
+hinsichtlich der Tage, an denen die Studierenden an den Projekten arbeiten?}" anhand der Projektmodule analysiert werden. Um diese Analyse durchführen zu können, werden die Klassen einzeln nach ihren Arbeitstagen analysiert. Die Arbeitstage werden anhand der offenen und geschlossenen Pull Requests und der Commit-Daten definiert. Für dies wird das Mining um die im Kapitel \secref{sec:Metriken} erwähnte Metrik \textit{commit} ergänzt.
+
+Um die Entwicklungsaktivität messbar machen zu können, mussten für alle Klassen die Projektmodul-Unterrichtstage nachgeschlagen werden:
+\begin{table}[ht]
+\caption{Projektmodul-Unterrichtstage der Klassen}
+\label{tab:stundenplan}
+\centering
+\begin{tabular}{l l l}
+\toprule
+\textbf{Klasse} & \textbf{Ort} & \textbf{Tag} \\
+\midrule
+It21tb   & Zürich      & Montag      \\
+It21ta   & Zürich      & Montag      \\
+It21a    & Zürich      & Mittwoch    \\
+It21tb   & Winterthur  & Donnerstag  \\
+It21a    & Winterthur  & Freitag     \\
+It21b    & Winterthur  & Freitag     \\
+It21ta   & Winterthur  & Freitag     \\
+\midrule
+It23tb   & Zürich      & Montag      \\
+It23ta   & Zürich      & Montag      \\
+It23a    & Zürich      & Mittwoch    \\
+It23b    & Zürich      & Mittwoch    \\
+It23a    & Winterthur  & Freitag     \\
+It23ta   & Winterthur  & Freitag     \\
+It23tb   & Winterthur  & Freitag     \\
+\midrule
+It24tb   & Zürich      & Montag      \\
+It24ta   & Zürich      & Montag      \\
+It24a    & Zürich      & Mittwoch    \\
+It24a    & Winterthur  & Freitag     \\
+It24ta   & Winterthur  & Freitag     \\
+It24tb   & Winterthur  & Freitag     \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
+Da sich während der Analyse  Differenzen zwischen den Voll- und Teilzeitklassen ergaben, werden diese geteilt angeschaut. 
+
+\subsection{Arbeitstage Pull Requests}
+Als erstes werden die Wochentage der Pull Request Erstellungs- und Schliessungsdaten ermittelt und auf die Wochentage aufgeteilt. Diese Aufteilung wird pro Klasse vorgenommen. In den vorliegenden Daten zeigt sich eine Tendenz zur Konzentration der Aktivitäten auf spezifische Wochentage, insbesondere auf die jeweiligen Unterrichtstage. So wurden bei den Vollzeitklassen rund 24\,\% aller Pull Requests (PRs) am Projekttag erstellt. Bei den Teilzeitklassen liegt dieser Wert mit 34\,\% deutlich höher. Dies unterstreicht die Bedeutung des Unterrichtstages für die praktische Arbeit im Rahmen des Projekts.
+
+Die \autoref{fig:anz-prs-teilzeit-pro-wochentag} zeigt exemplarisch die Verteilung der PR-Erstellungen auf die Wochentage für zwei Teilzeitklassen. Deutlich erkennbar ist eine Aktivitätsspitze am jeweiligen Unterrichtstag. An den folgenden Tagen nimmt die Aktivität deutlich ab. Auffällig ist auch, dass am Unterrichtstag nicht nur PRs erstellt, sondern auch überprüft und geschlossen wurden. Insgesamt ist der Anteil der am Wochenende erstellten PRs mit 27.7\,\% vergleichsweise hoch.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/pr-klasse-per-wochentag-it21ta.png}
+         \caption{Anzahl geöffneter PRs pro Wochentag der Teilzeitklasse It21ta}
+        \label{fig:anzahl-prs-pro-wochentag-it21ta}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/pr-klasse-per-wochentag-21tb.png}
+         \caption{Anzahl geöffneter PRs pro Wochentag der Teilzeitklasse It21tb}
+        \label{fig:anzahl-prs-pro-wochentag-it21tb}
+    \end{subfigure}
+    \caption{Anzahl geöffneter PRs pro Wochentag von 2 Teilzeitklassen}
+    \label{fig:anz-prs-teilzeit-pro-wochentag}
+\end{figure}
+
+Ein gegensätzliches Bild zeigt sich bei den Vollzeitklassen. Die \autoref{fig:anz-prs-vollzeit-pro-wochentag} zeigt die Verteilung der PR-Erstellungen und Schliessungen für zwei exemplarische Klassen.
+Hier zeigt sich eine insgesamt gleichmässigere Verteilung der Aktivitäten über die Woche. Zwar ist auch hier der Projekttag am aktivsten, jedoch meist in geringerem Ausmass als bei den Teilzeitklassen. Zudem wurden nur 16.8\% der PR am Wochenende erstellt.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/pr-klasse-per-wochentag-23a.png}
+         \caption{Anzahl geöffneter PRs pro Wochentag der Vollzeitklasse It23a}
+        \label{fig:anzahl-prs-pro-wochentag-it23a}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/pr-klasse-per-wochentag-24a.png}
+         \caption{Anzahl geöffneter PRs pro Wochentag der Vollzeitklasse It24a}
+        \label{fig:anzahl-prs-pro-wochentag-it24a}
+    \end{subfigure}
+    \caption{Anzahl geöffneter PRs pro Wochentag von 2 Vollzeitklassen}
+    \label{fig:anz-prs-vollzeit-pro-wochentag}
+\end{figure}
+
+\subsection{Arbeitstage Commits}
+Da sowohl die PRs als auch die einzelnen Commits für die Entwicklungsanalyse von Interesse sind, wurden die Commits der PRs analysiert.
+Die Analyse bestätigt die in der PR-Analyse bereits festgestellten Ergebnisse.
+
+So wurden bei den Vollzeitklassen 23.7\,\% aller Commits am jeweiligen Unterrichtstag durchgeführt. Bei den Teilzeitklassen liegt dieser Anteil mit 33.9\,\% deutlich höher. Die \autoref{fig:anz-commits-teilzeit-pro-wochentag} zeigt die Verteilung der Commits über die Wochentage exemplarisch für zwei Teilzeitklassen. Analog zur PR-Verteilung ist eine deutliche Spitze an den jeweiligen Projekttagen erkennbar. Insgesamt wurden 25.9\,\% aller Commits der Teilzeitklassen an einem Samstag oder Sonntag durchgeführt.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/commits-klasse-per-wochentag-21ta.png}
+         \caption{Anzahl Commits pro Wochentag der Teilzeitklasse It21ta}
+        \label{fig:anzahl-commits-pro-wochentag-it21ta}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/commits-klasse-per-wochentag-21tb.png}
+         \caption{Anzahl Commits pro Wochentag der Teilzeitklasse It21tb}
+        \label{fig:anzahl-commits-pro-wochentag-it21tb}
+    \end{subfigure}
+    \caption{Anzahl Commits pro Wochentag von 2 Teilzeitklassen}
+    \label{fig:anz-commits-teilzeit-pro-wochentag}
+\end{figure}
+
+Ein ähnliches Bild ergibt sich auch bei den Vollzeitklassen zwischen Pull Requests und Commits. Die \autoref{fig:anz-commits-vollzeit-pro-wochentag} zeigt die Commits zweier exemplarischer Klassen. Hier wurden 23.7\,\% der Commits am jeweiligen Projekttag durchgeführt – identisch mit dem PR-Anteil. Am Wochenende hingegen wurden nur 19.4\,\% der Commits verzeichnet, was deutlich unter dem Wert der Teilzeitklassen liegt.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/commits-klasse-per-wochentag-23a.png}
+         \caption{Anzahl Commits pro Wochentag der Teilzeitklasse It23a}
+        \label{fig:anzahl-commits-pro-wochentag-it23a}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/commits-klasse-per-wochentag-24a.png}
+         \caption{Anzahl Commits pro Wochentag der Teilzeitklasse It24a}
+        \label{fig:anzahl-commits-pro-wochentag-it24a}
+    \end{subfigure}
+    \caption{Anzahl Commits pro Wochentag von 2 Vollzeitklassen}
+    \label{fig:anz-commits-vollzeit-pro-wochentag}
+\end{figure}
+
+Zusammenfassend lässt sich festhalten, dass es klare Tendenzen gibt, dass die Studierenden vor allem an den Projekttagen arbeiten, wobei die Teilzeitstudierenden noch häufiger am Wochenende arbeiten und die Vollzeitstudierenden die Arbeit eher unter der Woche aufteilen.
+
+%----------------------------------------------------------------------------------------
+% SECTION 5
+%----------------------------------------------------------------------------------------
+\section{Unterschiede von Teilzeitstudierenden und Vollzeitstudierenden in der Pull Request Nutzung}
+Zur detaillierten Analyse der \fref{forschungsfrage5} "\textit{Welche Unterschiede zeigen sich in der Nutzung von Pull Requests zwischen Teilzeit- und Vollzeitstudierenden hinsichtlich Anzahl und Umfang?}" erfolgt eine Aufteilung der Repository-Daten auf Teilzeit- und Vollzeitklassen. Die Anzahl der Pull Requests der Teilzeitklassen beläuft sich auf 1369 und jene der Vollzeitklassen auf 1066. Dabei werden durchschnittlich 31.8 Pull Requests von den Teilzeitstudierenden erstellt und 39.5 von den Vollzeitstudierenden. In der folgenden Tabelle werden die wichtigsten Kennzahlen aufgezeigt.
 
 \begin{table}[htbp]
     \centering
@@ -251,385 +616,16 @@ Zum Vergleich zeigt die Abbildung \autoref{fig:anz-prs-vs-churn-size-tz-vz-nur-d
 
 Zusammengefasst zeigt sich, dass die Herausfilterung der Dev-Branch-Merges einen Einfluss auf die Ergebnisse der Churn-Verteilung hat, insbesondere bei grossen Pull Requests. Insgesamt bestätigt sich jedoch, dass Vollzeitstudierende – unabhängig von der Herausfilterung – in den meisten Kategorien durchschnittlich mehr Pull Requests pro Repository erstellen als Teilzeitstudierende.
 
-//TODO ok / nok?
+//TODO\\
+\textbf{Anhand der vorliegenden Untersuchungen bezüglich der \fref{forschungsfrage5} }
 
-\textbf{Anhand der vorliegenden Untersuchungen bezüglich Vollzeit- und Teilzeitstudierenden kann die \hyref{hypothese2} nicht belegt werden.}
-
-\section{Hypothese 1 Einfluss von Projektzeit}
-Als nächstes wurde der Zusammenhang zwischen der laufenden Projektzeit und der \textit{latency} untersucht. Um zu ermitteln, ob die fortschreitende Projektzeit einen Einfluss auf das Bearbeiten der Pull Requests hat und um zu sehen, ob die \hyref{hypothese2} "\textit{Gegen Ende des Projekts werden Pull Requests schneller gemergt.}" zutrifft. Zusätzlich werden auch die \textit{churns} untersucht, um zu sehen, wie sich diese im Verlauf der Projektzeit verändern. 
-
-
-Ein signifikanter Faktor, der bei den Projektmodulen eine Rolle spielt, ist der fest definierte Abgabetermin. Dies unterscheidet diese Projekte von Open-Source-Projekten, die in der Literatur häufig untersucht werden. Um diese Untersuchung durchführen zu können, wird zusätzlich zu den oben genannten Metriken der Abgabetermin der einzelnen Klassen nachgeschlagen.
-
-Zur initialen Analyse werden die Projekte in die entsprechenden Projektwochen aufgeteilt und die Mediane der \textit{latencies} und \textit{churns} der entsprechenden Wochen ermittelt. Dies soll eine allgemeine Übersicht der Veränderungen der Metriken aufzeigen.
-
-\subsection{Projektwochen im Verhältnis zu Latency und Churn}
-\label{sec:ProjektwochenLatencyChurn}
-In welcher Woche ein Pull Request stattfindet wird ermittelt indem die im Kapitel \secref{sec:Metriken} erwähnten Metriken \textit{Pull Request createTime} und \textit{Repository createTime} gemined werden und die Erstellungszeit des Repositroies abgezogen wird von der Eröffnungszeit des Pull Requests. 
-
-
-Anhand der \autoref{fig:mittelwert-woche-lateny} ist ersichtlich, dass die Latency gegen Ende der Projektzeit abnimmt, während die Churn (\autoref{fig:mittelwert-woche-churn}) bis zur 5. Woche ansteigt. 
-Zu beachten ist, dass, wie bereits im Kapitel \secref{sec:Projektmodule} erwähnt, die Projekte nicht exakt 28 Tage dauern. Die ermittelten Projektlaufzeiten liegen zwischen 20 und 36 Tagen.
-Wobei die Klassen aus den Jahren 2021 und 2022 bei einem Durchschnitt von 21 Tagen liegen. Die neueren Klassen ab dem Jahr 2023 haben eine Projektlaufzeitspannweite von 28 bis 36 Tagen, wobei eine Klasse 35 Tage überschreitet. In dieser Klasse haben fünf Teams eine Laufzeit von 29 Tagen und drei Teams eine Laufzeit von 35 oder 36 Tagen. Somit widerspiegeln diese drei Teams die Woche sechs in der folgenden \autoref{fig:vergleich-latency-churn-projektzeit}. Die Latency nimmt im Laufe der Zeit zweimal stark ab. Das erste Mal von der ersten zur zweiten Projektwoche, wobei sie in der ersten Woche bei einem Median von 3.5 Stunden und in der zweiten Woche bei 2 Stunden liegt. Zum zweiten Mal nimmt die Latenz in der vierten Projektwoche stark ab, und zwar von 1.7 Stunden auf 0.5 Stunden. In der sechsten Woche ist die Latency nahezu 0. Der Churn steigt bis zur 5. Woche kontinuierlich von 72 Zeilenwechseln auf 115 an und sinkt dann in der 6. Woche auf 98.
-\begin{figure}[htbp]
-    \centering
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{Figures/mittelwert-woche-lateny.png}
-        \caption{Mediane Woche des Projektes vs. Latency}
-        \label{fig:mittelwert-woche-lateny}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{Figures/mittelwert-woche-churn.png}
-        \caption{Mediane Woche des Projektes vs. Churn}
-        \label{fig:mittelwert-woche-churn}
-    \end{subfigure}
-    \caption{Vergleich von Latency und Churn innerhalb der Projektzeit}
-    \label{fig:vergleich-latency-churn-projektzeit}
-\end{figure}
-
-Werden die Daten nach Vollzeit- und Teilzeitstudierenden aufgeteilt, zeigt sich bei den Vollzeitklassen ein ähnliches Bild. Veranschaulicht wird dies in der \autoref{fig:vergleich-latency-churn-projektzeit-v}. Allerdings ist der Median der Latency in der ersten Woche mit 7.4 Stunden mehr als doppelt so hoch wie in der Gesamtauswertung. Ebenso nimmt die Latency von der ersten zur zweiten Woche stark ab. Der Wert sinkt um mehr als die Hälfte und liegt anschliessend bei 3.4 Stunden. Ab der vierten Woche ist der Median unter einer halben Stunde. Zeitgleich ist der Churn in der ersten Woche mit 71 Zeilenänderungen am geringsten, steigt mit Ausnahme der dritten Woche an und erreicht in der fünften Woche mit 121 Änderungen seinen Höhepunkt. Im Gegensatz zur Latency liegen diese Werte sehr nahe bei der Gesamtanalyse.
-\begin{figure}[htbp]
-    \centering
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{Figures/mittelwert-woche-lateny-v.png}
-        \caption{Mediane Woche des Projektes vs. Latency Vollzeit}
-        \label{fig:mittelwert-woche-lateny-v}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{Figures/mittelwert-woche-churn-v.png}
-        \caption{Mediane Woche des Projektes vs. Churn Vollzeit}
-        \label{fig:mittelwert-woche-churn-v}
-    \end{subfigure}
-    \caption{Vergleich von Latency und Churn innerhalb der Projektzeit Vollzeit}
-    \label{fig:vergleich-latency-churn-projektzeit-v}
-\end{figure}
-
-In der \autoref{fig:vergleich-latency-churn-projektzeit-t} ist zu erkennen, dass auch bei den Teilzeitstudierenden die Latency in der ersten Woche am höchsten ist, sich aber weniger stark von den Wochen zwei und drei unterscheidet. Zusätzlich ist der Wert der ersten Woche im Gegensatz zur Gesamtanalyse und vor allem den Vollzeitstudierenden tiefer bei einem Wert von knapp 2 Stunden. Zudem steigt bei den Teilzeitklassen in der dritten Woche die Latency nochmals an, aber dies nur mit einem Unterschied von 0.1 Stunden. Danach sinkt die Latency ebenso und liegt in Woche vier unter einer Stunde. Der Churn steigt ebenfalls an und erreicht in Woche fünf seinen Höhepunkt bei 110 Codezeilenänderungen. Die Werte der Churn befinden sich im gleichen Rahmen wie bei den Vollzeitstudierenden.
-
-\begin{figure}[htbp]
-    \centering
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{Figures/mittelwert-woche-lateny-t.png}
-        \caption{Mediane Woche des Projektes vs. Latency Teilzeit}
-        \label{fig:mittelwert-woche-lateny-t}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{Figures/mittelwert-woche-churn-t.png}
-        \caption{Mediane Woche des Projektes vs. Churn Teilzeit}
-        \label{fig:mittelwert-woche-churn-t}
-    \end{subfigure}
-    \caption{Vergleich von Latency und Churn innerhalb der Projektzeit Teilzeit}
-    \label{fig:vergleich-latency-churn-projektzeit-t}
-\end{figure}
-Zusammenfassend lässt sich feststellen, dass die Latency im Laufe der Zeit abnimmt, während der Churn zunimmt. Es ist auch ersichtlich, dass Vollzeitstudierende vor allem in der ersten Woche einen deutlich höheren Wert bei der Bearbeitungszeit der Pull Requests haben. Jedoch gilt zu beachten, dass wie bereits erwähnt, nicht alle Projekte gleich lange dauerten und somit waren bei den Wochen vier, fünf und sechs nicht mehr alle Projekte am laufen. Deshalb wurde ermittelt, wie die Pull Requests Verteilung über die Projektwochen ist.
-
-\begin{table}[ht]
-\caption{Anzahl Pull Requests pro Woche}
-\label{tab:anz_pr_per_week}
-\centering
-\begin{tabular}{rrrr}
-\toprule
-\textbf{Woche} & \textbf{Vollzeit} & \textbf{Teilzeit} & \textbf{Gesamt} \\
-\midrule
-1 & 94 & 107 & 201 \\
-2 & 158 & 174 & 332\\
-3 & 275 & 317 & 592\\
-4 & 298 & 363 & 661\\
-5 & 241 & 341 & 582 \\
-6 & 0 & 67 & 67\\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\newpage
-Wie in der \autoref{tab:anz_pr_per_week} ersichtlich wurden die wenigsten Pull Requests in der sechsten Woche erstellt. Zu diesem Zeitpunkt liefen jedoch nur noch drei Projekte. Abgesehen davon werden in der ersten Projektwoche die wenigsten Pull Requests erstellt. Diese Zahl steigt dann kontinuierlich bis zur 4. Woche an, obwohl in der 4. Woche nicht mehr alle Projekte am Laufen waren. In der fünften Woche ist ein Rückgang der Pull Requests zu beobachten, wobei diese in der Gesamtzahl nur geringfügig unter der dritten Woche und bei den Teilzeitstudierenden sogar leicht darüber liegt. 
-
-Die Erstellung von Pull Requests ist in den letzten Wochen der Projekte sehr hoch. Allerdings ist nicht genau ersichtlich, wie sich die Pull Requests über die Laufzeit der einzelnen Projekte verteilen. Deshalb wird in einer weiteren Untersuchung analysiert, wie die Verteilung der Pull Requests im Verhältnis zu den Abgabefristen der einzelnen Projekte aussieht.
-
-\subsection{Pull Requests im Verhältnis zum Abgabetermin}
-Die Untersuchung von Pull Requests im Verhältnis zur Abgabe zeigt, dass am Tag der Abgabe die meisten Pull Requests abgearbeitet werden. Dies ist aus der \autoref{fig:anz-prs-days-away-from-end} ersichtlich. Von den 2427 untersuchten Pull Requests wurden 523 am Tag der Abgabe erstellt und abgeschlossen. Dieser Wert entspricht einer Quote von 21.5\,\%.  Die zweitmeisten Pull Requests wurden am Tag vor der Abgabe bearbeitet mit einer Anzahl von 309. Am drittletzten Tag wurde ein erhöhter Wert festgestellt, der jedoch nicht mehr signifikant hervorsticht. Eine Zusammenfassung der letzten drei Tage der Projekte ergibt eine Gesamtzahl von 986 bearbeiteten Pull Requests, was einem Prozentsatz von 40.6\,\% entspricht. Über die restliche Projektzeit variieren die Anzahl bearbeiteter Pull Requests. Es lassen sich erhöhte Werte sieben, acht und 15 Tage vor der Abgabe feststellen, die sich von den Werten der übrigen Tage abheben.
-\begin{figure}[htbp]
-    \includegraphics[width=\textwidth]{Figures/anz-prs-days-away-from-end.png}
-    \caption{Anzahl eröffneter Pull Requests im Verhältnis zur Abgabe}
-    \label{fig:anz-prs-days-away-from-end}
-\end{figure}
-\newpage
-Eine detaillierte Analyse der Pull Requests in den einzelnen Teams zeigt, dass in 19 von 71 Teams mehr als 50 Prozent aller Pull Requests in den letzten drei Projekttagen eröffnet und abgeschlossen wurden. Es lässt sich feststellen, dass vier der analysierten Teams einen Anteil von über 75 Prozent ihrer Pull Requests in diesem Zeitraum bearbeitet haben. Zudem ist eine Gruppe zu identifizieren, die sämtliche ihrer Pull Requests innerhalb des definierten Zeitraums erstellt und geschlossen hat. Eine detaillierte Analyse des Projektes ergab, dass die genannte Gruppe insgesamt zwei Pull Requests hatte, die beide am Tag vor der Abgabe erstellt wurden. Wenn diese Analyse auf den letzten Projekttag beschränkt wird, dann sind es drei Teams, die mehr als 50 Prozent ihrer Pull Requests am Abgabetag erledigt haben.
-
-Viele Pull Requests werden gegen Ende der Projekte erstellt und wie im Kapitel \secref{sec:ProjektwochenLatencyChurn} aufgezeigt, nehmen die Latencies gegen Ende der Projekte ab. Jedoch ist dort nicht genau ersichtlich, wie dies bei den einzelnen Projekten aussieht. Deshalb werden die Latencies unter 30 Minuten und die ganz kurzen Latencies von unter einer Minute im Verhältnis zu den Abgaben gestellt.
-
-\subsection{Analyse kurze Pull Request Latency im Verhältnis zur Abgabe }
-Eine detaillierte Analyse der kurz geöffneten Pull Requests (kleiner als 30 Minuten) offenbart, dass der überwiegende Teil davon in den letzten drei Tagen und insbesondere am Tag der Abgabe erstellt werden. Eine weitere Restriktion der Pull Requests auf jene, die innerhalb einer Minute abgearbeitet werden, resultiert in einer ähnlichen Situation. Es ist jedoch festzustellen, dass der Tag der Abgabe sich stärker abhebt, wobei auch ein Anstieg zwei Tage vor Abgabe zu erkennen ist.  Die Resultate sind in \autoref{fig:anz-prs-under-x-mins} dargestellt.
-
-\begin{figure}[htbp]
-    \centering
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{Figures/anz-prs-under-30-min.png}
-    \caption{Anzahl Pull Requests unter 30 Minuten im Verhältnis zur Abgabe}
-    \label{fig:anz-prs-under-30-min}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{Figures/anz-prs-under-1-min.png}
-    \caption{Anzahl Pull Requests unter einer Minute im Verhältnis zur Abgabe}
-    \label{fig:anz-prs-under-1-min}
-    \end{subfigure}
-    \caption{Anzahl Pull Requests unter 30 / 1 Minute im Verhältnis zur Abgabe}
-    \label{fig:anz-prs-under-x-mins}
-\end{figure}
-
-\textbf{Die durchgeführten Analysen stützen, die in diesem Kapitel erforschte \hyref{hypothese1}.}
-
-\newpage
-\section{Pull Request Akzeptanz}
-In diesem Abschnitt wird die \fref{forschungsfrage2} "\textit{Können die Schliessungsgründe der PRs in den Projekten ermittelt und klassifiziert werden?}" untersucht. Ziel ist es, die Gründe für die Ablehnung oder das Schliessen von PRs systematisch zu erfassen und mögliche Muster zwischen Vollzeit- und Teilzeitklassen herauszuarbeiten.
-
-\subsection{Kategorisierung der geschlossenen Pull Requests}
-\label{sec:KategorienGeschlossenePRs} 
-// TODO: mit literatur vergleichen
-Um die Ursache des geschlossenen PRs klassifizieren zu können, müssen zuerst Kategorien erstellt werden. Diese Kategorien wurden aufgrund einer manuellen Analyse des Datensatzes erreicht. Dabei wurden alle 39 PRs mit einem Churn von mindestens 500 manuell angeschaut als auch eine Stichprobe von 50 geschlossenen PRs mit einem kleinerem Churn.
-\begin{itemize}
-    \item \textbf{PRs ohne erkennbaren Grund (OG)}: Die PRs wurden ohne Kommentar geschlossen. Die Churn-Grösse ist kleiner als 500.
-    \item \textbf{Feature durch anderen PR implementiert (FPI)}: Das Feature wurde durch einen anderen PR implementiert und der ursprüngliche PR anschliessend geschlossen.
-    \item \textbf{PRs mit falschem Zielbranch (FZB)}: Der Autor des PRs wählte den falschen Zielbranch aus. Der PR wurde anschliessend in den korrekten Branch gemerged.
-    \item \textbf{Feature wird nicht mehr benötigt (FNN)}: Das Feature wird nicht mehr benötigt. Dies muss explizit im PR vermerkt sein.
-    \item \textbf{Implementierung abgelehnt (IA)}: Die vorgeschlagene Implementierung wurde abgelehnt.
-    \item \textbf{Divers (DIV)}: Beinhaltet hauptsächlich Feedback-PRs, welche von gewissen Dozenten für die Notenvergabe verwendet wurden. Ausserdem sind einige Refactor-Branches zu sehen, welche ausschliesslich für den Refactoren erstellt wurden und anschliessend geschlossen wurden. 
-\end{itemize}
-
-\subsection{Deskriptive Analyse}
-Insgesamt wurden 2427 Pull Requests untersucht, wovon 170 PRs geschlossen wurden (7,0,\%). Von den geschlossenen PRs entfielen 95 auf Vollzeitklassen und 75 auf Teilzeitklassen.
-
-Der durchschnittliche Churn bei geschlossenen PRs beträgt: \begin{itemize} \item Teilzeitklassen: 137 Zeilenänderungen \item Vollzeitklassen: 188 Zeilenänderungen \end{itemize}
-
-Eine Aufteilung der geschlossenen Pull Requests nach Churn-Grösse zeigt, dass in Teilzeitklassen vorwiegend kleinere PRs geschlossen wurden, während in Vollzeitklassen die Spannweite der Churn-Grössen etwas grösser ist.
-
-\begin{figure}[htbp]
-    \includegraphics[width=\textwidth]{Figures/anzahl-geschlossene-prs-nach-churn.png}
-    \caption{Anzahl geschlossene Pull Requests nach Churn Grösse}
-    \label{fig:anz-clsd-prs-nach-churn}
-\end{figure}
-
-\pagebreak
-\subsection{Ursachenanalyse der geschlossenen PRs}
-Für die Ursachenanalyse wurden alle PRs mit einem Churn-Wert grösser als 500 sowie alle mit einem Churn-Wert kleiner als 100 manuell untersucht und den in Kapitel \secref{sec:KategorienGeschlossenePRs} definierten Kategorien zugeordnet. 
-Die Verteilung der Ursachen geschlossener PRs ist in Tabelle \autoref{tab:treatments} dargestellt.
-
-
-\begin{table}[htbp]
-\caption{Geschlossene PRs gruppiert nach Ursache}
-\label{tab:treatments}
-\centering
-\begin{tabular}{l l l l l l l}
-\toprule
-\textbf{Klasse} & 
-\makecell{\textbf{OG}} & 
-\makecell{\textbf{FPI}} & 
-\makecell{\textbf{FNN}} & 
-\makecell{\textbf{IA}} & 
-\makecell{\textbf{FZB}} & 
-\makecell{\textbf{DIV}} \\
-\midrule
-T < 100& 35 & 1 & 3 & 2 & 0 & 0\\
-V < 100& 22 & 1 & 0 & 1 & 1 & 0 \\
-T > 500& 22 & 8 & 0 & 2 & 4 & 5 \\
-V > 500& 8 & 0 & 1 & 4 & 6 & 0 \\
-\bottomrule
-\end{tabular}
-\end{table}
-\newpage
-\noindent\textbf{Legende:}
-\begin{itemize}
-\item[$T$] Alle Teilzeitklassen
-\item[$V$] Alle Vollzeitklassen
-\item[$< 100$] Churn kleiner 100
-\item[$> 500$] Churn grösser 500
-\end{itemize}
-
-Die wichtigsten Erkenntnisse aus der Ursachenanalyse sind folgende: Bei kleinen PRs (Churn $<$ 100) dominieren Fälle ohne nachvollziehbaren Schliessungsgrund. Bei grossen PRs (Churn $>$ 500) treten hingegen häufiger strukturierte Gründe auf, etwa ein falscher Zielbranch oder der Ersatz durch einen anderen PR. Teilzeitklassen haben insgesamt mehr PRs ohne klar dokumentierten Grund geschlossen, während Vollzeitklassen etwas häufiger explizite Ablehnungen oder Korrekturen von Branch-Fehlern zeigen.
-
-
-\subsection{Zeitliche Analyse geschlossener PRs}
-
-Eine Analyse der geschlossenen PRs im zeitlichen Verlauf der Projektlaufzeit zeigt deutliche Unterschiede zwischen Vollzeit- und Teilzeitklassen.
-
-\begin{figure}[htbp] 
-\centering \begin{subfigure}[b]{0.48\textwidth} 
-\centering \includegraphics[width=\textwidth]{Figures/closed-prs-projektzeit-vollzeit.png} 
-\caption{Geschlossene PRs Vollzeitklassen} 
-\label{fig:closed-prs-projektkeit-vollzeit}
-\end{subfigure} 
-\hfill 
-\begin{subfigure}[b]{0.48\textwidth} 
-\centering \includegraphics[width=\textwidth]{Figures/closed-prs-projektzeit-teilzeit.png} 
-\caption{Geschlossene PRs Teilzeitklassen} 
-\label{fig:closed-prs-projektkeit-teilzeit} 
-\end{subfigure} 
-\caption{Anzahl geschlossener PRs nach Tagen vor Abgabetermin} 
-\label{fig:closed-prs-projektzeit} 
-\end{figure}
-
-Die wichtigsten Beobachtungen sind folgende: In Teilzeitklassen konzentrieren sich die geschlossenen PRs stark auf die letzten Projekttage, insbesondere auf den Tag der Abgabe. In Vollzeitklassen hingegen verteilen sich die geschlossenen PRs gleichmässiger über den gesamten Projektverlauf.
-
-
-\subsection{Zusammenfassung}
-
-Zusammenfassend lässt sich festhalten, dass Teilzeitklassen tendenziell mehr kleine PRs ohne ausführliche Begründung schliessen, während Vollzeitklassen grössere PRs strukturierter ablehnen oder gezielt korrigieren. Auffällig ist zudem, dass viele geschlossene PRs, insbesondere in Teilzeitklassen, vermehrt gegen Ende des Projekts auftreten. Darüber hinaus zeigt sich, dass bei PRs mit hohen Churn-Werten Schliessungen häufiger auf Branch-Fehler oder redundante Implementierungen zurückzuführen sind.
-
-
-\section{Ergebnisse Entwicklungsaktivität}
-Empirische Studien zeigen, dass die Entwicklungsaktivität in Open-Source-Projekten auf Plattformen wie GitHub charakteristische Muster im Wochenverlauf aufweist. Insbesondere an Wochenenden ist die Aktivität signifikant geringer als unter der Woche. Innerhalb der Arbeitswoche fallen Montag und Freitag häufig als die Tage mit der geringsten Aktivität auf. Das Phänomen des Rückgangs der Entwicklungsaktivität wird oftmals auch \textit{Friday Effect} genannt. \parencite{claes_programmers_2018}
-
-Dies soll nun im Zusammenhang mit der \fref{forschungsfrage3} "\textit{Lassen sich Patterns der Zusammenarbeit im Team erkennen,
-hinsichtlich der Tage, an denen die Studierenden an den Projekten arbeiten?}" anhand der Projektmodule analysiert werden. Um diese Analyse durchführen zu können, werden die Klassen einzeln nach ihren Arbeitstagen analysiert. Die Arbeitstage werden anhand der offenen und geschlossenen Pull Requests und der Commit-Daten definiert. Für dies wird das Mining um die im Kapitel \secref{sec:Metriken} erwähnte Metrik \textit{commit} ergänzt.
-
-Um die Entwicklungsaktivität messbar machen zu können, mussten für alle Klassen die Projektmodul-Unterrichtstage nachgeschlagen werden:
-\begin{table}[ht]
-\caption{Projektmodul-Unterrichtstage der Klassen}
-\label{tab:stundenplan}
-\centering
-\begin{tabular}{l l l}
-\toprule
-\textbf{Klasse} & \textbf{Ort} & \textbf{Tag} \\
-\midrule
-It21tb   & Zürich      & Montag      \\
-It21ta   & Zürich      & Montag      \\
-It21a    & Zürich      & Mittwoch    \\
-It21tb   & Winterthur  & Donnerstag  \\
-It21a    & Winterthur  & Freitag     \\
-It21b    & Winterthur  & Freitag     \\
-It21ta   & Winterthur  & Freitag     \\
-\midrule
-It23tb   & Zürich      & Montag      \\
-It23ta   & Zürich      & Montag      \\
-It23a    & Zürich      & Mittwoch    \\
-It23b    & Zürich      & Mittwoch    \\
-It23a    & Winterthur  & Freitag     \\
-It23ta   & Winterthur  & Freitag     \\
-It23tb   & Winterthur  & Freitag     \\
-\midrule
-It24tb   & Zürich      & Montag      \\
-It24ta   & Zürich      & Montag      \\
-It24a    & Zürich      & Mittwoch    \\
-It24a    & Winterthur  & Freitag     \\
-It24ta   & Winterthur  & Freitag     \\
-It24tb   & Winterthur  & Freitag     \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-
-
-Da sich während der Analyse  Differenzen zwischen den Voll- und Teilzeitklassen ergaben, werden diese geteilt angeschaut. 
-
-\subsection{Arbeitstage Pull Requests}
-Als erstes werden die Wochentage der Pull Request Erstellungs- und Schliessungsdaten ermittelt und auf die Wochentage aufgeteilt. Diese Aufteilung wird pro Klasse vorgenommen. In den vorliegenden Daten zeigt sich eine Tendenz zur Konzentration der Aktivitäten auf spezifische Wochentage, insbesondere auf die jeweiligen Unterrichtstage. So wurden bei den Vollzeitklassen rund 24\,\% aller Pull Requests (PRs) am Projekttag erstellt. Bei den Teilzeitklassen liegt dieser Wert mit 34\,\% deutlich höher. Dies unterstreicht die Bedeutung des Unterrichtstages für die praktische Arbeit im Rahmen des Projekts.
-
-Die \autoref{fig:anz-prs-teilzeit-pro-wochentag} zeigt exemplarisch die Verteilung der PR-Erstellungen auf die Wochentage für zwei Teilzeitklassen. Deutlich erkennbar ist eine Aktivitätsspitze am jeweiligen Unterrichtstag. An den folgenden Tagen nimmt die Aktivität deutlich ab. Auffällig ist auch, dass am Unterrichtstag nicht nur PRs erstellt, sondern auch überprüft und geschlossen wurden. Insgesamt ist der Anteil der am Wochenende erstellten PRs mit 27.7\,\% vergleichsweise hoch.
-
-\begin{figure}[htbp]
-    \centering
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{Figures/pr-klasse-per-wochentag-it21ta.png}
-         \caption{Anzahl geöffneter PRs pro Wochentag der Teilzeitklasse It21ta}
-        \label{fig:anzahl-prs-pro-wochentag-it21ta}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{Figures/pr-klasse-per-wochentag-21tb.png}
-         \caption{Anzahl geöffneter PRs pro Wochentag der Teilzeitklasse It21tb}
-        \label{fig:anzahl-prs-pro-wochentag-it21tb}
-    \end{subfigure}
-    \caption{Anzahl geöffneter PRs pro Wochentag von 2 Teilzeitklassen}
-    \label{fig:anz-prs-teilzeit-pro-wochentag}
-\end{figure}
-
-Ein gegensätzliches Bild zeigt sich bei den Vollzeitklassen. Die \autoref{fig:anz-prs-vollzeit-pro-wochentag} zeigt die Verteilung der PR-Erstellungen und Schliessungen für zwei exemplarische Klassen.
-Hier zeigt sich eine insgesamt gleichmässigere Verteilung der Aktivitäten über die Woche. Zwar ist auch hier der Projekttag am aktivsten, jedoch meist in geringerem Ausmass als bei den Teilzeitklassen. Zudem wurden nur 16.8\% der PR am Wochenende erstellt.
-
-\begin{figure}[htbp]
-    \centering
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{Figures/pr-klasse-per-wochentag-23a.png}
-         \caption{Anzahl geöffneter PRs pro Wochentag der Vollzeitklasse It23a}
-        \label{fig:anzahl-prs-pro-wochentag-it23a}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{Figures/pr-klasse-per-wochentag-24a.png}
-         \caption{Anzahl geöffneter PRs pro Wochentag der Vollzeitklasse It24a}
-        \label{fig:anzahl-prs-pro-wochentag-it24a}
-    \end{subfigure}
-    \caption{Anzahl geöffneter PRs pro Wochentag von 2 Vollzeitklassen}
-    \label{fig:anz-prs-vollzeit-pro-wochentag}
-\end{figure}
-
-\subsection{Arbeitstage Commits}
-Da sowohl die PRs als auch die einzelnen Commits für die Entwicklungsanalyse von Interesse sind, wurden die Commits der PRs analysiert.
-Die Analyse bestätigt die in der PR-Analyse bereits festgestellten Ergebnisse.
-
-So wurden bei den Vollzeitklassen 23.7\,\% aller Commits am jeweiligen Unterrichtstag durchgeführt. Bei den Teilzeitklassen liegt dieser Anteil mit 33.9\,\% deutlich höher. Die \autoref{fig:anz-commits-teilzeit-pro-wochentag} zeigt die Verteilung der Commits über die Wochentage exemplarisch für zwei Teilzeitklassen. Analog zur PR-Verteilung ist eine deutliche Spitze an den jeweiligen Projekttagen erkennbar. Insgesamt wurden 25.9\,\% aller Commits der Teilzeitklassen an einem Samstag oder Sonntag durchgeführt.
-
-\begin{figure}[htbp]
-    \centering
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{Figures/commits-klasse-per-wochentag-21ta.png}
-         \caption{Anzahl Commits pro Wochentag der Teilzeitklasse It21ta}
-        \label{fig:anzahl-commits-pro-wochentag-it21ta}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{Figures/commits-klasse-per-wochentag-21tb.png}
-         \caption{Anzahl Commits pro Wochentag der Teilzeitklasse It21tb}
-        \label{fig:anzahl-commits-pro-wochentag-it21tb}
-    \end{subfigure}
-    \caption{Anzahl Commits pro Wochentag von 2 Teilzeitklassen}
-    \label{fig:anz-commits-teilzeit-pro-wochentag}
-\end{figure}
-
-Ein ähnliches Bild ergibt sich auch bei den Vollzeitklassen zwischen Pull Requests und Commits. Die \autoref{fig:anz-commits-vollzeit-pro-wochentag} zeigt die Commits zweier exemplarischer Klassen. Hier wurden 23.7\,\% der Commits am jeweiligen Projekttag durchgeführt – identisch mit dem PR-Anteil. Am Wochenende hingegen wurden nur 19.4\,\% der Commits verzeichnet, was deutlich unter dem Wert der Teilzeitklassen liegt.
-
-\begin{figure}[htbp]
-    \centering
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{Figures/commits-klasse-per-wochentag-23a.png}
-         \caption{Anzahl Commits pro Wochentag der Teilzeitklasse It23a}
-        \label{fig:anzahl-commits-pro-wochentag-it23a}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{Figures/commits-klasse-per-wochentag-24a.png}
-         \caption{Anzahl Commits pro Wochentag der Teilzeitklasse It24a}
-        \label{fig:anzahl-commits-pro-wochentag-it24a}
-    \end{subfigure}
-    \caption{Anzahl Commits pro Wochentag von 2 Vollzeitklassen}
-    \label{fig:anz-commits-vollzeit-pro-wochentag}
-\end{figure}
-
-Zusammenfassend lässt sich festhalten, dass es klare Tendenzen gibt, dass die Studierenden vor allem an den Projekttagen arbeiten, wobei die Teilzeitstudierenden noch häufiger am Wochenende arbeiten und die Vollzeitstudierenden die Arbeit eher unter der Woche aufteilen.
-
+%----------------------------------------------------------------------------------------
+% SECTION 6
+%----------------------------------------------------------------------------------------
 \section{Korrelationsanalyse verschiedener Metriken}
+In diesem Kapitel wird die \fref{forschungsfrage4} untersucht. Dazu werden zunächst die Metriken der Racetrack-Projekte analysiert und eine Korrelationsmatrix erstellt und anschliessend mit den OpenSource-Projekten der GitHub-Organisationen Ubique Innovation AG, Schweizerische Bundesbahnen (SBB) und Zalando SE verglichen.
 \subsection{Korrelationsanalyse der Racetrack Repositories}
-Um die \fref{forschungsfrage4} klären
+Die Korrelationsmatrix der Racetrack-Projekte ist in Abbildung \autoref{fig:korrelationsmatrix-racetrack} dargestellt. Auffällig ist die starke positive Korrelationen zwischen \textit{Churn} und \textit{Commits} (0.62) sowie zwischen \textit{Churn} und \textit{Changed Files Count} (0.70) bestehen. 
 
 \begin{figure}[htbp]
     \includegraphics[width=\textwidth]{Figures/racetrack-korrelationsmatrix.png}
@@ -637,13 +633,8 @@ Um die \fref{forschungsfrage4} klären
     \label{fig:korrelationsmatrix-racetrack}
 \end{figure}
 
-
-\subsection{Korrelationsanalyse von OpenSource Projekten}
-todo: einführung warum opensource repos, warum macht vergleich sinn
-\subsubsection{Vorstellung der GitHub-Organisationen im Vergleich zu Racetrack-Projekten}
-Im Rahmen dieser Analyse werden die Ergebnisse des Racetrack-Projektmoduls mit den Metriken von Open-Source-Projekten verglichen. Hierführ werden drei unterschiedliche Github Organisationen betrachtet, welche eine unterschiedliche Grösse und Komplextität aufweisen: \textit{Ubique}, \textit{Swiss Federal Railways (SBB)} und \textit{
-Zalando SE} angeschaut \parencite{noauthor_ubique_nodate} \parencite{noauthor_swiss_nodate} \parencite{noauthor_zalando_nodate}. 
-
+\subsection{Vorstellung der GitHub-Organisationen}
+Für den Vergleich wurden drei unterschiedliche GitHub Organisationen ausgewählt, die sich in Grösse (Anzahl Projekte) als auch in der jeweiligen Projektgrösse unterscheiden:
 
 \textit{Ubique Innovation AG} ist ein Schweizer Unternehmen mit Sitz in Zürich, das sich auf die Entwicklung von Softwarelösungen mit Fokus auf Mobile-App-Entwicklung spezialisiert hat. Im Jahr 2021 beschäftigte die Firma rund 50 Mitarbeiter \cite{noauthor_mathias_2021}. Zu den bekanntesten Projekten von Ubique gehören unter anderem die Mobile App der \textbf{Schweizerischen Bundesbahnen (SBB)}, die Kartenapplikation \textbf{Swisstopo} des Bundesamt für Landestopografie sowie die \textbf{Rega App}. \parencite{noauthor_apps_nodate}.
 
@@ -655,6 +646,72 @@ todo: same 8knot analyse
 
 Zalando ist eine grosse Github Organisation, die für ihre umfangreichen Open-Source-Projekte im Bereich der E-Commerce- und Cloud-Computing-Technologien bekannt ist. So besitzt Zalando 50 Repositories mit 835 Follower. \parencite{noauthor_zalando_nodate}
 
+
+\subsection{Vergleich mit professionellen GitHub-Organisationen}
+Zur besseren Einordnung der Ergebnisse der Racetrack-Projekte erfolgt nun ein Vergleich mit drei professionellen GitHub Organisationen unterschiedlicher Grössenordnung.
+
+
+\subsubsection{Ubique Innovation AG}
+Die Korrelationsmatrix von Ubique (siehe Abbildung \autoref{fig:korrelationsmatrix-ubique}) zeigt ebenfalls starke positive Zusammenhänge zwischen \textit{Churn}, \textit{Commits} (0.64) und \textit{Changed Files Count} (0.70). Jedoch zeigt sich bei Ubique eine positive Korrelation zwischen \textit{Latency} und \textit{Comments} (0.28), was auf umfangreichere Reviews bei längeren Bearbeitungszeiten hindeutet.
+
+\begin{figure}[htbp]
+\includegraphics[width=\textwidth]{Figures/ubique-korrelationsmatrix.png}
+\caption{Korrelations-Heatmap der Metriken von Ubique Innovation AG}
+\label{fig:korrelationsmatrix-ubique}
+\end{figure}
+
+
+Die Differenzanalyse zwischen Racetrack und Ubique (siehe \autoref{fig:diff-korrelationsmatrix-racetrack-ubique}) zeigt, dass die Racetrack-Projekte stärkere positive Korrelationen zwischen \textit{Description Length} und \textit{Commits} (0.38) sowie \textit{Description Length} und \textit{Churn} (0.34) aufweisen. In diesen Kategorien wird die leicht negative Korrelation der Ubique Projekte neutralisiert.  
+
+\begin{figure}[htbp]
+\includegraphics[width=\textwidth]{Figures/diff-korrelationsmatrix-racetrack-ubique.png}
+\caption{Differenz der Korrelations-Heatmaps der Racetrack Repositories und der Ubique Innovation Github Organisation}
+\label{fig:diff-korrelationsmatrix-racetrack-ubique}
+\end{figure}
+
+\newpage
+\subsubsection{Schweizerische Bundesbahnen (SBB)}
+Die Korrelationsmatrix der SBB (Abbildung \autoref{fig:korrelationsmatrix-sbb}) weist ebenfalls starke positive Korrelationen zwischen \textit{Churn} und \textit{Commits} (0.54) sowie \textit{Churn} und \textit{Changed Files Count} (0.81) auf. Auffällig bei der SBB ist die negative Korrelation zwischen \textit{Description Length} und \textit{Commits} (-0.33).
+
+\begin{figure}[htbp]
+    \includegraphics[width=\textwidth]{Figures/sbb-korrelationsmatrix.png}
+    \caption{Korrelations-Heatmap der Metriken der Schweizerischen Bundesbahn (SBB)}
+    \label{fig:korrelationsmatrix-sbb}
+\end{figure}
+
+Die Differenzanalyse zwischen Racetrack und SBB (Abbildung \autoref{fig:diff-korrelationsmatrix-racetrack-sbb}) zeigt, dass Racetrack eine stärkere positive Korrelation zwischen \textit{Description Length} und einigen Metriken wie \textit{Churn}, \textit{Commits}, so wie eine schwächere Korrelation mit der Anzahl \textit{Comments} aufweist.
+
+\begin{figure}[htbp]
+\includegraphics[width=\textwidth]{Figures/diff-korrelationsmatrix-racetrack-sbb.png}
+\caption{Differenz der Korrelations-Heatmaps der Racetrack Repositories und der SBB Github Organisation}
+\label{fig:diff-korrelationsmatrix-racetrack-sbb}
+\end{figure}
+
+\newpage
+
+\subsubsection{Zalando SE}
+Die Korrelationsmatrix von Zalando (Abbildung \autoref{fig:korrelationsmatrix-zalando}) zeigt deutliche Unterschiede zu Racetrack, insbesondere eine starke negative Korrelation zwischen \textit{Churn} und \textit{Description Length} (-0.47), was darauf hindeutet, dass bei Zalando umfangreiche Änderungen oft weniger ausführlich beschrieben werden. Zudem zeigt sich eine positive Korrelation zwischen \textit{Churn} und \textit{Changed Files Count} (0.82), ähnlich wie bei den anderen Organisationen. Auch gibt es eine negative Korrelation zwischen \textit{Changed Files Count} und \textit{Description Length} (-0.41).
+
+\begin{figure}[htbp]
+    \includegraphics[width=\textwidth]{Figures/zalando-korrelationsmatrix.png}
+    \caption{Korrelations-Heatmap der Metriken von Zalando}
+    \label{fig:korrelationsmatrix-zalando}
+\end{figure}
+
+Die Differenzanalyse zwischen Racetrack und Zalando (Abbildung \autoref{fig:diff-korrelationsmatrix-racetrack-zalando}) verdeutlicht, dass Racetrack im Gegensatz zu Zalando deutliche positive Korrelationen zwischen \textit{Description Length} und sowohl \textit{Commits} als auch \textit{Churn} aufweist.
+
+\begin{figure}[htbp]
+\includegraphics[width=\textwidth]{Figures/diff-korrelationsmatrix-racetrack-zalando.png}
+\caption{Differenz der Korrelations-Heatmaps der Racetrack Repositories und der Zalando Github Organisation}
+\label{fig:diff-korrelationsmatrix-racetrack-zalando}
+\end{figure}
+
+\newpage
+
+\subsection{Zusammenfassung}
+Zusammenfassend zeigen sich deutliche Unterschiede in den Repository-Metriken zwischen studentischen Racetrack-Projekten und professionellen GitHub-Organisationen. Während die starken positiven Zusammenhänge zwischen \textit{Churn}, \textit{Commits} und \textit{Changed Files Count} in allen Organisationen präsent sind, unterscheiden sich insbesondere die Korrelationen rund um \textit{Description Length}. Bei Racetrack-Projekten sind ausführlichere Beschreibungen oft mit umfangreicheren Änderungen und mehr Commits verbunden, während professionelle Organisationen tendenziell kürzere Beschreibungen bevorzugen, insbesondere bei grösseren Änderungen.
+
+\newpage
 
 // alter text
 \subsection{Latency und Churn}
@@ -683,28 +740,22 @@ Die Tabelle \autoref{tab:latency-churn-open-source} zeigt die wichtigsten statis
     \end{tabular}
 \end{table}
 
-\subsection{Allgemeine Korrelationen}
-Zur besseren Einschätzung der Zusammenhänge zwischen den verschiedenen Metriken wird jeweils eine Korrelationsmatrix der verschiedenen GitHub-Organisationen erstellt. Die Analyse basiert auf der Spearman-Rangkorrelation. 
 
-Die Korrelationsmatrix der Ubique Github Organisation ist in Abbildung \autoref{fig:korrelationsmatrix-ubique} dargestelltt. 
+%----------------------------------------------------------------------------------------
+% SECTION 7
+%----------------------------------------------------------------------------------------
+\section{Erweiterung GitGauge}
+Die Ergebnisse aus der \fref{forschungsfrage4} stellten sich als spannende Metrik heraus, für eine Erweiterung in GitGauge. Dabei soll angezeigt werden wann die Teammitglieder gearbeitet haben. Dies soll den Dozierende helfen, zu erkennen, ob es Probleme bei der Zusammenarbeit der Studierenden gibt.
+\subsection{Erkennung Arbeitszeiten}
+Die Arbeitszeiten sollten anhand der Commits in den Projekten erkannt werden. Dabei ist zu beachten, dass der Main Branch nicht alle Commits in den Projekten anzeigt, da Commits gesquashed werden können. Um jedoch an diese gesquashten Commits zu gelangen, werden zusätzlich die Pull Requests durchlaufen und deren Commits ausgelesen. Wenn jedoch Entwickler ihre Commits gesquashed haben, ohne dies über einen Pull Request zu tun, können die Commit-Daten nicht wiederhergestellt werden.
+\subsection{Implementierung}
+Zusätzlich zum Mining der Pull Request Commit Daten wurden die Daten aggregiert und dem Frontend zur Verfügung gestellt. Dazu wurde ein neuer Endpoint erstellt, der die Daten sowohl datumsbasiert als auch wochentagsbasiert pro Benutzer ausgibt. Diese Daten wurden dann im Frontend aufbereitet und visualisiert. Dazu wurden mit Hilfe der MUI X Library zwei Grafiken erstellt. Diese zeigen, wie in der \autoref{fig:gitgauge_commits} ersichtlich, zum einen die Commits pro User basierend auf Datum und zum anderen die Commits pro User pro Wochentag. Mittels des Switches in der linken oberen Ecke können entweder nur die Commits auf dem Main Branch angezeigt werden oder zusätzlich zu den Commits auf dem Main auch noch die Pull Request Commits.
 
+Das erste Diagramm wurde erstellt, um einen allgemeinen Überblick über die Arbeit der Teammitglieder zu erhalten und um zu sehen, ob alle Teammitglieder während der Projektlaufzeit kontinuierlich Beiträge leisten.
+
+Die zweite Grafik dient dazu, zu sehen, wann in der Woche gearbeitet wird. Um zu sehen, ob die Gruppe ausgeglichen arbeitet oder ob es grosse Unterschiede gibt, die zu Reibungen in der Zusammenarbeit führen können.
 \begin{figure}[htbp]
-    \includegraphics[width=\textwidth]{Figures/ubique-korrelationsmatrix.png}
-    \caption{Korrelations-Heatmap der Metriken der Ubique Innovation AG}
-    \label{fig:korrelationsmatrix-ubique}
+\includegraphics[width=\textwidth]{Figures/gitgauge_commits.png}
+\caption{GitGauge Implementierung der Commit per User Darstellung }
+\label{fig:gitgauge_commits}
 \end{figure}
-
-
-\autoref{fig:korrelationsmatrix-sbb} zeigt die Korrelationsmatrix der Metriken der Github Organisation der Schweizerischen Bundesbahn (SBB). 
-\begin{figure}[htbp]
-    \includegraphics[width=\textwidth]{Figures/sbb-korrelationsmatrix.png}
-    \caption{Korrelations-Heatmap der Metriken der Schweizerischen Bundesbahn (SBB)}
-    \label{fig:korrelationsmatrix-sbb}
-\end{figure}
-
-\begin{figure}[htbp]
-    \includegraphics[width=\textwidth]{Figures/zalando-korrelationsmatrix.png}
-    \caption{Korrelations-Heatmap der Metriken von Zalando}
-    \label{fig:korrelationsmatrix-zalando}
-\end{figure}
-
