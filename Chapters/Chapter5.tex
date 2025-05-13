@@ -16,9 +16,39 @@
 
 \section{Diskussion}
 
+Wie in der Aufgabenstellung beschrieben, wurden im Rahmen einer Literaturrecherche relevante Metriken identifiziert und aus den Repositories extrahiert. Auf dieser Grundlage wurden sechs Forschungsfragen entwickelt, die sich auf spezifische Metriken beziehen und deren Zusammenhänge untersuchen sollen. In diesem Kapitel werden die Forschungsfragen erneut aufgegriffen, eingeordnet und im Kontext der gewonnenen Erkenntnisse diskutiert.
 
+
+\subsection{Diskussion Forschungsfrage 1: Zusammenhang Latency und Churn}
+Wie bereits mehrfach erwähnt, ist sich die Literatur über den Zusammenhang zwischen diesen beiden Metriken nicht einig. Die Ergebnisse (\secref{sec:ResultatChurnLatency}) dieser Forschungsfrage zeigen keinen Zusammenhang, weder mit noch ohne Ausreisser. Dafür ist der Spearman-Koeffizient zu gering. Zieht man nun zusätzlich den Kontext aus \fref{forschungsfrage3} heran, so zeigt sich, dass die Projektdauer einen Einfluss auf die \textit{Latency} hat und die \textit{latencies} gegen Ende der Projektdauer kürzer werden, die \textit{Churns} jedoch grösser werden und somit den reinen Zusammenhang aus \textit{Churn} und \textit{Latency} verringern. Zusätzlich zeigt die Korrelationsanalyse der Racetrack Repositories, dass andere Metriken wie zum Beispiel Kommentare einen Einfluss auf die \textit{Latencies} haben. Die Kommentare jedoch keinen Einfluss auf die \textit{Churn} haben. Da Kommentare bedeuten können, dass Änderungen vorgenommen werden müssen, diese aber keine Korrelation mit der \textit{Churn} haben, zeigt wiederum, warum \textit{Latency} und \textit{Churn} keinen Zusammenhang haben. Anhand unserer Ergebnisse wird deutlich, dass Pull Requests ein komplexes Konstrukt sind und sich die \textit{Latencies} der Pull Requests aus vielen verschiedenen Gegebenheiten und somit Metriken zusammensetzen.
+
+\subsection{Diskussion Forschungsfrage 2: Schliessgründe der PRs}
+Die Untersuchung der Schliessgründe von Pull Requests (\secref{sec:UntersuchungSchliessgründePRs}) zeigt, dass besonders häufig die Kategorie \textit{OG} (ohne erkennbaren Grund) auftritt, vor allem bei kleineren PRs mit einem Churn unter 100. Dies deutet darauf hin, dass kleinere Änderungen tendenziell weniger dokumentiert und begründet geschlossen werden. \\
+Bei den  Teilzeitklassen tritt dieses Verhalten deutlich häufiger auf. Eine mögliche Erklärung dafür ist Zeitmangel oder eine geringere Relevanz kleinerer Änderungen im Vergleich zu grösseren / wichtigeren Beiträgen. Ebenfalls zeigen die Analysen in \secref{sec:ErgebnisseEntwicklungsaktivtät}, dass die Pull Requests oftmals an den Projektmodul-Unterrichtstagen geschlossen werden. Deshalb könnten die Reviews auch in Person ohne Dokumentation durchgeführt werden. 
+
+Bei PRs mit einem grossem Churn zeigen sich in den Vollzeitklassen häufiger strukturierte Schliessgründe wie \textit{ZFB} (falscher Zielbranch) oder \textit{FPI} (Feature durch anderen PR implementiert).
+
+Die normalisierten Daten zeigen, dass in Vollzeitklassen durchschnittlich mehr PRs pro Projekt geschlossen werden. Dies kann darauf hindeuten, dass der Review-Prozess dort konsequenter durchgeführt wird.
+
+Ein weiterer Unterschied zeigt sich im zeitlichen Verlauf der Schliessungen. In Teilzeitklassen treten viele geschlossene PRs erst in den letzten Tagen des Projekts auf, insbesondere am Tag der Abgabe. In Vollzeitklassen verteilen sich die Schliessungen gleichmässiger über die gesamte Projektlaufzeit. Dies lässt vermuten, dass in Teilzeitprojekten Pull Requests häufiger unter Zeitdruck abgeschlossen werden, möglicherweise ohne dokumentierte Begründung oder in informellen Gesprächen.
+
+Zusammenfassend lässt sich feststellen, dass sich die Schliessgründe von Pull Requests zuverlässig klassifizieren lassen. Unterschiede zeigen sich sowohl in der Verteilung der Gründe als auch in der zeitlichen Struktur. Vollzeitklassen schliessen PRs tendenziell strukturierter und über den gesamten Projektverlauf verteilt, während Teilzeitklassen häufiger spontane oder unkommentierte Schliessungen am Projektende aufweisen.
+
+
+\subsection{Diskussion Forschungsfrage 3: Zusammenhang Projektverlauf auf Review-Dauer}
+Die Ergebnisse der \fref{forschungsfrage4} zeigen klar, dass die \textit{latency} im Verlauf der Projekte abnimmt und dies bei steigenden \textit{churn}-Werten. Vor allem in den letzten Tagen der Projekte wurden Pull Requests sehr schnell geschlossen. Einige davon in einer Geschwindigkeit, die keine normalen Reviews mehr zulässt.  Ebenfalls steigt die Anzahl der Pull Requests, die bearbeitet werden, in den letzten zwei Tagen stark an. 
+
+Dabei ist zu beachten, dass diese Projekte, wie bereits mehrfach erwähnt, einen festen Abgabetermin haben und eine verspätete Abgabe ohne Auswirkung auf die Note nicht erlaubt ist. Eine plausible Erklärung wäre daher, dass die Studierenden in den letzten Tagen noch möglichst viel Funktionalität implementieren und Fehlerbehebungen vornehmen und daher viele Pull Requests geöffnet werden und diese dann so schnell wie möglich gemergt werden. Durch diesen Zeitdruck kann es dann sein, dass keine ernsthaften oder weniger genauen Reviews durchgeführt werden oder dass die Programmierung im Pair Programming (zwei Entwickler programmieren zusammen auf einem Notebook) erfolgt und deshalb kein Review mehr durchgeführt wird.
+
+\subsection{Diskussion Forschungsfrage 4: Patterns hinsichtlich der Arbeitstage}
+\subsection{Diskussion Forschungsfrage 5: Unterschiede Voll- und Teilzeitklassen hinsichtlich Nutzung PR}
+\subsection{Diskussion Forschungsfrage 6: Unterschiede der Repository Metriken zwischen Studentenprojekten und professionellen Github Organisationen}
+
+
+Rückblick auf Aufgabenstel-lung, erreicht bzw. nicht er-reicht
 
 \section{Ausblick}
+Legt dar, wie an die Resultate (konkret vom Industriepartner oder weiteren Forschungsar-beiten; allgemein) angeschlos-sen werden kann; legt dar, welche Chancen die Resultate bieten.
 
 
 

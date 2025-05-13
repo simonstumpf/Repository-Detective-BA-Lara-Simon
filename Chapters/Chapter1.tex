@@ -36,14 +36,14 @@ Das in der ZHAW entwickelte Tool \textit{GitGauge} ist ein Repository-Mining- un
 \newpage
 
 
-\subsection{vergleichbare Projekte}
+\subsection{Vergleichbare Projekte}
 Es existieren bereits mehrere Git-Analyse-Tools, die die Untersuchung von Repository-Metriken, insbesondere den Code-Reviews, ermöglichen. 
 
 \textit{Apache Kibble} ist ein OpenSource-Projekt, welches das Minen, Aggregieren und Visualisieren von Softwareprojekten ermöglicht. Viele der bereitgestellten Metriken fokussieren sich jedoch auf die OpenSource-Aspekte eines Projektes, wie etwa die Anzahl Autoren pro Zeitperiode. Ausserdem ist das Projekt nicht besonders aktiv, es wurden lediglich 1 Commit in den letzten 2 Jahren getätigt \parencite{noauthor_apachekibble-1_2025}. Jedoch ist das Projekt gemäss der Apache Webseite noch aktiv \parencite{noauthor_apache_nodate}. Abbildung \autoref{fig:apache-kibble} zeigt einen Auschnitt der offizllen Demo. 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{Figures/apache-kibble.png}
-    \caption{Screenshot der Apache Kibble Demo}
+    \caption{Screenshot der Apache Kibble Demo \parencite{noauthor_code_nodate}}
     \label{fig:apache-kibble}
 \end{figure}
 \newpage
@@ -53,17 +53,18 @@ Es existieren bereits mehrere Git-Analyse-Tools, die die Untersuchung von Reposi
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.9\textwidth]{Figures/augur-8knot.png}
-    \caption{Analyse des Projektes Argo mittels Augur \& 8Knot}
+    \caption{Analyse des Projektes Argo mittels Augur \& 8Knot \parencite{noauthor_metrixchaossio_nodate}}
     \label{fig:augur-8knot}
 \end{figure}
 
 \newpage
 
-%----------------------------------------------------------------------------------------
-% SECTION 2
-%----------------------------------------------------------------------------------------
 
-\section{Zielsetzung /\allowbreak Aufgabenstellung /\allowbreak Anforderungen}
+\section{Aufgabenstellung}
+Produktivitätsmetriken sollen aus Git-Repositories gewonnen werden. Aus den Daten der Repositories sollen aussagekräftige Kennzahlen für die Softwareentwicklung gewonnen werden. Dies soll durch eine Literaturrecherche bestehender Metriken und die Entwicklung von Analysealgorithmen erfolgen.
+Die offizielle Aufgabenstellung, gestellt von Michael Wahler, befindet sich im Anhang \secref{sec:OffAufgabenstellung}.
+
+\section{Forschungsfragen und Zielsetzung}
 \label{sec:Zielsetzung}
 
 Ziel dieser Arbeit ist es, Pull Requests aus Projekten zu untersuchen und deren Eigenschaften hinsichtlich verschiedener Einflussfaktoren zu analysieren. Dabei stehen folgende Forschungsfragen im Vordergrund:
@@ -91,10 +92,22 @@ Welche Unterschiede zeigen sich in der Nutzung von Pull Requests zwischen Teilze
 Welche Unterschiede zeigen sich in den Repository Metriken zwischen den Studentenprojekten und profesionellen Github Organisationen?
 }
 
+\section{Übersicht der Arbeit}
+Im \autoref{Chapter2} \textit{\nameref{Chapter2}} wird das theoretische Wissen vermittelt, welches für das Verständnis dieser Arbeit notwendig ist. Dabei wird auf  Git / GitHub spezifische Methodiken eingegangen, die untersuchten Projekte erläutert und das als Grundlage dienende Tool GitGauge erklärt.
+
+Das \autoref{Chapter3} \textit{\nameref{Chapter3}} beschreibt die Methodik der Arbeit. Es erläutert die Vorgehensweise und beschreibt die notwendigen Metriken zur Klärung der Forschungsfragen. Des Weiteren wird die Datengrundlage aufgezeigt.
 
 
-Die vorliegende Arbeit wurde für ein Zielpublikum verfasst, das in der Informatikbranche tätig ist.
+Die Ergebnisse werden im \autoref{Chapter4} \textit{\nameref{Chapter4}} dargelegt. Dabei wird auf die spezifischen Forschungsfragen eingegangen und die Analysen zur Beantwortung der Fragen dargestellt. Zusätzlich wird die Erweiterung an der GitGauge-Applikation demonstriert.
 
+Zum Schluss folgt das \autoref{Chapter5} \textit{\nameref{Chapter5}}, in dem noch einmal auf die Forschungsfragen und deren Ergebnisse eingegangen und diese bewertet werden. Ausserdem werden mögliche Erweiterungen aufgezeigt.
+\newpage
+\noindent
+\vspace*{\fill} % Add vertical space before the text
+\begin{center}
+    Die vorliegende Arbeit wurde für ein Zielpublikum verfasst, das in der Informatikbranche tätig ist.
+\end{center}
+\vspace*{\fill}
 
 
 

@@ -169,10 +169,10 @@
 %----------------------------------------------------------------------------------------
 % Comment out if any of the following is not needed:
 \renewcommand{\contentsname}{Inhaltsverzeichnis}
+\renewcommand{\listfigurename}{Abbildungsverzeichnis}
 
 \tableofcontents  % Add main table of contents
-%\listoffigures    % Add list of figures
-%\listoftables     % Add list of tables
+
 
 
 %----------------------------------------------------------------------------------------
@@ -219,7 +219,7 @@
 % Uncomment the lines as you write the Appendices
 \include{Appendices/AppendixA}
 % from https://www.zhaw.ch/en/lsfm/study/studiweb/master-ls/masters-thesis/
-%\include{Appendices/AppendixB}
+\include{Appendices/AppendixB}
 %\include{Appendices/AppendixC}
 \include{Appendices/DeclarationOfOriginalityZHAW} 
 
@@ -228,6 +228,8 @@
 % BIBLIOGRAPHY
 %----------------------------------------------------------------------------------------
 \printbibliography[heading=bibintoc]
+\listoffigures    % Add list of figures
+%\listoftables     % Add list of tables
 
 %----------------------------------------------------------------------------------------
 

@@ -6,15 +6,15 @@
 %----------------------------------------------------------------------------------------
 
 
-\chapter{Vorgehen / Methoden} % Main chapter title
+\chapter{Methodik} % Main chapter title
 
 \label{Chapter3} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
 
 %----------------------------------------------------------------------------------------
 % SECTION 1
 %----------------------------------------------------------------------------------------
-
-In diesem Kapitel...
+Dieses Kapitel beschreibt die Methoden und Vorgehensweisen, zur Beantwortung der Forschungsfragen. Ziel ist es, aussagekräftige Metriken zu extrahieren und Zusammenhänge festzustellen. 
+In diesem Kapitel werden die Metriken vorgestellt, die zur Beantwortung der Forschungsfragen notwendig sind. Es werden Definitionen und Berechnungen vorgestellt, um ein Verständnis für diese Metriken zu erlangen. Des Weiteren wird aufgezeigt, welche Metriken mittels Mining-Verfahren aus den Repositories extrahiert werden. Abschliessend wird die Datengrundlage vorgestellt, auf der die Analysen basieren.
 
 \section{Analyse Churn vs Latency}
 \label{sec:AnalyseChurnvsLatency}
@@ -46,6 +46,7 @@ r_s = 1 - \frac{6 \sum d_i^2}{n(n^2 - 1)}
 
 
 \section{Auswahl Metriken für Korrelationsanalyse}
+\label{sec:MetrikenKorrelation}
 Für die Korrelationsanalyse der Metriken zur Klärung von \fref{forschungsfrage6} müssen geeignete Metriken ausgewählt werden, die verschiedene Aspekte der Pull-Request-Dynamik abbilden. Soziale Faktoren wie die Erfahrung der Contributor oder die Dauer ihrer Mitarbeit an einem Projekt können jedoch nicht berücksichtigt werden, da solche Daten im Kontext der untersuchten Studenten-Repositories nicht verfügbar sind. Basierend auf der Analyse diverser wissenschaftlicher Literatur wurden folgende sieben Metriken ausgewählt:
 
 Als \textbf{Latency} wird die Zeit zwischen der Erstellung eines Pull Requests und dessen Merge oder Schliessung genannt. Sie wird als Indikator für die Effizienz des Review-Prozesses genutzt und ist in der Literatur häufig als Schlüsselfaktor für die Messung der Geschwindigkeit von Code-Reviews und DevOps-Prozessen anerkannt. Eine hohe Latenz kann auf ineffiziente Reviews oder Verzögerungen hinweisen, weshalb sie in die Analyse aufgenommen wurde, um die Geschwindigkeit der Pull-Request-Bearbeitung zu messen und Zusammenhänge mit anderen Metriken wie \textit{Churn} und \textit{Comments} zu untersuchen. \parencite{yu_wait_2015}
@@ -80,11 +81,10 @@ Um die Forschungsfragen beantworten zu können, werden folgende Metriken benöti
       \item \textbf{Pull Request Commits:} Alle Commits die auf den Pull Requests gemacht werden.
      \begin{itemize}
         \item \textbf{CommittedDate:} Das Datum an welchem der Commit gemacht wird.
+        \item \textbf{Author:} Die Person, welche den Commit erstellt hat.
     \end{itemize}
 \end{itemize}
 
-\section{Architekturbeschreibung GitGauge}
-// TODO 
 
 \section{Datengrundlagen}
 \label{sec:Datengrundlagen}

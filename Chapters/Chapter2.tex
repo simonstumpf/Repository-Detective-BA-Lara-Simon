@@ -13,6 +13,8 @@
 
 \chapter{Theoretische Grundlagen} % Main chapter title
 
+In diesem Kapitel werden die theoretischen Grundlagen vorgestellt, die für das Verständnis dieser Arbeit notwendig sind. Zunächst werden Git und GitHub vorgestellt. Danach folgen die spezifischen Techniken, welche diese Systeme verwenden. Anschliessend werden die Projektmodule und deren Unterschiede zu Open Source Projekten erläutert. Zusätzlich wird das Tool GitGauge vorgestellt und dessen Architektur beschrieben.
+
 \label{Chapter2} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
 
 %----------------------------------------------------------------------------------------
@@ -35,7 +37,14 @@ Pull Requests spielen für den Code-Review und die Diskussion innerhalb des Entw
 
 Durch das Konfigurieren von automatischen Checks mittels CI/CD können sowohl Anforderungen an die Softwarequalität (zum Beispiel durch das automatisierte Ausführen von Tests oder statischen Codeanalysen) als auch an den Entwicklungsprozess automatisiert überprüft werden \parencite{kinsman_how_2021}. Dazu gehört beispielsweise die Überprüfung, ob alle Commits mit einem Signed-off-by versehen sind, was in vielen Projekten zur Einhaltung des Developer Certificate of Origin (DCO) verpflichtend ist \parencite{holtgrave_attributing_2025}. Diese Massnahmen stellen sicher, dass sowohl die technische Qualität des Codes als auch rechtliche Rahmenbedingungen eingehalten werden, bevor ein Pull Request gemergt wird \parencite{noauthor_about_nodate}. 
 
-\section{Pull Request Dauer}
+\subsection{Git Squashing}
+\label{subsec:GitSquashing}
+Mit \textit{Git Squashing} wird die Praxis bezeichnet, mehrere Commits zu einem Commit zusammenzuführen, bevor diese in den Zielbranch gemerged werden. Dies kann entweder manuell durch ein interaktives Rebase über die Git-Kommandozeile oder automatisch erfolgen, indem beim Mergen des Pull Requests die Option \textit{Squash commits} ausgewählt wird. \parencite{noauthor_git_nodate} Je nach Plattform kann die Option zum automatischen Squashen von Commits beim Mergen des Pull Requests unterschiedlich bezeichnet sein \parencite{noauthor_about_nodate} \parencite{noauthor_squash_nodate}. \\
+Daraus ergibt sich, dass alle Änderungen eines Feature-Branches im Zielbranch zusammengeführt werden, ohne die gesamte Historie zu übernehmen. Oftmals dient dies dazu, die Lesbarkeit des Projektverlaufs zu verbessern oder fehlerhafte Commits auszublenden \parencite{codoban_comparative_2015}. Darüber hinaus kann das Reverten von Commits erleichtert werden, da eine flache Git-Historie, die nur eine zusammengefasste Reihe von Commits enthält, beim Zurücksetzen von Änderungen Vorteile bietet \parencite{just_switching_2016}.
+
+Nachteil ist der Verlust von Informationen über die schrittweise Entwicklung eines Features. Die Commits der jeweiligen Feature-Entwicklung und deren Nachrichten gehen verloren, was die Transparenz des Entwicklungsprozesses einschränkt.
+
+\section{Pull Request Latency}
 \label{sec:PullRequestDauer}
 Es existieren bereits diverse Studien, die sich mit der Analyse von Pull Requests befassen. In der Literatur werden verschiedene Faktoren untersucht, die die Dauer von Pull Requests beeinflussen. Zusammenfassend kommen die Studien zum Schluss, dass die Pull Request Laufzeit von verschiedenen Faktoren, wie der Diskussion, Reputation des Erstellers, Team-Auslastung, erster menschlicher Reaktion und Continuous Integration abhängig sind. Es existieren jedoch widersprüchliche Aussagen bezüglich der Abhängigkeit der Laufzeit von der PR-Grösse. \parencite{yu_wait_2015}\parencite{hasan_understanding_2023}\parencite{kudrjavets_small_2022}\parencite{bernardo_studying_2018}
 
@@ -141,7 +150,6 @@ In den Projektmodulen der ZHAW nutzen die Studierende GitHub als Plattform für 
 
 \subsection{Systemarchitektur}
 GitGauge ist als Webanwendung mit einer Client-Server-Architektur entwickelt. Die 3 Hauptkomponten sind in Abbildung \autoref{fig:container-diagram-gitgauge} ersichtlich. 
-TODO: joel nach original fragen
 \begin{figure}[htbp]
     \centering
         \includegraphics[width=0.8\textwidth]{Figures/container-diagram-gitgauge.png}
@@ -168,6 +176,5 @@ Die Analyse der Daten erfolgt jeweils bei Abfrage der Statistik API Endpoints de
     \caption{Übersicht Mining Prozess \parencite{grand_joel_vt1_joelgrand_repository_2024}}
     \label{fig:overview-mining-steps}
 \end{figure}
-
 
 
