@@ -30,17 +30,23 @@ Bei PRs mit einem grossem Churn zeigen sich in den Vollzeitklassen häufiger str
 
 Die normalisierten Daten zeigen, dass in Vollzeitklassen durchschnittlich mehr PRs pro Projekt geschlossen werden. Dies kann darauf hindeuten, dass der Review-Prozess dort konsequenter durchgeführt wird.
 
-Ein weiterer Unterschied zeigt sich im zeitlichen Verlauf der Schliessungen. In Teilzeitklassen treten viele geschlossene PRs erst in den letzten Tagen des Projekts auf, insbesondere am Tag der Abgabe. In Vollzeitklassen verteilen sich die Schliessungen gleichmässiger über die gesamte Projektlaufzeit. Dies lässt vermuten, dass in Teilzeitprojekten Pull Requests häufiger unter Zeitdruck abgeschlossen werden, möglicherweise ohne dokumentierte Begründung oder in informellen Gesprächen.
+Ein weiterer Unterschied zeigt sich im zeitlichen Verlauf der Schliessungen. In Teilzeitklassen treten viele geschlossene PRs erst in den letzten Tagen des Projekts auf, besonders am Tag der Abgabe. In den Vollzeitklassen sind die Schliessungen gleichmässiger über den gesamten Projektverlauf verteilt.
 
-Zusammenfassend lässt sich feststellen, dass sich die Schliessgründe von Pull Requests zuverlässig klassifizieren lassen. Unterschiede zeigen sich sowohl in der Verteilung der Gründe als auch in der zeitlichen Struktur. Vollzeitklassen schliessen PRs tendenziell strukturierter und über den gesamten Projektverlauf verteilt, während Teilzeitklassen häufiger spontane oder unkommentierte Schliessungen am Projektende aufweisen.
+Zusammenfassend lässt sich feststellen, dass sich die Schliessgründe von Pull Requests nicht zuverlässig klassifizieren lassen. Viele Pull Requests werden ohne erkennbaren Grund geschlossen. Bei den klassifizierbaren PRs zeigen sich Unterschiede sowohl in der Verteilung der Gründe als auch in der zeitlichen Struktur. Vollzeitklassen schliessen PRs tendenziell strukturierter und über den gesamten Projektverlauf verteilt, während Teilzeitklassen häufiger spontane oder unkommentierte Schliessungen am Projektende aufweisen.
 
 
 \subsection{Diskussion Forschungsfrage 3: Zusammenhang Projektverlauf auf Review-Dauer}
-Die Ergebnisse der \fref{forschungsfrage4} zeigen klar, dass die \textit{latency} im Verlauf der Projekte abnimmt und dies bei steigenden \textit{churn}-Werten. Vor allem in den letzten Tagen der Projekte wurden Pull Requests sehr schnell geschlossen. Einige davon in einer Geschwindigkeit, die keine normalen Reviews mehr zulässt.  Ebenfalls steigt die Anzahl der Pull Requests, die bearbeitet werden, in den letzten zwei Tagen stark an. 
+Die Ergebnisse der \fref{forschungsfrage3} zeigen klar, dass die \textit{latency} im Verlauf der Projekte abnimmt und dies bei steigenden \textit{churn}-Werten. Vor allem in den letzten Tagen der Projekte wurden Pull Requests sehr schnell geschlossen. Einige davon in einer Geschwindigkeit, die keine normalen Reviews mehr zulässt.  Ebenfalls steigt die Anzahl der Pull Requests, die bearbeitet werden, in den letzten zwei Tagen stark an. 
 
 Dabei ist zu beachten, dass diese Projekte, wie bereits mehrfach erwähnt, einen festen Abgabetermin haben und eine verspätete Abgabe ohne Auswirkung auf die Note nicht erlaubt ist. Eine plausible Erklärung wäre daher, dass die Studierenden in den letzten Tagen noch möglichst viel Funktionalität implementieren und Fehlerbehebungen vornehmen und daher viele Pull Requests geöffnet werden und diese dann so schnell wie möglich gemergt werden. Durch diesen Zeitdruck kann es dann sein, dass keine ernsthaften oder weniger genauen Reviews durchgeführt werden oder dass die Programmierung im Pair Programming (zwei Entwickler programmieren zusammen auf einem Notebook) erfolgt und deshalb kein Review mehr durchgeführt wird.
 
-\subsection{Diskussion Forschungsfrage 4: Patterns hinsichtlich der Arbeitstage}
+\subsection{Diskussion Forschungsfrage 4: Patterns der Zusammenarbeit hinsichtlich der Arbeitstage}
+Die Analyse der Arbeitstage von Pull Requests (\secref{sec:ErgebnisseEntwicklungsaktivtät}) zeigt deutliche Unterschiede der Arbeitstage zwischen Vollzeit- und Teilzeitklassen. Bei der Betrachtung der Tage, an denen PRs erstellt und bearbeitet wurden, fällt auf, dass sich die Aktivitäten in den Teilzeitklassen stark auf spezifische Wochentage konzentrieren – insbesondere auf die Unterrichtstage. 
+
+So fällt bei der Betrachtung des Erstellungsdatums der PRs auf, dass sich die Aktivitäten in den Teilzeitklassen stark auf spezifische Wochentage konzentrieren. Inbesondere an den Unterrichtstagen als auch am Wochenende werden die meisten PRs erstellt. Eine mögliche Erklärung dafür könnte sein, dass Teilzeitstudierende unter der Woche weniger Zeit zur Verfügung haben, da sie andere Verpflichtungen im Privaten oder im Studienalltag priorisieren müssen.
+
+Die Vollzeitklassen zeigen hingegen eine gleichmässigere Verteilung der PullRequest-Aktivitäten über die Woche. Diese Gruppen arbeiten typischerweise an allen Wochentagen ausser am Wochenende, was auf eine kontinuierlichere Arbeitsweise hinweist. Der Mittwoch sticht hier besonders heraus, da an diesem Tag vergleichsweise viele PRs erstellt und bearbeitet wurden. Eine mögliche Erklärung dafür könnte sein, dass an diesem Tag oftmals Gruppensitzungen oder gemeinsame Entwicklungstreffen (\textit{Weeklys}) stattfinden.
+
 \subsection{Diskussion Forschungsfrage 5: Unterschiede Voll- und Teilzeitklassen hinsichtlich Nutzung PR}
 \subsection{Diskussion Forschungsfrage 6: Unterschiede der Repository Metriken zwischen Studentenprojekten und professionellen Github Organisationen}
 
