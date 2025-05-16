@@ -16,7 +16,7 @@
 Dieses Kapitel beschreibt die Methoden und Vorgehensweisen, zur Beantwortung der Forschungsfragen. Ziel ist es, aussagekräftige Metriken zu extrahieren und Zusammenhänge festzustellen. 
 In diesem Kapitel werden die Metriken vorgestellt, die zur Beantwortung der Forschungsfragen notwendig sind. Es werden Definitionen und Berechnungen vorgestellt, um ein Verständnis für diese Metriken zu erlangen. Des Weiteren wird aufgezeigt, welche Metriken mittels Mining-Verfahren aus den Repositories extrahiert werden. Abschliessend wird die Datengrundlage vorgestellt, auf der die Analysen basieren.
 
-\section{Analyse Churn vs Latency}
+\section{Metriken und Berechnungen Churn vs Latency}
 \label{sec:AnalyseChurnvsLatency}
 Wie in Kapitel \secref{sec:PullRequestDauer} beschrieben, finden sich in der Literatur unterschiedliche Aussagen zum Einfluss der Code-Grösse (Churn) auf die Dauer von Pull Requests (PR Latency). Während einige Studien einen Zusammenhang feststellen, bleiben andere Untersuchungen uneindeutig \parencite{hasan_understanding_2023}\parencite{kudrjavets_small_2022}.
 
@@ -63,12 +63,6 @@ Neben der Anzahl geänderter Codezeilen gibt \textbf{Changed Files Count} an, wi
 
 Die Metrik \textbf{Contributors} misst die Anzahl der verschiedenen Entwickler, die an einem Pull Request beteiligt sind. Ein höherer Beitrag von verschiedenen Entwicklern könnte auf eine intensivere Zusammenarbeit hinweisen und könnte mit der Komplexität und der Dauer des Review-Prozesses korrelieren.
 
-
-\section{Repository Mining}
-Damit alle Analysen durchgeführt werden konnten, musste das Mining der Projekte erweitert werden. So wurde die GraphQL Abfrage für die PullRequests erweitert, um zusätzlich den Churn als auch die Commits auf den Pull Requests zu speichern. Die Abfrage der Daten wurde durch einen neuen PullRequest Statistik API Controller ermöglicht, welcher sämtliche Daten der einzelnen PullRequests, wie etwa der Churn, die einzelnen Commits des PullRequests als auch die Anzahl geänderter Dateien zurückgibt. 
-
-Für die einzelnen Analysen wurde jeweils ein neues Jupyter Notebook erstellt. Dieser ermöglichen eine schnelle und unkomplizierte (graphische) Auswertung der Daten. \parencite{noauthor_repo-detectivesba-metric-analysis-scripts_nodate}
-
 \section{Benötigte Metriken}
 Um die Forschungsfragen beantworten zu können, werden folgende Metriken benötigt. Die Begriffe selbst stammen direkt aus dem GitGauge Backend und sind daher in ihrer englischen Form aufgeführt \parencite{noauthor_repo-detectivesgitgauge-extractor-service_nodate}:
 \label{sec:Metriken}
@@ -85,6 +79,10 @@ Um die Forschungsfragen beantworten zu können, werden folgende Metriken benöti
     \end{itemize}
 \end{itemize}
 
+\section{Repository Mining}
+Damit alle Analysen durchgeführt werden konnten, musste das Mining der Projekte erweitert werden. So wurde die GraphQL Abfrage für die Pull Requests erweitert, um zusätzlich den Churn als auch die Commits auf den Pull Requests zu speichern. Die Abfrage der Daten wurde durch einen neuen PullRequest Statistik API Controller ermöglicht, welcher sämtliche Daten der einzelnen Pull Requests, wie etwa der Churn, die einzelnen Commits des Pull Requests als auch die Anzahl geänderter Dateien zurückgibt. 
+
+Für die einzelnen Analysen wurde jeweils ein neues Jupyter Notebook erstellt. Dieser ermöglichen eine schnelle und unkomplizierte (graphische) Auswertung der Daten. \parencite{noauthor_repo-detectivesba-metric-analysis-scripts_nodate}
 
 \section{Datengrundlagen}
 \label{sec:Datengrundlagen}

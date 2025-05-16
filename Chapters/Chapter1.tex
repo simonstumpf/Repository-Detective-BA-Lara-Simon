@@ -24,7 +24,7 @@ Die Analyse der Code-Review-Daten kann wertvolle Informationen über die Zusamme
 
 An der Zürcher Hochschule für Angewandte Wissenschaften (ZHAW) lernen die Studierenden in Projektmodulen, wie man Projekte erfolgreich durchführt. Für die Zusammenarbeit der Teams wird GitHub eingesetzt. Eine automatisierte Auswertung der Code Reviews kann den Dozierenden helfen, Probleme bei den Studierenden frühzeitig zu erkennen.
 
-Das in der ZHAW entwickelte Tool \textit{GitGauge} ist ein Repository-Mining- und Analyse-Tool, welches aktuell primär für den Einsatz an den Projektmodulen eingesetzt wird. Das Tool wurde im Rahmen einer Mastervertiefungsarbeit von Joel Grand mit Unterstützung des Supervisors Michael Wahler erstellt. GitGauge bietet eine auf \textit{Next.js} basierende Benutzeroberfläche. Der Server in \textit{C\# mit .NET Core } wurde entwickelt. Ziel dieser Arbeit ist es, die Analysen mit diesem Tool durchzuführen und gegebenenfalls, wo nötig, zu erweitern. \parencite{grand_joel_wahler_michael_waspe_lara_stumpf_simon_repo_nodate}
+Das in der ZHAW entwickelte Tool \textit{GitGauge} ist ein Repository-Mining- und Analyse-Tool, welches aktuell primär für den Einsatz an den Projektmodulen eingesetzt wird. Das Tool wurde im Rahmen einer Mastervertiefungsarbeit von Joel Grand mit Unterstützung des Supervisors Michael Wahler erstellt. GitGauge bietet eine auf \textit{Next.js} basierende Benutzeroberfläche. Der Server wurde in \textit{C\# mit .NET Core } entwickelt. Ziel dieser Arbeit ist es, die Analysen mit diesem Tool durchzuführen und gegebenenfalls, wo nötig, zu erweitern. \parencite{grand_joel_wahler_michael_waspe_lara_stumpf_simon_repo_nodate}
 
 \begin{figure}[htbp]
     \centering
@@ -61,7 +61,7 @@ Es existieren bereits mehrere Git-Analyse-Tools, die die Untersuchung von Reposi
 
 
 \section{Aufgabenstellung}
-Produktivitätsmetriken sollen aus Git-Repositories gewonnen werden. Aus den Daten der Repositories sollen aussagekräftige Kennzahlen für die Softwareentwicklung gewonnen werden. Dies soll durch eine Literaturrecherche bestehender Metriken und die Entwicklung von Analysealgorithmen erfolgen.
+Produktivitätsmetriken sollen aus Git-Repositories gewonnen werden. Aus den Daten der Repositories sollen aussagekräftige Kennzahlen für die Softwareentwicklung abgeleitet werden. Dies soll durch eine Literaturrecherche bestehender Metriken und die Entwicklung von Analysealgorithmen erfolgen.
 Die offizielle Aufgabenstellung, gestellt von Michael Wahler, befindet sich im Anhang \secref{sec:OffAufgabenstellung}.
 
 \section{Forschungsfragen und Zielsetzung}
@@ -90,11 +90,10 @@ Welche Unterschiede zeigen sich in der Nutzung von Pull Requests zwischen Teilze
 }
 
 \forschungsfrage{forschungsfrage6}{
-Welche Unterschiede zeigen sich in den Repository Metriken zwischen den Studentenprojekten und profesionellen Github Organisationen?
+Welche Unterschiede zeigen sich in den Repository Metriken zwischen den Studentenprojekten und professionellen Github Organisationen?
 }
 
 \section{Übersicht der Arbeit}
-\printforschungsfrage{forschungsfrage1}
 Im \autoref{Chapter2} \textit{\nameref{Chapter2}} wird das theoretische Wissen vermittelt, welches für das Verständnis dieser Arbeit notwendig ist. Dabei wird auf  Git / GitHub spezifische Methodiken eingegangen, die untersuchten Projekte erläutert und das als Grundlage dienende Tool GitGauge erklärt.
 
 Das \autoref{Chapter3} \textit{\nameref{Chapter3}} beschreibt die Methodik der Arbeit. Es erläutert die Vorgehensweise und beschreibt die notwendigen Metriken zur Klärung der Forschungsfragen. Des Weiteren wird die Datengrundlage aufgezeigt.
@@ -103,13 +102,7 @@ Das \autoref{Chapter3} \textit{\nameref{Chapter3}} beschreibt die Methodik der A
 Die Ergebnisse werden im \autoref{Chapter4} \textit{\nameref{Chapter4}} dargelegt. Dabei wird auf die spezifischen Forschungsfragen eingegangen und die Analysen zur Beantwortung der Fragen dargestellt. Zusätzlich wird die Erweiterung an der GitGauge-Applikation demonstriert.
 
 Zum Schluss folgt das \autoref{Chapter5} \textit{\nameref{Chapter5}}, in dem noch einmal auf die Forschungsfragen und deren Ergebnisse eingegangen und diese bewertet werden. Ausserdem werden mögliche Erweiterungen aufgezeigt.
-\newpage
-\noindent
-\vspace*{\fill} % Add vertical space before the text
-\begin{center}
-    Die vorliegende Arbeit wurde für ein Zielpublikum verfasst, das in der Informatikbranche tätig ist.
-\end{center}
-\vspace*{\fill}
+
 
 
 

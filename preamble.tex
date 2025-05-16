@@ -152,8 +152,12 @@
 
 
 \newcounter{forschungsfrage}
-\newcounter{hypothese}
+\newcommand{\forschungsfrage}[2]{
+  \refstepcounter{forschungsfrage}
+  \noindent\textbf{Forschungsfrage \theforschungsfrage}: \label{#1}#2
+}
 
+\newcounter{hypothese}
 \newcommand{\hypothese}[2]{
   \refstepcounter{hypothese}
   \noindent\textbf{Hypothese \thehypothese}: \label{#1}#2
@@ -161,23 +165,3 @@
 
 \newcommand{\fref}[1]{Forschungsfrage~\ref{#1}}
 \newcommand{\hyref}[1]{Hypothese~\ref{#1}}
-
-\usepackage{xparse}
-\usepackage{expl3}
-
-\ExplSyntaxOn
-
-\NewDocumentCommand{\forschungsfrage}{mm}
- {
-  \refstepcounter{forschungsfrage}
-  \tl_gset:cn { g_forschungsfrage_#1_tl }
-    { {Forschungsfrage~\theforschungsfrage}: \enquote{\textit{#2}} }
-  \noindent\textbf{Forschungsfrage~\theforschungsfrage}\label{#1}: #2
- }
-
-\NewDocumentCommand{\printforschungsfrage}{m}
- {
-  \tl_use:c { g_forschungsfrage_#1_tl }
- }
-
-\ExplSyntaxOff

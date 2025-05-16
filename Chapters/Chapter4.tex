@@ -19,10 +19,10 @@ In diesem Kapitel werden die in Kapitel \secref{sec:Zielsetzung} formulierten se
 \section{Churn vs Latency}
 \label{sec:ResultatChurnLatency}
 Zur Klärung der \fref{forschungsfrage1}: "\textit{Besteht ein Zusammenhang zwischen der Latency eines Pull
-Requests (Zeit bis zum Merge oder Schliessung) und dem Churn (Anzahl geänderter Codezeilen) des jeweiligen Pull Requests?}" wurden die geminten\footnote{Abgeleitet vom englischen Verb to mine.} Repository Daten in einem Jupiter Notebook aufbereitet und graphisch dargestellt. Dazu wurden die im Kapitel \secref{sec:Metriken} erwähnten Metriken \textit{createTime} und \textit{closeTime} gemint und damit die einzelnen Latencies berechnet. Um die Latency-Daten besser vergleichen zu können, wurden diese noch vom Datumsformat in Stunden umgerechnet. Des Weiteren wurden die Metriken  \textit{additions} und  \textit{deleteions} aus den Pull Requests extrahiert, um den Churn zu berechnen.
+Requests (Zeit bis zum Merge oder Schliessung) und dem Churn (Anzahl geänderter Codezeilen) des jeweiligen Pull Requests?}" wurden die geminten\footnote{Abgeleitet vom englischen Verb to mine.} Repository Daten in einem Jupiter Notebook aufbereitet und graphisch dargestellt. Dazu wurden die im Kapitel \secref{sec:Metriken} erwähnten Metriken \textit{createTime} und \textit{closeTime} gemint und damit die einzelnen Latencies berechnet. Um die Latency-Daten besser vergleichen zu können, wurden diese noch vom Datumsformat in Stunden umgerechnet. Des Weiteren wurden die Metriken  \textit{additions} und  \textit{deletions} aus den Pull Requests extrahiert, um den Churn zu berechnen.
 
 \subsection{Datenanalyse}
-Zum besseren Verständnis der \textit{latency}- und \textit{churn}- Werte wird zunächst eine allgemeine Analyse der Daten durchgeführt.
+Zum besseren Verständnis der \textit{latency}- und \textit{churn}- Werte wurde zunächst eine allgemeine Analyse der Daten durchgeführt.
 Die Analyse basiert auf 2435 extrahierten Pull Requests. Wovon im Durchschnitt 34.3 Pull Requests pro Repository erstellt werden. In der folgenden Tabelle werden die wichtigsten Kennzahlen aufgezeigt.
 
 
@@ -72,7 +72,7 @@ Der Boxplot in der \autoref{fig:boxplot-churn} zeigt, dass es viele kleine Pull 
 Werden die Ausreisser beider Metriken kumulativ aus allen Datensätzen herausgefiltert, bleiben 1887 Pull Requests übrig, was 77.5\,\% entspricht. Das Herausfiltern dieser Daten stellt einen erheblichen Eingriff in die Datenbasis dar und wird daher nicht pauschal vorgenommen.
 
 \subsection{Ergebnisse}
-Um festzustellen, ob zwischen den Metriken \textit{latency} und \textit{churn} ein Zusammenhang besteht wird die Spearman Rangkorrelation angewendet. Dafür wird die oben erwähnte \autoref{eqn:spearman} verwendet. Diese wird anhand der Phython Library \textit{pandas} berechnet. Als Ergebnis erreichte der Rangkorrelationskoeffizient einen Wert von 0.17. Dieser Wert liegt sehr Nahe bei null und zeigt somit keinen spezifischen Zusammenhang zwischen den beiden Metriken auf. 
+Um festzustellen, ob zwischen den Metriken \textit{latency} und \textit{churn} ein Zusammenhang besteht wird die Spearman Rangkorrelation angewendet. Dafür wird die oben erwähnte \autoref{eqn:spearman} verwendet. Diese wird anhand der Python-Library \textit{pandas} berechnet. Als Ergebnis erreichte der Rangkorrelationskoeffizient einen Wert von 0.17. Dieser Wert liegt sehr Nahe bei null und zeigt somit keinen spezifischen Zusammenhang zwischen den beiden Metriken auf. 
 
 Wie bereits erwähnt, weisen die Daten einen hohen Anteil an Ausreissern auf. Deshalb soll überprüft werden, ob die Metriken eine Korrelation besitzen, wenn diese Ausreisser herausgefiltert werden. In diesem Fall erhöht sich der Koeffizient auf 0.2, zeigt aber weiterhin keinen eindeutigen Zusammenhang zwischen den Metriken.
 
@@ -87,9 +87,11 @@ In diesem Abschnitt wird die \fref{forschungsfrage2} "\textit{Können die Schlie
 
 \subsection{Kategorisierung der geschlossenen Pull Requests}
 \label{sec:KategorienGeschlossenePRs} 
-Um die Ursache des geschlossenen PRs klassifizieren zu können, müssen zuerst Kategorien erstellt werden. Diese Kategorien wurden aufgrund einer manuellen Analyse des Datensatzes erreicht. Dabei wurden alle 39 PRs mit einem Churn von mindestens 500 manuell angeschaut als auch eine Stichprobe von 50 geschlossenen PRs mit einem kleinerem Churn.
+Um die Ursache des geschlossenen PRs klassifizieren zu können, müssen zuerst Kategorien erstellt werden. Diese Kategorien wurden aufgrund einer manuellen Analyse des Datensatzes erreicht. 
+Dafür wurden alle Pull Requests der Racetrack-Repositories (Teilzeit sowie Vollzeit) ausgelesen und anschliessend eine Liste aller geschlossenen PRs mit einem Churn von mindestens 500 erstellt. Diese Liste umfasste 39 Pull Requests. Um den Datensatz ausgewogener zu gestalten, wurde ergänzend eine zufällige Stichprobe von 20 weiteren geschlossenen PRs mit einem Churn von weniger als 500 ausgewählt und hinzugefügt.
+
 \begin{itemize}
-    \item \textbf{PRs ohne erkennbaren Grund (OG)}: Die PRs wurden ohne Kommentar geschlossen. Die Churn-Grösse ist kleiner als 500.
+    \item \textbf{PRs ohne erkennbaren Grund (OG)}: Die PRs wurden ohne Kommentar geschlossen.
     \item \textbf{Feature durch anderen PR implementiert (FPI)}: Das Feature wurde durch einen anderen PR implementiert und der ursprüngliche PR anschliessend geschlossen.
     \item \textbf{PRs mit falschem Zielbranch (FZB)}: Der Autor des PRs wählte den falschen Zielbranch aus. Der PR wurde anschliessend in den korrekten Branch gemerged.
     \item \textbf{Feature wird nicht mehr benötigt (FNN)}: Das Feature wird nicht mehr benötigt. Dies muss explizit im PR vermerkt sein.
@@ -110,27 +112,50 @@ Eine Aufteilung der geschlossenen Pull Requests nach Churn-Grösse zeigt, dass i
     \label{fig:anz-clsd-prs-nach-churn}
 \end{figure}
 
-In \autoref{fig:avg-avg-anz-clsd-prs-nach-churn} ist die durchschnittliche Anzahl geschlossener PRs pro Projekt für die Teilzeit und Vollzeitklassen ersichtlich.
+In \autoref{fig:avg-anz-clsd-prs-nach-churn} ist die durchschnittliche Anzahl geschlossener PRs pro Projekt für die Teilzeit und Vollzeitklassen ersichtlich.
 
-In der kleinsten Churn-Kategorie (0--100) ist die durchschnittliche Anzahl geschlossener PRs pro Repository mit 0{,}93 in beiden Gruppen nahezu gleich. Bei einem Churn von 100--200 liegt der Durchschnittswert in Vollzeitklassen mit 0{,}48 deutlich höher als in Teilzeitklassen (0{,}30), was auf ein aktiveres Review-Verhalten bei mittelgrossen Änderungen hinweist. Im Bereich 200--400 gleichen sich die Werte mit rund 0{,}45 wieder an.
+In der kleinsten Churn-Kategorie (0--100) ist die durchschnittliche Anzahl geschlossener PRs pro Repository mit 0.93 in beiden Gruppen nahezu gleich. Bei einem Churn von 100--200 liegt der Durchschnittswert in Vollzeitklassen mit 0{,}48 deutlich höher als in Teilzeitklassen (0.30). Im Bereich 200--400 gleichen sich die Werte mit rund 0.45 wieder an.
 
 Für grössere Churn-Werte (400--800) sinkt die durchschnittliche Anzahl geschlossener PRs in beiden Gruppen deutlich, wobei Vollzeitklassen durchgehend höhere Werte aufweisen (z.\,B. bei 600--800: Teilzeit 0{,}02, Vollzeit 0{,}22). In den Kategorien oberhalb von Churn 800 sind fast keine PRs der Teilzeitklassen zu finden. Besonders bei einem Churn von über 10'000 treten nur noch bei Vollzeitklassen geschlossene PRs auf (Durchschnitt: 0{,}07), während dieser Wert bei Teilzeitklassen bei null liegt.
 
 \begin{figure}[htbp]
     \includegraphics[width=\textwidth]{Figures/avg-anz-clsd-prs-nach-churn.png}
-    \caption{Durchschnittliche  Anzahl geschlossene Pull Requests nach Churn Grösse}
-    \label{fig:avg-avg-anz-clsd-prs-nach-churn}
+    \caption{Durchschnittliche  Anzahl geschlossene Pull Requests nach Churn Grösse pro Repository}
+    \label{fig:avg-anz-clsd-prs-nach-churn}
 \end{figure}
+
+Ergänzend zur durchschnittlichen Anzahl geschlossener PRs pro Projekt zeigt die \autoref{fig:vergleich-gesamtanzahl-prs-vs-closed-teilzeit}, wie sich die Gesamtzahl aller PRs und die Anzahl geschlossener PRs in den Teilzeitklassen über die verschiedenen Churn-Kategorien verteilt. Für die Vollzeitklassen findet sich in \autoref{fig:vergleich-gesamtanzahl-prs-vs-closed-vollzeit} die gleiche Darstellung.
+
+In beiden Unterrichtsformen zeigt sich, dass die Mehrheit der Pull Requests in die kleinste Churn-Kategorie (0–100) fällt. Mit zunehmendem Churn nimmt sowohl die Gesamtanzahl der PRs als auch die Zahl der geschlossenen PRs kontinuierlich ab. Auffällig ist jedoch, dass bei den Vollzeitklassen auch in den höheren Churn-Kategorien mehr geschlossene Pull Requests registriert sind. So finden sich etwa in der Kategorie 1000–10k deutlich mehr geschlossene PRs als in den Teilzeitklassen, obwohl die Gesamtanzahl der PRs in diesem Bereich nur geringfügig höher ist.
+
+\begin{figure}[htbp]
+    \includegraphics[width=\textwidth]{Figures/vergleich-gesamtanzahl-prs-vs-closed-teilzeit.png}
+    \caption{Vergleich Gesamtanzahl PRs (exkl. geschlossene) vs. geschlossene PRs der Teilzeitklassen}
+    \label{fig:vergleich-gesamtanzahl-prs-vs-closed-teilzeit}
+\end{figure}
+
+In der höchsten Churn-Kategorie (>10k) sind in den Teilzeitklassen keine geschlossenen PRs zu verzeichnen, während in den Vollzeitklassen noch vereinzelte Schliessungen vorkommen. 
+
+\begin{figure}[htbp]
+    \includegraphics[width=\textwidth]{Figures/vergleich-gesamtanzahl-prs-vs-closed-vollzeit.png}
+    \caption{Vergleich Gesamtanzahl PRs (exkl. geschlossene) vs. geschlossene PRs der Vollzeitklassen}
+    \label{fig:vergleich-gesamtanzahl-prs-vs-closed-vollzeit}
+\end{figure}
+
 
 \pagebreak
 \subsection{Ursachenanalyse der geschlossenen PRs}
 Für die Ursachenanalyse wurden alle PRs mit einem Churn-Wert grösser als 500 sowie alle mit einem Churn-Wert kleiner als 100 manuell untersucht und den in Kapitel \secref{sec:KategorienGeschlossenePRs} definierten Kategorien zugeordnet. 
-Die Verteilung der Ursachen geschlossener PRs ist in Tabelle \autoref{tab:treatments} dargestellt.
+Die Verteilung der Ursachen geschlossener PRs ist in \autoref{tab:geschlossene-prs-nach-ursache} dargestellt. \\
+So ist sichtbar, dass die meisten PRs in allen Klassen jeweils ohne Erkennbaren Grund \textit{OG} geschlossen werden. Dieses Muster ist insbesondere bei den PRs mit einem geringen Churn (<100) ausgeprägt, wobei bei beiden Unterrichtsmodellen ein klarer Spitzenwert in dieser Kategorie erkennbar ist. \\
+Bei PRs mit einem grossen Churn (>500) hingegen zeigt sich eine leicht stärkere Differenzierung der Schliessgründe.
+In den Vollzeitklassen treten dabei strukturierte Ursachen wie \textit{FZB} (falscher Zielbranch) und \textit{IA} (Implementierung abgelehnt) auf. 
+In den Teilzeitklassen hingegen treten im Bereich grosser PRs vermehrt Ursachen der Kategorie \textit{FPI} (Feature durch anderen PR implementiert) oder in der Kategorie \textit{DIV} auf, welche unter anderem Refactorings und Feedback-PRs beinhalten.
 
 
 \begin{table}[htbp]
 \caption{Geschlossene PRs gruppiert nach Ursache}
-\label{tab:treatments}
+\label{tab:geschlossene-prs-nach-ursache}
 \centering
 \begin{tabular}{l l l l l l l}
 \toprule
@@ -149,30 +174,74 @@ V > 500& 8 & 0 & 1 & 4 & 6 & 0 \\
 \bottomrule
 \end{tabular}
 \end{table}
-\noindent\textbf{Legende:}
-\begin{itemize}
-\item[$T$] Alle Teilzeitklassen
-\item[$V$] Alle Vollzeitklassen
-\item[$< 100$] Churn kleiner 100
-\item[$> 500$] Churn grösser 500
-\end{itemize}
 
-Abbildung \autoref{fig:avg-avg-anz-clsd-prs-nach-ursache-und-churn} zeigt die durchschnittlichen geschlossenen PRs gruppiert nach Ursache und Churn. Dabei sind die beiden Churn-Kategorien unter 100 die Ursache \textit{OG} (ohne erkennbaren Grund) mit Abstand am häufigsten vertreten. Bei den Vollzeit- und Teilzeitklassen liegt der durchschnittliche Wert bei rund 0.8 geschlossenen PRs pro Repository. \\
-Auch bei PRs mit grossem Churn (> 500) bleibt \textit{OG} die häufigste Ursache. 
+\textbf{Legende:}
 
-Auffällig ist zudem, dass strukturierte Ursachen wie \textit{FPI} (Feature durch anderen PR implementiert), \textit{IA} (Implementierung abgelehnt) und \textit{FZB} (falscher Zielbranch) in Vollzeitklassen mit grossem Churn signifikant häufiger auftreten. So liegt der Durchschnitt für \textit{FZB} bei 0.22 pro Repository, während dieser Wert bei Teilzeitklassen lediglich 0.09 beträgt. 
+\begin{tabular}{r l}
+$T$ & Alle Teilzeitklassen \\
+$V$ & Alle Vollzeitklassen \\
+$< 100$ & Churn kleiner 100 \\
+$> 500$ & Churn grösser 500 \\
+\end{tabular}
+\\
 
-Die Kategorie \textit{DIV}, welche unter anderem Refactor- und Feedback-PRs beinhaltet, tritt nur bei den Teilzeitklassen mit grossem Churn auf und erreicht dort einen Durchschnitt von rund 0.11 PRs pro Repository.
+Zur besseren visuellen Veranschaulichung dient \autoref{fig:anz-clsd-prs-nach-ursache-und-churn}, welche die \autoref{tab:geschlossene-prs-nach-ursache} darstellt.
+
+
+\begin{figure}[htbp]
+    \includegraphics[width=\textwidth]{Figures/ursachenanalyse.png}
+    \caption{Geschlossene PRs gruppiert nach Ursache}
+    \label{fig:anz-clsd-prs-nach-ursache-und-churn}
+\end{figure}
+\newpage
+
+Die Normalisierung der Daten erfolgt, indem die absolute Anzahl geschlossener Pull Requests jeder Ursache durch die Anzahl der analysierten Repositories innerhalb der jeweiligen Unterrichtsform dividiert wird. Dadurch entsteht ein durchschnittlicher Wert pro Repository, der eine vergleichbare Betrachtung zwischen Vollzeit- und Teilzeitklassen ermöglicht.\autoref{tab:durchschittliche-anzahl-geschlossene-prs-nach-ursache-pro-projekt} zeigt die durchschnittlichen geschlossenen PRs gruppiert nach Ursache und Churn pro Projekt.  \\
+In den beiden Churn-Klassen (<100) ist die Ursache \textit{OG} (ohne erkennbaren Grund) mit Abstand am häufigsten vertreten. In Vollzeit- und Teilzeitklassen liegt der durchschnittliche Wert jeweils bei rund 0.8 geschlossenen PRs pro Repository. Auch bei PRs mit grossem Churn (> 500) bleibt \textit{OG} die häufigste Ursache.
+
+Strukturierte Ursachen wie \textit{FPI} (Feature durch anderen PR implementiert), \textit{IA} (Implementierung abgelehnt) und \textit{FZB} (falscher Zielbranch) treten bei PRs mit grossem Churn in beiden Unterrichtsformen auf, in Vollzeitklassen jedoch oftmals mit höheren Durchschnittswerten. Für \textit{FZB} beträgt der Durchschnitt in Vollzeitklassen 0.222 PRs pro Repository, in Teilzeitklassen 0.091. Die Ursache \textit{FPI} tritt ausschliesslich in Teilzeitklassen auf (0.182), \textit{IA} hingegen ist in Vollzeitklassen mit 0.148 stärker vertreten als in Teilzeitklassen (0.045). Die Kategorie \textit{DIV}, welche unter anderem Refactor- und Feedback-PRs umfasst, ist nur in Teilzeitklassen mit grossem Churn vertreten und besitzt dort einen durchschnittlichen Wert von 0.114 PRs pro Repository.
+
+Die Ursache \textit{FNN} (Feature wird nicht mehr benötigt) zeigt ein etwas anderes Bild: Sie ist bei kleinen PRs (Churn < 100) ausschliesslich in Teilzeitklassen mit einem Durchschnitt von 0.068 vertreten und ist bei den Vollzeitklassen nicht vertreten. Bei einem Churn (> 500) ist \textit{FNN} nur in den Vollzeitklassen mit einem Wert von 0.037 vertreten und in den Teilzeitklassen nicht vorhanden.
+
+\begin{table}[htbp]
+\caption{Durchschnittliche Anzahl geschlossene PRs gruppiert nach Ursache und Churn pro Repository}
+\label{tab:durchschittliche-anzahl-geschlossene-prs-nach-ursache-pro-projekt}
+\centering
+\begin{tabular}{l l l l l l l}
+\toprule
+\textbf{Klasse} & 
+\makecell{\textbf{OG}} & 
+\makecell{\textbf{FPI}} & 
+\makecell{\textbf{FNN}} & 
+\makecell{\textbf{IA}} & 
+\makecell{\textbf{FZB}} & 
+\makecell{\textbf{DIV}} \\
+\midrule
+T < 100 & 0.795 & 0.023 & 0.068 & 0.045 & 0.000 & 0.000 \\
+V < 100 & 0.815 & 0.037 & 0.000 & 0.037 & 0.037 & 0.000 \\
+T > 500 & 0.500 & 0.182 & 0.000 & 0.045 & 0.091 & 0.114 \\
+V > 500 & 0.296 & 0.000 & 0.037 & 0.148 & 0.222 & 0.000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\textbf{Legende:}
+
+\begin{tabular}{r l}
+$T$ & Alle Teilzeitklassen \\
+$V$ & Alle Vollzeitklassen \\
+$< 100$ & Churn kleiner 100 \\
+$> 500$ & Churn grösser 500 \\
+\end{tabular}
+\\
+
+Als visuelle Darstellung der \autoref{tab:durchschittliche-anzahl-geschlossene-prs-nach-ursache-pro-projekt} dient die \autoref{fig:avg-avg-anz-clsd-prs-nach-ursache-und-churn}.
+
 \begin{figure}[htbp]
     \includegraphics[width=\textwidth]{Figures/ursachenanalyse-pro-repo.png}
-    \caption{Durchschnittliche Anzahl geschlossene Pull Requests nach Ursache und Churn}
+    \caption{Durchschnittliche Anzahl geschlossene PRs gruppiert nach Ursache und Churn pro Repository}
     \label{fig:avg-avg-anz-clsd-prs-nach-ursache-und-churn}
 \end{figure}
 
-
-
-Zusammenfassend lässt sich sagen, dass bei kleinen Pull Requests (Churn < 100) Ablehnungen ohne klaren Anlass (\textit{OG}) sowohl bei Teilzeit- als auch bei Vollzeitklassen am häufigsten vorkommen. Bei grossen Pull Requests (Churn > 500) zeigen sich hingegen mehrere Ursachen. So treten strukturierte Schliessungsgründe, wie redundante Features (\textit{FPI}), falsche Zielbranches (\textit{FZB}) oder explizit abgelehnte Implementierungen (\textit{IA}), bei Vollzeitklassen deutlich häufiger auf als bei Teilzeitklassen. Diese Trends sind ebenfalls bei den normalisierten Daten auf. Vollzeitklassen schliessen bei hohem Churn tendenziell mehr Pull Requests aus konkreten, nachvollziehbaren Gründen, während in Teilzeitklassen zusätzlich häufiger Refactoring- oder Feedback-bezogene PRs (\textit{DIV}) vorkommen.
-
+Zusammenfassend zeigen die Ergebnisse, dass bei kleinen Pull Requests (Churn < 100) die Ursache \textit{OG} (ohne erkennbaren Grund) in beiden Unterrichtsformen mit Abstand am häufigsten vorkommen. Bei grossen Pull Requests (Churn > 500) verteilt sich die Anzahl geschlossener PRs auf mehrere Ursachen. In Vollzeitklassen treten in dieser Churn-Kategorie strukturierte Ursachen wie \textit{IA} (Implementierung abgelehnt), \textit{FZB} (falscher Zielbranch) und \textit{FNN} (Feature wird nicht mehr benötigt) häufiger auf. In Teilzeitklassen hingegen ist die Ursache \textit{FPI} (Feature durch anderen PR implementiert) nur in dieser Unterrichtsform vertreten. Zudem tritt die Kategorie \textit{DIV}, welche unter anderem Feedback- und Refactoring-PRs umfasst, ausschliesslich in Teilzeitklassen mit grossem Churn auf. Die dargestellten Trends zeigen sich sowohl in den absoluten Werten als auch in den normalisierten Daten pro Repository.
 \pagebreak
 
 \subsection{Zeitliche Analyse geschlossener PRs}
@@ -211,16 +280,16 @@ Als nächstes wurde die \fref{forschungsfrage3} "\textit{Besteht ein Zusammenhan
 
 Ein signifikanter Faktor, der bei den Projektmodulen eine Rolle spielt, ist der fest definierte Abgabetermin. Dies unterscheidet diese Projekte von Open-Source-Projekten, die in der Literatur häufig untersucht werden. Um diese Untersuchung durchführen zu können, wird zusätzlich zu den oben genannten Metriken der Abgabetermin der einzelnen Klassen nachgeschlagen.
 
-Zur initialen Analyse werden die Projekte in die entsprechenden Projektwochen aufgeteilt und die Mediane der \textit{latencies} und \textit{churns} der entsprechenden Wochen ermittelt. Dies soll eine allgemeine Übersicht der Veränderungen der Metriken aufzeigen.
+Zur initialen Analyse wurden die Projekte in die entsprechenden Projektwochen aufgeteilt und die Mediane der \textit{latencies} und \textit{churns} der entsprechenden Wochen ermittelt. Dies soll eine allgemeine Übersicht der Veränderungen der Metriken aufzeigen.
 
 \subsection{Projektwochen im Verhältnis zu Latency und Churn}
 \label{sec:ProjektwochenLatencyChurn}
-In welcher Woche ein Pull Request stattfindet wird ermittelt indem die im Kapitel \secref{sec:Metriken} erwähnten Metriken \textit{Pull Request createTime} und \textit{Repository createTime} gemined werden und die Erstellungszeit des Repositroies abgezogen wird von der Eröffnungszeit des Pull Requests. 
+In welcher Woche ein Pull Request stattfindet, wird ermittelt, indem die im Kapitel \secref{sec:Metriken} erwähnten Metriken \textit{Pull Request createTime} und \textit{Repository createTime} gemined werden und die Erstellungszeit des Repositories von der Eröffnungszeit des Pull Requests abgezogen wird. 
 
 
 Anhand der \autoref{fig:mittelwert-woche-lateny} ist ersichtlich, dass die Latency gegen Ende der Projektzeit abnimmt, während die Churn (\autoref{fig:mittelwert-woche-churn}) bis zur 5. Woche ansteigt. 
 Zu beachten ist, dass, wie bereits im Kapitel \secref{sec:Projektmodule} erwähnt, die Projekte nicht exakt 28 Tage dauern. Die ermittelten Projektlaufzeiten liegen zwischen 20 und 36 Tagen.
-Wobei die Klassen aus den Jahren 2021 und 2022 bei einem Durchschnitt von 21 Tagen liegen. Die neueren Klassen ab dem Jahr 2023 haben eine Projektlaufzeitspannweite von 28 bis 36 Tagen, wobei eine Klasse 35 Tage überschreitet. In dieser Klasse haben fünf Teams eine Laufzeit von 29 Tagen und drei Teams eine Laufzeit von 35 oder 36 Tagen. Somit widerspiegeln diese drei Teams die Woche sechs in der folgenden \autoref{fig:vergleich-latency-churn-projektzeit}. Die Latency nimmt im Laufe der Zeit zweimal stark ab. Das erste Mal von der ersten zur zweiten Projektwoche, wobei sie in der ersten Woche bei einem Median von 3.5 Stunden und in der zweiten Woche bei 2 Stunden liegt. Zum zweiten Mal nimmt die Latenz in der vierten Projektwoche stark ab, und zwar von 1.7 Stunden auf 0.5 Stunden. In der sechsten Woche ist die Latency nahezu 0. Der Churn steigt bis zur 5. Woche kontinuierlich von 72 Zeilenwechseln auf 115 an und sinkt dann in der 6. Woche auf 98.
+Wobei die Klassen aus den Jahren 2021 und 2022 bei einem Durchschnitt von 21 Tagen liegen. Die neueren Klassen ab dem Jahr 2023 haben eine Projektlaufzeitspannweite von 28 bis 36 Tagen, wobei eine Klasse 35 Tage überschreitet. In dieser Klasse haben fünf Teams eine Laufzeit von 29 Tagen und drei Teams eine Laufzeit von 35 oder 36 Tagen. Somit widerspiegeln diese drei Teams die Woche sechs in der folgenden \autoref{fig:vergleich-latency-churn-projektzeit}. Die Latency nimmt im Laufe der Zeit zweimal stark ab. Das erste Mal von der ersten zur zweiten Projektwoche, wobei sie in der ersten Woche bei einem Median von 3.5 Stunden und in der zweiten Woche bei 2 Stunden liegt. Zum zweiten Mal nimmt die Latency in der vierten Projektwoche stark ab, und zwar von 1.7 Stunden auf 0.5 Stunden. In der sechsten Woche ist die Latency nahezu 0. Der Churn steigt bis zur 5. Woche kontinuierlich von 72 Zeilenwechseln auf 115 an und sinkt dann in der 6. Woche auf 98.
 \begin{figure}[htbp]
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
@@ -484,13 +553,13 @@ Ein ähnliches Bild ergibt sich auch bei den Vollzeitklassen zwischen Pull Reque
     \label{fig:anz-commits-vollzeit-pro-wochentag}
 \end{figure}
 
-Zusammenfassend lässt sich festhalten, dass es klare Tendenzen gibt, dass die Studierenden vor allem an den Projekttagen arbeiten, wobei die Teilzeitstudierenden noch häufiger am Wochenende arbeiten und die Vollzeitstudierenden die Arbeit eher unter der Woche aufteilen.
+\textbf{Zusammenfassend lässt sich über die \fref{forschungsfrage4} festhalten, dass es klare Tendenzen gibt, dass die Studierenden vor allem an den Projekttagen arbeiten, wobei die Teilzeitstudierenden noch häufiger am Wochenende arbeiten und die Vollzeitstudierenden die Arbeit eher unter der Woche aufteilen.}
 
 %----------------------------------------------------------------------------------------
 % SECTION 5
 %----------------------------------------------------------------------------------------
 \section{Unterschiede von Teilzeitstudierenden und Vollzeitstudierenden in der Pull Request Nutzung}
-Zur detaillierten Analyse der \fref{forschungsfrage5} "\textit{Welche Unterschiede zeigen sich in der Nutzung von Pull Requests zwischen Teilzeit- und Vollzeitstudierenden hinsichtlich Anzahl und Umfang?}" erfolgt eine Aufteilung der Repository-Daten auf Teilzeit- und Vollzeitklassen. Die Anzahl der Pull Requests der Teilzeitklassen beläuft sich auf 1369 und jene der Vollzeitklassen auf 1066. Dabei werden durchschnittlich 31.8 Pull Requests von den Teilzeitstudierenden erstellt und 39.5 von den Vollzeitstudierenden. In der folgenden Tabelle werden die wichtigsten Kennzahlen aufgezeigt.
+Zur detaillierten Analyse der \fref{forschungsfrage5} "\textit{Welche Unterschiede zeigen sich in der Nutzung von Pull Requests zwischen Teilzeit- und Vollzeitstudierenden hinsichtlich Anzahl, Umfang und Dauer?}" erfolgt eine Aufteilung der Repository-Daten auf Teilzeit- und Vollzeitklassen. Die Anzahl der Pull Requests der Teilzeitklassen beläuft sich auf 1369 und jene der Vollzeitklassen auf 1066. Dabei werden durchschnittlich 31.8 Pull Requests von den Teilzeitstudierenden erstellt und 39.5 von den Vollzeitstudierenden. In der folgenden Tabelle werden die wichtigsten Kennzahlen aufgezeigt.
 
 \begin{table}[htbp]
     \centering
@@ -515,7 +584,7 @@ Zur detaillierten Analyse der \fref{forschungsfrage5} "\textit{Welche Unterschie
     \label{tab:deskriptive-kennzahlen-teilzeit-vollzeit}
 \end{table}
 
-Die \textit{latency} zeigt, dass Teilzeitstudierende im Durchschnitt mehr Zeit benötigen, um eine Pr zu bearbeiten. Der Median zeigt jedoch, dass die Teilzeitstudierenden mehr sehr kleine Pull Requests haben. Wobei bei beiden die Bearbeitungszeit im Median deutlich kürzer ist. Man sieht auch, dass die Teilzeitstudierenden eine grössere Streuung der Bearbeitungszeiten haben. Sie haben also gewisse Pull Requests die deutlich länger dauern. Dies ist auch im Maximum zu sehen, welches bei den Teilzeitstudierenden bei 416 Stunden liegt, was 17 Tagen entspricht. Wobei die Vollzeitstudierenden ein Maximum von 265 Stunden haben, was 11 Tagen entspricht.
+Die \textit{latency} zeigt, dass Teilzeitstudierende im Durchschnitt mehr Zeit benötigen, um einen PR zu bearbeiten. Der Median zeigt jedoch, dass die Teilzeitstudierenden häufiger sehr kurze Pull Request-Latencies haben. Wobei bei beiden die Bearbeitungszeit im Median deutlich kürzer ist. Man sieht auch, dass die Teilzeitstudierenden eine grössere Streuung der Bearbeitungszeiten haben. Sie haben also gewisse Pull Requests die deutlich länger dauern. Dies ist auch im Maximum zu sehen, welches bei den Teilzeitstudierenden bei 416 Stunden liegt, was 17 Tagen entspricht. Wobei die Vollzeitstudierenden ein Maximum von 265 Stunden haben, was 11 Tagen entspricht.
 
 Der \textit{churn} zeigt, dass Vollzeitstudierende sowohl im Durchschnitt als auch im Median mehr Zeilenänderungen pro Pull Request vornehmen. Die Standardabweichung zeigt ebenfalls, dass Vollzeitstudierende grössere Schwankungen in der Anzahl der Zeilenänderungen haben. Im Maximum ist ersichtlich, dass beide sehr grosse Prs haben, wobei sich das Maximum der Vollzeitstudierenden nochmals um mehr als 4'000 Zeilen unterscheidet.
 
@@ -537,8 +606,8 @@ Um die Verteilung der \textit{latencies} zu analysieren, werden die Daten in Int
 \end{itemize}
 
 
-Die \autoref{fig:anz-prs-vs-latency-tv} zeigt die Pull Requests der Vollzeit- und Teilzeitklassen aufgeteilt in die oben genannten Intervalle. Es ist ersichtlich, dass ein Grossteil der Pull Requests in beiden Unterrichtsmodellen in den ersten drei Intervallen bearbeitet wurde. Im Intervall [0-1min] heben sich die Klassen der Teilzeitstudierenden jedoch stark ab. 
-Die mittleren Latenzzeiten von einer halben Stunde bis zu einem Tag sind deutlich geringer. Bei den Unterrichtsmodellen gibt es keine nennenswerten Unterschiede. Lediglich bei den Bearbeitungszeiten von einer bis vier Stunden fallen die Teilzeitstudierenden auf. Auch die Bearbeitungszeiten von einem Tag bis zu einer Woche sind noch gut vertreten. Bei mehr als sieben Tagen heben sich die Teilzeitstudierenden wieder deutlich von den Vollzeitstudierenden ab.
+Die \autoref{fig:anz-prs-vs-latency-tv} zeigt die Pull Requests der Vollzeit- und Teilzeitklassen aufgeteilt in die oben genannten Intervalle. Es ist ersichtlich, dass ein Grossteil der Pull Requests in beiden Unterrichtsmodellen in den ersten drei Intervallen bearbeitet wurden. Im Intervall [0-1min] heben sich die Klassen der Teilzeitstudierenden jedoch stark ab. 
+Die mittleren Latencies von einer halben Stunde bis zu einem Tag sind deutlich geringer. Bei den Unterrichtsmodellen gibt es keine nennenswerten Unterschiede. Lediglich bei den Bearbeitungszeiten von einer bis vier Stunden fallen die Teilzeitstudierenden auf. Auch die Bearbeitungszeiten von einem Tag bis zu einer Woche sind noch gut vertreten. Bei mehr als sieben Tagen heben sich die Teilzeitstudierenden wieder deutlich von den Vollzeitstudierenden ab.
 
 \begin{figure}[htbp]
     \includegraphics[width=\textwidth]{Figures/anz-prs-vs-latency-tv.png}
@@ -553,16 +622,15 @@ Die \autoref{fig:anz-avg-prs-vs-latency-tv} zeigt nun, dass die Teilzeitstudiere
 
 \begin{figure}[htbp]
     \includegraphics[width=\textwidth]{Figures/anz-avg-prs-vs-latency-tv.png}
-    \caption{Durchschnittliche Anzahl Pull Requests vs. Latency (Teilzeit, Vollzeit)}
+    \caption{Durchschnittliche Anzahl Pull Requests vs. Latency (Teilzeit, Vollzeit) pro Repository}
     \label{fig:anz-avg-prs-vs-latency-tv}
 \end{figure}
 \newpage
-Insgesamt bestätigen die Abbildungen \autoref{fig:anz-prs-vs-latency-tv} und \autoref{fig:anz-avg-prs-vs-latency-tv}, dass die meisten Pull Requests schnell bearbeitet werden. Des Weiteren zeigt es, dass die Teilzeitstudierenden eine stärkere Streuung aufweisen als Vollzeitstudierende, da sie die Vollzeitstudierenden im ersten und letzten Intervall übertreffen.
+Insgesamt zeigen die Abbildungen \autoref{fig:anz-prs-vs-latency-tv} und \autoref{fig:anz-avg-prs-vs-latency-tv}, dass die meisten Pull Requests schnell bearbeitet werden. Des Weiteren ist ersichtlich, dass die Teilzeitstudierenden eine stärkere Streuung aufweisen als Vollzeitstudierenden, da sie die Vollzeitstudierenden im ersten und letzten Intervall übertreffen.
 
-\newpage
-Zur Klassifikation der Churn Grösse werden die von Doğan und Tüzün vorgeschlagenen Grössenkateogrien (XS, S, M, L, XL) verwendet. Diese Einteilung basiert auf empirischen Studien und industriellen Standards. \parencite{dogan_towards_2022}
+Zur Klassifikation der Churn Grösse werden die von Doğan und Tüzün \parencite{dogan_towards_2022} vorgeschlagenen Grössenkateogrien (XS, S, M, L, XL) verwendet. Diese Einteilung basiert auf empirischen Studien und industriellen Standards. \parencite{dogan_towards_2022}
 
-Während der manuellen Untersuchung für die \fref{forschungsfrage2} wurde festgestellt, dass einige PRs einen Churn über 10'000 aufweisen. Entweder handelt es sich hierbei um geschlossene PRs welche entweder ausversehen erstellt oder beispielsweise mit dem falschen Zielbranch erstellt werden. Um diese zusätzlich klassifizieren zu können, wurde eine zusätzliche Grösse \textit{XXL} mit Churn \textit{10'000} erstellt. 
+Während der manuellen Untersuchung für die \fref{forschungsfrage2} wurde festgestellt, dass einige PRs einen Churn über 10'000 aufweisen. Entweder handelt es sich hierbei um geschlossene PRs, welche entweder aus Versehen oder beispielsweise mit dem falschen Zielbranch erstellt wurden. Um diese klassifizieren zu können, wurde eine zusätzliche Grösse \textit{XXL} mit Churn \textit{10'000} erstellt. 
 
 Somit ergibt sich für die Analyse folgende Klassifizierung: 
 \begin{table}[ht]
@@ -584,7 +652,7 @@ XXL  & 10000+ \\
 \end{table}
 
 
-Abbildung \autoref{fig:anz-prs-vs-churn-size-tz-vz} zeigt die Pull Request der Voll- und Teilzeitklassen aufgeteilt nach ihrer Churn Grösse. So ist sichtbar, dass die Teilzeitklassen insegsamt mehr PRs erstellen. Dieser Trend ist in allen Grössenaktegorien sichtbar, ausser bei den \textit{XXL} PRs. Hier verfügen die Teilzeitklassen ingesamt über 2 PRs, während die Teilzeitklassen 5 PRs mit einem Churn über 10'000 verfügen. Bei den \textit{XXS} PRs verfügen die Teilzeitklassen über 1.5x so viele PRs.
+Die \autoref{fig:anz-prs-vs-churn-size-tz-vz} zeigt Pull Request der Voll- und Teilzeitklassen aufgeteilt nach ihrer Churn Grösse. So ist sichtbar, dass die Teilzeitklassen insgesamt mehr PRs erstellen. Dieser Trend ist in allen Grössenaktegorien sichtbar, ausser bei den \textit{XXL} PRs. Hier verfügen die Teilzeitklassen  über 2 PRs, während die Teilzeitklassen 5 PRs mit einem Churn über 10'000 verfügen. Bei den \textit{XXS} PRs verfügen die Teilzeitklassen über 1.5 mal so viele PRs.
 
 \begin{figure}[htbp]
     \includegraphics[width=\textwidth]{Figures/anz-prs-vs-churn-size-tz-vz.png}
@@ -592,11 +660,11 @@ Abbildung \autoref{fig:anz-prs-vs-churn-size-tz-vz} zeigt die Pull Request der V
     \label{fig:anz-prs-vs-churn-size-tz-vz}
 \end{figure}
 
-Eine Normalisierung der Daten, welche nun die durchschnittliche Anzahl PRs pro Repo zeigt, dass die Vollzeitklassen entweder gleich viel oder mehr PRs pro Kategorie erstellen. Die Teilzeitklassen erstellen jedoch fast gleich viele PRs in den Kategorien \textit{XS} und \textit{XL}, dort erstellen die Vollzeitklassen jeweils 1,12 und 1,18 so viele PRs. 
+Eine Normalisierung der Daten, die nun die durchschnittliche Anzahl der Pull Requests pro Repository wiedergibt, zeigt, dass die Vollzeitklassen entweder gleich viele oder mehr Pull Requests pro Kategorie erstellen. Die Teilzeitklassen erstellen jedoch fast gleich viele PRs in den Kategorien \textit{XS} und \textit{XL}, dort erstellen die Vollzeitklassen jeweils 1.12 und 1.18 so viele PRs. 
 
 \begin{figure}[htbp]
     \includegraphics[width=\textwidth]{Figures/avg-anz-prs-vs-churn-size-tz-vz-pro-repo.png}
-    \caption{Durchschnittliche Anzahl PullRequests vs. Churn Grösse pro Projekt(Teilzeit, Vollzeit)}
+    \caption{Durchschnittliche Anzahl PullRequests vs. Churn Grösse (Teilzeit, Vollzeit) pro Repository}
     \label{fig:anz-prs-vs-churn-size-tz-vz}
 \end{figure}
 
@@ -613,21 +681,21 @@ Die \autoref{fig:anz-avg-prs-vs-latency-tv-no-dev} zeigt kaum Differenzen zur \a
 \end{figure}
 \newpage
 
-Nach der Entfernung der Pull Requests, die von Dev-Branches auf Main- oder Master-Branches gemerged wurden, bleibt das Bild in Bezug auf die Churn-Grössen weitgehend unverändert.
+Ebenfalls bleibt das Bild, nach der Entfernung der Pull Requests von Dev-Branches, in Bezug auf die Churn-Grössen weitgehend unverändert.
 
-Abbildung \autoref{fig:anz-prs-vs-churn-size-tz-vz-ohne-dev} zeigt die durchschnittliche Anzahl von Pull Requests pro Repository, diesmal unter Einbeziehung der Dev-Branch-Merges. Es ist ersichtlich, dass die Vollzeitklassen in allen Churn-Kategorien tendenziell mehr Pull Requests pro Repository erstellen als die Teilzeitklassen. Besonders in den Kategorien \textit{M} (50–199 Änderungen) und \textit{L} (200–999 Änderungen) ist der Unterschied deutlich ausgeprägt. In den Kategorien \textit{XS} (0–9 Änderungen) und \textit{S} (10–49 Änderungen) ist der Abstand zwischen Teilzeit- und Vollzeitklassen zwar etwas geringer, aber immer noch zugunsten der Vollzeitklassen.
+Die \autoref{fig:anz-prs-vs-churn-size-tz-vz-ohne-dev} zeigt die durchschnittliche Anzahl von Pull Requests pro Repository, diesmal unter Einbeziehung der Dev-Branch-Merges. Es ist ersichtlich, dass die Vollzeitklassen in allen Churn-Kategorien tendenziell mehr Pull Requests pro Repository erstellen als die Teilzeitklassen. Besonders in den Kategorien \textit{M} (50–199 Änderungen) und \textit{L} (200–999 Änderungen) ist der Unterschied deutlich ausgeprägt. In den Kategorien \textit{XS} (0–9 Änderungen) und \textit{S} (10–49 Änderungen) ist der Abstand zwischen Teilzeit- und Vollzeitklassen zwar etwas geringer, aber immer noch zugunsten der Vollzeitklassen.
 
 \begin{figure}[htbp]
     \includegraphics[width=\textwidth]{Figures/avg-anz-prs-vs-churn-size-tz-vz-pro-repo-ohne-dev.png}
-    \caption{Durchschnittliche Anzahl PullRequests vs. Churn Grösse pro Projekt(Teilzeit, Vollzeit) ohne Dev zu Main}
+    \caption{Durchschnittliche Anzahl Pull Requests vs. Churn Grösse (Teilzeit, Vollzeit) ohne Dev zu Main pro Repository}
     \label{fig:anz-prs-vs-churn-size-tz-vz-ohne-dev}
 \end{figure}
 
-Zum Vergleich zeigt die Abbildung \autoref{fig:anz-prs-vs-churn-size-tz-vz-nur-dev} nur die PRs, die von Dev-Branches auf Main-Branches gemerged wurden. Hier zeigt sich, dass diese Pull Requests insbesondere in den grösseren Churn-Kategorien (\textit{L} bis \textit{XXL}) auftreten. Auffällig ist zudem, dass in dieser Betrachtung die Vollzeitstudierenden mehr grosse Dev-Branch Pull Requests erzeugen als die Teilzeitstudierenden.
+Zum Vergleich zeigt die \autoref{fig:anz-prs-vs-churn-size-tz-vz-nur-dev} nur die PRs, die von Dev-Branches auf Main-Branches gemerged wurden. Hier zeigt sich, dass diese Pull Requests insbesondere in den grösseren Churn-Kategorien (\textit{L} bis \textit{XXL}) auftreten. Auffällig ist zudem, dass in dieser Betrachtung die Vollzeitstudierenden mehr grosse Dev-Branch Pull Requests erzeugen als die Teilzeitstudierenden.
 
 \begin{figure}[htbp]
     \includegraphics[width=\textwidth]{Figures/avg-anz-prs-vs-churn-size-tz-vz-pro-repo-nur-dev.png}
-    \caption{Durchschnittliche Anzahl PullRequests vs. Churn Grösse pro Projekt(Teilzeit, Vollzeit) nur Dev zu Main}
+    \caption{Durchschnittliche Anzahl Pull Requests vs. Churn Grösse (Teilzeit, Vollzeit) nur Dev zu Main pro Repository}
     \label{fig:anz-prs-vs-churn-size-tz-vz-nur-dev}
 \end{figure}
 
@@ -639,7 +707,7 @@ Zusammengefasst zeigt sich, dass die Herausfilterung der Dev-Branch-Merges einen
 % SECTION 6
 %----------------------------------------------------------------------------------------
 \section{Korrelationsanalyse verschiedener Metriken}
-In diesem Kapitel wird die \fref{forschungsfrage4} untersucht. Dazu werden zunächst die Metriken der Racetrack-Projekte analysiert und eine Korrelationsmatrix erstellt und anschliessend mit den OpenSource-Projekten der GitHub-Organisationen Ubique Innovation AG, Schweizerische Bundesbahnen (SBB) und Zalando SE verglichen.
+In diesem Kapitel wird die \fref{forschungsfrage6} untersucht. Dazu werden zunächst die Metriken der Racetrack-Projekte analysiert und eine Korrelationsmatrix erstellt und anschliessend mit den OpenSource-Projekten der GitHub-Organisationen Ubique Innovation AG, Schweizerische Bundesbahnen (SBB) und Zalando SE verglichen.
 \subsection{Korrelationsanalyse der Racetrack Repositories}
 Die Korrelationsmatrix der Racetrack-Projekte ist in Abbildung \autoref{fig:korrelationsmatrix-racetrack} dargestellt. Auffällig ist die starke positive Korrelationen zwischen \textit{Churn} und \textit{Commits} (0.62) sowie zwischen \textit{Churn} und \textit{Changed Files Count} (0.70) bestehen. 
 
@@ -677,7 +745,7 @@ Die Korrelationsmatrix von Ubique (siehe Abbildung \autoref{fig:korrelationsmatr
 \end{figure}
 
 
-Die Differenzanalyse zwischen Racetrack und Ubique (siehe \autoref{fig:diff-korrelationsmatrix-racetrack-ubique}) zeigt, dass die Racetrack-Projekte stärkere positive Korrelationen zwischen \textit{Description Length} und \textit{Commits} (0.38) sowie \textit{Description Length} und \textit{Churn} (0.34) aufweisen. In diesen Kategorien wird die leicht negative Korrelation der Ubique Projekte neutralisiert.  
+Die Differenzanalyse zwischen Racetrack und Ubique (siehe \autoref{fig:diff-korrelationsmatrix-racetrack-ubique}) zeigt, dass die Racetrack-Projekte stärkere positive Korrelationen zwischen \textit{Description Length} und \textit{Commits} (0.38) sowie \textit{Description Length} und \textit{Churn} (0.34) aufweisen.
 
 \begin{figure}[htbp]
 \includegraphics[width=\textwidth]{Figures/diff-korrelationsmatrix-racetrack-ubique.png}
@@ -725,7 +793,7 @@ Die Differenzanalyse zwischen Racetrack und Zalando (Abbildung \autoref{fig:diff
 \newpage
 
 \subsection{Zusammenfassung}
-Zusammenfassend zeigen sich deutliche Unterschiede in den Repository-Metriken zwischen studentischen Racetrack-Projekten und professionellen GitHub-Organisationen. Während die starken positiven Zusammenhänge zwischen \textit{Churn}, \textit{Commits} und \textit{Changed Files Count} in allen Organisationen präsent sind, unterscheiden sich insbesondere die Korrelationen rund um \textit{Description Length}. Bei Racetrack-Projekten sind ausführlichere Beschreibungen oft mit umfangreicheren Änderungen und mehr Commits verbunden, während professionelle Organisationen tendenziell kürzere Beschreibungen bevorzugen, insbesondere bei grösseren Änderungen.
+Zusammenfassend zeigen sich deutliche Unterschiede in den Repository-Metriken zwischen studentischen Racetrack-Projekten und professionellen GitHub-Organisationen. Während die starken positiven Zusammenhänge zwischen \textit{Churn}, \textit{Commits} und \textit{Changed Files Count} in allen Projekten präsent sind, unterscheiden sich insbesondere die Korrelationen rund um \textit{Description Length}. Bei Racetrack-Projekten sind ausführlichere Beschreibungen oft mit umfangreicheren Änderungen und mehr Commits verbunden, während professionelle Organisationen tendenziell kürzere Beschreibungen bevorzugen, insbesondere bei grösseren Änderungen.
 
 \newpage
 
