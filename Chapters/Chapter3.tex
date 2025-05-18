@@ -37,12 +37,23 @@ churn = additions + deletions
 
 Für die Metriken \textit{additions} und \textit{deletions} musste das Mining erweitert werden. Dazu wurde die bestehende Pull Request-Entität um die Metriken \textit{additions} und \textit{deletions} ergänzt und im Miner für Pull Request eine Abfrage via GraphQL erstellt. Die entsprechende GraphQL-Abfrage ist in der folgenden \autoref{fig:GraphQL-Abfrage-additions-deletions} ersichtlich. Dabei konnten die Metriken direkt von der Pull Request-Entität der entsprechenden GraphQL-Bibliothek (Octokit.GraphQL) bezogen werden.
 
-\begin{figure}[htbp]
-    \centering
-        \includegraphics[width=\textwidth]{Figures/GraphQL-Abfrage-additions-deletions.png}
-    \caption{GraphQL-Abfrage additions und deletions}
-    \label{fig:GraphQL-Abfrage-additions-deletions}
-\end{figure}
+\begin{lstlisting}[language=CSharp, caption={GraphQL-Abfrage additions und deletions}]
+var query = new Query()
+.Repository(repositoryData.Repository!.Project, repositoryData.Repository!.Owner)
+.PullRequests()
+.AllPages()
+    .Select(pr => new PullRequest
+    {
+        GitHubId = pr.Id.Value,
+        Number = pr.Number,
+        Title = pr.Title,
+        Description = pr.BodyText,
+        CreateTime = pr.CreatedAt,
+        UpdateTime = pr.UpdatedAt,
+        CloseTime = pr.ClosedAt,
+    ......
+}).Compile();
+\end{lstlisting}
 
 Um Anschliessend den Zusammenhang der Metriken analysieren zu können, wird die Rangkorrelation nach Spearman verwendet. Mittels der Rangkorrelation nach Spearman \parencite{noauthor_t-test_nodate} kann überprüft werden, ob ein Zusammenhang zwischen zwei Variablen besteht. Dabei verwendet Spearman die Rangplätze der Daten und nicht deren Wert. Der daraus resultierende Korrelationskoeffizient r\textsubscript{s} kann zwischen -1 und 1 liegen, wobei dieser bei eins ein starker positiver Zusammenhang und bei -1 ein starker negativer Zusammenhang zwischen den zwei Variablen besteht. Wenn der Korrelationskoeffizient bei null liegt, besteht keine Korrelation. \parencite{noauthor_t-test_nodate}  \\
 Die Spearman-Formel \parencite{noauthor_t-test_nodate} stellt sich wie folgt zusammen: 
@@ -60,22 +71,33 @@ r_s = 1 - \frac{6 \sum d_i^2}{n(n^2 - 1)}
 Zur Beantwortung der \fref{forschungsfrage2} ist der Status des Pull Requests erforderlich. Es sei darauf hingewiesen, dass diese Metrik nicht unmittelbar von GitHub extrahiert werden kann, sondern dass diese ermittelt werden muss. Dazu werden die Metriken \textit{closeTime} und \textit{mergeTime} benötigt. Im ersten Schritt wird überprüft, ob der PR  eine \textit{closeTime} aufweist. Ist dies der Fall, wird im zweiten Schritt überprüft, ob ebenfalls eine \textit{mergeTime} vorhanden ist. Somit kann evaluiert werden, ob der Pull Request geschlossen wurde und ob dies durch ein Merging erfolgte. Diese Überprüfung ist bereits in GitGauge implementiert und wird entsprechend zur Beantwortung der \fref{forschungsfrage2} verwendet. Im Falle der \fref{forschungsfrage2} interessieren die Pull Requests, die geschlossen, aber nicht gemergt wurden. Die Analyse der entsprechend geschlossenen PRs wurde manuell durchgeführt.
 
 Bei \fref{forschungsfrage3} wird zusätzlich zu den bereits erwähnten Metriken \textit{createTime} und \textit{closeTime} des Pull Requests die \textit{createTime} des Repositories benötigt, um berechnen zu können, zu welchem Zeitpunkt im Projekt ein Pull Request erstellt oder geschlossen wurde.  Dafür wurde im neuen Repository-Miner die \textit{createTime } mittels GraphQL-Abfrage extrahiert. Dies ist in der \autoref{fig:GraphQl-Abfrage-repo} ersichtlich. Zudem wurde die Repository-Entität um das Erstellungsdatum erweitert. 
-\begin{figure}[htbp]
-    \centering
-        \includegraphics[width=\textwidth]{Figures/GraphQl-Abfrage-repo.png}
-    \caption{GraphQL-Abfrage Repository}
-    \label{fig:GraphQl-Abfrage-repo}
-\end{figure}
+\begin{lstlisting}[language=CSharp, caption={GraphQL-Abfrage Repository}]
+var repositoryQuery = new Query()
+    .Repository(owner: repositoryData.Repository.Owner, name: repositoryData.Repository.Project)
+    .Select(repo => new
+    {
+        repo.Name,
+        repo.Owner.Login,
+        repo.Description,
+        repo.CreatedAt
+    }).Compile();
+\end{lstlisting}
 
 Zusätzlich wurden die Abgabetermine genutzt, um zu analysieren, wie weit ein Ereignis von der Abgabe entfernt erfolgte. Diese Termine wurden für die Projekte bereitgestellt und konnten nachgeschlagen werden.
 
 Zur Identifizierung von Mustern in den Pull Requests, die in der \fref{forschungsfrage4} thematisiert werden, erfolgt zusätzlich zu den Metriken \textit{createTime} und \textit{closeTime} eine Analyse der Commits auf den Pull Requests. Zu diesem Zweck wurde die Pull Request-Entität um die Commit-Entität erweitert. Die Commits beinhalten die Attribute \textit{Sha}, \textit{Message}, \textit{CommitTime} und \textit{Author}. Beim \textit{Sha} handelt es sich um eine Id, mit welcher der Commit eindeutig identifiziert werden kann. Die \textit{Message} beinhaltet die Commit-Message, die bei einem Commit angegeben werden muss. Mittels der \textit{CommitTime} ist ersichtlich, wann der Commit gemacht wurde, und der \textit{Author} zeigt, wer den Commit gemacht hat. Zusätzlich musste die GraphQL-Abfrage im Pull Request-Miner erweitert werden. Dies ist in \autoref{fig:GraphQl-Abfrage-commits} ersichtlich. Dafür wurden aus der Pull Request-Entität der GraphQL-Bibliothek die Commits ausgelesen und die entsprechenden Parameter abgefüllt.
-\begin{figure}[htbp]
-    \centering
-        \includegraphics[width=\textwidth]{Figures/GraphQL-Abfrage-commits.png}
-    \caption{GraphQL-Abfrage Pull Request Commits}
-    \label{fig:GraphQl-Abfrage-commits}
-\end{figure}
+\begin{lstlisting}[language=CSharp, caption={GraphQL-Abfrage Pull Request Commits}, label={lst:graphql-commits}]
+PullRequestCommits = pr.Commits(null, null, null, null)
+    .AllPages()
+    .Select(commit => new PullRequestCommitEntity()
+    {
+        PullRequestGraphqlId = commit.PullRequest.Id.Value,
+        GitHubId = commit.Commit.Oid,
+        Sha = commit.Commit.Oid,
+        Message = commit.Commit.Message,
+        CommitTime = commit.Commit.CommittedDate,
+    }).ToList(),
+\end{lstlisting}
 
 \newpage
 Die bereits aufgeführten Erweiterungen genügten für die \fref{forschungsfrage5}, sodass keine zusätzlichen Änderungen im Mining von GitGauge vorgenommen werden mussten. Jedoch mussten bei der Analyse die Klassen auf Vollzeit und Teilzeit aufgeteilt werden. In den Projektmodulen wird für jede Klasse jeweils eine GitHub-Organisation erstellt. Anhand der Namen dieser Organisationen kann erkannt werden, ob es sich um eine Teilzeit- oder Vollzeitklasse handelt, da der Klassenname darin vorkommt. Die Klassennamen für Informatik setzen sich wie folgt zusammen: 
@@ -118,7 +140,68 @@ Die Metrik \textbf{Contributors} misst die Anzahl der verschiedenen Entwickler, 
 \section{Architektur}
 
 \section{Erkennung Squashing}
+Mit \textit{Git Squashing} können mehrere Commits zu einem Commit zusammengeführt werden, bevor diese in den Zielbranch gemerged werden. Die theoretischen Grundlagen werden in \autoref{subsec:GitSquashing} erläutert. Die Implementierung des GitGauge-Features der Metrik der Commits pro Contributer (visualisiert als Timeline pro Wochentag sowie als Projektverlauf), bietet die Option gesqushte Feature Commits zu inkludieren (\textit{Include Squashed Feature Commits}). Ziel dieses Feature ist es, den Arbeitsverlauf von gesquashten Feature-Branches in die Grafik mit einzufliessen, da diese ebenfalls wichtig für die Gesamtbetrachtung sind. 
+Je nach Einstellung des Feature-Toggles wird die Datenverarbeitung wie folgt angepasst: \\
+\begin{itemize}
+    \item \textbf{Feature deaktiviert}: Es werden ausschliesslich die Commits aus dem Main-Branch berücksichtigt. Gesquashte Commits aus Feature-Branches werden als ein Commit analyisiert.
+    \item \textbf{Feature aktiviert}: Zwei Filter- und Einbeziehungsschritte werden vorgenommen:
+        \begin{itemize}
+        \item Gesquashte Commits auf dem Main-Branch werden ausgeschlossen.
+        \item Alle Commits aus den gesquashten Feature-Branches werden in die Analyse integriert.
+    \end{itemize}
+\end{itemize}
 
+Die nicht gesquashten Pull Requests müssen dabei nicht inkludiert werden, da die gesamte Feature-Branch Historie auf dem Main-Branch vorhanden ist. 
+
+Die folgende Logik zeigt die Verarbeitung gesquashter Commits in der Methode \textit{GetCommitsCountPerDate} der Klasse \textit{ContributorMetricsCalculator}. Diese Vorgehensweise wurde konsistent in allen Methoden hinzugefügt, welche zur Berechnung der Graphen erforderlich sind.
+
+\begin{lstlisting}[language=CSharp, caption={Verarbeitung gesquashter Commits in der Methode \textit{GetCommitsCountPerDate}}, label={lst:graphql-commits}]
+void processCommit(DateTime commitDate, ContributorDto contributor)
+{
+
+	if (!commitsCountPerDate.ContainsKey(commitDate))
+	{
+		commitsCountPerDate[commitDate] = new Dictionary<String, int>();
+	}
+
+	if (!commitsCountPerDate[commitDate].ContainsKey(contributor.Username))
+	{
+		commitsCountPerDate[commitDate][contributor.Username] = 0;
+	}
+
+	commitsCountPerDate[commitDate][contributor.Username]++;
+}
+foreach (Commit commit in commits)
+{
+	// skip squashed commits if feature commits should be included instead
+	if (queryParams.IncludeSquashedFeatureCommits && squashedCommits.Contains(commit.Sha))
+	{
+		continue;
+	}
+	processCommit(commit.CommitTime.Date, commit.Author!.ToContributorDto());
+}
+
+
+if (queryParams.IncludeSquashedFeatureCommits)
+{
+	foreach (PullRequest pr in pullRequests)
+	{
+		if (IsPullRequestToMainSquashed(pr, commits))
+		{
+			foreach (PullRequestCommitEntity commit in pr.PullRequestCommits)
+			{
+				processCommit(commit.CommitTime.Date, commit.Author!.ToContributorDto());;		
+			}	
+		}
+	}
+}
+
+return commitsCountPerDate;
+\end{lstlisting}
+
+Der in \autoref{lst:graphql-commits} dargestellte Code implementiert die Zählung von Commits pro Contributor und Datum, wobei optional auch gesquashte Feature-Commits berücksichtigt werden können. Die gezeigte Methode nutzt dazu die Hilfsmethode \textit{processCommit}, welche die Zählwerte in einer verschachtelten Dictionary-Struktur (\textit{commitsCountPerDate}) aggregiert.
+
+Zuerst werden alle Commits des Main-Branches prozessiert. Ist die Option \textit{IncludeSquashedFeatureCommits} aktiviert, so werden gesquashte Commits aus dem Main-Branch übersprungen. In einem zweiten Schritt werden alle Pull Request Commits, welche den Main- / Master-Branch als Target besitzen, in die Liste miteinbezogen. 
 
 \section{Vorstellung der GitHub-Organisationen}
 \label{sec:VorstellungGithubOrgs}

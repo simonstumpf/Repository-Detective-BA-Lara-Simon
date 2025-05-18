@@ -81,7 +81,7 @@
     basicstyle=\ttfamily\footnotesize,
     breakatwhitespace=false,
     breaklines=true,
-%    captionpos=b,
+    captionpos=b,
     keepspaces=true,
     numbers=left,
     numbersep=5pt,
@@ -165,3 +165,22 @@
 
 \newcommand{\fref}[1]{Forschungsfrage~\ref{#1}}
 \newcommand{\hyref}[1]{Hypothese~\ref{#1}}
+
+\lstdefinelanguage{CSharp}{
+  morekeywords={
+    abstract, as, base, bool, break, byte, case, catch, char, checked, class,
+    const, continue, decimal, default, delegate, do, double, else, enum,
+    event, explicit, extern, false, finally, fixed, float, for, foreach, goto,
+    if, implicit, in, int, interface, internal, is, lock, long, namespace,
+    new, null, object, operator, out, override, params, private, protected,
+    public, readonly, ref, return, sbyte, sealed, short, sizeof, stackalloc,
+    static, string, struct, switch, this, throw, true, try, typeof, uint,
+    ulong, unchecked, unsafe, ushort, using, virtual, void, volatile, while,
+    get, set, value
+  },
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+}
+\renewcommand{\lstlistingname}{Code}     

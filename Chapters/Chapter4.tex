@@ -824,16 +824,16 @@ Aufgrund der Analysen, die für die \fref{forschungsfrage4} durchgeführt wurden
 Ziel der Erweiterung ist es, die Arbeitszeiten der Teammitglieder anzuzeigen. Dies soll den Dozierenden dabei helfen, Probleme bei der Zusammenarbeit der Studierenden zu erkennen und zu analysieren, ob es beispielsweise ungleiche Arbeitsverteilungen oder Verzögerungen gibt.
 
 \subsection{Erkennung Arbeitszeiten}
-Die Arbeitszeiten der Teammitglieder werden anhand der Commits innerhalb der Projekte ermittelt. Dabei muss berücksichtigt werden, dass der Main Branch nicht alle Commits anzeigt. Features Branches können noch nicht gemerdet sein oder die Metrik kann durch \textit{squashed Commits} verfälscht werden. Um dennoch alle Commits inkludieren zu können, werden zusätzlich alle Pull Requests eingelesen und alle aufgelisteten Commits analysiert. 
+Die Arbeitszeiten der Teammitglieder werden anhand der Commits innerhalb der Projekte ermittelt. Dabei muss berücksichtigt werden, dass der Main Branch nicht alle Commits beinhaltet. Features Branches können noch nicht gemerdet sein oder die Metrik kann durch \textit{squashed Commits} verfälscht werden. Um dennoch alle Commits analysieren zu können, werden zusätzlich alle Pull Requests eingelesen, welche den Main- / Master-Branch als Target besitzen und alle aufgelisteten Commits in die Analyse integriert. 
 
 \subsection{Implementierung}
-Zusätzlich zum Mining der Pull Request Commit Daten wurden die Daten aggregiert und dem Frontend zur Verfügung gestellt. Dazu wurde ein neuer Endpoint erstellt, der die Daten sowohl datumsbasiert als auch wochentagsbasiert pro Benutzer ausgibt. Diese Daten wurden dann im Frontend aufbereitet und visualisiert. Dazu wurden mit Hilfe der MUI X Library zwei Grafiken erstellt. Diese zeigen, wie in der \autoref{fig:gitgauge_commits} ersichtlich, zum einen die Commits pro User basierend auf Datum und zum anderen die Commits pro User pro Wochentag. Mittels des Switches in der linken oberen Ecke können entweder nur die Commits auf dem Main-Branch angezeigt werden oder zusätzlich zu den Commits auf dem Main auch noch die Pull Request Commits, welche mit einem Squashed-Commit auf den Main-Branch gemerged wurden.
+Zusätzlich zum Mining der Pull Request Commit-Daten werden die Daten aggregiert und dem Frontend zur Verfügung gestellt. Dazu wurde ein neuer Endpoint erstellt, der die Daten sowohl datumsbasiert als auch wochentagsbasiert pro Benutzer (Contributor) ausgibt. Diese Daten werden dann im Frontend aufbereitet und visualisiert. Dazu wird mit Hilfe der MUI X Library zwei Grafiken erstellt. Diese zeigen, wie in \autoref{fig:gitgauge_commits} ersichtlich, zum einem die Commits pro User basierend auf Datum und zum anderen die Commits pro User pro Wochentag. Mittels des Switches in der linken oberen Ecke können entweder nur die Commits auf dem Main-Branch angezeigt werden oder zusätzlich zu den Commits auf dem Main auch noch die Pull Request Commits, welche mit einem Squashed-Commit auf den Main-Branch gemerged wurden.
 
-Das erste Diagramm wurde erstellt, um einen allgemeinen Überblick über die Arbeit der Teammitglieder zu erhalten und um zu sehen, ob alle Teammitglieder während der Projektlaufzeit kontinuierlich Beiträge leisten.
+Das erste Diagramm ermöglicht den Benutzern des Tools einen allgemeinen Überblick über die Arbeitsaktivitäten der Teammitglieder. Es erlaubt Rückschlüsse darauf, ob alle Mitglieder während der gesamten Projektlaufzeit kontinuierlich zum Projekt beigetragen haben.
 
-Die zweite Grafik dient dazu, zu sehen, wann in der Woche gearbeitet wird. Um zu sehen, ob die Gruppe ausgeglichen arbeitet oder ob es grosse Unterschiede gibt, die zu Reibungen in der Zusammenarbeit führen können.
+Die zweite Grafik zeigt, an welchen Wochentagen die Projektarbeit stattfindet. Dadurch lässt sich analysieren, ob die Arbeitsverteilung innerhalb des Teams ausgewogen ist oder ob signifikante Unterschiede bestehen, die potenziell zu Konflikten in der Zusammenarbeit führen können.
 \begin{figure}[htbp]
 \includegraphics[width=\textwidth]{Figures/gitgauge_commits.png}
-\caption{GitGauge Implementierung der Commit per User Darstellung }
+\caption{GitGauge Implementierung der \textit{Commit per User} Darstellung }
 \label{fig:gitgauge_commits}
 \end{figure}
