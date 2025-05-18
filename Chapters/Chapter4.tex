@@ -76,7 +76,11 @@ Um festzustellen, ob zwischen den Metriken \textit{latency} und \textit{churn} e
 
 Wie bereits erwähnt, weisen die Daten einen hohen Anteil an Ausreissern auf. Deshalb soll überprüft werden, ob die Metriken eine Korrelation besitzen, wenn diese Ausreisser herausgefiltert werden. In diesem Fall erhöht sich der Koeffizient auf 0.2, zeigt aber weiterhin keinen eindeutigen Zusammenhang zwischen den Metriken.
 
-\textbf{Zusammenfassend kann zur \fref{forschungsfrage1} festgestellt werden, dass die Metriken \textit{latency} und \textit{churn} keinen Zusammenhang aufweisen.}
+\subsection{Zusammenfassung}
+Die Analyse zeigt, dass die meisten Pull Requests sehr schnell bearbeitet werden, mit einer Median-Bearbeitungszeit von 0.6 Stunden. Der Churn verteilt sich ebenfalls sehr ungleich, die meisten PRs enthalten wenige Änderungen, einige jedoch sehr viele. Der Mittelwert der Anzahl Codeänderungen (Churn) liegt bei 278 Zeilen.
+
+Die Berechnung der Spearman-Rangkorrelation ergibt einen Wert von 0.17, was auf keinen signifikanten Zusammenhang zwischen dem Churn und der Latency hindeutet. Auch nach Herausfiltern extremer Ausreisser bleibt der Zusammenhang mit 0.20 sehr schwach.
+Zusammenfassend lässt sich zur \fref{forschungsfrage1} feststellen, dass die Metriken \textit{latency} und \textit{churn} keinen Zusammenhang aufweisen.
 
 %----------------------------------------------------------------------------------------
 % SECTION 2
@@ -116,7 +120,7 @@ In \autoref{fig:avg-anz-clsd-prs-nach-churn} ist die durchschnittliche Anzahl ge
 
 In der kleinsten Churn-Kategorie (0--100) ist die durchschnittliche Anzahl geschlossener PRs pro Repository mit 0.93 in beiden Gruppen nahezu gleich. Bei einem Churn von 100--200 liegt der Durchschnittswert in Vollzeitklassen mit 0{,}48 deutlich höher als in Teilzeitklassen (0.30). Im Bereich 200--400 gleichen sich die Werte mit rund 0.45 wieder an.
 
-Für grössere Churn-Werte (400--800) sinkt die durchschnittliche Anzahl geschlossener PRs in beiden Gruppen deutlich, wobei Vollzeitklassen durchgehend höhere Werte aufweisen (z.\,B. bei 600--800: Teilzeit 0{,}02, Vollzeit 0{,}22). In den Kategorien oberhalb von Churn 800 sind fast keine PRs der Teilzeitklassen zu finden. Besonders bei einem Churn von über 10'000 treten nur noch bei Vollzeitklassen geschlossene PRs auf (Durchschnitt: 0{,}07), während dieser Wert bei Teilzeitklassen bei null liegt.
+Für grössere Churn-Werte (400--800) sinkt die durchschnittliche Anzahl geschlossener PRs in beiden Gruppen deutlich, wobei Vollzeitklassen durchgehend höhere Werte aufweisen (z.\,B. bei 600--800: Teilzeit 0.02, Vollzeit 0.22). In den Kategorien oberhalb von Churn 800 sind fast keine PRs der Teilzeitklassen zu finden. Besonders bei einem Churn von über 10'000 treten nur noch bei Vollzeitklassen geschlossene PRs auf (Durchschnitt: 0.07), während dieser Wert bei Teilzeitklassen bei null liegt.
 
 \begin{figure}[htbp]
     \includegraphics[width=\textwidth]{Figures/avg-anz-clsd-prs-nach-churn.png}
@@ -271,6 +275,12 @@ Die wichtigsten Beobachtungen sind folgende: In Teilzeitklassen konzentrieren si
 
 Zusammenfassend lässt sich festhalten, dass Teilzeitklassen tendenziell mehr kleine PRs ohne ausführliche Begründung schliessen, während Vollzeitklassen grössere PRs strukturierter ablehnen oder gezielt korrigieren. Auffällig ist zudem, dass viele geschlossene PRs, insbesondere in Teilzeitklassen, vermehrt gegen Ende des Projekts auftreten. Darüber hinaus zeigt sich, dass bei PRs mit hohen Churn-Werten Schliessungen häufiger auf Branch-Fehler oder redundante Implementierungen zurückzuführen sind.
 
+Zusammenfassend lässt sich feststellen, dass sich die Schliessgründe von Pull Requests nicht eindeutig klassifizieren lassen, da viele PRs ohne erkennbaren Grund geschlossen wurden, insbesondere bei kleineren Änderungen mit einem Churn unter 100. Dieses Verhalten tritt besonders häufig bei den Teilzeitklassen auf, zudem ist auffällig, dass in den Teilzeitklassen viele PRS  erst gegen Ende des Projekts, besonders am Abgabetag, geschlossen werden. Dies könnte darauf hindeuten, dass Reviews vor Ort und ohne Dokumentation durchgeführt werden.
+
+Im Gegensatz dazu zeigen Vollzeitklassen häufiger strukturierte Schliessgründe wie falsche Zielbranches oder abgelehnte Implementierungen bei den grossen Pull Requests. Insgesamt werden in den Vollzeitklassen durchschnittlich mehr PRs pro Projekt geschlossen, zudem sind Schliessungen hier gleichmässiger über den gesamten Projektverlauf verteilt.
+
+Diese Beobachtungen verdeutlichen, dass die Schliessungsgründe der Pull Requests systematisch ermittelt und klassifiziert werden konnten (\fref{forschungsfrage2}).
+
 %----------------------------------------------------------------------------------------
 % SECTION 3
 %----------------------------------------------------------------------------------------
@@ -411,6 +421,17 @@ Eine detaillierte Analyse der kurz geöffneten Pull Requests (kleiner als 30 Min
 \textbf{Die durchgeführten Analysen stellen einen wie in der \fref{forschungsfrage3} gestellten Zusammenhang fest. Die Review-Zeiten für Pull Requests nehmen gegen Ende der Projekte stark ab, insbesondere in den letzten Tagen der Projekte.}
 
 \newpage
+
+\subsection{Zusammenfassung}
+Die Analayse zeigt deutlich, dass die Bearbeitungszeit von Pull Requests im Verlauf der Projektlaufzeit stark abnimmt, besonders an den letzten drei Tagen vor Abgabe. Gleichzeitig nimmt der Churn bis zur letzten Projektwoche kontinuierlich zu.
+
+Über 40,\% aller Pull Requests werden in den letzten drei Tagen der Projekte erstellt und abgeschlossen, wobei am Tag der Abgabe die meisten Pull Requests erstellt werden. Dies zeigt sich auch an der erhöhten Anzahl von Pull Requests mit besonders kurzen Bearbeitungszeiten (unter 30 Minuten und unter einer Minute) am Abgabetag.
+
+Ein Vergleich zwischen den Vollzeit- und Teilzeitklassen zeigt, dass die Vollzeitklassen besonders in der ersten Projektwoche längere Bearbeitungszeiten besitzen als die Teilzeitklassen. Der Churn zeigt bei beiden Gruppen ein ähnliches Verhalten über den gesamten Projektverlauf.
+
+Zusätzlich wurde festgestellt, dass die Gesamtzahl der Pull Requests in der ersten Projektwoche am niedrigsten ist, danach kontinuierlich bis zur vierten Woche ansteigt und in der fünften Woche leicht abnimmt. Wenige Pull Requests wurden in einer sechsten Projektwoche erstellt, da nur noch wenige Projekte zu diesem Zeitpunkt aktiv waren.
+
+Zusammenfassend kann zur \fref{forschungsfrage3} festgestellt werden, dass ein klarer Zusammenhang zwischen dem Zeitpunkt im Projektverlauf und der Review-Dauer von Pull Requests besteht.
 
 %----------------------------------------------------------------------------------------
 % SECTION 4
@@ -553,8 +574,13 @@ Ein ähnliches Bild ergibt sich auch bei den Vollzeitklassen zwischen Pull Reque
     \label{fig:anz-commits-vollzeit-pro-wochentag}
 \end{figure}
 
-\textbf{Zusammenfassend lässt sich über die \fref{forschungsfrage4} festhalten, dass es klare Tendenzen gibt, dass die Studierenden vor allem an den Projekttagen arbeiten, wobei die Teilzeitstudierenden noch häufiger am Wochenende arbeiten und die Vollzeitstudierenden die Arbeit eher unter der Woche aufteilen.}
 
+\subsection{Zusammenfassung}
+Die Analyse zeigt deutlich, dass die Entwicklungsaktivität stark vom Unterrichtstag der Klassen beeinflusst wird. Sowohl bei den Pull Requests als auch bei den Commits zeigt sich eine Konzentration der Aktivitäten auf den jeweiligen Projekttag, wobei dieser Effekt bei den Teilzeitklassen deutlicher ausgeprägt ist als bei den Vollzeitklassen.
+
+Bei den Teilzeitklassen wurden etwa 34\% aller Pull Requests und Commits am Unterrichtstag durchgeführt. Zudem ist bei diesen Klassen die Aktivität am Wochenende mit rund 28\% der Pull Requests und 26\% der Commits relativ hoch. Die Vollzeitklassen zeigen ein gleichmäßigeres Aktivitätsmuster über die Wochentage verteilt, mit ungefähr 24\% der Pull Requests und Commits am Projekttag und einer niedrigeren Wochenendaktivität von etwa 17\% (Pull Requests) bzw. 19\% (Commits).
+
+Zusammenfassend kann zur \fref{forschungsfrage4} festgestellt werden, dass klare Patterns der Zusammenarbeit innerhalb der Teams bestehen, insbesondere hinsichtlich einer verstärkten Aktivität am jeweiligen Unterrichtstag sowie einer signifikant höheren Wochenendaktivität bei den Teilzeitklassen im Vergleich zu den Vollzeitklassen.
 %----------------------------------------------------------------------------------------
 % SECTION 5
 %----------------------------------------------------------------------------------------
@@ -656,7 +682,7 @@ Die \autoref{fig:anz-prs-vs-churn-size-tz-vz} zeigt Pull Request der Voll- und T
 
 \begin{figure}[htbp]
     \includegraphics[width=\textwidth]{Figures/anz-prs-vs-churn-size-tz-vz.png}
-    \caption{Anzahl PullRequests vs. Churn Grösse (Teilzeit, Vollzeit)}
+    \caption{Anzahl Pull Requests vs. Churn Grösse (Teilzeit, Vollzeit)}
     \label{fig:anz-prs-vs-churn-size-tz-vz}
 \end{figure}
 
@@ -668,7 +694,7 @@ Eine Normalisierung der Daten, die nun die durchschnittliche Anzahl der Pull Req
     \label{fig:anz-prs-vs-churn-size-tz-vz}
 \end{figure}
 
-Die für die \fref{forschungsfrage2} benötigte manuelle Untersuchung ergab, dass in einigen Klassen das in Kapitel \secref{sec:GitFlow} eingeführte Branching Konzept \textit{Git Flow} verwendet haben. Dies verfälscht eventuell die Daten, da es sich bei den manuell untersuchten Pull Requests um grosse PRs (Churn) handelt, welche keinen Review erfordern. Aus diesem Grund, werden die Analysen erneut durchgeführt jedoch mit herausgefilterten Dev Branches.
+Die für die \fref{forschungsfrage2} benötigte manuelle Untersuchung ergab, dass in einigen Klassen das in Kapitel \secref{sec:GitFlow} eingeführte Branching Konzept \textit{Git Flow} verwendet wurde. Dies verfälscht eventuell die Daten, da es sich bei den manuell untersuchten Pull Requests um grosse PRs (Churn) handelt, welche keinen Review erfordern. Aus diesem Grund werden die Analysen erneut durchgeführt, jedoch mit herausgefilterten Dev Branches.
 
 Da die Namen der Dev-Branches nicht einheitlich sind, werden alle Branches herausgefiltert, die das Wort Dev enthalten und auf den Main/Master Branch gemerged werden. Dabei ist zu beachten, dass GitHub den heutigen Haupt-Branch Main nennt, während dieser früher Master hiess. In der manuellen Analyse wurde festgestellt, dass einige Klassen aus dem Jahr 2021 immer noch solche Master Branches verwenden. Zusätzlich wurden alle herausgefilterten Pull Requests überprüft, um sicherzustellen, dass ausschliesslich Dev-Branches entfernt werden. Es wurden 75 Pull Requests von Dev-Branches zu Main-Branches ermittelt.
 
@@ -700,16 +726,14 @@ Zum Vergleich zeigt die \autoref{fig:anz-prs-vs-churn-size-tz-vz-nur-dev} nur di
 \end{figure}
 
 Zusammengefasst zeigt sich, dass die Herausfilterung der Dev-Branch-Merges einen Einfluss auf die Ergebnisse der Churn-Verteilung hat, insbesondere bei grossen Pull Requests. Insgesamt bestätigt sich jedoch, dass Vollzeitstudierende – unabhängig von der Herausfilterung – in den meisten Kategorien durchschnittlich mehr Pull Requests pro Repository erstellen als Teilzeitstudierende.
-
-\textbf{Anhand der vorliegenden Untersuchungen bezüglich der \fref{forschungsfrage5} }
-
 %----------------------------------------------------------------------------------------
 % SECTION 6
 %----------------------------------------------------------------------------------------
 \section{Korrelationsanalyse verschiedener Metriken}
+\label{sec:Korrelationsanalyse}
 In diesem Kapitel wird die \fref{forschungsfrage6} untersucht. Dazu werden zunächst die Metriken der Racetrack-Projekte analysiert und eine Korrelationsmatrix erstellt und anschliessend mit den OpenSource-Projekten der GitHub-Organisationen Ubique Innovation AG, Schweizerische Bundesbahnen (SBB) und Zalando SE verglichen.
 \subsection{Korrelationsanalyse der Racetrack Repositories}
-Die Korrelationsmatrix der Racetrack-Projekte ist in Abbildung \autoref{fig:korrelationsmatrix-racetrack} dargestellt. Auffällig ist die starke positive Korrelationen zwischen \textit{Churn} und \textit{Commits} (0.62) sowie zwischen \textit{Churn} und \textit{Changed Files Count} (0.70) bestehen. 
+Die Korrelationsmatrix der Racetrack-Projekte ist in \autoref{fig:korrelationsmatrix-racetrack} dargestellt. Auffällig ist die starke positive Korrelation, welche zwischen \textit{Churn} und \textit{Commits} (0.62) sowie zwischen \textit{Churn} und \textit{Changed Files Count} (0.70) besteht. 
 
 \begin{figure}[htbp]
     \includegraphics[width=\textwidth]{Figures/racetrack-korrelationsmatrix.png}
@@ -717,22 +741,10 @@ Die Korrelationsmatrix der Racetrack-Projekte ist in Abbildung \autoref{fig:korr
     \label{fig:korrelationsmatrix-racetrack}
 \end{figure}
 
-\subsection{Vorstellung der GitHub-Organisationen}
-Für den Vergleich wurden drei unterschiedliche GitHub Organisationen ausgewählt, die sich in Grösse (Anzahl Projekte) als auch in der jeweiligen Projektgrösse unterscheiden:
-
-\textit{Ubique Innovation AG} ist ein Schweizer Unternehmen mit Sitz in Zürich, das sich auf die Entwicklung von Softwarelösungen mit Fokus auf Mobile-App-Entwicklung spezialisiert hat. Im Jahr 2021 beschäftigte die Firma rund 50 Mitarbeiter \cite{noauthor_mathias_2021}. Zu den bekanntesten Projekten von Ubique gehören unter anderem die Mobile App der \textbf{Schweizerischen Bundesbahnen (SBB)}, die Kartenapplikation \textbf{Swisstopo} des Bundesamt für Landestopografie sowie die \textbf{Rega App}. \parencite{noauthor_apps_nodate}.
-
-todo: mit 8knot github org aluege (aktuell down) 
-https://metrix.chaoss.io/
-
-Die \textit{Schweizerische Bundesbahnen (SBB)} ist die staatliche Eisenbahngesellschaft der Schweiz \parencite{uvek_schweizerische_nodate}. Die SBB repräsentiert eine mittelgrosse Organisation im Bereich der Open Source Entwicklung mit 104 Projekten und 137 Followers auf Github. \parencite{noauthor_swiss_nodate} 
-todo: same 8knot analyse
-
-Zalando ist eine grosse Github Organisation, die für ihre umfangreichen Open-Source-Projekte im Bereich der E-Commerce- und Cloud-Computing-Technologien bekannt ist. So besitzt Zalando 50 Repositories mit 835 Follower. \parencite{noauthor_zalando_nodate}
 
 
 \subsection{Vergleich mit professionellen GitHub-Organisationen}
-Zur besseren Einordnung der Ergebnisse der Racetrack-Projekte erfolgt nun ein Vergleich mit drei professionellen GitHub Organisationen unterschiedlicher Grössenordnung.
+Zur besseren Einordnung der Ergebnisse der Racetrack-Projekte erfolgt nun ein Vergleich mit drei professionellen GitHub-Organisationen unterschiedlicher Grössenordnung. Die Auswahl der drei Github Organisationen \textit{Ubique Innovation AG}, \textit{Schweizerische Bundesbahnen (SBB)} und \textit{Zalando} wird in \autoref{sec:VorstellungGithubOrgs} erläutert. 
 
 
 \subsubsection{Ubique Innovation AG}
@@ -745,7 +757,7 @@ Die Korrelationsmatrix von Ubique (siehe Abbildung \autoref{fig:korrelationsmatr
 \end{figure}
 
 
-Die Differenzanalyse zwischen Racetrack und Ubique (siehe \autoref{fig:diff-korrelationsmatrix-racetrack-ubique}) zeigt, dass die Racetrack-Projekte stärkere positive Korrelationen zwischen \textit{Description Length} und \textit{Commits} (0.38) sowie \textit{Description Length} und \textit{Churn} (0.34) aufweisen.
+Um die Unterschiede zwischen den Racetrack-Repositories und den untersuchten OSS-Repositories besser zu erkennen, wurde eine Differenzanalyse durchgeführt. Hierbei wurden die Differenzen der einzelnen Korrelationen berechnet und in einer Heatmap dargestellt. Die Differenzanalyse zwischen Racetrack und Ubique (siehe \autoref{fig:diff-korrelationsmatrix-racetrack-ubique}) zeigt, dass die Racetrack-Projekte stärkere positive Korrelationen zwischen \textit{Description Length} und \textit{Commits} (0.38) sowie \textit{Description Length} und \textit{Churn} (0.34) aufweisen.
 
 \begin{figure}[htbp]
 \includegraphics[width=\textwidth]{Figures/diff-korrelationsmatrix-racetrack-ubique.png}
@@ -774,7 +786,7 @@ Die Differenzanalyse zwischen Racetrack und SBB (Abbildung \autoref{fig:diff-kor
 \newpage
 
 \subsubsection{Zalando SE}
-Die Korrelationsmatrix von Zalando (Abbildung \autoref{fig:korrelationsmatrix-zalando}) zeigt deutliche Unterschiede zu Racetrack, insbesondere eine starke negative Korrelation zwischen \textit{Churn} und \textit{Description Length} (-0.47), was darauf hindeutet, dass bei Zalando umfangreiche Änderungen oft weniger ausführlich beschrieben werden. Zudem zeigt sich eine positive Korrelation zwischen \textit{Churn} und \textit{Changed Files Count} (0.82), ähnlich wie bei den anderen Organisationen. Auch gibt es eine negative Korrelation zwischen \textit{Changed Files Count} und \textit{Description Length} (-0.41).
+Die Korrelationsmatrix von Zalando (\autoref{fig:korrelationsmatrix-zalando}) zeigt deutliche Unterschiede zu Racetrack, insbesondere eine starke negative Korrelation zwischen \textit{Churn} und \textit{Description Length} (-0.47), was darauf hindeutet, dass bei Zalando umfangreiche Änderungen oft weniger ausführlich beschrieben werden. Zudem zeigt sich eine positive Korrelation zwischen \textit{Churn} und \textit{Changed Files Count} (0.82), ähnlich wie bei den anderen Organisationen. Auch gibt es eine negative Korrelation zwischen \textit{Changed Files Count} und \textit{Description Length} (-0.41).
 
 \begin{figure}[htbp]
     \includegraphics[width=\textwidth]{Figures/zalando-korrelationsmatrix.png}
@@ -793,7 +805,12 @@ Die Differenzanalyse zwischen Racetrack und Zalando (Abbildung \autoref{fig:diff
 \newpage
 
 \subsection{Zusammenfassung}
-Zusammenfassend zeigen sich deutliche Unterschiede in den Repository-Metriken zwischen studentischen Racetrack-Projekten und professionellen GitHub-Organisationen. Während die starken positiven Zusammenhänge zwischen \textit{Churn}, \textit{Commits} und \textit{Changed Files Count} in allen Projekten präsent sind, unterscheiden sich insbesondere die Korrelationen rund um \textit{Description Length}. Bei Racetrack-Projekten sind ausführlichere Beschreibungen oft mit umfangreicheren Änderungen und mehr Commits verbunden, während professionelle Organisationen tendenziell kürzere Beschreibungen bevorzugen, insbesondere bei grösseren Änderungen.
+Die Analyse zeigt, dass starke positive Korrelationen zwischen den Metriken \textit{Churn}, \textit{Commits} und \textit{Changed Files Count} in den Racetrack-Projekten als auch in den professionellen GitHub-Organisationen vorhanden sind. Diese Korrelationen deuten darauf hin, dass umfangreiche Änderungen häufig mit vielen Commits und vielen veränderten Dateien einhergehen.
+
+Unterschiede zeigen sich insbesondere bei der Korrelation mit der Metrik \textit{Description Length}. In den Racetrack-Projekten stehen längere Pull Request-Beschreibungen in positivem Zusammenhang mit umfangreicheren Änderungen und mehr Commits. 
+In den professionellen Projekten hingegen, insbesondere bei Zalando, zeigt sich eine negative Korrelation zwischen \textit{Description Length} und \textit{Churn}. 
+
+Zusammenfassend lässt sich zur \fref{forschungsfrage6} feststellen, dass zwar einige Metriken in den Racetrack und  in professionellen Projekten ähnlich korrelieren, insbesondere im Bereich \textit{Churn}, \textit{Commits} und \textit{Changed Files Count}, jedoch insbesondere die Beschreibungstexte der Pull Requests unterschiedliche Zusammenhänge zu anderen Metriken aufweisen.
 
 \newpage
 
@@ -810,7 +827,7 @@ Ziel der Erweiterung ist es, die Arbeitszeiten der Teammitglieder anzuzeigen. Di
 Die Arbeitszeiten der Teammitglieder werden anhand der Commits innerhalb der Projekte ermittelt. Dabei muss berücksichtigt werden, dass der Main Branch nicht alle Commits anzeigt. Features Branches können noch nicht gemerdet sein oder die Metrik kann durch \textit{squashed Commits} verfälscht werden. Um dennoch alle Commits inkludieren zu können, werden zusätzlich alle Pull Requests eingelesen und alle aufgelisteten Commits analysiert. 
 
 \subsection{Implementierung}
-Zusätzlich zum Mining der Pull Request Commit Daten wurden die Daten aggregiert und dem Frontend zur Verfügung gestellt. Dazu wurde ein neuer Endpoint erstellt, der die Daten sowohl datumsbasiert als auch wochentagsbasiert pro Benutzer ausgibt. Diese Daten wurden dann im Frontend aufbereitet und visualisiert. Dazu wurden mit Hilfe der MUI X Library zwei Grafiken erstellt. Diese zeigen, wie in der \autoref{fig:gitgauge_commits} ersichtlich, zum einen die Commits pro User basierend auf Datum und zum anderen die Commits pro User pro Wochentag. Mittels des Switches in der linken oberen Ecke können entweder nur die Commits auf dem Main Branch angezeigt werden oder zusätzlich zu den Commits auf dem Main auch noch die Pull Request Commits.
+Zusätzlich zum Mining der Pull Request Commit Daten wurden die Daten aggregiert und dem Frontend zur Verfügung gestellt. Dazu wurde ein neuer Endpoint erstellt, der die Daten sowohl datumsbasiert als auch wochentagsbasiert pro Benutzer ausgibt. Diese Daten wurden dann im Frontend aufbereitet und visualisiert. Dazu wurden mit Hilfe der MUI X Library zwei Grafiken erstellt. Diese zeigen, wie in der \autoref{fig:gitgauge_commits} ersichtlich, zum einen die Commits pro User basierend auf Datum und zum anderen die Commits pro User pro Wochentag. Mittels des Switches in der linken oberen Ecke können entweder nur die Commits auf dem Main-Branch angezeigt werden oder zusätzlich zu den Commits auf dem Main auch noch die Pull Request Commits, welche mit einem Squashed-Commit auf den Main-Branch gemerged wurden.
 
 Das erste Diagramm wurde erstellt, um einen allgemeinen Überblick über die Arbeit der Teammitglieder zu erhalten und um zu sehen, ob alle Teammitglieder während der Projektlaufzeit kontinuierlich Beiträge leisten.
 

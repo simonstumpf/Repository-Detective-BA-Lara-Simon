@@ -16,22 +16,35 @@
 Dieses Kapitel beschreibt die Methoden und Vorgehensweisen, zur Beantwortung der Forschungsfragen. Ziel ist es, aussagekräftige Metriken zu extrahieren und Zusammenhänge festzustellen. 
 In diesem Kapitel werden die Metriken vorgestellt, die zur Beantwortung der Forschungsfragen notwendig sind. Es werden Definitionen und Berechnungen vorgestellt, um ein Verständnis für diese Metriken zu erlangen. Des Weiteren wird aufgezeigt, welche Metriken mittels Mining-Verfahren aus den Repositories extrahiert werden. Abschliessend wird die Datengrundlage vorgestellt, auf der die Analysen basieren.
 
-\section{Metriken und Berechnungen Churn vs Latency}
+\section{Erarbeitung der Forschungsfragen}
+\label{sec:ErarbeitungFF}
+
+\section{Vorgehensweise bei den Forschungsfragen}
 \label{sec:AnalyseChurnvsLatency}
-Wie in Kapitel \secref{sec:PullRequestDauer} beschrieben, finden sich in der Literatur unterschiedliche Aussagen zum Einfluss der Code-Grösse (Churn) auf die Dauer von Pull Requests (PR Latency). Während einige Studien einen Zusammenhang feststellen, bleiben andere Untersuchungen uneindeutig \parencite{hasan_understanding_2023}\parencite{kudrjavets_small_2022}.
+\label{sec:Metriken}
+Um die Forschungsfragen beantworten zu können, musste das Mining erweitert werden. Dafür wurden weitere GraphQL-Abfragen implementiert und ein neuer  Miner für Repositories erstellt und den Miner für Pull Requests erweitert. Bei den Minern handelt es sich um sogenannte Extractor-Services, welche ...
 
-
-Aus den im Kapitel \secref{sec:Metriken} Metriken werden die Metriken \textit{latency} und \textit{churn} berechnet. Die \textit{latency} wird anhand folgender Formel berechnet:
+Um die erste \fref{forschungsfrage1} beantworten zu können, müssen die Metriken \textit{Latency} und \textit{Churn} eingeführt werden. Die \textit{Latency} bestimmt die Zeit von wann der Pull Request geöffnet wurde bis zur Schliessung des Pull Requests, sei dies durch das Mergen des PRs oder durch manuelle Schliessung. Die \textit{Latency} wird anhand folgender Formel berechnet:
 \begin{equation}
 latency = closeTime - createTime
 \end{equation}
+Dabei handelt es sich bei den Metriken \textit{closeTime} und \textit{createTime} um zwei Metriken, die mittels Mining gewonnen werden können. Diese sind bereits im Issue-Miner von GitGauge umgesetzt und mussten nicht neu implementiert werden. Bei den Namen der Metriken handelt es sich um die Namen der Attribute, wie sie in Git Gauge genannt werden.
 
-Die Zusammensetzung des \textit{churn} ist wie folgt:
+Des Weiteren wird die Metrik \textit{Churn} gebraucht. Diese Metrik setzt sich aus der Anzahl geänderter Zeilen im Pull Request zusammen \parencite{gousios_exploratory_2014}. Folgend die Formel für \textit{Churn} (die Namen der Metriken werden von den Namen der Attribute in GitGauge abgeleitet): 
 \begin{equation}
 churn = additions + deletions
 \end{equation}
 
-Mittels der Rangkorrelation nach Spearman \parencite{noauthor_t-test_nodate} kann überprüft werden, ob ein Zusammenhang zwischen zwei Variablen besteht. Dabei verwendet Spearman die Rangplätze der Daten und nicht deren Wert. Der daraus resultierende Korrelationskoeffizient r\textsubscript{s} kann zwischen -1 und 1 liegen, wobei dieser bei eins ein starker positiver Zusammenhang und bei -1 ein starker negativer Zusammenhang zwischen den zwei Variablen besteht. Wenn der Korrelationskoeffizient bei null liegt, besteht keine Korrelation. \parencite{noauthor_t-test_nodate}  \\
+Für die Metriken \textit{additions} und \textit{deletions} musste das Mining erweitert werden. Dazu wurde die bestehende Pull Request-Entität um die Metriken \textit{additions} und \textit{deletions} ergänzt und im Miner für Pull Request eine Abfrage via GraphQL erstellt. Die entsprechende GraphQL-Abfrage ist in der folgenden \autoref{fig:GraphQL-Abfrage-additions-deletions} ersichtlich. Dabei konnten die Metriken direkt von der Pull Request-Entität der entsprechenden GraphQL-Bibliothek (Octokit.GraphQL) bezogen werden.
+
+\begin{figure}[htbp]
+    \centering
+        \includegraphics[width=\textwidth]{Figures/GraphQL-Abfrage-additions-deletions.png}
+    \caption{GraphQL-Abfrage additions und deletions}
+    \label{fig:GraphQL-Abfrage-additions-deletions}
+\end{figure}
+
+Um Anschliessend den Zusammenhang der Metriken analysieren zu können, wird die Rangkorrelation nach Spearman verwendet. Mittels der Rangkorrelation nach Spearman \parencite{noauthor_t-test_nodate} kann überprüft werden, ob ein Zusammenhang zwischen zwei Variablen besteht. Dabei verwendet Spearman die Rangplätze der Daten und nicht deren Wert. Der daraus resultierende Korrelationskoeffizient r\textsubscript{s} kann zwischen -1 und 1 liegen, wobei dieser bei eins ein starker positiver Zusammenhang und bei -1 ein starker negativer Zusammenhang zwischen den zwei Variablen besteht. Wenn der Korrelationskoeffizient bei null liegt, besteht keine Korrelation. \parencite{noauthor_t-test_nodate}  \\
 Die Spearman-Formel \parencite{noauthor_t-test_nodate} stellt sich wie folgt zusammen: 
 \begin{equation}
 r_s = 1 - \frac{6 \sum d_i^2}{n(n^2 - 1)}
@@ -43,6 +56,44 @@ r_s = 1 - \frac{6 \sum d_i^2}{n(n^2 - 1)}
   \item[$d_i$] Differenz der Ränge zwischen den zwei Variablen 
   \item[$n$] Anzahl der beobachteten Fälle
 \end{itemize}
+
+Zur Beantwortung der \fref{forschungsfrage2} ist der Status des Pull Requests erforderlich. Es sei darauf hingewiesen, dass diese Metrik nicht unmittelbar von GitHub extrahiert werden kann, sondern dass diese ermittelt werden muss. Dazu werden die Metriken \textit{closeTime} und \textit{mergeTime} benötigt. Im ersten Schritt wird überprüft, ob der PR  eine \textit{closeTime} aufweist. Ist dies der Fall, wird im zweiten Schritt überprüft, ob ebenfalls eine \textit{mergeTime} vorhanden ist. Somit kann evaluiert werden, ob der Pull Request geschlossen wurde und ob dies durch ein Merging erfolgte. Diese Überprüfung ist bereits in GitGauge implementiert und wird entsprechend zur Beantwortung der \fref{forschungsfrage2} verwendet. Im Falle der \fref{forschungsfrage2} interessieren die Pull Requests, die geschlossen, aber nicht gemergt wurden. Die Analyse der entsprechend geschlossenen PRs wurde manuell durchgeführt.
+
+Bei \fref{forschungsfrage3} wird zusätzlich zu den bereits erwähnten Metriken \textit{createTime} und \textit{closeTime} des Pull Requests die \textit{createTime} des Repositories benötigt, um berechnen zu können, zu welchem Zeitpunkt im Projekt ein Pull Request erstellt oder geschlossen wurde.  Dafür wurde im neuen Repository-Miner die \textit{createTime } mittels GraphQL-Abfrage extrahiert. Dies ist in der \autoref{fig:GraphQl-Abfrage-repo} ersichtlich. Zudem wurde die Repository-Entität um das Erstellungsdatum erweitert. 
+\begin{figure}[htbp]
+    \centering
+        \includegraphics[width=\textwidth]{Figures/GraphQl-Abfrage-repo.png}
+    \caption{GraphQL-Abfrage Repository}
+    \label{fig:GraphQl-Abfrage-repo}
+\end{figure}
+
+Zusätzlich wurden die Abgabetermine genutzt, um zu analysieren, wie weit ein Ereignis von der Abgabe entfernt erfolgte. Diese Termine wurden für die Projekte bereitgestellt und konnten nachgeschlagen werden.
+
+Zur Identifizierung von Mustern in den Pull Requests, die in der \fref{forschungsfrage4} thematisiert werden, erfolgt zusätzlich zu den Metriken \textit{createTime} und \textit{closeTime} eine Analyse der Commits auf den Pull Requests. Zu diesem Zweck wurde die Pull Request-Entität um die Commit-Entität erweitert. Die Commits beinhalten die Attribute \textit{Sha}, \textit{Message}, \textit{CommitTime} und \textit{Author}. Beim \textit{Sha} handelt es sich um eine Id, mit welcher der Commit eindeutig identifiziert werden kann. Die \textit{Message} beinhaltet die Commit-Message, die bei einem Commit angegeben werden muss. Mittels der \textit{CommitTime} ist ersichtlich, wann der Commit gemacht wurde, und der \textit{Author} zeigt, wer den Commit gemacht hat. Zusätzlich musste die GraphQL-Abfrage im Pull Request-Miner erweitert werden. Dies ist in \autoref{fig:GraphQl-Abfrage-commits} ersichtlich. Dafür wurden aus der Pull Request-Entität der GraphQL-Bibliothek die Commits ausgelesen und die entsprechenden Parameter abgefüllt.
+\begin{figure}[htbp]
+    \centering
+        \includegraphics[width=\textwidth]{Figures/GraphQL-Abfrage-commits.png}
+    \caption{GraphQL-Abfrage Pull Request Commits}
+    \label{fig:GraphQl-Abfrage-commits}
+\end{figure}
+
+\newpage
+Die bereits aufgeführten Erweiterungen genügten für die \fref{forschungsfrage5}, sodass keine zusätzlichen Änderungen im Mining von GitGauge vorgenommen werden mussten. Jedoch mussten bei der Analyse die Klassen auf Vollzeit und Teilzeit aufgeteilt werden. In den Projektmodulen wird für jede Klasse jeweils eine GitHub-Organisation erstellt. Anhand der Namen dieser Organisationen kann erkannt werden, ob es sich um eine Teilzeit- oder Vollzeitklasse handelt, da der Klassenname darin vorkommt. Die Klassennamen für Informatik setzen sich wie folgt zusammen: 
+\begin{equation}
+IT<yy><Klassenkuerzel><Ort>
+\end{equation}
+\noindent\textbf{Legende:}
+\begin{itemize}
+  \item \textit{yy}:  DIe letzten zwei Ziffern des Jahres bei Studiebegninn (z.B. 23)
+  \item\textit{Klassenkuerzel}: Bei Vollzeitklassen: a/b bei Teilzeit ta/tb
+  \item\textit{Ort}: WIN/ZH (Abkürzungen für Winterthur und Zürich)
+\end{itemize}
+
+Anhand des \textit{t}'s kann somit erkannt werden, ob eine Klasse Teilzeit oder Vollzeit ist.
+
+Für die \fref{forschungsfrage6} wurden sieben Metriken festgelegt, anhand derer die Korrelationsanalyse und der Vergleich mit OSS-Projekten stattfinden sollen. Die sieben Metriken sind: \textit{Latency}, \textit{Churn}, \textit{Commits}, \textit{Comments}, \textit{Description Length}, \textit{Changed Files Count} und \textit{Contributors}. Diese wurden, wie in Kapitel \secref{sec:ErarbeitungFF} erwähnt, durch Literaturrecherche festgelegt. Die entsprechenden Metriken werden im folgenden Abschnitt \secref{sec:MetrikenKorrelation} aufgezeigt und die entsprechenden OSS-Projekte werden im Kapitel \secref{sec:VorstellungGithubOrgs} vorgestellt. Für die Korrelationsanalyse musste das Mining erweitert werden. Zusätzlich zu den bereits genannten Erweiterungen wurden noch die Metriken \textit{ChangedFiles} und \textit{TotalCommits} extrahiert.
+
+Die Analysen der Forschungsfragen erfolgten via Jupyter Notebooks. Für die einzelnen Untersuchungen wurde jeweils ein neues Jupyter Notebook erstellt. Diese ermöglichen eine schnelle und unkomplizierte (graphische) Auswertung der Daten. \parencite{noauthor_repo-detectivesba-metric-analysis-scripts_nodate}
 
 
 \section{Auswahl Metriken für Korrelationsanalyse}
@@ -63,29 +114,27 @@ Neben der Anzahl geänderter Codezeilen gibt \textbf{Changed Files Count} an, wi
 
 Die Metrik \textbf{Contributors} misst die Anzahl der verschiedenen Entwickler, die an einem Pull Request beteiligt sind. Ein höherer Beitrag von verschiedenen Entwicklern könnte auf eine intensivere Zusammenarbeit hinweisen und könnte mit der Komplexität und der Dauer des Review-Prozesses korrelieren.
 
-\section{Benötigte Metriken}
-Um die Forschungsfragen beantworten zu können, werden folgende Metriken benötigt. Die Begriffe selbst stammen direkt aus dem GitGauge Backend und sind daher in ihrer englischen Form aufgeführt \parencite{noauthor_repo-detectivesgitgauge-extractor-service_nodate}:
-\label{sec:Metriken}
-\begin{itemize}
-    \item \textbf{Repository createTime:} Das Erstellungsdatum des Repository.
-    \item \textbf{Pull Request createTime:} Das Erstellungsdatum des PullRequests.
-    \item \textbf{Pull Request closeTime:} Die Schliesszeit(Closed / Merged) des Pull Requests.
-    \item \textbf{Pull Request Additions:} Anzahl der hinzugefügten Codezeilen.
-    \item \textbf{Pull Request Deletions:} Anzahl der gelöschten Codezeilen
-      \item \textbf{Pull Request Commits:} Alle Commits die auf den Pull Requests gemacht werden.
-     \begin{itemize}
-        \item \textbf{CommittedDate:} Das Datum an welchem der Commit gemacht wird.
-        \item \textbf{Author:} Die Person, welche den Commit erstellt hat.
-    \end{itemize}
-\end{itemize}
+    
+\section{Architektur}
 
-\section{Repository Mining}
-Damit alle Analysen durchgeführt werden konnten, musste das Mining der Projekte erweitert werden. So wurde die GraphQL Abfrage für die Pull Requests erweitert, um zusätzlich den Churn als auch die Commits auf den Pull Requests zu speichern. Die Abfrage der Daten wurde durch einen neuen PullRequest Statistik API Controller ermöglicht, welcher sämtliche Daten der einzelnen Pull Requests, wie etwa der Churn, die einzelnen Commits des Pull Requests als auch die Anzahl geänderter Dateien zurückgibt. 
+\section{Erkennung Squashing}
 
-Für die einzelnen Analysen wurde jeweils ein neues Jupyter Notebook erstellt. Dieser ermöglichen eine schnelle und unkomplizierte (graphische) Auswertung der Daten. \parencite{noauthor_repo-detectivesba-metric-analysis-scripts_nodate}
+
+\section{Vorstellung der GitHub-Organisationen}
+\label{sec:VorstellungGithubOrgs}
+Für den Vergleich der Korrelationsanalyse der Racetrack-Repositories werden drei GitHub-Organisationen ausgewählt. Diese unterscheiden sich in ihrer Unternehmensgrösse, der Anzahl ihrer Projekte, der Grösse der jeweiligen Projekte sowie im Anteil der Repositories, die nicht nur öffentlich zugänglich sind, sondern auch aktiv als OpenSource-Projekte mit Beiträgen externer Contributor weiterentwickelt werden.
+
+\textit{Ubique Innovation AG} ist ein Schweizer Unternehmen mit Sitz in Zürich, das sich auf die Entwicklung von Softwarelösungen mit Fokus auf Mobile-App-Entwicklung spezialisiert hat. Im Jahr 2021 beschäftigte die Firma rund 50 Mitarbeiter \cite{noauthor_mathias_2021}. Zu den bekanntesten Projekten von Ubique gehören unter anderem die Mobile App der \textbf{Schweizerischen Bundesbahnen (SBB)}, die Kartenapplikation \textbf{Swisstopo} des Bundesamt für Landestopografie sowie die \textbf{Rega App}. \parencite{noauthor_apps_nodate}.
+
+todo: mit 8knot github org aluege (aktuell down) 
+https://metrix.chaoss.io/
+
+Die \textit{Schweizerische Bundesbahnen (SBB)} ist die staatliche Eisenbahngesellschaft der Schweiz \parencite{uvek_verkehr_energie_und_kommunikation_eidgenossisches_departement_fur_umwelt_schweizerische_nodate}. Die SBB repräsentiert eine mittelgrosse Organisation im Bereich der Open Source Entwicklung mit 104 Projekten und 137 Followers auf Github. \parencite{noauthor_swiss_nodate} 
+todo: same 8knot analyse
+
+\textit{Zalando} ist eine grosse Github-Organisation, die für ihre umfangreichen Open-Source-Projekte im Bereich der E-Commerce- und Cloud-Computing-Technologien bekannt ist. So besitzt Zalando 50 Repositories mit 835 Followern. \parencite{noauthor_zalando_nodate}
+
 
 \section{Datengrundlagen}
 \label{sec:Datengrundlagen}
 Als Datengrundlage dienen die Repositories aus dem ersten Projekt Racetrack, welches im zweiten Projektmodul stattfindet. Dieses dauert etwa vier Wochen, wobei die genaue Anzahl der Tage pro Klasse variieren kann. Das Grundgerüst des Sourcecodes wird in der Aufgabenstellung mitgeliefert, was die Vergleichbarkeit der Projekte erhöht. Es werden 7 Teilzeit- und 5 Vollzeitklassen aus den Jahren 2021 - 2024 analysiert. Insgesamt werden 71 Racetrack Repositories untersucht. 
-
-
