@@ -22,9 +22,9 @@ In diesem Kapitel werden die Metriken vorgestellt, die zur Beantwortung der Fors
 \section{Vorgehensweise bei den Forschungsfragen}
 \label{sec:AnalyseChurnvsLatency}
 \label{sec:Metriken}
-Um die Forschungsfragen beantworten zu können, musste das Mining erweitert werden. Dafür wurden weitere GraphQL-Abfragen implementiert und ein neuer  Miner für Repositories erstellt und den Miner für Pull Requests erweitert. Bei den Minern handelt es sich um sogenannte Extractor-Services, welche ...
+Um die Forschungsfragen beantworten zu können, musste das Mining erweitert werden. Dafür wurden weitere GraphQL-Abfragen implementiert und ein neuer  Miner für Repositories erstellt sowie der Miner für Pull Requests erweitert. Bei den Minern handelt es sich um sogenannte Extractor-Services, welche die GraphQL-Abfragen implementieren und die Daten in den entsprechenden Entitäten abspeichern.
 
-Um die erste \fref{forschungsfrage1} beantworten zu können, müssen die Metriken \textit{Latency} und \textit{Churn} eingeführt werden. Die \textit{Latency} bestimmt die Zeit von wann der Pull Request geöffnet wurde bis zur Schliessung des Pull Requests, sei dies durch das Mergen des PRs oder durch manuelle Schliessung. Die \textit{Latency} wird anhand folgender Formel berechnet:
+Um die erste \fref{forschungsfrage1} beantworten zu können, müssen die Metriken \textit{Latency} und \textit{Churn} eingeführt werden. Die \textit{Latency} bestimmt die Zeitspanne zwischen der Eröffnung und der Schliessung eines Pull Requests, sei es durch das Mergen des PRs oder durch manuelle Schliessung. Die manuelle Schliessung bedeutet, dass der Pull Request entweder abgelehnt wurde oder durch den Autor des PRs erfolgte. Die \textit{Latency} wird anhand folgender Formel berechnet:
 \begin{equation}
 latency = closeTime - createTime
 \end{equation}
