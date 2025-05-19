@@ -136,8 +136,27 @@ Neben der Anzahl geänderter Codezeilen gibt \textbf{Changed Files Count} an, wi
 
 Die Metrik \textbf{Contributors} misst die Anzahl der verschiedenen Entwickler, die an einem Pull Request beteiligt sind. Ein höherer Beitrag von verschiedenen Entwicklern könnte auf eine intensivere Zusammenarbeit hinweisen und könnte mit der Komplexität und der Dauer des Review-Prozesses korrelieren.
 
-    
+\newpage  
 \section{Architektur}
+Die \autoref{fig:Vereinfachte_Architektur} zeigt eine vereinfachte Architektur der GitGauge-Applikation. Sie beschränkt sich auf die wesentlichen Komponenten, die im Rahmen der Forschungsarbeiten benötigt werden.  
+\begin{figure}[htbp]
+    \centering
+        \includegraphics[width=\textwidth]{Figures/Vereinfachte_Architektur.png}
+    \caption{Architektur}
+    \label{fig:Vereinfachte_Architektur}
+\end{figure}
+
+Im Folgenden werden die Komponenten beschrieben:
+\begin{itemize}
+    \item \textbf{GitHub}: GitHub dient als externe Datenquelle und stellt über die GraphQL-API Informationen zu Metriken wie Repositories, Commits und Pull Requests bereit.
+    \item \textbf{DB}: Die Datenbank (MS SQL Express) dient der Applikation als zentrales Speichermedium. In der Datenbank werden die extrahierten Metriken gespeichert. 
+    \item \textbf{Data Extractor (Miner)}: Die Data Extractor Services sind in C\# .NET Core geschrieben. In ihnen findet das Mining statt. Die Services erstellen die GraphQL-Abfragen und führen sie aus. Das Ergebnis der Abfragen wird anschliessend in die Datenbank geschrieben. 
+    \item \textbf{API Controller}: Auch die API Controller sind in C\# .NET Core implementiert. Sie aggregieren Daten aus der Datenbank und stellen diese über REST-Schnittstellen den konsumierenden Komponenten zur Verfügung. Darüber hinaus nehmen die Controller neue Mining-Anfragen entgegen und leiten diese an den Data Extractor weiter.
+    \item \textbf{Web Application}: Die Webanwendung wurde mit Next.js entwickelt. Sie dient GitGauge-Anwendern als Einstiegspunkt. Über sie können Analysen zu den Repositories dargestellt, neue Repositories erfasst und Aufträge fürs Mining erstellt werden. 
+    \item \textbf{Data Analyser}:  Der in Python implementierte Data Analyser dient der weiterführenden Auswertung und Interpretation der gesammelten GitHub-Daten. Über den API-Controller ruft er relevante Informationen ab, verarbeitet sie mithilfe von Algorithmen der Datenanalyse und liefert aggregierte oder statistische Ergebnisse zurück. Diese werden zusätzlich visuell aufbereitet.
+\end{itemize}
+
+
 
 \section{Erkennung Squashing}
 Mit \textit{Git Squashing} können mehrere Commits zu einem Commit zusammengeführt werden, bevor diese in den Zielbranch gemerged werden. Die theoretischen Grundlagen werden in \autoref{subsec:GitSquashing} erläutert. Die Implementierung des GitGauge-Features der Metrik der Commits pro Contributer (visualisiert als Timeline pro Wochentag sowie als Projektverlauf), bietet die Option gesqushte Feature Commits zu inkludieren (\textit{Include Squashed Feature Commits}). Ziel dieses Feature ist es, den Arbeitsverlauf von gesquashten Feature-Branches in die Grafik mit einzufliessen, da diese ebenfalls wichtig für die Gesamtbetrachtung sind. 
