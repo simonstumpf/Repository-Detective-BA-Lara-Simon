@@ -10,7 +10,7 @@
 
 \label{Chapter4} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
 
-In diesem Kapitel werden die in Kapitel \secref{sec:Zielsetzung} formulierten sechs Forschungsfragen untersucht. Dazu wurden die in Kapitel \secref{sec:Metriken} definierten Metriken mittels Mining-Verfahren auf den erwähnten 71 Racetrack-Repositories erhoben. Die Berechnungen der relevanten Metriken erfolgten nach der in Kapitel \secref{sec:AnalyseChurnvsLatency} beschriebenen Methodik. Darauf aufbauend wurden Zusammenhänge und Unterschiede im Pull-Request-Verhalten untersucht. Zusätzlich werden die erwähnten Metriken aus dem Kapitel \secref{sec:MetrikenKorrelation} mit drei Open-Source-Projekten verglichen und zum Abschluss wird die Erweiterung an der GitGauge-Applikation demonstriert. 
+In diesem Kapitel werden die in Kapitel \secref{sec:Zielsetzung} formulierten sechs Forschungsfragen untersucht. Dazu wurden die in Kapitel \secref{sec:Metriken} definierten Metriken mittels Mining-Verfahren auf den erwähnten 71 Racetrack-Repositories erhoben. Die Berechnungen der relevanten Metriken erfolgten nach der in Kapitel \secref{sec:AnalyseChurnvsLatency} beschriebenen Methodik. Darauf aufbauend wurden Zusammenhänge und Unterschiede im Pull-Request-Verhalten untersucht. Zusätzlich werden die erwähnten Metriken aus dem Kapitel \secref{sec:MetrikenKorrelation} mit drei OpenSource-Projekten verglichen und zum Abschluss wird die Erweiterung an der GitGauge-Applikation demonstriert. 
 
 
 %----------------------------------------------------------------------------------------
@@ -288,7 +288,7 @@ Diese Beobachtungen verdeutlichen, dass die Schliessungsgründe der Pull Request
 Als nächstes wurde die \fref{forschungsfrage3} "\textit{Besteht ein Zusammenhang zwischen dem Zeitpunkt im Projektverlauf und der Review-Dauer von Pull Requests?}" untersucht. Um zu ermitteln, ob die fortschreitende Projektzeit einen Einfluss auf das Bearbeiten der Pull Requests hat. Zusätzlich werden auch die \textit{churns} untersucht, um zu sehen, wie sich diese im Verlauf der Projektzeit verändern. 
 
 
-Ein signifikanter Faktor, der bei den Projektmodulen eine Rolle spielt, ist der fest definierte Abgabetermin. Dies unterscheidet diese Projekte von Open-Source-Projekten, die in der Literatur häufig untersucht werden. Um diese Untersuchung durchführen zu können, wird zusätzlich zu den oben genannten Metriken der Abgabetermin der einzelnen Klassen nachgeschlagen.
+Ein signifikanter Faktor, der bei den Projektmodulen eine Rolle spielt, ist der fest definierte Abgabetermin. Dies unterscheidet diese Projekte von OpenSource-Projekten, die in der Literatur häufig untersucht werden. Um diese Untersuchung durchführen zu können, wird zusätzlich zu den oben genannten Metriken der Abgabetermin der einzelnen Klassen nachgeschlagen.
 
 Zur initialen Analyse wurden die Projekte in die entsprechenden Projektwochen aufgeteilt und die Mediane der \textit{latencies} und \textit{churns} der entsprechenden Wochen ermittelt. Dies soll eine allgemeine Übersicht der Veränderungen der Metriken aufzeigen.
 
@@ -438,7 +438,7 @@ Zusammenfassend kann zur \fref{forschungsfrage3} festgestellt werden, dass ein k
 %----------------------------------------------------------------------------------------
 \section{Ergebnisse Entwicklungsaktivität}
 \label{sec:ErgebnisseEntwicklungsaktivtät}
-Empirische Studien zeigen, dass die Entwicklungsaktivität in Open-Source-Projekten auf Plattformen wie GitHub charakteristische Muster im Wochenverlauf aufweist. Insbesondere an Wochenenden ist die Aktivität signifikant geringer als unter der Woche. Innerhalb der Arbeitswoche fallen Montag und Freitag häufig als die Tage mit der geringsten Aktivität auf. Das Phänomen des Rückgangs der Entwicklungsaktivität wird oftmals auch \textit{Friday Effect} genannt. \parencite{claes_programmers_2018}
+Empirische Studien zeigen, dass die Entwicklungsaktivität in OpenSource-Projekten auf Plattformen wie GitHub charakteristische Muster im Wochenverlauf aufweist. Insbesondere an Wochenenden ist die Aktivität signifikant geringer als unter der Woche. Innerhalb der Arbeitswoche fallen Montag und Freitag häufig als die Tage mit der geringsten Aktivität auf. Das Phänomen des Rückgangs der Entwicklungsaktivität wird oftmals auch \textit{Friday Effect} genannt. \parencite{claes_programmers_2018}
 
 Dies soll nun im Zusammenhang mit der \fref{forschungsfrage4} "\textit{Lassen sich Patterns der Zusammenarbeit im Team erkennen,
 hinsichtlich der Tage, an denen die Studierenden an den Projekten arbeiten?}" anhand der Projektmodule analysiert werden. Um diese Analyse durchführen zu können, werden die Klassen einzeln nach ihren Arbeitstagen analysiert. Die Arbeitstage werden anhand der offenen und geschlossenen Pull Requests und der Commit-Daten definiert. Für dies wird das Mining um die im Kapitel \secref{sec:Metriken} erwähnte Metrik \textit{commit} ergänzt.
@@ -578,7 +578,7 @@ Ein ähnliches Bild ergibt sich auch bei den Vollzeitklassen zwischen Pull Reque
 \subsection{Zusammenfassung}
 Die Analyse zeigt deutlich, dass die Entwicklungsaktivität stark vom Unterrichtstag der Klassen beeinflusst wird. Sowohl bei den Pull Requests als auch bei den Commits zeigt sich eine Konzentration der Aktivitäten auf den jeweiligen Projekttag, wobei dieser Effekt bei den Teilzeitklassen deutlicher ausgeprägt ist als bei den Vollzeitklassen.
 
-Bei den Teilzeitklassen wurden etwa 34\% aller Pull Requests und Commits am Unterrichtstag durchgeführt. Zudem ist bei diesen Klassen die Aktivität am Wochenende mit rund 28\% der Pull Requests und 26\% der Commits relativ hoch. Die Vollzeitklassen zeigen ein gleichmäßigeres Aktivitätsmuster über die Wochentage verteilt, mit ungefähr 24\% der Pull Requests und Commits am Projekttag und einer niedrigeren Wochenendaktivität von etwa 17\% (Pull Requests) bzw. 19\% (Commits).
+Bei den Teilzeitklassen wurden etwa 34\% aller Pull Requests und Commits am Unterrichtstag durchgeführt. Zudem ist bei diesen Klassen die Aktivität am Wochenende mit rund 28\% der Pull Requests und 26\% der Commits relativ hoch. Die Vollzeitklassen zeigen ein gleichmässigeres Aktivitätsmuster über die Wochentage verteilt, mit ungefähr 24\% der Pull Requests und Commits am Projekttag und einer niedrigeren Wochenendaktivität von etwa 17\% (Pull Requests) bzw. 19\% (Commits).
 
 Zusammenfassend kann zur \fref{forschungsfrage4} festgestellt werden, dass klare Patterns der Zusammenarbeit innerhalb der Teams bestehen, insbesondere hinsichtlich einer verstärkten Aktivität am jeweiligen Unterrichtstag sowie einer signifikant höheren Wochenendaktivität bei den Teilzeitklassen im Vergleich zu den Vollzeitklassen.
 %----------------------------------------------------------------------------------------
