@@ -13,18 +13,18 @@
 %----------------------------------------------------------------------------------------
 % SECTION 1
 %----------------------------------------------------------------------------------------
-Dieses Kapitel beschreibt die Methoden und Vorgehensweisen, zur Beantwortung der Forschungsfragen. Ziel ist es, aussagekräftige Metriken zu extrahieren und Zusammenhänge festzustellen. 
-In diesem Kapitel werden die Metriken vorgestellt, die zur Beantwortung der Forschungsfragen notwendig sind. Es werden Definitionen und Berechnungen vorgestellt, um ein Verständnis für diese Metriken zu erlangen. Des Weiteren wird aufgezeigt, welche Metriken mittels Mining-Verfahren aus den Repositories extrahiert werden. Abschliessend wird die Datengrundlage vorgestellt, auf der die Analysen basieren.
+In diesem Kapitel werden die Methoden und Vorgehensweisen zur Beantwortung der Forschungsfragen beschrieben. Das Ziel besteht darin, aussagekräftige Metriken zu extrahieren und Zusammenhänge festzustellen.
+Zunächst wird die Erarbeitung der Forschungsfragen aufgezeigt, anschliessend die Vorgehensweise bei den Forschungsfragen. Dabei werden die Metriken vorgestellt, die untersucht werden sollen. Zusätzlich wird die für diese Arbeit wichtige Architektur aufgezeigt. Ebenso werden die Open-Source-GitHub-Projekte vorgestellt, die in Forschungsfrage 6 untersucht werden. Abschliessend wird die Datengrundlage präsentiert, auf der die Analysen basieren.
 
 \section{Erarbeitung der Forschungsfragen}
 \label{sec:ErarbeitungFF}
 Zur Festlegung der Forschungsfragen wurde eine intensive Literaturrecherche durchgeführt. Dabei wurden Fachliteratur und Studien berücksichtigt, um Metriken im Kontext von Pull Requests beziehungsweise Code Reviews zu ermitteln. Die Forschungsfragen wurden iterativ formuliert und überarbeitet.
 
-Die Literatur zeigte viele verschidedene Metriken auf die bereits untersucht wurden. Dabei 
+In der Literatur wurden zahlreiche Metriken identifiziert, die im Zusammenhang mit Pull Requests untersucht wurden. Besonders häufig finden sich dabei Analysen zur \textit{latency} sowie zur Akzeptanz von Pull Requests. Diese sind in \autoref{Chapter2} aufgeführt. Auffällig war, dass Studien teils widersprüchliche Ergebnisse hinsichtlich eines möglichen Zusammenhangs zwischen \textit{latency} und \textit{churn} (Anzahl geänderter Codezeilen) aufzeigen. Auf Basis dieses Befunds wurde die \fref{forschungsfrage1} abgeleitet, um diesen Zusammenhang zu untersuchen.
 
 In vielen Studien werden hauptsächlich Open-Source-Projekte untersucht. Diese unterscheiden sich jedoch, wie in Kapitel \secref{sec:Projektmodule} und \secref{sec:OpenSourceProjekte} erläutert, in wesentlichen Aspekten von studentischen Softwareprojekten – etwa hinsichtlich der Teamstruktur, Zielsetzung, Zeitplanung und des Erfahrungsniveaus der Beteiligten. Aus diesem Grund wurden zunächst die spezifischen Rahmenbedingungen von studentischen Projekten analysiert und darauf aufbauend relevante Metriken definiert.
 
-Aus dieser Analyse ergaben sich die Forschungsfragen 3 bis 5, die sich mit dem Einfluss des Projektverlaufs, dem Arbeitsverhalten der Studierenden sowie Unterschieden zwischen Teilzeit- und Vollzeitstudierenden befassen. Um darüber hinaus die Unterschiede zwischen studentischen Projekten und professionellen Open-Source-Projekten systematisch zu untersuchen, wurde Forschungsfrage 6 formuliert.
+Aus dieser Analyse ergaben sich die Forschungsfragen 3 bis 5, die sich mit dem Einfluss des Projektverlaufs, dem Arbeitsverhalten der Studierenden sowie Unterschieden zwischen Teilzeit- und Vollzeitstudierenden befassen. Zusätzlich wurde Forschungsfrage 2 formuliert, um zu untersuchen, ob sich die Schliessungsgründe von Pull Requests in studentischen Projekten identifizieren und klassifizieren lassen und ob sich die in der Literatur etablierten Metriken zur Akzeptanz auch auf diesen Kontext übertragen lassen. Um darüber hinaus die Unterschiede zwischen studentischen Projekten und professionellen Open-Source-Projekten systematisch zu untersuchen, wurde Forschungsfrage 6 formuliert.
 
 \section{Vorgehensweise bei den Forschungsfragen}
 \label{sec:AnalyseChurnvsLatency}
@@ -125,7 +125,7 @@ Für die \fref{forschungsfrage6} wurden sieben Metriken festgelegt, anhand derer
 Die Analysen der Forschungsfragen erfolgten via Jupyter Notebooks. Für die einzelnen Untersuchungen wurde jeweils ein neues Jupyter Notebook erstellt. Diese ermöglichen eine schnelle und unkomplizierte (graphische) Auswertung der Daten. \parencite{noauthor_repo-detectivesba-metric-analysis-scripts_nodate}
 
 
-\section{Auswahl Metriken für Korrelationsanalyse}
+\section{Metriken für die Korrelationsanalyse}
 \label{sec:MetrikenKorrelation}
 Für die Korrelationsanalyse der Metriken zur Klärung von \fref{forschungsfrage6} müssen geeignete Metriken ausgewählt werden, die verschiedene Aspekte der Pull-Request-Dynamik abbilden. Soziale Faktoren wie die Erfahrung der Contributor oder die Dauer ihrer Mitarbeit an einem Projekt können jedoch nicht berücksichtigt werden, da solche Daten im Kontext der untersuchten Studenten-Repositories nicht verfügbar sind. Basierend auf der Analyse diverser wissenschaftlicher Literatur wurden folgende sieben Metriken ausgewählt:
 

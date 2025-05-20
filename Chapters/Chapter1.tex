@@ -7,7 +7,16 @@
 
 
 \chapter{Einleitung} % Main chapter title
+In der modernen Softwareentwicklung sind Code Reviews ein wichtiger Bestandteil zur Sicherstellung der Codequalität und der Förderung der Teamzusammenarbeit. In der Praxis werden diese Reviews meist über Plattformen wie GitHub oder GitLab durchgeführt. Dabei dienen sogenannte Pull Requests (auch Merge Requests genannt) als Grundlage für die Reviewprozesse.
 
+Die systematische Analyse von Code-Review-Daten bietet wertvolle Einblicke in die Dynamik und Entwicklungsprozess eines Softwareprojekts. Eine automatisierte Auswertung dieser Daten kann frühzeitig auf technische Probleme oder Herausforderungen in der Zusammenarbeit hinweisen. An der Zürcher Hochschule für Angewandte Wissenschaften (ZHAW), wo Studierende in vier Projektmodulen diverse Softwareprojekte in unterschiedlichen Grössen umsetzen, erhalten Lehrpersonen durch solche Analysen ein Werkzeug, um die Teamarbeit objektiv zu beurteilen und potenzielle Schwierigkeiten frühzeitig zu erkennen.
+
+Zur Unterstützung dieser Analyse wurde an der ZHAW das Tool \textit{GitGauge} entwickelt. GitGauge ist ein Repository-Mining- und Analyse-Werkzeug mit einer Web-Benutzeroberfläche entwickelt mit \textit{Next.js} und einem Server-Backend in \textit{C\#} (\textit{.NET Core}).  \\
+Die Bachelorarbeit setzt auf diesem Tool auf und verfolgt das Ziel, bestehende Analysefunktionen weiterzuentwickeln sowie neue Metriken und Auswertungen zu erarbeiten, die speziell auf die Bedürfnisse der Projektmodule zugeschnitten sind.
+
+Zentraler Bestandteil der Arbeit ist die Beantwortung von 6 konkreten, eigens entwickelten Forschungsfragen. Untersucht wird unter anderem, ob ein Zusammenhang zwischen der Bearbeitungsdauer (Latency) eines Pull Requests und der Anzahl geänderter Codezeilen (Churn) besteht, wie sich die Review-Dauer im zeitlichen Verlauf eines Projekts verändert oder welche Unterschiede zwischen Vollzeit- und Teilzeitstudierenden hinsichtlich ihrer Nutzung von Pull Requests bestehen.
+
+Die Arbeit gliedert sich wie folgt: Kapitel 2 erläutert die theoretischen Grundlagen, darunter Git-spezifische Konzepte, eine Einführung in die Projektmodule und das Tool GitGauge. Kapitel 3 beschreibt die methodische Vorgehensweise zur Beantwortung der Forschungsfragen. In Kapitel 4 werden die Ergebnisse präsentiert und diskutiert, während Kapitel 5 die Resultate zusammenfasst und einen Ausblick auf zukünftige Weiterentwicklungen gibt.
 
 \label{Chapter1} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
 
