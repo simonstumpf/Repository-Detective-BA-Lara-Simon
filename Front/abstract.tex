@@ -14,6 +14,17 @@ The abstract is like a miniature version of the entire manuscript. Structure it 
 %----------------------------------------------------------------------------------------
 \begin{extraAbstract}
 \addchaptertocentry{\extraabstractname} % Add the abstract to the table of contents
+Diese Arbeit untersucht die Nutzung von Code Reviews beziehungsweise Pull Requests in studentischen Projekten an der Zürcher Hochschule für Angewandte Wissenschaften (ZHAW). Ziel dieser Arbeit ist es, Performancemetriken zu finden und  Analysealgorithmen zu entwickeln. 
 
-Die Zusammenfassung entspricht einer Miniaturversion des gesamten Dokuments. Gliedere sie ähnlich: Beginne mit dem Kontext und der Motivation für das Projekt, einer kurzen Beschreibung der Methode und der verfügbaren Daten, Ihren Ergebnissen und den Schlussfolgerungen. Beschränke dich auf eine Seite!    
+Die Arbeit baut auf einem an der ZHAW entwickelten Tool namens GitGauge auf. Diese Applikation betreibt Mining und Analyse von Repositories und stellt dies visuell dar.
+
+ Die Arbeit untersucht sechs Forschungsfragen, die sich mit dem Zusammenhang von Pull-Request-Latency und Churn (Anzahl Zeilenänderungen), den Gründen für das Schliessen von PRs, zeitlichen Faktoren im Projektverlauf, Arbeitsmustern von Studierenden, Unterschieden zwischen Teilzeit- und Vollzeitstudierenden sowie dem Vergleich von studentischen Projekten mit professionellen Open-Source-Repositories befassen.
+
+ Um diese Fragen zu beantworten, wurden die Daten von 71 GitHub-Repositories von Studierenden analysiert. Die Methodik umfasst intensive Literaturrecherche, die iterative Erarbeitung der Forschungsfragen und der Vorgehensweise zur Beantwortung dieser Fragen. Diese umfassen GraphQL-Abfragen, um die Daten zu minen, die Analyse der Daten sowie statistische Verfahren wie die Spearman-Korrelation. Zusätzlich wurde die Applikation GitGauge erweitert.
+ 
+
+ Die Ergebnisse zeigen, dass kein signifikanter Zusammenhang zwischen Latency und Churn besteht. Ebenfalls zeigen sie, dass die Schliessgründe der Pull Requests nicht eindeutig klassifizieren lassen. Des Weiteren wurde ein klarer Zusammenhang zwischen der Projektzeit und der Review-Dauer festgestellt. Diese nimmt im Verlauf des Projektes stetig ab. Zusätzlich zeigte sich ein klares Pattern bei den Arbeitstagen von den Studierenden. Diese zentrieren sich vor allem bei den Teilzeitstudierenden auf die Unterrichtstage, an denen die Projektmodule stattfinden. Zwischen den beiden Unterrichtsmodellen gibt es bei dem Churn und der Anzahl keine signifikanten Unterschiede, bei der Latency ist erkennbar, dass Teilzeitstudierende eine grössere Streuung in den Werten haben und viele sehr kurze Bearbeitungszeiten haben. Jedoch haben beide Modelle die meisten Latencies unter 30 Minuten.
+ Beim Vergleich von den Korrelationen der Metriken bei den Projektmodulen und den untersuchten Open-Source-Projekten (OSS) zeigten sich Übereinstimmigkeiten bei den Zusammenhängen von Churn, Anzahl Commits und Changed Files. Jedoch beim Zusammenhang zwischen Description Length und Latency zeigen sich Unterschiede. Bei den studentischen Projekten besteht ein positiver Zusammenhang, während bei einem der OSS-Projekte ein negativer Zusammenhang festgestellt wurde und bei den anderen kein klarer Zusammenhang erkennbar war. 
+ 
+
 \end{extraAbstract}
