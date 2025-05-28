@@ -10,11 +10,11 @@
 
 
 \section{Python Bibliotheken}
-Für die durchgeführten Analysen wurden mehrere Python-Bibliotheken verwendet, die die Datenmanipulation, Visualisierung und wissenschaftliche Berechnungen unterstützen. Diese Bibliotheken wurden aufgrund ihrer umfangreichen Funktionalitäten, Dokumentation und dem bereits vorhandenem Wissen der Autoren ausgewählt. 
+Für die durchgeführten Analysen wurden mehrere Python-Bibliotheken verwendet, die die Datenmanipulation, Visualisierung und wissenschaftliche Berechnungen unterstützen. Diese Bibliotheken wurden aufgrund ihrer umfangreichen Funktionalitäten, Dokumentation und des bereits vorhandenen Wissens der Autoren ausgewählt. 
 
 
 \subsection{Jupyter Notebooks}  
-Jupyter Notebooks sind ein Tool für interaktive Datenanalysen und die Visualisierung von Python Code, Ergebnissen und Text. Sie ermöglichen die Erstellung von \textit{Notebooks}, die eine Kombination aus ausführbarem Python-Code, erklärenden Markdown-Texten und grafischen Darstellungen enthalten. \parencite{noauthor_project_nodate} \\
+Jupyter Notebooks sind ein Tool für interaktive Datenanalysen und die Visualisierung von Python-Code, Ergebnissen und Text. Sie ermöglichen die Erstellung von \textit{Notebooks}, die eine Kombination aus ausführbarem Python-Code, erklärenden Markdown-Texten und grafischen Darstellungen enthalten. \parencite{noauthor_project_nodate} \\
 Im Rahmen dieses Projekts werden Jupyter Notebooks zur Organisation und Dokumentation der Datenanalyse eingesetzt. 
 
 \subsection{NumPy}
@@ -29,11 +29,16 @@ Matplotlib ist eine Bibliothek zur Erstellung von statistischen Visualisierungen
 
 \subsection{SciPy}
 SciPy ist eine Bibliothek, die auf \textit{NumPy} aufbaut und eine Vielzahl von Funktionen für wissenschaftliche Berechnungen bietet. In diesem Projekt wird insbesondere das Statistikmodul von SciPy verwendet, um verschiedene Metriken zu analysieren. \\
-Zur Untersuchung der PullRequests kommen statistische Methoden zum Einsatz, um Korrelationen zwischen unterschiedlichen Metriken wie \textit{Latency} und \textit{Churn} zu bestimmen. Dabei werden unter anderem der Pearson- und der Spearman-Korrelationskoeffizient genutzt, um sowohl lineare als auch monotone Zusammenhänge zwischen den Daten zu quantifizieren. \parencite{noauthor_scipy_nodate}
+Zur Untersuchung der Pull Requests kommen statistische Methoden zum Einsatz, um Korrelationen zwischen unterschiedlichen Metriken wie \textit{Latency} und \textit{Churn} zu bestimmen. Dabei werden unter anderem der Pearson- und der Spearman-Korre\-lations\-koeffizient genutzt, um sowohl lineare als auch monotone Zusammenhänge zwischen den Daten zu quantifizieren. \parencite{noauthor_scipy_nodate}
 
 \subsection{Seaborn}
 Seaborn ist eine auf \textit{Matplotlib} aufbauende Bibliothek, die für statistische Datenvisualisierungen entwickelt wurde. Sie bietet eine benutzerfreundliche API sowie erweiterte Funktionen für die Erstellung von Diagrammen wie Heatmaps, Boxplots und Violinplots, die insbesondere in der Analyse von Mustern und Verteilungen komplexer Datensätze nützlich sind.
 In diesem Projekt wird Seaborn primär für die Darstellung von Korrelationsmatrizen eingesetzt. \parencite{waskom_seaborn_2021}
+
+\section{GitHub GraphQL-API Octokit}
+Mithilfe der Octokit.GraphQL.NET-Bibliothek ist ein Zugriff auf die GraphQL-API von GitHub möglich. Diese ermöglicht es, die GraphQL-API aus einer C\#-Applikation aufzurufen. Die Bibliothek ist stark typisiert und nutzt C\#-Typen für eine einfache Integration.
+\parencite{noauthor_octokitoctokitgraphqlnet_2025}
+
 
 \section{Frontend Datenvisualisierung}
 Im Rahmen dieses Projekts wird die React-Komponentenbibliothek \textit{MUI X Library} verwendet, die anpassbare und interaktive UI-Elemente für Datenvisualisierungen bereitstellt. Insbesondere die \textit{MUI X Charts}, die ein Teil dieser Bibliothek sind, ermöglichen die einfache Erstellung von Diagrammen.
