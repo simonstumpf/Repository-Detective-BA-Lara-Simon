@@ -277,13 +277,10 @@ Die wichtigsten Beobachtungen sind folgende: In Teilzeitklassen konzentrieren si
 
 \subsection{Zusammenfassung}
 
-Zusammenfassend lässt sich festhalten, dass Teilzeitklassen tendenziell mehr kleine PRs ohne ausführliche Begründung schliessen, während Vollzeitklassen grössere PRs strukturierter ablehnen oder gezielt korrigieren. Auffällig ist zudem, dass viele geschlossene PRs, insbesondere in Teilzeitklassen, vermehrt gegen Ende des Projekts auftreten. Darüber hinaus zeigt sich, dass bei PRs mit hohen Churn-Werten Schliessungen häufiger auf Branch-Fehler oder redundante Implementierungen zurückzuführen sind.
+Zusammenfassend lässt sich festhalten, dass sich die Schliessgründe von Pull-Requests nicht eindeutig klassifizieren lassen. Viele PRs wurden ohne erkennbaren Grund geschlossen, insbesondere bei kleineren Änderungen mit einem Churn unter 100. Dieses Verhalten tritt besonders häufig bei den Teilzeitklassen auf. Auffällig ist dabei, dass diese oft ohne Begründung geschlossen werden. Zudem werden viele PRs der Teilzeitklassen erst gegen Ende des Projekts, besonders am Abgabetag, geschlossen.
 
-Zusammenfassend lässt sich feststellen, dass sich die Schliessgründe von Pull-Requests nicht eindeutig klassifizieren lassen, da viele PRs ohne erkennbaren Grund geschlossen wurden, insbesondere bei kleineren Änderungen mit einem Churn unter 100. Dieses Verhalten tritt besonders häufig bei den Teilzeitklassen auf, zudem ist auffällig, dass in den Teilzeitklassen viele PRs erst gegen Ende des Projekts, besonders am Abgabetag, geschlossen werden. Dies könnte darauf hindeuten, dass Reviews vor Ort und ohne Dokumentation durchgeführt werden.
+Im Gegensatz dazu zeigen Vollzeitklassen bei den großen Pull-Requests häufiger strukturierte Schliessgründe wie falsche Zielbranches oder abgelehnte Implementierungen. Sie korrigieren grössere PRs zudem häufiger gezielt, anstatt sie kommentarlos zu schliessen. Insgesamt werden in den Vollzeitklassen durchschnittlich mehr PRs pro Projekt geschlossen. Zudem sind Schliessungen hier gleichmässiger über den gesamten Projektverlauf verteilt. Darüber hinaus zeigt sich, dass bei PRs mit hohen Churn-Werten Schliessungen häufiger auf Branch-Fehler oder redundante Implementierungen zurückzuführen sind.
 
-Im Gegensatz dazu zeigen Vollzeitklassen häufiger strukturierte Schliessgründe wie falsche Zielbranches oder abgelehnte Implementierungen bei den grossen Pull-Requests. Insgesamt werden in den Vollzeitklassen durchschnittlich mehr PRs pro Projekt geschlossen, zudem sind Schliessungen hier gleichmässiger über den gesamten Projektverlauf verteilt.
-
-Diese Beobachtungen verdeutlichen, dass die Schliessungsgründe der Pull-Requests systematisch ermittelt und klassifiziert werden konnten (\fref{forschungsfrage2}).
 
 %----------------------------------------------------------------------------------------
 % SECTION 3
@@ -363,6 +360,7 @@ In der \autoref{fig:vergleich-latency-churn-projektzeit-t} ist zu erkennen, dass
     \caption{Vergleich von Latency und Churn innerhalb der Projektzeit Teilzeit}
     \label{fig:vergleich-latency-churn-projektzeit-t}
 \end{figure}
+\newpage
 Zusammenfassend lässt sich feststellen, dass die Latency im Laufe der Zeit abnimmt, während der Churn zunimmt. Es ist auch ersichtlich, dass Vollzeitstudierende vor allem in der ersten Woche einen deutlich höheren Wert bei der Bearbeitungszeit der Pull-Requests haben. Zu beachten ist jedoch, dass, wie bereits erwähnt, nicht alle Projekte gleich lange dauerten. Somit waren in den Wochen vier, fünf und sechs nicht mehr alle Projekte aktiv. Deshalb wurde zusätzlich ermittelt, wie die Pull-Request-Verteilung über die Projektwochen ist.
 
 \begin{table}[ht]
@@ -436,7 +434,7 @@ Die durchgeführten Analysen stellen einen wie in der \fref{forschungsfrage3} ge
 %----------------------------------------------------------------------------------------
 % SECTION 4
 %----------------------------------------------------------------------------------------
-\section{Ergebnisse Entwicklungsaktivität}
+\section{Ergebnisse Entwicklungs\-aktivi\-tät}
 \label{sec:ErgebnisseEntwicklungsaktivtät}
 Empirische Studien zeigen, dass die Entwicklungsaktivität in Open-Source-Projekten auf Plattformen wie GitHub charakteristische Muster im Wochenverlauf aufweist. Insbesondere an Wochenenden ist die Aktivität signifikant geringer als unter der Woche. Innerhalb der Arbeitswoche fallen Montag und Freitag häufig als die Tage mit der geringsten Aktivität auf. Das Phänomen des Rückgangs der Entwicklungsaktivität wird oftmals auch \textit{Friday Effect} genannt. \parencite{claes_programmers_2018}
 
@@ -586,7 +584,7 @@ Zusammenfassend kann zur \fref{forschungsfrage4} festgestellt werden, dass klare
 % SECTION 5
 %----------------------------------------------------------------------------------------
 \section{Unterschiede von Teilzeitstudierenden und Vollzeitstudierenden in der Pull-Request-Nutzung}
-Zur detaillierten Analyse der \fref{forschungsfrage5} "\textit{Welche Unterschiede zeigen sich in der Nutzung von Pull-Requests zwischen Teilzeit- und Vollzeitstudierenden hinsichtlich Anzahl, Umfang und Dauer?}" erfolgt eine Aufteilung der Repository-Daten auf Teilzeit- und Vollzeitklassen. Die Anzahl der Pull-Requests der Teilzeitklassen beläuft sich auf 1369 und jene der Vollzeitklassen auf 1066. Dabei werden durchschnittlich 31.8 Pull-Requests von den Teilzeitstudierenden erstellt und 39.5 von den Vollzeitstudierenden. In der folgenden Tabelle werden die wichtigsten Kennzahlen aufgezeigt.
+Zur detaillierten Analyse der \fref{forschungsfrage5} "\textit{Welche Unterschiede zeigen sich in der Nutzung von Pull-Requests zwischen Teilzeit- und Vollzeitstudierenden hinsichtlich Anzahl, Umfang und Dauer?}" erfolgt eine Aufteilung der Repository-Daten auf Teilzeit- und Vollzeitklassen. Die Anzahl der Pull-Requests der Teilzeitklassen beläuft sich auf 1369 und jene der Vollzeitklassen auf 1066. Dabei werden durchschnittlich 31.8 Pull-Requests von den Teilzeitstudierenden erstellt und 39.5 von den Vollzeitstudierenden. Die wichtigsten Kennzahlen sind in \autoref{tab:deskriptive-kennzahlen-teilzeit-vollzeit} aufgezeigt.
 
 \begin{table}[htbp]
     \centering
@@ -612,12 +610,14 @@ Zur detaillierten Analyse der \fref{forschungsfrage5} "\textit{Welche Unterschie
 \end{table}
 
 \newpage
+\subsection{Deskriptive Analyse der Metriken}
 Die \textit{latency} zeigt, dass Teilzeitstudierende im Durchschnitt mehr Zeit benötigen, um einen PR zu bearbeiten. Der Median zeigt jedoch, dass Teilzeitstudierende häufiger sehr kurze Pull-Request-Latencies haben. Dabei ist bei beiden die Bearbeitungszeit im Median deutlich kürzer. Ausserdem ist zu erkennen, dass die Teilzeitstudierenden eine grössere Streuung der Bearbeitungszeiten aufweisen. Sie haben also einige Pull-Requests, die deutlich länger dauern. Dies ist auch im Maximum zu sehen, welches bei den Teilzeitstudierenden bei 416 Stunden liegt, was 17 Tagen entspricht. Wobei die Vollzeitstudierenden ein Maximum von 265 Stunden haben, was 11 Tagen entspricht.
 
 Der \textit{churn} zeigt, dass Vollzeitstudierende sowohl im Durchschnitt als auch im Median mehr Zeilenänderungen pro Pull-Request vornehmen. Die Standardabweichung zeigt ebenfalls, dass Vollzeitstudierende grössere Schwankungen in der Anzahl der Zeilenänderungen haben. Im Maximum ist ersichtlich, dass beide sehr grosse PRs haben, wobei sich das Maximum der Vollzeitstudierenden nochmals um mehr als 4'000 Zeilen unterscheidet.
 
 Auch die Struktur der PRs unterscheidet sich leicht zwischen den Unterrichtsmodellen: Die durchschnittliche Anzahl bearbeiteter Dateien pro PR liegt insgesamt bei 5.66 Dateien. Teilzeitklassen weisen mit 5.85 im Schnitt mehr betroffene Dateien auf als Vollzeitklassen mit 5.42 Dateien. Ebenso zeigt sich bei der durchschnittlichen Anzahl Commits pro PR ein Unterschied: Insgesamt liegt der Durchschnitt bei 7.03 Commits pro PR, wobei Teilzeitklassen auf 6.50 und Vollzeitklassen auf 7.70 Commits pro PR kommen.
 
+\subsection{Verteilung der Latencies}
 Um die Verteilung der \textit{latencies} zu analysieren, werden die Daten in Intervalle eingeteilt. Die Festlegung dieser Intervalle erfolgte auf der Grundlage bereits analysierter Daten. Nachfolgend eine Liste dieser Intervalle und die Gründe, warum sie so definiert wurden: 
 
 \begin{itemize}
@@ -657,6 +657,7 @@ Die \autoref{fig:anz-avg-prs-vs-latency-tv} zeigt nun, dass die Teilzeitstudiere
 
 Insgesamt zeigen die Abbildungen \autoref{fig:anz-prs-vs-latency-tv} und \autoref{fig:anz-avg-prs-vs-latency-tv}, dass die meisten Pull-Requests schnell bearbeitet werden. Des Weiteren ist ersichtlich, dass die Teilzeitstudierenden eine stärkere Streuung aufweisen als die Vollzeitstudierenden, da sie die Vollzeitstudierenden im ersten und letzten Intervall übertreffen.
 
+\subsection{Verteilung der Churn-Grössen}
 Zur Klassifizierung der Churn-Grösse werden die von Doğan und Tüzün \parencite{dogan_towards_2022} vorgeschlagenen Grössenkategorien (XS, S, M, L, XL) verwendet. Diese Einteilung basiert auf empirischen Studien und industriellen Standards. \parencite{dogan_towards_2022}
 
 Während der manuellen Untersuchung für die \fref{forschungsfrage2} wurde festgestellt, dass einige PRs einen Churn über 10'000 aufweisen. Entweder handelt es sich hierbei um geschlossene PRs, welche entweder aus Versehen oder beispielsweise mit dem falschen Zielbranch erstellt wurden. Um diese klassifizieren zu können, wurde eine zusätzliche Grösse \textit{XXL} mit Churn \textit{10'000} erstellt. 
@@ -699,6 +700,7 @@ Eine Normalisierung der Daten, die nun die durchschnittliche Anzahl der Pull-Req
 \end{figure}
 
 \newpage
+\subsection{Einfluss des Git Flow Branching-Konzept}
 Die für die \fref{forschungsfrage2} benötigte manuelle Untersuchung ergab, dass in einigen Klassen das in Kapitel \secref{sec:GitFlow} eingeführte Branching-Konzept \textit{Git Flow} verwendet wurde. Dies verfälscht eventuell die Daten, da es sich bei den manuell untersuchten Pull-Requests um grosse PRs (Churn) handelt, welche keinen Review erfordern. Aus diesem Grund werden die Analysen erneut durchgeführt, jedoch mit herausgefilterten Dev-Branches.
 
 Da die Namen der Dev-Branches nicht einheitlich sind, werden alle Branches herausgefiltert, die das Wort Dev enthalten und auf den Main/Master Branch gemerged werden. Dabei ist zu beachten, dass GitHub den heutigen Haupt-Branch Main nennt, während dieser früher Master hiess. In der manuellen Analyse wurde festgestellt, dass einige Klassen aus dem Jahr 2021 immer noch solche Master-Branches verwenden. Zusätzlich wurden alle herausgefilterten Pull-Requests überprüft, um sicherzustellen, dass ausschliesslich Dev-Branches entfernt werden. Es wurden 75 Pull-Requests von Dev-Branches zu Main-Branches ermittelt.
@@ -714,7 +716,7 @@ Die \autoref{fig:anz-avg-prs-vs-latency-tv-no-dev} zeigt kaum Differenzen zur \a
 
 Ebenfalls bleibt das Bild, nach der Entfernung der Pull-Requests von Dev-Branches, in Bezug auf die Churn-Grössen weitgehend unverändert.
 
-Die \autoref{fig:anz-prs-vs-churn-size-tz-vz-ohne-dev} zeigt die durchschnittliche Anzahl von Pull-Requests pro Repository, diesmal unter Einbeziehung der Dev-Branch-Merges. Es ist ersichtlich, dass die Vollzeitklassen in allen Churn-Kategorien tendenziell mehr Pull-Requests pro Repository erstellen als die Teilzeitklassen. Besonders in den Kategorien \textit{M} (50–199 Änderungen) und \textit{L} (200–999 Änderungen) ist der Unterschied deutlich ausgeprägt. In den Kategorien \textit{XS} (0–9 Änderungen) und \textit{S} (10–49 Änderungen) ist der Abstand zwischen Teilzeit- und Vollzeitklassen zwar etwas geringer, aber immer noch zugunsten der Vollzeitklassen.
+Die \autoref{fig:anz-prs-vs-churn-size-tz-vz-ohne-dev} zeigt die durchschnittliche Anzahl von Pull-Requests pro Repository gruppiert nach ihrer Churn Grösse, ohne Dev-Branch-Merges. Es ist ersichtlich, dass die Vollzeitklassen in allen Churn-Kategorien tendenziell mehr Pull-Requests pro Repository erstellen als die Teilzeitklassen. Besonders in den Kategorien \textit{M} (50–199 Änderungen) und \textit{L} (200–999 Änderungen) ist der Unterschied deutlich ausgeprägt. In den Kategorien \textit{XS} (0–9 Änderungen) und \textit{S} (10–49 Änderungen) ist der Abstand zwischen Teilzeit- und Vollzeitklassen zwar etwas geringer, aber immer noch zugunsten der Vollzeitklassen.
 
 \begin{figure}[htbp]
     \includegraphics[width=\textwidth]{Figures/avg-anz-prs-vs-churn-size-tz-vz-pro-repo-ohne-dev.png}
@@ -731,7 +733,9 @@ Zum Vergleich zeigt die \autoref{fig:anz-prs-vs-churn-size-tz-vz-nur-dev} nur di
     \label{fig:anz-prs-vs-churn-size-tz-vz-nur-dev}
 \end{figure}
 
-Zusammengefasst zeigt sich, dass die Herausfilterung der Dev-Branch-Merges die Ergebnisse der Churn-Verteilung beeinflusst, insbesondere bei grossen Pull-Requests. Insgesamt bestätigt sich jedoch, dass Vollzeitstudierende – unabhängig von der Herausfilterung – in den meisten Kategorien durchschnittlich mehr Pull-Requests pro Repository erstellen als Teilzeitstudierende.
+\subsection{Zusammenfassung}
+
+Die Analyse zeigt Unterschiede zwischen Teilzeit- und Vollzeitstudierenden in der Pull-Request-Nutzung. Vollzeitstudierende erstellen im Durchschnitt mehr Pull-Requests, haben umfangreichere Änderungen und eine konsistentere Bearbeitungszeit. Teilzeitstudierende hingegen weisen stärkere Schwankungen bezüglich der Latencies auf. Auffällig häufig kommen dabei sehr kurze sowie sehr lange Bearbeitungszeiten vor. Vollzeitstudierende dominieren insbesondere bei grösseren Pull-Requests, während Teilzeitstudierende kleinere Änderungen häufiger schnell bearbeiten. Der Einfluss der Dev-Branch-Merges auf die Latency sowie die Churn-Verteilung ist dabei nur gering. 
 %----------------------------------------------------------------------------------------
 % SECTION 6
 %----------------------------------------------------------------------------------------

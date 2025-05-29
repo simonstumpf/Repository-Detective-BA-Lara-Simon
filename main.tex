@@ -22,7 +22,7 @@
 %----------------------------------------------------------------------------------------
 \documentclass[
     11pt,                      % Default font size
-    %oneside,                  % One-side binding. Default: Two-side binding / alternating margins
+    oneside,                  % One-side binding. Default: Two-side binding / alternating margins
     ngerman,                   % Language. Use ngerman for German (Neue Rechtschreibung)
     singlespacing,             % Spacing option: singlespacing, onehalfspacing or doublespacing
     %nolistspacing,            % Set spacing in lists to single
@@ -67,7 +67,7 @@
 % - Abstract / Zusammenfassung
 % - Meta information of PDF
 
-\thesistitle{Repository Detective}             % Thesis title,              command: \ttitle
+\thesistitle{Analyse von Code-Review-Metriken in Softwareprojekten}             % Thesis title,              command: \ttitle
 \thesistype{Bachelorarbeit}             % Type of thesis (e.g. Master Thesis) \ttype
 
 \thesisdate{\today}                     % Date of submission                  \tdate
@@ -221,12 +221,14 @@
 % from https://www.zhaw.ch/en/lsfm/study/studiweb/master-ls/masters-thesis/
 \include{Appendices/AppendixB}
 \include{Appendices/AppendixC}
+\include{Appendices/AppendixD}
 %\include{Appendices/DeclarationOfOriginalityZHAW} 
 
 
 %----------------------------------------------------------------------------------------
 % BIBLIOGRAPHY
 %----------------------------------------------------------------------------------------
+\sloppy 
 \printbibliography[heading=bibintoc]
 %\listoffigures    % Add list of figures
 %\listoftables     % Add list of tables

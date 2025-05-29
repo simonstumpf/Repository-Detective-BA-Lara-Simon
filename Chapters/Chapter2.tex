@@ -26,7 +26,7 @@ Die Nutzung eines Versionskontrollsystems (VCS - version control system) ist ein
 
 Mit der Nutzung einer verteilten Versionsverwaltung (DVCS - distributed version control system) wird kein zentrales Repository mehr verwendet. Jeder Entwickler verfügt über eine Kopie des Projektes inklusive des gesamten Projektverlaufs. Änderungen können lokal implementiert werden. Eine Verbindung zum Server wird nur für das Synchronisieren von Änderungen notwendig. \parencite{noauthor_informationen_2025} 
 
-Git ist heute das am meisten verbreitete DVCS-System. Es wurde von Linus Torvalds für die Entwicklung des Linux-Kernels entwickelt. \parencite{zack_git_2018} Git bezeichnet ein Projekt als ein Git-Repository, wobei der Verlauf als eine Reihe von Snapshots (Commits) modelliert wird. Diese Commits sind in unterschiedlichen Branches organisiert, welche die parallele Entwicklung ermöglichen. Die Verwendung von Branches ermöglicht die parallele Entwicklung von Bugs, neuen Features etc., ohne dass es zu gegenseitigen Beeinträchtigungen kommt. Diese unterschiedlichen Branches werden anschliessend gemerged. 
+Git ist heute das am meisten verbreitete DVCS-System. Es wurde von Linus Torvalds für die Entwicklung des Linux-Kernels entwickelt. \parencite{zack_git_2018} Git bezeichnet ein Projekt als ein Git-Repository, wobei der Verlauf als eine Reihe von Snapshots (Commits) modelliert wird. Diese Commits sind in unterschiedlichen Branches organisiert, welche die parallele Entwicklung ermöglichen. Die Verwendung von Branches ermöglicht die parallele Entwicklung von Bugs, neuen Features etc., ohne dass es zu gegenseitigen Beeinträchtigungen kommt. Diese unterschiedlichen Branches werden anschliessend gemerged. \parencite{noauthor_informationen_2025}   
 
 Mit dem Erfolg von Git entstanden Dienste und Anbieter, welche Git-Repositories online zur Verfügung stellen und zusätzliche Kollaborationstools anbieten. GitHub ist der bekannteste und auch am meisten verwendete Hosting-Dienst. Auf GitHub können Entwickler ihr Git-Repository hosten, Änderungen vorschlagen und diskutieren, Fehler (Issues) tracken. GitHub bietet eine Weboberfläche, welche für das Einsehen des Codes, aber auch für das Erstellen von Pull-Requests und Issues verwendet werden kann. Zusätzlich kann der CI/CD-Prozess direkt mittels GitHub-Actions abgebildet werden. \parencite{noauthor_informationen_2025}  
 
@@ -42,7 +42,7 @@ Durch das Konfigurieren von automatischen Checks mittels CI/CD können sowohl An
 Mit \textit{Git-Squashing} wird die Praxis bezeichnet, mehrere Commits zu einem Commit zusammenzuführen, bevor diese in den Zielbranch gemerged werden. Dies kann entweder manuell durch ein interaktives Rebase über die Git-Kommandozeile oder automatisch erfolgen, indem beim Mergen des Pull-Requests die Option \textit{Squash-Commits} ausgewählt wird. \parencite{noauthor_git_nodate} Je nach Plattform kann die Option zum automatischen Squashen von Commits beim Mergen des Pull-Requests unterschiedlich bezeichnet sein \parencite{noauthor_about_nodate} \parencite{noauthor_squash_nodate}. \\
 Daraus ergibt sich, dass alle Änderungen eines Feature-Branches im Zielbranch zusammengeführt werden, ohne die gesamte Historie zu übernehmen. Oftmals dient dies dazu, die Lesbarkeit des Projektverlaufs zu verbessern oder fehlerhafte Commits auszublenden \parencite{codoban_comparative_2015}. Darüber hinaus kann das Reverten von Commits erleichtert werden, da eine flache Git-Historie, die nur eine zusammengefasste Reihe von Commits enthält, beim Zurücksetzen von Änderungen Vorteile bietet \parencite{just_switching_2016}.
 
-Nachteil ist der Verlust von Informationen über die schrittweise Entwicklung eines Features. Die Commits der jeweiligen Feature-Entwicklung und deren Nachrichten gehen verloren, was die Transparenz des Entwicklungsprozesses einschränkt.
+Nachteil ist der Verlust von Informationen über die schrittweise Entwicklung eines Features. Die Commits der jeweiligen Feature-Entwicklung und deren Nachrichten gehen verloren, was die Transparenz des Entwicklungsprozesses einschränkt. \parencite{codoban_comparative_2015}
 
 \section{Pull-Request-Latency}
 \label{sec:PullRequestDauer}
@@ -161,11 +161,11 @@ GitGauge ist als Webanwendung mit einer Client-Server-Architektur entwickelt. Di
     \label{fig:container-diagram-gitgauge}
 \end{figure}
 
-Das \textit{Frontend} ist eine Next.js-Webapplikation. Die Benutzer können über die Oberfläche neue Repositories hinzufügen und anschliessend den Mining-Prozess starten. Der Mining-Prozess kann auch jederzeit wiederholt werden. Anschliessend werden alle verfügbaren Metriken dargestellt. Die Wahl fiel auf Next.js, da dies serverseitiges Rendering unterstützt. Dies verbessert die Performance und erleichtert das Fetching der Daten. \parencite{grand_joel_vt1_joelgrand_repository_2024}
+Das Frontend ist eine Next.js-Webapplikation. Die Benutzer können über die Oberfläche neue Repositories hinzufügen und anschliessend den Mining-Prozess starten. Der Mining-Prozess kann auch jederzeit wiederholt werden. Anschliessend werden alle verfügbaren Metriken dargestellt. Die Wahl fiel auf Next.js, da dies serverseitiges Rendering unterstützt. Dies verbessert die Performance und erleichtert das Fetching der Daten. \parencite{grand_joel_vt1_joelgrand_repository_2024}
 
-Das \textit{Backend} ist eine REST-API, welche in C\# mithilfe von \textit{.NET Core} implementiert wurde. Das Backend-Projekt ist in zwei Projekte unterteilt: dem Kernprojekt für die Hauptlogik und einem Data-Projekt, das als Object-Relational-Mapping (ORM) Schicht die Datenschemata definiert. Intern folgt das Backend einer geschichteten Architektur mit klar getrennten Verantwortlichkeiten. Von den Controller-Klassen (für die REST-API) über Services (Businesslogik) bis zur Datenzugriffsschicht (Data Store). \parencite{grand_joel_vt1_joelgrand_repository_2024}
+Das Backend ist eine REST-API, welche in C\# mithilfe von \textit{.NET Core} implementiert wurde. Das Backend-Projekt ist in zwei Projekte unterteilt: dem Kernprojekt für die Hauptlogik und einem Data-Projekt, das als Object-Relational-Mapping (ORM) Schicht die Datenschemata definiert. Intern folgt das Backend einer geschichteten Architektur mit klar getrennten Verantwortlichkeiten. Von den Controller-Klassen (für die REST-API) über Services (Businesslogik) bis zur Datenzugriffsschicht (Data Store). \parencite{grand_joel_vt1_joelgrand_repository_2024}
 
-Die \textit{Datenbank} speichert sämtliche Daten, welche über die Projekte gesammelt wurden. Als Datenbank wird ein MSSQL-Server 2019 eingesetzt. \parencite{grand_joel_vt1_joelgrand_repository_2024}
+Die Datenbank speichert sämtliche Daten, welche über die Projekte gesammelt wurden. Als Datenbank wird ein MSSQL-Server 2019 eingesetzt. \parencite{grand_joel_vt1_joelgrand_repository_2024}
 
 \subsection{Repository Mining}
 Das Mining der Daten wird in GitGauge mittels einer \textit{Mining-Pipeline} abgebildet. Wie in \autoref{fig:overview-mining-steps} ersichtlich, besteht das Minen aus folgenden Phasen: Datenextraktion, Datenverarbeitung und Datenanalyse. 
@@ -177,7 +177,7 @@ Die Analyse der Daten erfolgt jeweils bei Abfrage der Statistik-API-Endpunkte de
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{Figures/uebersicht-mining-prozess.png}
-    \caption{Übersicht Mining Prozess \parencite{grand_joel_vt1_joelgrand_repository_2024}}
+    \caption{Übersicht Mining-Prozess \parencite{grand_joel_vt1_joelgrand_repository_2024}}
     \label{fig:overview-mining-steps}
 \end{figure}
 
