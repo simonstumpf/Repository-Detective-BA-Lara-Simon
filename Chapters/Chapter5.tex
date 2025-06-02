@@ -15,39 +15,44 @@
 %----------------------------------------------------------------------------------------
 
 \section{Diskussion}
+Wie in der Aufgabenstellung beschrieben, wurden zunächst sechs Forschungsfragen formuliert, die verschiedene Aspekte von Pull-Requests und Teamverhalten untersuchen. Diese Fragen bildeten die Grundlage für die gesamte Analyse. Erst im Anschluss daran wurden im Rahmen einer Literaturrecherche geeignete Metriken identifiziert, mit denen die Forschungsfragen beantwortet werden konnten. Die benötigten Daten wurden anschliessend mithilfe des Tools GitGauge aus den Repositories extrahiert.
 
-Wie in der Aufgabenstellung beschrieben, wurden im Rahmen einer Literaturrecherche relevante Metriken identifiziert und aus den Repositories extrahiert. Auf dieser Grundlage wurden sechs Forschungsfragen definiert, die sich auf spezifische Metriken beziehen und deren Zusammenhänge untersuchen sollen. In diesem Kapitel werden die Forschungsfragen erneut aufgegriffen, eingeordnet und im Kontext der gewonnenen Erkenntnisse diskutiert.
+In diesem Kapitel werden die Forschungsfragen erneut aufgegriffen, eingeordnet und im Kontext der gewonnenen Erkenntnisse diskutiert.
+
 
 
 \subsection{Forschungsfrage 1: Zusammenhang Latency und Churn}
-Wie im Abschnitt \secref{sec:PullRequestDauer} erwähnt, besteht in der Fachliteratur keine Einigkeit über den Zusammenhang zwischen den beiden Metriken \textit{Churn} und \textit{Latency} \parencite{yu_wait_2015}\parencite{hasan_understanding_2023}\parencite{kudrjavets_small_2022}. \\
+Wie im Abschnitt \secref{sec:PullRequestDauer} erwähnt, besteht in der Fachliteratur keine Einigkeit über den Zusammenhang zwischen den beiden Metriken \textit{Churn} und \textit{Latency} \parencite{yu_wait_2015}\parencite{hasan_understanding_2023}\parencite{kudrjavets_small_2022}.
 Die Ergebnisse (\secref{sec:ResultatChurnLatency}) dieser Arbeit zeigen keinen Zusammenhang, weder mit noch ohne Ausreisser. Der Spearman-Koeffizient fällt hierfür zu gering aus. 
 Zusätzlich besteht auch kein Zusammenhang zwischen \textit{Latency} und \textit{Churn} in den Korrelationsanalysen von den überprüften OSS-Projekten in Kapitel \secref{sec:Korrelationsanalyse}. Dies zeigt, dass die nicht zusammenhängenden Metriken kein ausschliessliches Phänomen von den Racetrack-Repositories sind.
 
 Anhand unserer Ergebnisse wird deutlich, dass Pull-Requests ein komplexes Konstrukt sind und sich die \textit{Latencies} der Pull-Requests aus vielen verschiedenen Gegebenheiten und somit Metriken zusammensetzen.
 
 \subsection{Forschungsfrage 2: Schliessgründe der PRs}
-Die Untersuchung der Schliessgründe von Pull-Requests (\secref{sec:UntersuchungSchliessgründePRs}) zeigt, dass besonders häufig die Kategorie \textit{OG} (ohne erkennbaren Grund) auftritt, vor allem bei kleineren PRs mit einem Churn unter 100. Dies deutet darauf hin, dass kleinere Änderungen tendenziell weniger dokumentiert und begründet geschlossen werden. \\
+Die Analyse der Schliessgründe bezieht sich ausschliesslich auf die Projektmodule. Da die Untersuchung der Gründe manuell erfolgte und dies mit viel Aufwand verbunden war, lagen die Open-Source-Projekte ausserhalb des Scopes.
+
+Die Untersuchung der Schliessgründe von Pull-Requests (\secref{sec:UntersuchungSchliessgründePRs}) zeigt, dass besonders häufig die Kategorie \textit{OG} (ohne erkennbaren Grund) auftritt, vor allem bei kleineren PRs mit einem Churn unter 100. Dies deutet darauf hin, dass kleinere Änderungen tendenziell weniger dokumentiert und begründet geschlossen werden. 
 Bei den  Teilzeitklassen tritt dieses Verhalten deutlich häufiger auf. Eine mögliche Erklärung dafür ist Zeitmangel oder eine geringere Relevanz kleinerer Änderungen im Vergleich zu grösseren / wichtigeren Beiträgen. Ebenfalls zeigen die Analysen in \secref{sec:ErgebnisseEntwicklungsaktivtät}, dass die Pull-Requests oftmals an den Projektmodul-Unterrichtstagen geschlossen werden. Deshalb könnte es sein, dass die Reviews in Person und daher ohne Dokumentation durchgeführt werden. 
 
 Bei PRs mit einem grossem Churn zeigen sich in den Vollzeitklassen häufiger strukturierte Schliessgründe wie \textit{ZFB} (falscher Zielbranch) oder \textit{IA} (Implementierung
 abgelehnt). Bei den Teilzeitklassen sind es \textit{FPI} (Feature durch anderen
-PR implementiert) und \textit{DIV} (Divers). Bei beiden ist jedoch die Kategorie \textit{OG} (ohne erkennbaren Grund) am häufigsten vertreten. \\
+PR implementiert) und \textit{DIV} (Divers). Bei beiden ist jedoch die Kategorie \textit{OG} (ohne erkennbaren Grund) am häufigsten vertreten. 
 Die hohe Anzahl an PRs ohne erkennbaren Grund legt nahe, dass die Kommunikation über andere Kanäle (z.B. Microsoft Teams, Jira, WhatsApp) oder direkt vor Ort erfolgt. In solchen Fällen werden Pull-Requests möglicherweise mündlich besprochen und im Anschluss geschlossen, ohne dass ein schriftlicher Kommentar im PR selbst hinterlassen wird.
 
 Die normalisierten Daten zeigen, dass in Vollzeitklassen durchschnittlich mehr PRs pro Projekt geschlossen werden. Dies kann darauf hindeuten, dass der Review-Prozess dort konsequenter durchgeführt wird.
 
-Ein weiterer Unterschied zeigt sich im zeitlichen Verlauf der Schliessungen. In Teilzeitklassen treten viele geschlossene PRs erst in den letzten Tagen des Projekts auf, besonders am Tag der Abgabe. In den Vollzeitklassen sind die Schliessungen gleichmässiger über den gesamten Projektverlauf verteilt.  \\
+Ein weiterer Unterschied zeigt sich im zeitlichen Verlauf der Schliessungen. In Teilzeitklassen treten viele geschlossene PRs erst in den letzten Tagen des Projekts auf, besonders am Tag der Abgabe. In den Vollzeitklassen sind die Schliessungen gleichmässiger über den gesamten Projektverlauf verteilt.
 Diese Häufung zum Projektende in Teilzeitklassen könnte mehrere Ursachen besitzen: Zum einen steht Teilzeitstudierenden durch ihre beruflichen Verpflichtungen während des Semesters oftmals nur ein begrenztes Zeitfenster für die Projektarbeit zur Verfügung. Meistens bündelt sich dies auf die Unterrichtstage oder Abende. Des Weiteren ist die synchrone Abstimmung innerhalb der Teams durch die eingeschränkte Verfügbarkeit der Mitglieder erschwert, was zu einer Ansammlung offener PRs führen kann. Ebenfalls scheint der Fokus in Teilzeitklassen eher auf der termingerechten Abgabe als auf einem optimierten Entwicklungsprozess zu liegen, was zur Folge hat, dass viele PRs erst kurz vor Projektende finalisiert werden.
 
 Zusammenfassend lässt sich feststellen, dass sich die Schliessgründe von Pull-Re\-quests nicht zuverlässig klassifizieren lassen. Viele Pull-Requests werden ohne erkennbaren Grund geschlossen. Bei den klassifizierbaren PRs zeigen sich Unterschiede sowohl in der Verteilung der Gründe als auch in der zeitlichen Struktur. Vollzeitklassen schliessen PRs tendenziell strukturierter und über den gesamten Projektverlauf verteilt, während Teilzeitklassen häufiger spontane oder unkommentierte Schliessungen am Projektende aufweisen.
 
 
-\subsection{Forschungsfrage 3: Zusammenhang Projektverlauf auf Review-Dauer}
+\subsection{Forschungsfrage 3: Zusammenhang Projektverlauf und Review-Dauer}
 Die Ergebnisse der \fref{forschungsfrage3} zeigen deutlich, dass die \textit{latency} im Verlauf der Projekte abnimmt, obwohl gleichzeitig die \textit{Churn}-Werte steigen. Besonders an den letzten Tagen vor Projektende wurden viele Pull-Requests sehr schnell geschlossen, teilweise in einer Geschwindigkeit, die keine regulären und genauen Reviews mehr zulässt. 
 
-Dabei ist zu beachten, dass diese Projekte, wie bereits in Kapitel \secref{sec:Projektmodule} erwähnt, einen festen Abgabetermin haben und eine verspätete Abgabe Auswirkungen auf die Bewertung hat. Eine naheliegende Erklärung ist, dass Studierende in den letzten Tagen vor Abgabe versuchen, möglichst viele Funktionalitäten zu implementieren und bestehende Fehler zu beheben. Daraus ergibt sich eine grosse Anzahl an Pull-Requests, die unter Zeitdruck schnell gemergt werden. \\
-Dieser Zeitdruck kann zur Folge haben, dass Reviews nur oberflächlich oder gar nicht durchgeführt werden. In manchen Fällen erfolgt die Entwicklung möglicherweise im Pair-Programming (zwei Entwickler programmieren zusammen auf einem Notebook), wodurch ein separates Review entfällt, da der Code gemeinsam erstellt wurde.
+Dabei ist zu beachten, dass diese Projekte, wie bereits in Kapitel \secref{sec:Projektmodule} erwähnt, einen festen Abgabetermin haben und eine verspätete Abgabe Auswirkungen auf die Bewertung hat. Eine naheliegende Erklärung ist, dass Studierende in den letzten Tagen vor Abgabe versuchen, möglichst viele Funktionalitäten zu implementieren und bestehende Fehler zu beheben. Daraus ergibt sich eine grosse Anzahl an Pull-Requests, die unter Zeitdruck schnell gemerged werden. \\
+Dieser Zeitdruck kann zur Folge haben, dass Reviews nur oberflächlich oder gar nicht durchgeführt werden. Jedoch könnte es auch sein, dass die Entwicklung im Pair-Programming (zwei Entwickler programmieren zusammen auf einem Notebook) stattfindet. Diese Methodik wurde von unserem Projektteam in gewissen Fällen in den jeweiligen Modulen angewendet. Da der Code gemeinsam erstellt wird, kann ein separates Review entfallen, da die Überprüfung direkt bei der Implementierung erfolgt.
+
 
 \subsection{Forschungsfrage 4: Patterns der Zusammenarbeit hinsichtlich der Arbeitstage}
 Die Analyse der Arbeitstage von Pull-Requests (\secref{sec:ErgebnisseEntwicklungsaktivtät}) zeigt deutliche Unterschiede der Arbeitstage zwischen Vollzeit- und Teilzeitklassen. Bei der Betrachtung der Tage, an denen PRs erstellt und bearbeitet wurden, fällt auf, dass sich die Aktivitäten in den Teilzeitklassen stark auf spezifische Wochentage konzentrieren, insbesondere auf die Unterrichtstage. 

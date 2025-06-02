@@ -7,16 +7,21 @@
 
 
 \chapter{Einleitung} % Main chapter title
-In der modernen Softwareentwicklung sind Code-Reviews ein wichtiger Bestandteil zur Sicherstellung der Codequalität und der Förderung der Teamzusammenarbeit. In der Praxis werden diese Reviews meist über Plattformen wie GitHub oder GitLab durchgeführt. Dabei dienen sogenannte Pull-Requests (auch Merge-Requests genannt) als Grundlage für die Reviewprozesse.
+In der modernen Softwareentwicklung sind Code-Reviews ein essenzieller Bestandteil zur Sicherstellung der Codequalität sowie zur Förderung der Teamzusammenarbeit. In der Praxis erfolgen diese Reviews meist über Plattformen wie GitHub oder GitLab, wobei sogenannte Pull-Requests (auch Merge-Requests genannt) den strukturellen Rahmen für den Reviewprozess bilden.
 
-Die systematische Analyse von Code-Review-Daten bietet wertvolle Einblicke in die Dynamik und den Entwicklungsprozess eines Softwareprojekts. Eine automatisierte Auswertung dieser Daten kann frühzeitig auf technische Probleme oder Herausforderungen in der Zusammenarbeit hinweisen. An der Zürcher Hochschule für Angewandte Wissenschaften (ZHAW), wo Studierende in vier Projektmodulen diverse Softwareprojekte in unterschiedlichen Grössen umsetzen, erhalten Lehrpersonen durch solche Analysen ein Werkzeug, um die Teamarbeit objektiv zu beurteilen und potenzielle Schwierigkeiten frühzeitig zu erkennen.
+Ein zentrales Problem in softwarebasierten Teamprojekten ist die fehlende Transparenz über die Qualität der Zusammenarbeit und den Zustand des Entwicklungsprozesses. Zwar liefern Pull-Requests wertvolle Daten, doch deren systematische Auswertung bleibt oft ungenutzt. Diese Problematik bildet den Ausgangspunkt der vorliegenden Arbeit. Durch die Analyse von Code-Review-Daten lassen sich frühzeitig technische Probleme sowie Herausforderungen in der Teamkoordination erkennen.
 
-Zur Unterstützung dieser Analyse wurde an der ZHAW das Tool \textit{GitGauge} entwickelt. GitGauge ist ein Repository-Mining- und Analyse-Werkzeug mit einer Web-Benutzeroberfläche, entwickelt mit \textit{Next.js} und einem Server-Backend in \textit{C\#} (\textit{.NET Core}).  \\
-Die Bachelorarbeit setzt auf diesem Tool auf und verfolgt das Ziel, bestehende Analysefunktionen weiterzuentwickeln sowie neue Metriken und Auswertungen zu erarbeiten, die speziell auf die Bedürfnisse der Projektmodule zugeschnitten sind.
+An der Zürcher Hochschule für Angewandte Wissenschaften (ZHAW) führen Studierende im Rahmen von vier Projektmodulen Softwareprojekte in Teams durch. Lehrpersonen stehen dabei vor der Herausforderung, die Teamleistung objektiv zu beurteilen. Eine automatisierte Auswertung der Code-Review-Daten bietet ihnen ein wirkungsvolles Instrument, um potenzielle Probleme frühzeitig zu identifizieren und gezielt zu intervenieren.
 
-Zentraler Bestandteil der Arbeit ist die Beantwortung von 6 konkreten, eigens entwickelten Forschungsfragen. Untersucht wird unter anderem, ob ein Zusammenhang zwischen der Bearbeitungsdauer (Latency) eines Pull-Requests und der Anzahl geänderter Codezeilen (Churn) besteht, wie sich die Review-Dauer im zeitlichen Verlauf eines Projekts verändert oder welche Unterschiede zwischen Vollzeit- und Teilzeitstudierenden hinsichtlich ihrer Nutzung von Pull-Requests bestehen.
+Zur Unterstützung dieser Auswertung wurde an der ZHAW das Tool \textit{GitGauge} entwickelt. GitGauge ist ein Repository-Mining- und Analysewerkzeug mit einer Web-Benutzeroberfläche.
 
-Die Arbeit gliedert sich wie folgt: Kapitel 2 erläutert die theoretischen Grundlagen, darunter Git-spezifische Konzepte, eine Einführung in die Projektmodule und das Tool GitGauge. Kapitel 3 beschreibt die methodische Vorgehensweise zur Beantwortung der Forschungsfragen. In Kapitel 4 werden die Ergebnisse präsentiert und diskutiert, während Kapitel 5 die Resultate zusammenfasst und einen Ausblick auf zukünftige Weiterentwicklungen gibt.
+Ziel der Arbeit ist es, GitGauge funktional zu erweitern, neue Metriken zu entwickeln und gezielte Analysen zu ermöglichen, die auf die spezifischen Anforderungen der Projektmodule abgestimmt sind. Damit soll ein praxisnahes Werkzeug entstehen, das sowohl Lehrpersonen als auch Studierenden neue Erkenntnisse über Teamdynamik und Arbeitsweise liefert.
+
+Im Mittelpunkt der Untersuchung stehen sechs eigens entwickelte Forschungsfragen. Diese beleuchten unter anderem, ob ein Zusammenhang zwischen der Bearbeitungsdauer (Latency) eines Pull-Requests und der Anzahl geänderter Codezeilen (Churn) besteht, wie sich die Review-Dauer im zeitlichen Verlauf eines Projekts verändert und welche Unterschiede zwischen Vollzeit- und Teilzeitstudierenden hinsichtlich ihrer Pull-Request-Nutzung bestehen.
+
+Die Arbeit ist wie folgt aufgebaut: Kapitel 2 erläutert die theoretischen Grundlagen, darunter Git-spezifische Konzepte, eine Einführung in die Projektmodule sowie das Tool GitGauge. Kapitel 3 beschreibt die methodische Vorgehensweise zur Beantwortung der Forschungsfragen. In Kapitel 4 werden die Ergebnisse präsentiert und diskutiert. Kapitel 5 fasst die Resultate zusammen und gibt einen Ausblick auf zukünftige Weiterentwicklungen.
+
+
 
 \label{Chapter1} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
 
@@ -26,14 +31,14 @@ Die Arbeit gliedert sich wie folgt: Kapitel 2 erläutert die theoretischen Grund
 
 \section{Ausgangslage}
 \label{sec:Ausgangslage} 
-Code-Reviews sind ein wichtiger Bestandteil der modernen Softwareentwicklung. Reviews fördern nicht nur die Qualität des Codes, sondern auch die Zusammenarbeit im Team \parencite{dos_santos_investigating_2018}. In der Praxis werden Code-Reviews häufig über Plattformen wie GitHub oder GitLab durchgeführt. Dabei werden auf der Plattform sogenannte Pull-Requests / Merge-Requests erstellt, welche dann als Grundlage für die Reviews dienen. Die Bezeichnung kann sich von Plattform zu Plattform ändern, beschreibt aber jeweils dasselbe Konzept. \parencite{kansab_analyzing_2025}
+Code-Reviews sind ein wichtiger Bestandteil der modernen Softwareentwicklung. Reviews fördern nicht nur die Qualität des Codes, sondern auch die Zusammenarbeit im Team \parencite{dos_santos_investigating_2018}. In der Praxis werden Code-Reviews häufig über Plattformen wie GitHub oder GitLab durchgeführt \parencite{noauthor_team_nodate}. Dabei werden auf der Plattform sogenannte Pull-Requests / Merge-Requests erstellt, welche dann als Grundlage für die Reviews dienen. Die Bezeichnung kann sich von Plattform zu Plattform ändern, beschreibt aber jeweils dasselbe Konzept \parencite{kansab_analyzing_2025}.
 
 
-Die Analyse der Code-Review-Daten kann wertvolle Informationen über die Zusammenarbeit und den Fortschritt innerhalb eines Softwareprojekts liefern. Eine automatisierte Auswertung bietet die Möglichkeit, Probleme oder Verbesserungsmöglichkeiten zu erkennen. Diese können sowohl auf technischer als auch auf sozialer Ebene sein. 
+Die Analyse der Code-Review-Daten kann wertvolle Informationen über die Zusammenarbeit und den Fortschritt innerhalb eines Softwareprojekts liefern. So kann beispielsweise festgestellt werden, wie oft bestimmte Contributor miteinander interagieren oder wie lange es durchschnittlich dauert, bis ein Review abgeschlossen ist. Eine automatisierte Auswertung bietet die Möglichkeit, Probleme oder Verbesserungsmöglichkeiten zu erkennen. Diese können sowohl auf technischer als auch auf sozialer Ebene sein. 
 
 An der Zürcher Hochschule für Angewandte Wissenschaften (ZHAW) lernen die Studierenden in Projektmodulen, wie man Projekte erfolgreich durchführt. Für die Zusammenarbeit der Teams wird GitHub eingesetzt. Eine automatisierte Auswertung der Code-Reviews kann den Dozierenden helfen, Probleme bei den Studierenden frühzeitig zu erkennen.
 
-Das in der ZHAW entwickelte Tool \textit{GitGauge} ist ein Repository-Mining- und Analyse-Tool, welches aktuell primär für den Einsatz an den Projektmodulen eingesetzt wird. Das Tool wurde im Rahmen einer Mastervertiefungsarbeit von Joel Grand mit Unterstützung des Supervisors Michael Wahler erstellt. GitGauge bietet eine auf \textit{Next.js} basierende Benutzeroberfläche. Der Server wurde in \textit{C\# mit .NET Core } entwickelt. Ziel dieser Arbeit ist es, die Analysen mit diesem Tool durchzuführen und gegebenenfalls, wo nötig, zu erweitern. \parencite{grand_joel_wahler_michael_waspe_lara_stumpf_simon_repo_nodate}
+Das in der ZHAW entwickelte Tool \textit{GitGauge} ist ein Repository-Mining- und Analyse-Tool, welches aktuell primär für den Einsatz an den Projektmodulen eingesetzt wird. Das Tool wurde im Rahmen einer Mastervertiefungsarbeit von Joel Grand mit Unterstützung des Supervisors Michael Wahler erstellt. GitGauge bietet eine auf \textit{Next.js} basierende Benutzeroberfläche, welche in \autoref{fig:gitgauge-project-overview} dargestellt ist. Der Server wurde in \textit{C\# mit .NET Core } entwickelt. Ziel dieser Arbeit ist es, die Analysen mit diesem Tool durchzuführen und gegebenenfalls, wo nötig, zu erweitern. \parencite{grand_joel_wahler_michael_waspe_lara_stumpf_simon_repo_nodate}
 
 \begin{figure}[htbp]
     \centering
@@ -43,29 +48,6 @@ Das in der ZHAW entwickelte Tool \textit{GitGauge} ist ein Repository-Mining- un
 \end{figure}
 
 \newpage
-
-
-\subsection{Vergleichbare Projekte}
-Es existieren bereits mehrere Git-Analyse-Tools, die die Untersuchung von Repository-Metriken, insbesondere den Code-Reviews, ermöglichen. 
-
-\textit{Apache Kibble} ist ein Open-Source-Projekt, welches das Minen, Aggregieren und Visualisieren von Softwareprojekten ermöglicht. Viele der bereitgestellten Metriken fokussieren sich jedoch auf die Open-Source-Aspekte eines Projektes, wie etwa die Anzahl der Autoren pro Zeitperiode. Ausserdem ist das Projekt nicht besonders aktiv, es wurden lediglich 1 Commit in den letzten 2 Jahren getätigt \parencite{noauthor_apachekibble-1_2025}. Jedoch ist das Projekt gemäss der Apache-Webseite noch aktiv \parencite{noauthor_apache_nodate}. Abbildung \autoref{fig:apache-kibble} zeigt einen Ausschnitt der offiziellen Demo. 
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.8\textwidth]{Figures/apache-kibble.png}
-    \caption{Screenshot der Apache Kibble-Demo \parencite{noauthor_code_nodate}}
-    \label{fig:apache-kibble}
-\end{figure}
-
-\textit{Augur} ist ein Data-Engineering-Tool und REST-Webservice, welcher sich auf die Analyse von GitHub- und GitLab-Daten fokussiert. Der Hauptfokus von Augur liegt auf der Messung der allgemeinen Gesundheit und Nachhaltigkeit von Open-Source-Projekten. Das Tool sammelt und normalisiert Daten aus verschiedenen Repositories, um nützliche Metriken über den Zustand eines Projekts (GitHub-Organi\-sation) zu liefern. Diese Metriken ermöglichen eine umfassende Analyse der Entwickleraktivitäten, der Community-Dynamiken und der Stabilität von Projekten. Die Daten werden in einer relationalen Datenbank abgespeichert \parencite{noauthor_chaossaugur_nodate}. Augur ist ein Projekt der \textit{CHAOSS} (Community Health Analytics in Open-Source-Software) Community, welche selbst der Linux Foundation angehört. Die CHAOSS-Community beschäftigt sich mit der Analyse und Messung der Gesundheit und Nachhaltigkeit von Open-Source-Projekten. So werden Metriken entwickelt, die die langfristige Stabilität und das Wachstum der Projekte unterstützen sollen. Die Community verwaltet über 60 Repositories auf GitHub. \parencite{noauthor_chaoss_nodate} \parencite{noauthor_about_nodate-1}
-\newpage
-\textit{8Knot} ist eine Dash-Webanwendung, welche von \textit{Red Hat Open Source Program Office} entwickelt wird. Es nutzt die von Augur gesammelten Daten, um die Interaktionen der Git-Projekte zu visualisieren \parencite{noauthor_chaossaugur_nodate} \parencite{noauthor_oss-aspen8knot_2025}. 
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.9\textwidth]{Figures/augur-8knot.png}
-    \caption{Analyse des Projektes Argo mittels Augur \& 8Knot \parencite{noauthor_metrixchaossio_nodate} \parencite{noauthor_argoprojargo-workflows_2025}}
-    \label{fig:augur-8knot}
-\end{figure}
-
 
 \section{Aufgabenstellung}
 Produktivitätsmetriken sollen aus Git-Repositories gewonnen werden. Aus den Daten der Repositories sollen aussagekräftige Kennzahlen für die Softwareentwicklung abgeleitet werden. Dies soll durch eine Literaturrecherche bestehender Metriken und die Entwicklung von Analysealgorithmen erfolgen.
