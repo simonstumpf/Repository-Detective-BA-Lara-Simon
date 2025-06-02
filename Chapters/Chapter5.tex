@@ -50,7 +50,8 @@ Zusammenfassend lässt sich feststellen, dass sich die Schliessgründe von Pull-
 \subsection{Forschungsfrage 3: Zusammenhang Projektverlauf und Review-Dauer}
 Die Ergebnisse der \fref{forschungsfrage3} zeigen deutlich, dass die \textit{latency} im Verlauf der Projekte abnimmt, obwohl gleichzeitig die \textit{Churn}-Werte steigen. Besonders an den letzten Tagen vor Projektende wurden viele Pull-Requests sehr schnell geschlossen, teilweise in einer Geschwindigkeit, die keine regulären und genauen Reviews mehr zulässt. 
 
-Dabei ist zu beachten, dass diese Projekte, wie bereits in Kapitel \secref{sec:Projektmodule} erwähnt, einen festen Abgabetermin haben und eine verspätete Abgabe Auswirkungen auf die Bewertung hat. Eine naheliegende Erklärung ist, dass Studierende in den letzten Tagen vor Abgabe versuchen, möglichst viele Funktionalitäten zu implementieren und bestehende Fehler zu beheben. Daraus ergibt sich eine grosse Anzahl an Pull-Requests, die unter Zeitdruck schnell gemerged werden. \\
+Dabei ist zu beachten, dass diese Projekte, wie bereits in Kapitel \secref{sec:Projektmodule} erwähnt, einen festen Abgabetermin haben und eine verspätete Abgabe Auswirkungen auf die Bewertung hat. Eine naheliegende Erklärung ist, dass Studierende in den letzten Tagen vor Abgabe versuchen, möglichst viele Funktionalitäten zu implementieren und bestehende Fehler zu beheben. Daraus ergibt sich eine grosse Anzahl an Pull-Requests, die unter Zeitdruck schnell gemerged werden. 
+
 Dieser Zeitdruck kann zur Folge haben, dass Reviews nur oberflächlich oder gar nicht durchgeführt werden. Jedoch könnte es auch sein, dass die Entwicklung im Pair-Programming (zwei Entwickler programmieren zusammen auf einem Notebook) stattfindet. Diese Methodik wurde von unserem Projektteam in gewissen Fällen in den jeweiligen Modulen angewendet. Da der Code gemeinsam erstellt wird, kann ein separates Review entfallen, da die Überprüfung direkt bei der Implementierung erfolgt.
 
 
@@ -59,13 +60,15 @@ Die Analyse der Arbeitstage von Pull-Requests (\secref{sec:ErgebnisseEntwicklung
 
 Die Auswertung der Erstellungsdaten zeigt, dass in Teilzeitklassen ein Grossteil der PRs an den Unterrichtstagen sowie an Wochenenden erstellt wird. Eine mögliche Erklärung ist, dass Teilzeitstudierende unter der Woche aufgrund anderer Verpflichtungen im beruflichen Umfeld nur eingeschränkt Zeit für Projektarbeit finden.
 
-Bei den Vollzeitklassen zeigt sich hingegen eine gleichmässigere Verteilung der Pull-Request-Aktivitäten über die Woche. Diese Gruppen arbeiten typischerweise an allen Wochentagen ausser am Wochenende, was auf eine kontinuierlichere Arbeitsweise hinweist. Der entsprechende Unterrichtstag der Klasse sticht hier besonders heraus, da an diesem Tag vergleichsweise viele PRs erstellt und bearbeitet wurden. Eine mögliche Erklärung dafür könnte sein, dass an diesem Tag oftmals Gruppensitzungen oder gemeinsame Entwicklungstreffen (\textit{Weeklys}) stattfinden. \\
+Bei den Vollzeitklassen zeigt sich hingegen eine gleichmässigere Verteilung der Pull-Request-Aktivitäten über die Woche. Diese Gruppen arbeiten typischerweise an allen Wochentagen ausser am Wochenende, was auf eine kontinuierlichere Arbeitsweise hinweist. Der entsprechende Unterrichtstag der Klasse sticht hier besonders heraus, da an diesem Tag vergleichsweise viele PRs erstellt und bearbeitet wurden. Eine mögliche Erklärung dafür könnte sein, dass an diesem Tag oftmals Gruppensitzungen oder gemeinsame Entwicklungstreffen (\textit{Weeklys}) stattfinden. 
+
 Diese unterschiedlichen Arbeitsrhythmen der beiden Unterrichtsmodelle bedeuten, dass Dozierende auf verschiedene Rahmenbedingungen treffen. Diese sollten bei Betreuung und Bewertung der Projekte berücksichtigt werden.
 
 \subsection{Forschungsfrage 5: Unterschiede Voll- und Teilzeitklassen hinsichtlich Nutzung der PRs}
 In der \fref{forschungsfrage5} wurde untersucht, ob Unterschiede in der Nutzung von Pull-Requests zwischen den Vollzeit- und Teilzeitklassen bestehen, insbesondere im Hinblick auf Anzahl, Umfang (Churn) und Bearbeitungsdauer (Latency).
 
-Im Median zeigen die Unterschiede bei den Churns keine signifikanten Unterschiede auf. Betrachtet man jedoch den Mittelwert, so liegt dieser bei den Vollzeitstudierenden um rund 40 Zeilen höher. Zudem ist die Standardabweichung bei den Vollzeitklassen deutlich grösser (+286), was auf eine grössere Streuung der Änderungsumfänge hindeutet. Auch der maximale Churn-Wert ist in dieser Gruppe deutlich höher. \\
+Im Median zeigen die Unterschiede bei den Churns keine signifikanten Unterschiede auf. Betrachtet man jedoch den Mittelwert, so liegt dieser bei den Vollzeitstudierenden um rund 40 Zeilen höher. Zudem ist die Standardabweichung bei den Vollzeitklassen deutlich grösser (+286), was auf eine grössere Streuung der Änderungsumfänge hindeutet. Auch der maximale Churn-Wert ist in dieser Gruppe deutlich höher. 
+
 Eine detaillierte Analyse zeigt, dass beide Unterrichtsmodelle den grössten Anteil ihrer Pull-Requests mit Änderungen im Bereich von 50–199 Zeilen einreichen. Sehr grosse Pull-Requests (über 10.000 Zeilen) sind in beiden Gruppen selten, treten jedoch bei den Vollzeitstudierenden etwas häufiger auf. Dies erklärt die grössere Streuung. Bemerkenswert ist jedoch, dass 40\,\% dieser sehr grossen PRs von den Vollzeitstudierenden wieder geschlossen wurden, was darauf hindeutet, dass solche umfangreichen Änderungen nicht automatisch akzeptiert werden.
 
 
