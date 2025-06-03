@@ -7,7 +7,7 @@
 
 
 \chapter{Einleitung} % Main chapter title
-In der modernen Softwareentwicklung sind Code-Reviews ein essenzieller Bestandteil zur Sicherstellung der Codequalität sowie zur Förderung der Teamzusammenarbeit. In der Praxis erfolgen diese Reviews meist über Plattformen wie GitHub oder GitLab, wobei sogenannte Pull-Requests (auch Merge-Requests genannt) den strukturellen Rahmen für den Reviewprozess bilden.
+In der modernen Softwareentwicklung sind Code-Reviews ein essenzieller Bestandteil zur Sicherstellung der Codequalität sowie zur Förderung der Teamzusammenarbeit \parencite{dos_santos_investigating_2018}. In der Praxis erfolgen diese Reviews meist über Plattformen wie GitHub oder GitLab, wobei sogenannte Pull-Requests (auch Merge-Requests genannt) den strukturellen Rahmen für den Reviewprozess bilden \parencite{noauthor_team_nodate}.
 
 Ein zentrales Problem in softwarebasierten Teamprojekten ist die fehlende Transparenz über die Qualität der Zusammenarbeit und den Zustand des Entwicklungsprozesses. Zwar liefern Pull-Requests wertvolle Daten, doch deren systematische Auswertung bleibt oft ungenutzt. Diese Problematik bildet den Ausgangspunkt der vorliegenden Arbeit. Durch die Analyse von Code-Review-Daten lassen sich frühzeitig technische Probleme sowie Herausforderungen in der Teamkoordination erkennen.
 
@@ -31,7 +31,7 @@ Die Arbeit ist wie folgt aufgebaut: Kapitel 2 erläutert die theoretischen Grund
 
 \section{Ausgangslage}
 \label{sec:Ausgangslage} 
-Code-Reviews sind ein wichtiger Bestandteil der modernen Softwareentwicklung. Reviews fördern nicht nur die Qualität des Codes, sondern auch die Zusammenarbeit im Team \parencite{dos_santos_investigating_2018}. In der Praxis werden Code-Reviews häufig über Plattformen wie GitHub oder GitLab durchgeführt \parencite{noauthor_team_nodate}. Dabei werden auf der Plattform sogenannte Pull-Requests / Merge-Requests erstellt, welche dann als Grundlage für die Reviews dienen. Die Bezeichnung kann sich von Plattform zu Plattform ändern, beschreibt aber jeweils dasselbe Konzept \parencite{kansab_analyzing_2025}.
+In der Praxis werden Code-Reviews häufig über Plattformen wie GitHub oder GitLab durchgeführt \parencite{noauthor_team_nodate}. Dabei werden auf der Plattform sogenannte Pull-Requests / Merge-Requests erstellt, welche dann als Grundlage für die Reviews dienen. Die Bezeichnung kann sich von Plattform zu Plattform ändern, beschreibt aber jeweils dasselbe Konzept \parencite{kansab_analyzing_2025}.
 
 
 Die Analyse der Code-Review-Daten kann wertvolle Informationen über die Zusammenarbeit und den Fortschritt innerhalb eines Softwareprojekts liefern. So kann beispielsweise festgestellt werden, wie oft bestimmte Contributor miteinander interagieren oder wie lange es durchschnittlich dauert, bis ein Review abgeschlossen ist. Eine automatisierte Auswertung bietet die Möglichkeit, Probleme oder Verbesserungsmöglichkeiten zu erkennen. Diese können sowohl auf technischer als auch auf sozialer Ebene sein. 
@@ -42,7 +42,7 @@ Das in der ZHAW entwickelte Tool \textit{GitGauge} ist ein Repository-Mining- un
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.8\textwidth]{Figures/giggauge-overview.png}
+    \includegraphics[width=0.9\textwidth]{Figures/giggauge-overview.png}
     \caption{Übersicht eines Projektes in GitGauge}
     \label{fig:gitgauge-project-overview}
 \end{figure}
@@ -75,7 +75,7 @@ Lassen sich Patterns der Zusammenarbeit im Team erkennen, hinsichtlich der Tage,
 }
 
 \forschungsfrage{forschungsfrage5}{
-Welche Unterschiede zeigen sich in der Nutzung von Pull-Requests zwischen Teilzeit- und Vollzeitstudierenden hinsichtlich Anzahl, Umfang und Dauer?
+Welche Unterschiede zeigen sich in der Nutzung von Pull-\linebreak Requests zwischen Teilzeit- und Vollzeitstudierenden hinsichtlich Anzahl, Umfang und Dauer?
 }
 
 \forschungsfrage{forschungsfrage6}{

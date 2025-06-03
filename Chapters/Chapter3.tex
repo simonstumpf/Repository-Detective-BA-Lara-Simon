@@ -79,7 +79,7 @@ r_s = 1 - \frac{6 \sum d_i^2}{n(n^2 - 1)}
   \item[$n$] Anzahl der beobachteten Fälle
 \end{itemize}
 
-Zur Beantwortung der \fref{forschungsfrage2} ist der Status des Pull-Requests erforderlich. Ein Pull-Request kann entweder \textit{open} sein, wenn er noch aktiv ist, \textit{merged}, wenn er erfolgreich in den Zielbranch integriert wurde, oder \textit{closed}, wenn er ohne Merge geschlossen wurde \parencite{noauthor_enums_nodate}. Es sei darauf hingewiesen, dass diese Metrik nicht unmittelbar von GitHub extrahiert werden kann, sondern dass diese ermittelt werden muss. Dazu werden die Metriken \textit{closeTime} und \textit{mergeTime} benötigt. Im ersten Schritt wird überprüft, ob der PR  eine \textit{closeTime} aufweist. Ist dies der Fall, wird im zweiten Schritt überprüft, ob ebenfalls eine \textit{mergeTime} vorhanden ist. Somit kann evaluiert werden, ob der Pull-Request geschlossen wurde und ob dies durch ein Merging erfolgte. Diese Überprüfung ist bereits in GitGauge implementiert und wird entsprechend zur Beantwortung der \fref{forschungsfrage2} verwendet. Im Falle der \fref{forschungsfrage2} interessieren die Pull-Requests, die geschlossen, aber nicht gemergt wurden. Die Analyse der entsprechend geschlossenen PRs wurde manuell durchgeführt.
+Zur Beantwortung der \fref{forschungsfrage2} ist der Status des Pull-Requests erforderlich. Ein Pull-Request kann entweder \textit{open} sein, wenn er noch aktiv ist, \textit{merged}, wenn er erfolgreich in den Zielbranch integriert wurde, oder \textit{closed}, wenn er ohne Merge geschlossen wurde \parencite{noauthor_enums_nodate}. Es sei darauf hingewiesen, dass diese Metrik nicht unmittelbar von GitHub extrahiert werden kann, sondern dass diese ermittelt werden muss. Dazu werden die Metriken \textit{closeTime} und \textit{mergeTime} benötigt. Im ersten Schritt wird überprüft, ob der PR  eine \textit{closeTime} aufweist. Ist dies der Fall, wird im zweiten Schritt überprüft, ob ebenfalls eine \textit{mergeTime} vorhanden ist. Somit kann evaluiert werden, ob der Pull-Request geschlossen wurde und ob dies durch ein Merging erfolgte. Diese Überprüfung ist bereits in GitGauge implementiert und wird entsprechend zur Beantwortung der \fref{forschungsfrage2} verwendet. Im Falle der \fref{forschungsfrage2} interessieren die Pull-Requests, die geschlossen, aber nicht gemerged wurden. Die Analyse der entsprechend geschlossenen PRs wurde manuell durchgeführt.
 
 Bei \fref{forschungsfrage3} wird zusätzlich zu den bereits erwähnten Metriken \textit{createTime} und \textit{closeTime} des Pull-Requests die \textit{createTime} des Repositories benötigt, um berechnen zu können, zu welchem Zeitpunkt im Projekt ein Pull-Request erstellt oder geschlossen wurde.  Dafür wurde im neuen Repository-Miner die \textit{createTime } mittels GraphQL-Abfrage extrahiert. Dies ist im folgenden \autoref{code:graphQLRepoMiner} ersichtlich. Zudem wurde die Repository-Entität um das Erstellungsdatum erweitert. 
 \begin{lstlisting}[language=CSharp, caption={GraphQL-Abfrage Repository}, label={code:graphQLRepoMiner}]
@@ -94,7 +94,7 @@ var repositoryQuery = new Query()
     }).Compile();
 \end{lstlisting}
 
-Zusätzlich wurden die Abgabetermine der Projektmodule genutzt, um zu analysieren, wie weit ein Ereignis von der Abgabe entfernt erfolgte. Diese Termine wurden für die Projekte bereitgestellt und konnten nachgeschlagen werden.
+Zusätzlich wurden die Abgabetermine der Racetrack-Projekte genutzt, um zu analysieren, wie weit ein Ereignis von der Abgabe entfernt erfolgte. Diese Termine wurden für die Projekte bereitgestellt und konnten nachgeschlagen werden.
 
 Zur Identifizierung von Mustern in den Pull-Requests, die in der \fref{forschungsfrage4} thematisiert werden, erfolgt zusätzlich zu den Metriken \textit{createTime} und \textit{closeTime} eine Analyse der Commits auf den Pull-Requests. Zu diesem Zweck wurde die Pull-Request-Entität um die Commit-Entität erweitert. Die Commits beinhalten die Attribute \textit{Sha}, \textit{Message}, \textit{CommitTime} und \textit{Author}. Beim \textit{Sha} handelt es sich um den Hashwert des Commits, welcher als ID verwendet wird \parencite{noauthor_git_nodate}. Die \textit{Message} beinhaltet die Commit-Message, die bei einem Commit angegeben werden muss. Mittels der \textit{CommitTime} ist ersichtlich, wann der Commit gemacht wurde, und der \textit{Author} zeigt, wer den Commit gemacht hat. Zusätzlich musste die GraphQL-Abfrage im Pull-Request-Miner erweitert werden. Dies ist im \autoref{code:prCommits} ersichtlich. Dafür wurden aus der Pull-Request-Entität der GraphQL-Bibliothek die Commits ausgelesen und die entsprechenden Parameter abgefüllt.
 \begin{lstlisting}[language=CSharp, caption={GraphQL-Abfrage Pull-Request-Commits}, label={code:prCommits}]
@@ -110,7 +110,6 @@ PullRequestCommits = pr.Commits(null, null, null, null)
     }).ToList(),
 \end{lstlisting}
 
-\newpage
 Die bereits aufgeführten Erweiterungen genügen für die Bearbeitung der \fref{forschungsfrage5}, sodass keine zusätzlichen Änderungen im Mining von GitGauge vorgenommen werden mussten. Jedoch mussten bei der Analyse die Klassen auf Vollzeit und Teilzeit aufgeteilt werden. In den Projektmodulen wird für jede Klasse jeweils eine GitHub-Organisation erstellt. Anhand der Namen dieser Organisationen kann erkannt werden, ob es sich um eine Teilzeit- oder Vollzeitklasse handelt, da der Klassenname darin vorkommt. Die Klassennamen für Informatik setzen sich wie folgt zusammen: 
 \begin{equation}
 IT<yy><Klassenkuerzel><Ort>
@@ -122,22 +121,22 @@ IT<yy><Klassenkuerzel><Ort>
   \item\textit{Ort}: WIN/ZH (Abkürzungen für Winterthur und Zürich)
 \end{itemize}
 
-Anhand des Buchstabens \textit{t}'s kann somit erkannt werden, ob eine Klasse Teilzeit oder Vollzeit ist.
+Anhand des Buchstabens \textit{t} kann somit erkannt werden, ob eine Klasse Teilzeit oder Vollzeit ist.
 
-Für die \fref{forschungsfrage6} wurden sieben Metriken festgelegt, anhand derer die Korrelationsanalyse und der Vergleich mit OSS-Projekten stattfinden sollen. Die sieben Metriken sind: \textit{Latency}, \textit{Churn}, \textit{Commits}, \textit{Comments}, \textit{Description Length}, \textit{Changed Files Count} und \textit{Contributors}. Diese wurden, wie in Kapitel \secref{sec:ErarbeitungFF} erwähnt, durch Literaturrecherche festgelegt. Die entsprechenden Metriken werden im folgenden Abschnitt \secref{sec:MetrikenKorrelation} aufgezeigt und die entsprechenden OSS-Projekte werden im Kapitel \secref{sec:VorstellungGithubOrgs} vorgestellt. Für die Korrelationsanalyse musste das Mining erweitert werden. Zusätzlich zu den bereits genannten Erweiterungen wurden noch die Metriken \textit{ChangedFiles} und \textit{TotalCommits} extrahiert.
+Für die \fref{forschungsfrage6} wurden sieben Metriken festgelegt, anhand derer die Korrelationsanalyse und der Vergleich mit OSS-Projekten stattfinden sollen. Die sieben Metriken sind: \textit{Latency}, \textit{Churn}, \textit{Commits}, \textit{Comments}, \textit{Description Length}, \textit{Changed Files Count} und \textit{Contributors}. Diese wurden, wie in Kapitel \secref{sec:ErarbeitungFF} erwähnt, durch Literaturrecherche festgelegt. Die entsprechenden Metriken werden im folgenden Abschnitt \secref{sec:MetrikenKorrelation} aufgezeigt und die entsprechenden OSS-Projekte werden im Kapitel \secref{sec:VorstellungGithubOrgs} vorgestellt. Für die Korrelationsanalyse\linebreak musste das Mining erweitert werden. Zusätzlich zu den bereits genannten Erweiterungen wurden noch die Metriken \textit{ChangedFiles} und \textit{TotalCommits} extrahiert.
 
 Die Analysen der Forschungsfragen erfolgten via Jupyter-Notebooks. Für die einzelnen Untersuchungen wurde jeweils ein neues Jupyter-Notebook erstellt. Diese ermöglichen eine schnelle und unkomplizierte (grafische) Auswertung der Daten. \parencite{noauthor_repo-detectivesba-metric-analysis-scripts_nodate}
 
 
 \section{Metriken für die Korrelations\-analyse}
 \label{sec:MetrikenKorrelation}
-Für die Korrelationsanalyse der Metriken zur Klärung von \fref{forschungsfrage6} müssen geeignete Metriken ausgewählt werden, die verschiedene Aspekte der Pull-Request-Dynamik abbilden. Soziale Faktoren wie die Erfahrung der Contributor oder die Dauer ihrer Mitarbeit an einem Projekt können jedoch nicht berücksichtigt werden, da solche Daten im Kontext der untersuchten Studenten-Repositories nicht verfügbar sind. Basierend auf der Analyse diverser wissenschaftlicher Literatur wurden folgende sieben Metriken ausgewählt:
+Für die Korrelationsanalyse der Metriken zur Klärung von \fref{forschungsfrage6} müssen geeignete Metriken ausgewählt werden, die verschiedene Aspekte der Pull-Request-Dynamik abbilden. Soziale Faktoren wie die Erfahrung der Contributor oder die Dauer ihrer Mitarbeit an einem Projekt können jedoch nicht berücksichtigt werden, da solche Daten im Kontext der untersuchten Studenten-Repositories nicht verfügbar sind. Basierend auf der Analyse wissenschaftlicher Literatur wurden folgende sieben Metriken ausgewählt \parencite{yu_wait_2015} \parencite{gousios_exploratory_2014} \parencite{zhang_pull_2022} \parencite{tsay_influence_2014}:
 
 Als \textbf{Latency} wird die Zeit zwischen der Erstellung eines Pull-Requests und dessen Merge oder Schliessung genannt. Sie wird als Indikator für die Effizienz des Review-Prozesses genutzt und ist in der Literatur häufig als Schlüsselfaktor für die Messung der Geschwindigkeit von Code-Reviews und DevOps-Prozessen anerkannt. Eine hohe Latenz kann auf ineffiziente Reviews oder Verzögerungen hinweisen, weshalb sie in die Analyse aufgenommen wurde, um die Geschwindigkeit der Pull-Request-Bearbeitung zu messen und Zusammenhänge mit anderen Metriken wie \textit{Churn} und \textit{Comments} zu untersuchen. \parencite{yu_wait_2015}
 
 Die Metrik \textbf{Churn} misst die Anzahl geänderter Codezeilen in einem Pull-Request. Sie wird als Indikator für den Umfang und die Komplexität einer Änderung betrachtet und ist häufig mit längeren Review-Zeiten verbunden. Diese Metrik wurde ausgewählt, da grössere Änderungen im Code oft genauere Überprüfungen erfordern und somit die \textit{Latency} des Pull-Requests beeinflussen können. \parencite{gousios_exploratory_2014}
 
-Die Anzahl der \textbf{Commits} in einem Pull-Request gibt an, wie viele Commits gemergt werden sollen. Sie zeigt, wie kleinschrittig oder iterativ ein Beitrag entwickelt wurde. Mehrere Commits deuten häufig darauf hin, dass der Pull-Request mehrere Anpassungen durchlaufen hat, was zu einer längeren Review-Dauer führt. \parencite{zhang_pull_2022}
+Die Anzahl der \textbf{Commits} in einem Pull-Request gibt an, wie viele Commits gemerged werden sollen. Sie zeigt, wie kleinschrittig oder iterativ ein Beitrag entwickelt wurde. Mehrere Commits deuten häufig darauf hin, dass der Pull-Request mehrere Anpassungen durchlaufen hat, was zu einer längeren Review-Dauer führt. \parencite{zhang_pull_2022}
 
 \textbf{Comments} messen die Anzahl der Kommentare, die während des Review-Prozesses als auch auf den Pull-Request selber erstellt wurden. Eine höhere Anzahl an Kommentaren deutet auf intensivere Diskussionen hin, die den Review-Prozess verlängern können und die Wahrscheinlichkeit eines Merges verringern. Zudem ist eine hohe Zahl an Kommentaren oft mit einer höheren Qualität und Gründlichkeit des Reviews verbunden. \parencite{tsay_influence_2014}
 
@@ -149,13 +148,13 @@ Die Metrik \textbf{Contributors} misst die Anzahl der verschiedenen Entwickler, 
 
 \section{Erkennung Git-Squashing}
 \label{sec:ErkennungSquashing}
-Mit \textit{Git-Squashing} können mehrere Commits zu einem Commit zusammengeführt werden, bevor diese in den Zielbranch gemergt werden. Die theoretischen Grundlagen werden in \secref{sec:GitSquashing} erläutert. 
+Mit \textit{Git-Squashing} können mehrere Commits zu einem Commit zusammengeführt werden, bevor diese in den Zielbranch gemerged werden. Die theoretischen Grundlagen werden in \secref{sec:GitSquashing} erläutert. 
 
-Um das neue Feature in GitGauge zu implementieren, müssen gesquashte Commits erkannt und optional berücksichtigt werden. Ziel der neuen Implementierung ist es, sichtbar zu machen, wann genau Contributors Commits erstellen, um daraus ableiten zu können, an welchen Tagen aktiv gearbeitet wurde. Damit dieses Bild möglichst akkurat ist, sollen nicht nur die Commits im Haupt-Branch (Main / Master-Branch) berücksichtigt werden, sondern auch jene Commits, die ursprünglich in Pull Requests enthalten waren, aber durch Squashing beim Merge zu einem einzelnen Commit zusammengefasst wurden.
+Um das neue Feature in GitGauge zu implementieren, müssen gesquashede Commits erkannt und optional berücksichtigt werden. Ziel der neuen Implementierung ist es, sichtbar zu machen, wann genau Contributors Commits erstellen, um daraus ableiten zu können, an welchen Tagen aktiv gearbeitet wurde. Damit dies möglichst akkurat ist, sollen nicht nur die Commits im Haupt-Branch (Main / Master-Branch) berücksichtigt werden, sondern auch jene Commits, die ursprünglich in Pull Requests enthalten waren, aber durch Squashing beim Merge zu einem einzelnen Commit zusammengefasst wurden.
 
-Das Herausfiltern von gesquashten Commits ist hierbei essenziell, da Squashing die Metriken über die tatsächliche Arbeitsverteilung verfälschen kann. Betrachtet man lediglich diesen finalen Merge-Commit, so gehen wesentliche Informationen verloren. Beispielsweise darüber an welchen Tagen tatsächlich entwickelt wurde, wie kontinuierlich die Arbeit stattfand und wie viele Einzelschritte zum Endergebnis führten. Der Squash-Commit bildet lediglich den Merge-Zeitpunkt ab und verschleiert so die zeitliche Struktur der Entwicklung. 
+Das Herausfiltern von gesquasheden Commits ist hierbei essenziell, da Squashing die Metriken über die tatsächliche Arbeitsverteilung verfälschen kann. Betrachtet man lediglich diesen finalen Merge-Commit, so gehen wesentliche Informationen verloren. Beispielsweise darüber an welchen Tagen tatsächlich entwickelt wurde, wie kontinuierlich die Arbeit stattfand und wie viele Einzelschritte zum Endergebnis führten. Der Squash-Commit bildet lediglich den Merge-Zeitpunkt ab und verschleiert so die zeitliche Struktur der Entwicklung. 
 
-Um dem entgegenzuwirken, bietet die neue Implementierung eine Einstellungsmöglichkeit, mit der gesquashte Feature-Commits optional in die Auswertung einbezogen werden können. Über einen entsprechenden Toggle (\textit{Include Squashed Feature Commits}) kann diese Option aktiviert oder deaktiviert werden. Je nach Einstellung des Feature-Toggles wird die Datenverarbeitung wie folgt angepasst:
+Um dem entgegenzuwirken, bietet die neue Implementierung eine Einstellungsmöglichkeit, mit der gesquashede Feature-Commits optional in die Auswertung einbezogen werden können. Über einen entsprechenden Toggle (\textit{Include Squashed Feature Commits}) kann diese Option aktiviert oder deaktiviert werden. Je nach Einstellung des Feature-Toggles wird die Datenverarbeitung wie folgt angepasst:
 \begin{itemize}
     \item \textbf{Feature deaktiviert}: Es werden ausschliesslich die Commits aus dem Main-Branch berücksichtigt. Gesquashte Commits aus Feature-Branches werden als ein Commit analysiert.
     \item \textbf{Feature aktiviert}: Zwei Filter- und Einbeziehungsschritte werden vorgenommen:
@@ -217,12 +216,11 @@ Der in \autoref{lst:graphql-commits} dargestellte Code implementiert die Zählun
 
 Zuerst werden alle Commits des Main-Branches verarbeitet. Ist die Option \textit{IncludeSquashedFeatureCommits} aktiviert, so werden gesquashte Commits aus dem Main-Branch übersprungen. In einem zweiten Schritt werden alle Pull-Request-Commits, welche den Main- / Master-Branch als Target besitzen, in die Liste miteinbezogen. 
 
-\newpage
 \section{Architektur}
 Die \autoref{fig:Vereinfachte_Architektur} zeigt eine vereinfachte Architektur der GitGauge-Applikation. Sie beschränkt sich auf die wesentlichen Komponenten, die im Rahmen der Forschungsarbeiten benötigt werden. Dabei sind die in der Arbeit verwendeten und erweiterten Komponenten von GitGauge dargestellt. Ausserdem wird der in der Arbeit entwickelte Analyser aufgezeigt, der ausserhalb der GitGauge-Applikation existiert und lediglich die Daten von GitGauge bezieht.  
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.8\textwidth]{Figures/Vereinfachte_Architektur.pdf}
+    \includegraphics[width=0.9\textwidth]{Figures/Vereinfachte_Architektur.pdf}
     \caption{Architektur}
     \label{fig:Vereinfachte_Architektur}
 \end{figure}

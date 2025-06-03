@@ -10,7 +10,7 @@
 
 \label{Chapter4} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
 
-In diesem Kapitel werden die in Kapitel \secref{sec:Zielsetzung} formulierten sechs Forschungsfragen untersucht. Dazu wurden die in Kapitel \secref{sec:Metriken} definierten Metriken mittels Mining-Verfahr\-en auf den erwähnten 71 Racetrack-Repositories und den entsprechenden OSS-Repositories erhoben. Die Berechnungen der relevanten Metriken erfolgten nach der in Kapitel \secref{sec:AnalyseChurnvsLatency} beschriebenen Methodik. Darauf aufbauend wurden Zusammenhänge und Unterschiede im Pull-Request-Verhalten untersucht. Zusätzlich werden die erwähnten Metriken aus dem Kapitel \secref{sec:MetrikenKorrelation} mit drei Open-Source-Projekten verglichen und zum Abschluss wird die Erweiterung an der GitGauge-Applikation demonstriert. 
+In diesem Kapitel werden die in Kapitel \secref{sec:Zielsetzung} formulierten sechs Forschungsfragen untersucht. Dazu wurden die in Kapitel \secref{sec:Metriken} definierten Metriken mittels Mining-Verfahr\-en auf den erwähnten 71 Racetrack-Repositories und den entsprechenden OSS-Repo\-sitories erhoben. Darauf aufbauend wurden Zusammenhänge und Unterschiede im Pull-Request-Verhalten untersucht. Zusätzlich werden die erwähnten Metriken aus dem Kapitel \secref{sec:MetrikenKorrelation} mit drei Open-Source-Projekten verglichen. 
 
 
 %----------------------------------------------------------------------------------------
@@ -18,7 +18,7 @@ In diesem Kapitel werden die in Kapitel \secref{sec:Zielsetzung} formulierten se
 %----------------------------------------------------------------------------------------
 \section{Churn vs. Latency}
 \label{sec:ResultatChurnLatency}
-Zur Klärung der \fref{forschungsfrage1}: "\textit{Besteht ein Zusammenhang zwischen der Latency eines Pull-Requests (Zeit bis zum Merge oder Schliessung) und dem Churn (Anzahl geänderter Codezeilen) des jeweiligen Pull-Requests?}" wurden die geminten\footnote{Abgeleitet vom englischen Verb to mine.} Repository-Daten in einem Jupyter-Notebook aufbereitet und grafisch dargestellt. Dazu wurden die im Kapitel \secref{sec:Metriken} erwähnten Metriken \textit{createTime} und \textit{closeTime} geminet und damit die einzelnen Latencies berechnet. Um die Latency-Daten besser vergleichen zu können, wurden diese noch vom Datumsformat in Stunden umgerechnet. Des Weiteren wurden die Metriken  \textit{additions} und  \textit{deletions} aus den Pull-Requests extrahiert, um den Churn zu berechnen.
+Zur Klärung der \fref{forschungsfrage1}: "\textit{Besteht ein Zusammenhang zwischen der Latency eines Pull-Requests (Zeit bis zum Merge oder Schliessung) und dem Churn (Anzahl geänderter Codezeilen) des jeweiligen Pull-Requests?}" wurden die gemineden\footnote{Abgeleitet vom englischen Verb to mine.} Repository-Daten in einem Jupyter-Notebook aufbereitet und grafisch dargestellt. Dazu wurden die im Kapitel \secref{sec:Metriken} erwähnten Metriken \textit{createTime} und \textit{closeTime} gemined und damit die einzelnen Latencies berechnet. Um die Latency-Daten besser vergleichen zu können, wurden diese noch vom Datumsformat in Stunden umgerechnet. Des Weiteren wurden die Metriken  \textit{additions} und  \textit{deletions} aus den Pull-Requests extrahiert, um den Churn zu berechnen.
 
 \subsection{Datenanalyse}
 Zum besseren Verständnis der \textit{latency}- und \textit{churn}- Werte wurde zunächst eine allgemeine Analyse der Daten durchgeführt.
@@ -348,7 +348,6 @@ Wobei die Klassen aus den Jahren 2021 und 2022 bei einem Durchschnitt von 21 Tag
     \caption{Vergleich von Latency und Churn innerhalb der Projektzeit}
     \label{fig:vergleich-latency-churn-projektzeit}
 \end{figure}
-\newpage
 
 Werden die Daten nach Vollzeit- und Teilzeitstudierenden aufgeteilt, zeigt sich bei den Vollzeitklassen ein ähnliches Bild. Dies wird in der \autoref{fig:vergleich-latency-churn-projektzeit-v} veranschaulicht. Allerdings ist der Median der Latency in der ersten Woche mit 7.4 Stunden mehr als doppelt so hoch wie in der Gesamtauswertung. Ebenso nimmt die Latency von der ersten zur zweiten Woche stark ab. Der Wert sinkt um mehr als die Hälfte und liegt anschliessend bei 3.4 Stunden. Ab der vierten Woche ist der Median unter einer halben Stunde. Zeitgleich ist der Churn in der ersten Woche mit 71 Zeilenänderungen am geringsten, steigt mit Ausnahme der dritten Woche an und erreicht in der fünften Woche mit 121 Änderungen seinen Höhepunkt. Im Gegensatz zur Latency liegen diese Werte sehr nahe bei der Gesamtanalyse.
 \begin{figure}[htbp]
