@@ -7,13 +7,13 @@
 
 
 \chapter{Einleitung} % Main chapter title
-In der modernen Softwareentwicklung sind Code-Reviews ein essenzieller Bestandteil zur Sicherstellung der Codequalität sowie zur Förderung der Teamzusammenarbeit \parencite{dos_santos_investigating_2018}. In der Praxis erfolgen diese Reviews meist über Plattformen wie GitHub oder GitLab, wobei sogenannte Pull-Requests (auch Merge-Requests genannt) den strukturellen Rahmen für den Reviewprozess bilden \parencite{noauthor_team_nodate}.
+In der modernen Softwareentwicklung sind Code-Reviews ein essenzieller Bestandteil zur Sicherstellung der Codequalität sowie zur Förderung der Teamzusammenarbeit \parencite{dos_santos_investigating_2018}. In der Praxis erfolgen diese Reviews meist über Plattformen wie GitHub oder GitLab, wobei sogenannte Pull-Requests (PR) / Merge-Requests (MR) den \linebreak strukturellen Rahmen für den Reviewprozess bilden \parencite{noauthor_team_nodate}.
 
 Ein zentrales Problem in softwarebasierten Teamprojekten ist die fehlende Transparenz über die Qualität der Zusammenarbeit und den Zustand des Entwicklungsprozesses. Zwar liefern Pull-Requests wertvolle Daten, doch deren systematische Auswertung bleibt oft ungenutzt. Diese Problematik bildet den Ausgangspunkt der vorliegenden Arbeit. Durch die Analyse von Code-Review-Daten lassen sich frühzeitig technische Probleme sowie Herausforderungen in der Teamkoordination erkennen.
 
 An der Zürcher Hochschule für Angewandte Wissenschaften (ZHAW) führen Studierende im Rahmen von vier Projektmodulen Softwareprojekte in Teams durch. Lehrpersonen stehen dabei vor der Herausforderung, die Teamleistung objektiv zu beurteilen. Eine automatisierte Auswertung der Code-Review-Daten bietet ihnen ein wirkungsvolles Instrument, um potenzielle Probleme frühzeitig zu identifizieren und gezielt zu intervenieren.
 
-Zur Unterstützung dieser Auswertung wurde an der ZHAW das Tool \textit{GitGauge} entwickelt. GitGauge ist ein Repository-Mining- und Analysewerkzeug mit einer Web-Benutzeroberfläche.
+Zur Unterstützung dieser Auswertung wurde an der ZHAW das Tool GitGauge entwickelt. GitGauge ist ein Repository-Mining- und Analysewerkzeug mit einer Web-Benutzeroberfläche.
 
 Ziel der Arbeit ist es, GitGauge funktional zu erweitern, neue Metriken zu entwickeln und gezielte Analysen zu ermöglichen, die auf die spezifischen Anforderungen der Projektmodule abgestimmt sind. Damit soll ein praxisnahes Werkzeug entstehen, das sowohl Lehrpersonen als auch Studierenden neue Erkenntnisse über Teamdynamik und Arbeitsweise liefert.
 
@@ -38,7 +38,7 @@ Die Analyse der Code-Review-Daten kann wertvolle Informationen über die Zusamme
 
 An der Zürcher Hochschule für Angewandte Wissenschaften (ZHAW) lernen die Studierenden in Projektmodulen, wie man Projekte erfolgreich durchführt. Für die Zusammenarbeit der Teams wird GitHub eingesetzt. Eine automatisierte Auswertung der Code-Reviews kann den Dozierenden helfen, Probleme bei den Studierenden frühzeitig zu erkennen.
 
-Das in der ZHAW entwickelte Tool \textit{GitGauge} ist ein Repository-Mining- und Analyse-Tool, welches aktuell primär für den Einsatz an den Projektmodulen eingesetzt wird. Das Tool wurde im Rahmen einer Mastervertiefungsarbeit von Joel Grand mit Unterstützung des Supervisors Michael Wahler erstellt. GitGauge bietet eine auf \textit{Next.js} basierende Benutzeroberfläche, welche in \autoref{fig:gitgauge-project-overview} dargestellt ist. Der Server wurde in \textit{C\# mit .NET Core } entwickelt. Ziel dieser Arbeit ist es, die Analysen mit diesem Tool durchzuführen und gegebenenfalls, wo nötig, zu erweitern. \parencite{grand_joel_wahler_michael_waspe_lara_stumpf_simon_repo_nodate}
+Das in der ZHAW entwickelte Tool GitGauge ist ein Repository-Mining- und Analy\-se-Tool, welches aktuell primär für den Einsatz an den Projektmodulen eingesetzt wird. Das Tool wurde im Rahmen einer Mastervertiefungsarbeit von Joel Grand mit Unterstützung des Supervisors Michael Wahler erstellt. GitGauge bietet eine auf Next.js basierende Benutzeroberfläche, welche in \autoref{fig:gitgauge-project-overview} dargestellt ist. Der Server wurde in C\# mit .NET Core entwickelt. Ziel dieser Arbeit ist es, die Analysen mit diesem Tool durchzuführen und gegebenenfalls, wo nötig, zu erweitern. \parencite{grand_joel_wahler_michael_waspe_lara_stumpf_simon_repo_nodate}
 
 \begin{figure}[htbp]
     \centering
@@ -83,14 +83,14 @@ Welche Unterschiede zeigen sich in den Repository-Metriken zwischen den Studente
 }
 
 \section{Übersicht der Arbeit}
-Im \autoref{Chapter2} \textit{\nameref{Chapter2}} wird das theoretische Wissen vermittelt, welches für das Verständnis dieser Arbeit notwendig ist. Dabei wird auf  Git / GitHub-spezifische Methodiken eingegangen, die untersuchten Projekte erläutert und das als Grundlage dienende Tool GitGauge erklärt.
+Im \autoref{Chapter2} \nameref{Chapter2} wird das theoretische Wissen vermittelt, welches für das Verständnis dieser Arbeit notwendig ist. Dabei wird auf  Git / GitHub-spezifische Methodiken eingegangen, die untersuchten Projekte erläutert und das als Grundlage dienende Tool GitGauge erklärt.
 
-Das \autoref{Chapter3} \textit{\nameref{Chapter3}} beschreibt die Methodik der Arbeit. Es erläutert die Vorgehensweise und beschreibt die notwendigen Metriken zur Klärung der Forschungsfragen. Des Weiteren wird die Datengrundlage aufgezeigt.
+Das \autoref{Chapter3} \nameref{Chapter3} beschreibt die Methodik der Arbeit. Es erläutert die Vorgehensweise und beschreibt die notwendigen Metriken zur Klärung der Forschungsfragen. Des Weiteren wird die Datengrundlage aufgezeigt.
 
 
-Die Ergebnisse werden im \autoref{Chapter4} \textit{\nameref{Chapter4}} dargelegt. Dabei wird auf die spezifischen Forschungsfragen eingegangen und die Analysen zur Beantwortung der Fragen dargestellt. Zusätzlich wird die Erweiterung an der GitGauge-Applikation demonstriert.
+Die Ergebnisse werden im \autoref{Chapter4} \nameref{Chapter4} dargelegt. Dabei wird auf die spezifischen Forschungsfragen eingegangen und die Analysen zur Beantwortung der Fragen dargestellt. 
 
-Zum Schluss folgt das \autoref{Chapter5} \textit{\nameref{Chapter5}}, in dem noch einmal auf die Forschungsfragen und deren Ergebnisse eingegangen und diese bewertet werden. Ausserdem werden mögliche Erweiterungen aufgezeigt.
+Zum Schluss folgt das \autoref{Chapter5} \nameref{Chapter5}, in dem noch einmal auf die Forschungsfragen und deren Ergebnisse eingegangen und diese bewertet werden. Ausserdem werden mögliche Erweiterungen aufgezeigt.
 
 
 

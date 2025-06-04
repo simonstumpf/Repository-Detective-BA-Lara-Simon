@@ -18,17 +18,17 @@ In diesem Kapitel werden die in Kapitel \secref{sec:Zielsetzung} formulierten se
 %----------------------------------------------------------------------------------------
 \section{Churn vs. Latency}
 \label{sec:ResultatChurnLatency}
-Zur Klärung der \fref{forschungsfrage1}: "\textit{Besteht ein Zusammenhang zwischen der Latency eines Pull-Requests (Zeit bis zum Merge oder Schliessung) und dem Churn (Anzahl geänderter Codezeilen) des jeweiligen Pull-Requests?}" wurden die gemineden\footnote{Abgeleitet vom englischen Verb to mine.} Repository-Daten in einem Jupyter-Notebook aufbereitet und grafisch dargestellt. Dazu wurden die im Kapitel \secref{sec:Metriken} erwähnten Metriken \textit{createTime} und \textit{closeTime} gemined und damit die einzelnen Latencies berechnet. Um die Latency-Daten besser vergleichen zu können, wurden diese noch vom Datumsformat in Stunden umgerechnet. Des Weiteren wurden die Metriken  \textit{additions} und  \textit{deletions} aus den Pull-Requests extrahiert, um den Churn zu berechnen.
+Zur Klärung der \fref{forschungsfrage1}: "\textit{Besteht ein Zusammenhang zwischen der Latency eines Pull-Requests (Zeit bis zum Merge oder Schliessung) und dem Churn (Anzahl geänderter Codezeilen) des jeweiligen Pull-Requests?}" wurden die gemineden\footnote{Abgeleitet vom englischen Verb to mine.} Repository-Daten in einem Jupyter-Notebook aufbereitet und grafisch dargestellt. Dazu wurden die im Kapitel \secref{sec:Metriken} erwähnten Metriken createTime und closeTime gemined und damit die einzelnen Latencies berechnet. Um die Latency-Daten besser vergleichen zu können, wurden diese noch vom Datumsformat in Stunden umgerechnet. Des Weiteren wurden die Metriken  additions und deletions aus den Pull-Requests extrahiert, um den Churn zu berechnen.
 
 \subsection{Datenanalyse}
-Zum besseren Verständnis der \textit{latency}- und \textit{churn}- Werte wurde zunächst eine allgemeine Analyse der Daten durchgeführt.
-Die Analyse basiert auf 2435 extrahierten Pull-Requests. Im Durchschnitt werden 34.3 Pull-Requests pro Repository erstellt. Die wichtigsten Kennzahlen sind in \autoref{tab:deskriptive-kennzahlen} aufgeführt.
+Zum besseren Verständnis der latency- und churn- Werte wurde zunächst eine allgemeine Analyse der Daten durchgeführt.
+Die Analyse basiert auf 2'435 extrahierten Pull-Requests. Im Durchschnitt werden 34.3 Pull-Requests pro Repository erstellt. Die wichtigsten Kennzahlen sind in \autoref{tab:deskriptive-kennzahlen} aufgeführt.
 
 \newpage
 
 \begin{table}[htbp]
     \centering
-    \caption{Kennzahlen zu \textit{Latency} und \textit{Churn}}
+    \caption{Kennzahlen zu Latency und Churn}
     \begin{tabular}{@{}lrr@{}}
         \toprule
         \textbf & \textbf{Latency (in Stunden)} & \textbf{Churn} \\
@@ -39,7 +39,7 @@ Die Analyse basiert auf 2435 extrahierten Pull-Requests. Im Durchschnitt werden 
         1. Quartil (Q1) & 0.05 & 28.0 \\
         Median & 0.6 & 94.0 \\
         3. Quartil (Q3) &  16.4   & 251.0 \\
-        Maximum & 416.3 & 17299.0 \\
+        Maximum & 416.3 & 17'299.0 \\
         \bottomrule
     \end{tabular}
     \label{tab:deskriptive-kennzahlen}
@@ -51,7 +51,7 @@ Ein ähnliches Bild zeigt sich beim Churn. Auch hier liegt der Mittelwert mit 27
 
 Diese Werte sind zusätzlich in den Boxplots in den Abbildungen \autoref{fig:boxplot-latency} und \autoref{fig:boxplot-churn} ersichtlich. 
 In beiden Abbildungen ist der Box-Bereich auf der linken Seite kompakt und nahe bei null. 
-Die \autoref{fig:boxplot-latency} zeigt ebenfalls, dass viele Pull-Requests schnell abgearbeitet werden, während wenige längere Bearbeitungszeiten aufweisen. Es zeigt ausserdem auf, dass es eine Reihe von Ausreissern gibt. Diese belaufen sich auf 14\,\% aller \textit{latencies}.
+Die \autoref{fig:boxplot-latency} zeigt ebenfalls, dass viele Pull-Requests schnell abgearbeitet werden, während wenige längere Bearbeitungszeiten aufweisen. Es zeigt ausserdem auf, dass es eine Reihe von Ausreissern gibt. Diese belaufen sich auf 14\,\% aller latencies.
 
 \begin{figure}[htbp]
     \includegraphics[width=0.8\textwidth]{Figures/boxplot-latency.pdf}
@@ -60,7 +60,7 @@ Die \autoref{fig:boxplot-latency} zeigt ebenfalls, dass viele Pull-Requests schn
     \label{fig:boxplot-latency}
 \end{figure}
  \newpage
-Der Boxplot in der \autoref{fig:boxplot-churn} zeigt, dass es viele kleine Pull-Requests mit wenigen Codezeilenänderungen gibt. Wie bereits bei der \textit{latency} wird festgestellt, dass es eine Reihe von Ausreissern gibt, von denen einige besonders hervorstechen. Diese befinden sich bei über 10'000 Zeilenänderungen. In diesem Fall liegt die Anzahl der Ausreisser bei 9.6\,\%.
+Der Boxplot in der \autoref{fig:boxplot-churn} zeigt, dass es viele kleine Pull-Requests mit wenigen Codezeilenänderungen gibt. Wie bereits bei der latency wird festgestellt, dass es eine Reihe von Ausreissern gibt, von denen einige besonders hervorstechen. Diese befinden sich bei über 10'000 Zeilenänderungen. In diesem Fall liegt die Anzahl der Ausreisser bei 9.6\,\%.
 
 \begin{figure}[htbp]
     \includegraphics[width=0.8\textwidth]{Figures/boxplot-churn.pdf}
@@ -72,7 +72,7 @@ Der Boxplot in der \autoref{fig:boxplot-churn} zeigt, dass es viele kleine Pull-
 Werden die Ausreisser beider Metriken kumulativ aus allen Datensätzen herausgefiltert, bleiben 1887 Pull-Requests übrig, was 77.5\,\% entspricht. Das Herausfiltern dieser Daten stellt einen erheblichen Eingriff in die Datenbasis dar und wird daher nicht pauschal vorgenommen.
 
 \subsection{Ergebnisse}
-Um festzustellen, ob zwischen den Metriken \textit{latency} und \textit{churn} ein Zusammenhang besteht, wird die Spearman-Rangkorrelation angewendet. Dafür wird die oben erwähnte \autoref{eqn:spearman} verwendet. Diese wird mittels der Python-Bibliothek \textit{pandas} berechnet. Als Ergebnis erreichte der Rangkorrelationskoeffizient einen Wert von 0.17. Dieser Wert liegt nahe bei null und zeigt somit keinen spezifischen Zusammenhang zwischen den beiden Metriken auf. 
+Um festzustellen, ob zwischen den Metriken latency und churn ein Zusammenhang besteht, wird die Spearman-Rangkorrelation angewendet. Dafür wird die oben erwähnte \autoref{eqn:spearman} verwendet. Diese wird mittels der Python-Bibliothek pandas berechnet. Als Ergebnis erreichte der Rangkorrelationskoeffizient einen Wert von 0.17. Dieser Wert liegt nahe bei null und zeigt somit keinen spezifischen Zusammenhang zwischen den beiden Metriken auf. 
 
 Wie bereits erwähnt, weisen die Daten einen hohen Anteil an Ausreissern auf. Deshalb soll überprüft werden, ob die Metriken eine Korrelation besitzen, wenn diese Ausreisser herausgefiltert werden. In diesem Fall erhöht sich der Koeffizient auf 0.2, zeigt aber weiterhin keinen eindeutigen Zusammenhang zwischen den Metriken.
 
@@ -80,7 +80,7 @@ Wie bereits erwähnt, weisen die Daten einen hohen Anteil an Ausreissern auf. De
 Die Analyse zeigt, dass die meisten Pull-Requests sehr schnell bearbeitet werden, mit einer Median-Bearbeitungszeit von 0.6 Stunden. Der Churn verteilt sich ebenfalls sehr ungleich, die meisten PRs enthalten wenige Änderungen, einige jedoch sehr viele. Der Mittelwert der Anzahl Codeänderungen (Churn) liegt bei 278 Zeilen.
 
 Die Berechnung der Spearman-Rangkorrelation ergibt einen Wert von 0.17, was auf keinen signifikanten Zusammenhang zwischen dem Churn und der Latency hindeutet. Auch nach Herausfiltern extremer Ausreisser bleibt der Zusammenhang mit 0.20 sehr schwach.
-Zusammenfassend lässt sich zur \fref{forschungsfrage1} feststellen, dass die Metriken \textit{latency} und \textit{churn}, bei den untersuchten Projekten, keinen Zusammenhang aufweisen.
+Zusammenfassend lässt sich zur \fref{forschungsfrage1} feststellen, dass die Metriken latency und churn, bei den untersuchten Projekten, keinen Zusammenhang aufweisen.
 
 %----------------------------------------------------------------------------------------
 % SECTION 2
@@ -105,7 +105,7 @@ Dafür wurden alle Pull-Requests der Racetrack-Repositories (Teilzeit sowie Voll
 
 \newpage
 \subsection{Deskriptive Analyse}
-Insgesamt wurden 2427 Pull-Requests untersucht, wovon 170 PRs geschlossen wurden (7.0 \%). Von den geschlossenen PRs entfielen 95 auf Vollzeitklassen und 75 auf Teilzeitklassen. Die Teilzeitklassen verfügen im Schnitt über 2.77 und die Vollzeitklassen 2.15 geschlossene PRs pro Projekt. 
+Insgesamt wurden 2'427 Pull-Requests untersucht, wovon 170 PRs geschlossen wurden (7.0 \%). Von den geschlossenen PRs entfielen 95 auf Vollzeitklassen und 75 auf Teilzeitklassen. Die Teilzeitklassen verfügen im Schnitt über 2.77 und die Vollzeitklassen 2.15 geschlossene PRs pro Projekt. 
 
 Der durchschnittliche Churn bei geschlossenen PRs beträgt: \begin{itemize} \item Teilzeitklassen: 137 Zeilenänderungen \item Vollzeitklassen: 188 Zeilenänderungen \end{itemize}
 
@@ -139,7 +139,7 @@ Ergänzend zur durchschnittlichen Anzahl geschlossener PRs pro Projekt zeigt die
     \label{fig:vergleich-gesamtanzahl-prs-vs-closed-teilzeit}
 \end{figure}
 
-In beiden Unterrichtsformen zeigt sich, dass die Mehrheit der Pull-Requests in die kleinste Churn-Kategorie (0–100) fällt. Mit zunehmendem Churn nimmt sowohl die Gesamtanzahl der PRs als auch die Zahl der geschlossenen PRs kontinuierlich ab. Auffällig ist jedoch, dass bei den Vollzeitklassen auch in den höheren Churn-Kategorien mehr geschlossene Pull-Requests registriert sind. So finden sich etwa in der Kategorie 1000–10k deutlich mehr geschlossene PRs als in den Teilzeitklassen, obwohl die Gesamtanzahl der PRs in diesem Bereich nur geringfügig höher ist.
+In beiden Unterrichtsformen zeigt sich, dass die Mehrheit der Pull-Requests in die kleinste Churn-Kategorie (0–100) fällt. Mit zunehmendem Churn nimmt sowohl die Gesamtanzahl der PRs als auch die Zahl der geschlossenen PRs kontinuierlich ab. Auffällig ist jedoch, dass bei den Vollzeitklassen auch in den höheren Churn-Kategorien mehr geschlossene Pull-Requests registriert sind. So finden sich etwa in der Kategorie 1'000–10k deutlich mehr geschlossene PRs als in den Teilzeitklassen, obwohl die Gesamtanzahl der PRs in diesem Bereich nur geringfügig höher ist.
 In der höchsten Churn-Kategorie (>10k) sind in den Teilzeitklassen keine geschlossenen PRs zu verzeichnen, während in den Vollzeitklassen noch vereinzelte Schliessungen vorkommen. 
 
 \begin{figure}[htbp]
@@ -210,21 +210,21 @@ Zur besseren visuellen Veranschaulichung dient \autoref{fig:anz-clsd-prs-nach-ur
     \caption{Geschlossene PRs gruppiert nach Ursache}
     \label{fig:anz-clsd-prs-nach-ursache-und-churn}
 \end{figure}
-So ist in der \autoref{tab:geschlossene-prs-nach-ursache} und \autoref{fig:anz-clsd-prs-nach-ursache-und-churn} sichtbar, dass die meisten PRs in allen Klassen jeweils ohne erkennbaren Grund \textit{OG} geschlossen werden. Dieses Muster ist insbesondere bei den PRs mit einem geringen Churn (<100) ausgeprägt, wobei bei beiden Unterrichtsmodellen ein klarer Spitzenwert in dieser Kategorie erkennbar ist.
+So ist in der \autoref{tab:geschlossene-prs-nach-ursache} und \autoref{fig:anz-clsd-prs-nach-ursache-und-churn} sichtbar, dass die meisten PRs in allen Klassen jeweils ohne erkennbaren Grund OG geschlossen werden. Dieses Muster ist insbesondere bei den PRs mit einem geringen Churn (<100) ausgeprägt, wobei bei beiden Unterrichtsmodellen ein klarer Spitzenwert in dieser Kategorie erkennbar ist.
 
 
 Bei PRs mit einem grossen Churn (>500) hingegen zeigt sich eine leicht stärkere Differenzierung der Schliessgründe.
-In den Vollzeitklassen treten dabei strukturierte Ursachen wie \textit{FZB} (falscher Zielbranch) und \textit{IA} (Implementierung abgelehnt) auf. 
-In den Teilzeitklassen hingegen treten im Bereich grosser PRs vermehrt Ursachen der Kategorie \textit{FPI} (Feature durch anderen PR implementiert) oder in der Kategorie \textit{DIV} auf, welche unter anderem Refactorings und Feedback-PRs beinhalten.
+In den Vollzeitklassen treten dabei strukturierte Ursachen wie FZB (falscher Zielbranch) und IA (Implementierung abgelehnt) auf. 
+In den Teilzeitklassen hingegen treten im Bereich grosser PRs vermehrt Ursachen der Kategorie FPI (Feature durch anderen PR implementiert) oder in der Kategorie DIV auf, welche unter anderem Refactorings und Feedback-PRs beinhalten.
 
 
 Die Normalisierung der Daten erfolgt, indem die absolute Anzahl geschlossener Pull-Requests jeder Ursache durch die Anzahl der analysierten Repositories innerhalb der jeweiligen Unterrichtsform dividiert wird. Dadurch entsteht ein durchschnittlicher Wert pro Repository, der eine vergleichbare Betrachtung zwischen Voll\-zeit- und Teilzeitklassen ermöglicht. \autoref{tab:durchschittliche-anzahl-geschlossene-prs-nach-ursache-pro-projekt} zeigt die durchschnittlichen geschlossenen PRs gruppiert nach Ursache und Churn pro Projekt.  
 
-In den beiden Churn-Klassen (<100) ist die Ursache \textit{OG} (ohne erkennbaren Grund) mit Abstand am häufigsten vertreten. In Vollzeit- und Teilzeitklassen liegt der durchschnittliche Wert jeweils bei rund 0.8 geschlossenen PRs pro Repository. Auch bei PRs mit grossem Churn (> 500) bleibt \textit{OG} die häufigste Ursache.
+In den beiden Churn-Klassen (<100) ist die Ursache OG (ohne erkennbaren Grund) mit Abstand am häufigsten vertreten. In Vollzeit- und Teilzeitklassen liegt der durchschnittliche Wert jeweils bei rund 0.8 geschlossenen PRs pro Repository. Auch bei PRs mit grossem Churn (> 500) bleibt OG die häufigste Ursache.
 
-Strukturierte Ursachen wie \textit{FPI} (Feature durch anderen PR implementiert), \textit{IA} (Implementierung abgelehnt) und \textit{FZB} (falscher Zielbranch) treten bei PRs mit grossem Churn in beiden Unterrichtsformen auf, in Vollzeitklassen jedoch oftmals mit höheren Durchschnittswerten. Für \textit{FZB} beträgt der Durchschnitt in Vollzeitklassen 0.222 PRs pro Repository, in Teilzeitklassen 0.091. Die Ursache \textit{FPI} tritt ausschliesslich in Teilzeitklassen auf (0.182), \textit{IA} hingegen ist in Vollzeitklassen mit 0.148 stärker vertreten als in Teilzeitklassen (0.045). Die Kategorie \textit{DIV}, welche unter anderem Refactor- und Feedback-PRs umfasst, ist nur in Teilzeitklassen mit grossem Churn vertreten und besitzt dort einen durchschnittlichen Wert von 0.114 PRs pro Repository.
+Strukturierte Ursachen wie FPI (Feature durch anderen PR implementiert), IA (Implementierung abgelehnt) und FZB (falscher Zielbranch) treten bei PRs mit grossem Churn in beiden Unterrichtsformen auf, in Vollzeitklassen jedoch oftmals mit höheren Durchschnittswerten. Für FZB beträgt der Durchschnitt in Vollzeitklassen 0.222 PRs pro Repository, in Teilzeitklassen 0.091. Die Ursache FPI tritt ausschliesslich in Teilzeitklassen auf (0.182), IA hingegen ist in Vollzeitklassen mit 0.148 stärker vertreten als in Teilzeitklassen (0.045). Die Kategorie DIV, welche unter anderem Refactor- und Feedback-PRs umfasst, ist nur in Teilzeitklassen mit grossem Churn vertreten und besitzt dort einen durchschnittlichen Wert von 0.114 PRs pro Repository.
 
-Die Ursache \textit{FNN} (Feature wird nicht mehr benötigt) zeigt ein etwas anderes Bild: Sie ist bei kleinen PRs (Churn < 100) ausschliesslich in Teilzeitklassen mit einem Durchschnitt von 0.068 vertreten und ist bei den Vollzeitklassen nicht vertreten. Bei einem Churn (> 500) ist \textit{FNN} nur in den Vollzeitklassen mit einem Wert von 0.037 vertreten und in den Teilzeitklassen nicht vorhanden.
+Die Ursache FNN (Feature wird nicht mehr benötigt) zeigt ein etwas anderes Bild: Sie ist bei kleinen PRs (Churn < 100) ausschliesslich in Teilzeitklassen mit einem Durchschnitt von 0.068 vertreten und ist bei den Vollzeitklassen nicht vertreten. Bei einem Churn (> 500) ist FNN nur in den Vollzeitklassen mit einem Wert von 0.037 vertreten und in den Teilzeitklassen nicht vorhanden.
 
 \begin{table}[htbp]
 \caption{Durchschnittliche Anzahl geschlossene PRs gruppiert nach Ursache und Churn pro Repository}
@@ -280,7 +280,7 @@ Als visuelle Darstellung der \autoref{tab:durchschittliche-anzahl-geschlossene-p
 \end{figure}
 
 \newpage
-Zusammenfassend zeigen die Ergebnisse, dass bei kleinen Pull-Requests (Churn < 100) die Ursache \textit{OG} (ohne erkennbaren Grund) in beiden Unterrichtsformen mit Abstand am häufigsten vorkommt. Bei grossen Pull-Requests (Churn > 500) verteilt sich die Anzahl geschlossener PRs auf mehrere Ursachen. In Vollzeitklassen treten in dieser Churn-Kategorie strukturierte Ursachen wie \textit{IA} (Implementierung abgelehnt), \textit{FZB} (falscher Zielbranch) und \textit{FNN} (Feature wird nicht mehr benötigt) häufiger auf. In Teilzeitklassen hingegen ist die Ursache \textit{FPI} (Feature durch anderen PR implementiert) nur in dieser Unterrichtsform vertreten. Zudem tritt die Kategorie \textit{DIV}, welche unter anderem Feedback- und Refactoring-PRs umfasst, ausschliesslich in Teilzeitklassen mit grossem Churn auf. Die dargestellten Trends zeigen sich sowohl in den absoluten Werten als auch in den normalisierten Daten pro Repository.
+Zusammenfassend zeigen die Ergebnisse, dass bei kleinen Pull-Requests (Churn < 100) die Ursache OG (ohne erkennbaren Grund) in beiden Unterrichtsformen mit Abstand am häufigsten vorkommt. Bei grossen Pull-Requests (Churn > 500) verteilt sich die Anzahl geschlossener PRs auf mehrere Ursachen. In Vollzeitklassen treten in dieser Churn-Kategorie strukturierte Ursachen wie IA (Implementierung abgelehnt), FZB (falscher Zielbranch) und FNN (Feature wird nicht mehr benötigt) häufiger auf. In Teilzeitklassen hingegen ist die Ursache FPI (Feature durch anderen PR implementiert) nur in dieser Unterrichtsform vertreten. Zudem tritt die Kategorie DIV, welche unter anderem Feedback- und Refactoring-PRs umfasst, ausschliesslich in Teilzeitklassen mit grossem Churn auf. Die dargestellten Trends zeigen sich sowohl in den absoluten Werten als auch in den normalisierten Daten pro Repository.
 
 \subsection{Zeitliche Analyse geschlossener PRs}
 
@@ -315,16 +315,16 @@ Im Gegensatz dazu zeigen Vollzeitklassen bei den großen Pull-Requests häufiger
 % SECTION 3
 %----------------------------------------------------------------------------------------
 \section{Einfluss von Projektzeit}
-Als Nächstes wurde die \fref{forschungsfrage3} "\textit{Besteht ein Zusammenhang zwischen dem Zeitpunkt im Projektverlauf und der Review-Dauer von Pull-Requests?}" untersucht. Um zu ermitteln, ob die fortschreitende Projektzeit einen Einfluss auf das Bearbeiten der Pull-Requests hat. Zusätzlich werden auch die \textit{churns} untersucht, um zu sehen, wie sich diese im Verlauf der Projektzeit verändern. 
+Als Nächstes wurde die \fref{forschungsfrage3} "\textit{Besteht ein Zusammenhang zwischen dem Zeitpunkt im Projektverlauf und der Review-Dauer von Pull-Requests?}" untersucht. Um zu ermitteln, ob die fortschreitende Projektzeit einen Einfluss auf das Bearbeiten der Pull-Requests hat. Zusätzlich werden auch die churns untersucht, um zu sehen, wie sich diese im Verlauf der Projektzeit verändern. 
 
 
 Ein signifikanter Faktor, der bei den Projektmodulen eine Rolle spielt, ist der fest definierte Abgabetermin. Dies unterscheidet diese Projekte von Open-Source-Projekten, die in der Literatur häufig untersucht werden. Um diese Untersuchung durchführen zu können, wird zusätzlich zu den oben genannten Metriken der Abgabetermin der einzelnen Klassen nachgeschlagen.
 
-Zur initialen Analyse wurden die Projekte in die entsprechenden Projektwochen aufgeteilt und die Mediane der \textit{latencies} und \textit{churns} der entsprechenden Wochen ermittelt. Dies soll eine allgemeine Übersicht der Veränderungen der Metriken aufzeigen.
+Zur initialen Analyse wurden die Projekte in die entsprechenden Projektwochen aufgeteilt und die Mediane der latencies und churns der entsprechenden Wochen ermittelt. Dies soll eine allgemeine Übersicht der Veränderungen der Metriken aufzeigen.
 
 \subsection{Projektwochen im Verhältnis zu Latency und Churn}
 \label{sec:ProjektwochenLatencyChurn}
-In welcher Woche ein Pull-Request stattfindet, wird ermittelt, indem die im Kapitel \secref{sec:Metriken} erwähnten Metriken \textit{Pull-Request createTime} und \textit{Repository createTime} gemined werden und die Erstellungszeit des Repositories von der Eröffnungszeit des Pull-Requests abgezogen wird. 
+In welcher Woche ein Pull-Request stattfindet, wird ermittelt, indem die im Kapitel \secref{sec:Metriken} erwähnten Metriken Pull-Request createTime und Repository createTime gemined werden und die Erstellungszeit des Repositories von der Eröffnungszeit des Pull-Requests abgezogen wird. 
 
 
 Anhand der \autoref{fig:mittelwert-woche-lateny} ist ersichtlich, dass die Latency gegen Ende der Projektzeit abnimmt, während den Churn (\autoref{fig:mittelwert-woche-churn}) bis zur 5. Woche ansteigt. 
@@ -465,10 +465,10 @@ Die durchgeführten Analysen stellen einen wie in der \fref{forschungsfrage3} ge
 \newpage
 \section{Ergebnisse Entwicklungs\-aktivi\-tät}
 \label{sec:ErgebnisseEntwicklungsaktivtät}
-Empirische Studien zeigen, dass die Entwicklungsaktivität in Open-Source-Projekten auf Plattformen wie GitHub charakteristische Muster im Wochenverlauf aufweist. Insbesondere an Wochenenden ist die Aktivität signifikant geringer als unter der Woche. Innerhalb der Arbeitswoche fallen Montag und Freitag häufig als die Tage mit der geringsten Aktivität auf. Das Phänomen des Rückgangs der Entwicklungsaktivität wird oftmals auch \textit{Friday Effect} genannt. \parencite{claes_programmers_2018}
+Empirische Studien zeigen, dass die Entwicklungsaktivität in Open-Source-Projekten auf Plattformen wie GitHub charakteristische Muster im Wochenverlauf aufweist. Insbesondere an Wochenenden ist die Aktivität signifikant geringer als unter der Woche. Innerhalb der Arbeitswoche fallen Montag und Freitag häufig als die Tage mit der geringsten Aktivität auf. Das Phänomen des Rückgangs der Entwicklungsaktivität wird oftmals auch Friday Effect genannt. \parencite{claes_programmers_2018}
 
 Dies soll nun im Zusammenhang mit der \fref{forschungsfrage4} "\textit{Lassen sich Patterns der Zusammenarbeit im Team erkennen,
-hinsichtlich der Tage, an denen die Studierenden an den Projekten arbeiten?}" anhand der Projektmodule analysiert werden. Um diese Analyse durchführen zu können, werden die Klassen einzeln nach ihren Arbeitstagen analysiert. Die Arbeitstage werden anhand der offenen und geschlossenen Pull-Requests und der Commit-Daten definiert. Für dies wird das Mining um die im Kapitel \secref{sec:Metriken} erwähnte Metrik \textit{commit} ergänzt.
+hinsichtlich der Tage, an denen die Studierenden an den Projekten arbeiten?}" anhand der Projektmodule analysiert werden. Um diese Analyse durchführen zu können, werden die Klassen einzeln nach ihren Arbeitstagen analysiert. Die Arbeitstage werden anhand der offenen und geschlossenen Pull-Requests und der Commit-Daten definiert. Für dies wird das Mining um die im Kapitel \secref{sec:Metriken} erwähnte Metrik commit ergänzt.
 
 Um die Entwicklungsaktivität messbar machen zu können, mussten für alle Klassen die Projektmodul-Unterrichtstage nachgeschlagen werden. Diese sind in \autoref{tab:stundenplan} ersichtlich. 
 \begin{table}[ht]
@@ -617,7 +617,7 @@ Zur detaillierten Analyse der \fref{forschungsfrage5} "\textit{Welche Unterschie
 
 \begin{table}[htbp]
     \centering
-    \caption{Kennzahlen zu \textit{Latency} und \textit{Churn} von Teilzeit- und Vollzeitklassen}
+    \caption{Kennzahlen zu Latency und Churn von Teilzeit- und Vollzeitklassen}
     \begin{tabular}{@{}lrrrr@{}}
         \toprule
         \makecell{}&
@@ -632,7 +632,7 @@ Zur detaillierten Analyse der \fref{forschungsfrage5} "\textit{Welche Unterschie
         1. Quartil (Q1) & 0.04 & 0.07 & 27.0 & 28.3\\
         Median & 0.5 & 0.8 & 93.0 & 97.0 \\
         3. Quartil (Q3) &  15.1 & 17.5 & 249.0 & 254.5 \\
-        Maximum & 416.3 & 265.0 & 13206.0 & 17299.0 \\
+        Maximum & 416.3 & 265.0 & 13'206.0 & 17'299.0 \\
         \bottomrule
     \end{tabular}
     \label{tab:deskriptive-kennzahlen-teilzeit-vollzeit}
@@ -640,14 +640,14 @@ Zur detaillierten Analyse der \fref{forschungsfrage5} "\textit{Welche Unterschie
 
 \newpage
 \subsection{Deskriptive Analyse der Metriken}
-Die \textit{latency} zeigt, dass Teilzeitstudierende im Durchschnitt mehr Zeit benötigen, um einen PR zu bearbeiten. Der Median zeigt jedoch, dass Teilzeitstudierende häufiger sehr kurze Pull-Request-Latencies haben. Dabei ist bei beiden die Bearbeitungszeit im Median deutlich kürzer. Ausserdem ist zu erkennen, dass die Teilzeitstudierenden eine grössere Streuung der Bearbeitungszeiten aufweisen. Sie haben also einige Pull-Requests, die deutlich länger dauern. Dies ist auch im Maximum zu sehen, welches bei den Teilzeitstudierenden bei 416 Stunden liegt, was 17 Tagen entspricht. Wobei die Vollzeitstudierenden ein Maximum von 265 Stunden haben, was 11 Tagen entspricht.
+Die latency zeigt, dass Teilzeitstudierende im Durchschnitt mehr Zeit benötigen, um einen PR zu bearbeiten. Der Median zeigt jedoch, dass Teilzeitstudierende häufiger sehr kurze Pull-Request-Latencies haben. Dabei ist bei beiden die Bearbeitungszeit im Median deutlich kürzer. Ausserdem ist zu erkennen, dass die Teilzeitstudierenden eine grössere Streuung der Bearbeitungszeiten aufweisen. Sie haben also einige Pull-Requests, die deutlich länger dauern. Dies ist auch im Maximum zu sehen, welches bei den Teilzeitstudierenden bei 416 Stunden liegt, was 17 Tagen entspricht. Wobei die Vollzeitstudierenden ein Maximum von 265 Stunden haben, was 11 Tagen entspricht.
 
-Der \textit{churn} zeigt, dass Vollzeitstudierende sowohl im Durchschnitt als auch im Median mehr Zeilenänderungen pro Pull-Request vornehmen. Die Standardabweichung zeigt ebenfalls, dass Vollzeitstudierende grössere Schwankungen in der Anzahl der Zeilenänderungen haben. Im Maximum ist ersichtlich, dass beide sehr grosse PRs haben, wobei sich das Maximum der Vollzeitstudierenden nochmals um mehr als 4'000 Zeilen von dem Maximum der Teilzeitstudierenden unterscheidet.
+Der churn zeigt, dass Vollzeitstudierende sowohl im Durchschnitt als auch im Median mehr Zeilenänderungen pro Pull-Request vornehmen. Die Standardabweichung zeigt ebenfalls, dass Vollzeitstudierende grössere Schwankungen in der Anzahl der Zeilenänderungen haben. Im Maximum ist ersichtlich, dass beide sehr grosse PRs haben, wobei sich das Maximum der Vollzeitstudierenden nochmals um mehr als 4'000 Zeilen von dem Maximum der Teilzeitstudierenden unterscheidet.
 
 Auch die Struktur der PRs unterscheidet sich leicht zwischen den Unterrichtsmodellen: Die durchschnittliche Anzahl bearbeiteter Dateien pro PR liegt insgesamt bei 5.66 Dateien. Teilzeitklassen weisen mit 5.85 im Schnitt mehr betroffene Dateien auf als Vollzeitklassen mit 5.42 Dateien. Ebenso zeigt sich bei der durchschnittlichen Anzahl Commits pro PR ein Unterschied: Insgesamt liegt der Durchschnitt bei 7.03 Commits pro PR, wobei Teilzeitklassen auf 6.50 und Vollzeitklassen auf 7.70 Commits pro PR kommen.
 
 \subsection{Verteilung der Latencies}
-Um die Verteilung der \textit{latencies} zu analysieren, werden die Daten in Intervalle eingeteilt. Die Festlegung dieser Intervalle erfolgt auf der Grundlage bereits analysierter Daten. Nachfolgend eine Liste dieser Intervalle und die Gründe, warum sie so definiert wurden: 
+Um die Verteilung der latencies zu analysieren, werden die Daten in Intervalle eingeteilt. Die Festlegung dieser Intervalle erfolgt auf der Grundlage bereits analysierter Daten. Nachfolgend eine Liste dieser Intervalle und die Gründe, warum sie so definiert wurden: 
 
 \begin{itemize}
     \item \textbf{[0-1min]}: Für Pull-Requests, die sofort gemerged werden.
@@ -690,7 +690,7 @@ Insgesamt zeigen die Abbildungen \autoref{fig:anz-prs-vs-latency-tv} und \autore
 \subsection{Verteilung der Churn-Grössen}
 Zur Klassifizierung der Churn-Grösse werden die von Doğan und Tüzün \parencite{dogan_towards_2022} vorgeschlagenen Grössenkategorien (XS, S, M, L, XL) verwendet. Diese Einteilung basiert auf empirischen Studien und industriellen Standards.
 
-Während der manuellen Untersuchung für die \fref{forschungsfrage2} wurde festgestellt, dass einige PRs einen Churn über 10'000 aufweisen. Entweder handelt es sich hierbei um geschlossene PRs, welche entweder aus Versehen oder beispielsweise mit dem falschen Zielbranch erstellt wurden. Um diese klassifizieren zu können, wurde eine zusätzliche Grösse \textit{XXL} mit Churn \textit{10'000} erstellt. 
+Während der manuellen Untersuchung für die \fref{forschungsfrage2} wurde festgestellt, dass einige PRs einen Churn über 10'000 aufweisen. Entweder handelt es sich hierbei um geschlossene PRs, welche entweder aus Versehen oder beispielsweise mit dem falschen Zielbranch erstellt wurden. Um diese klassifizieren zu können, wurde eine zusätzliche Grösse XXL mit Churn 10'000 erstellt. 
 
 \newpage
 Somit ergibt sich für die Analyse die in \autoref{tab:churnkategorien} dargestellte Klassifizierung der Churn-Grössen.
@@ -706,14 +706,14 @@ XS  & 0--9       \\
 S        & 10--49     \\
 M        & 50--199    \\
 L         & 200--999   \\
-XL   & 1000--9999 \\
-XXL  & 10000+ \\
+XL   & 1'000--9999 \\
+XXL  & 10'000+ \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 
-Die \autoref{fig:anz-prs-vs-churn-size-tz-vz} zeigt Pull-Requests der Voll- und Teilzeitklassen, aufgeteilt nach ihrer Churn-Grösse. So ist sichtbar, dass die Teilzeitklassen insgesamt mehr PRs erstellen. Dieser Trend ist in allen Grössenkategorien sichtbar, ausser bei den \textit{XXL} PRs. Hier verfügen die Teilzeitklassen  über 2 PRs, während die Vollzeitklassen 5 PRs mit einem Churn über 10'000 verfügen. Bei den \textit{XXS} PRs verfügen die Teilzeitklassen über 1.5 Mal so viele PRs.
+Die \autoref{fig:anz-prs-vs-churn-size-tz-vz} zeigt Pull-Requests der Voll- und Teilzeitklassen, aufgeteilt nach ihrer Churn-Grösse. So ist sichtbar, dass die Teilzeitklassen insgesamt mehr PRs erstellen. Dieser Trend ist in allen Grössenkategorien sichtbar, ausser bei den XXL PRs. Hier verfügen die Teilzeitklassen  über 2 PRs, während die Vollzeitklassen 5 PRs mit einem Churn über 10'000 verfügen. Bei den XXS PRs verfügen die Teilzeitklassen über 1.5 Mal so viele PRs.
 
 \begin{figure}[htbp]
     \includegraphics[width=\textwidth]{Figures/anz-prs-vs-churn-size-tz-vz.pdf}
@@ -721,7 +721,7 @@ Die \autoref{fig:anz-prs-vs-churn-size-tz-vz} zeigt Pull-Requests der Voll- und 
     \label{fig:anz-prs-vs-churn-size-tz-vz}
 \end{figure}
 \newpage
-Eine Normalisierung der Daten, die nun die durchschnittliche Anzahl der Pull-Requests pro Repository abbildet, ist in \autoref{fig:avg-anz-prs-vs-churn-size-tz-vz-pro-repo} dargestellt. Dabei zeigt sich, dass die Vollzeitklassen in allen Kategorien entweder gleich viele oder mehr Pull-Requests erstellen als die Teilzeitklassen. Die Teilzeitklassen erstellen jedoch fast gleich viele PRs in den Kategorien \textit{XS} und \textit{XL}, dort erstellen die Vollzeitklassen jeweils 1.12 und 1.18 so viele PRs. 
+Eine Normalisierung der Daten, die nun die durchschnittliche Anzahl der Pull-Requests pro Repository abbildet, ist in \autoref{fig:avg-anz-prs-vs-churn-size-tz-vz-pro-repo} dargestellt. Dabei zeigt sich, dass die Vollzeitklassen in allen Kategorien entweder gleich viele oder mehr Pull-Requests erstellen als die Teilzeitklassen. Die Teilzeitklassen erstellen jedoch fast gleich viele PRs in den Kategorien XS und XL, dort erstellen die Vollzeitklassen jeweils 1.12 und 1.18 so viele PRs. 
 
 \begin{figure}[htbp]
     \includegraphics[width=\textwidth]{Figures/avg-anz-prs-vs-churn-size-tz-vz-pro-repo.pdf}
@@ -731,7 +731,7 @@ Eine Normalisierung der Daten, die nun die durchschnittliche Anzahl der Pull-Req
 
 
 \subsection{Einfluss des Git Flow Branching-Konzept}
-Die für die \fref{forschungsfrage2} benötigte manuelle Untersuchung ergab, dass in einigen Klassen das in Kapitel \secref{sec:GitFlow} eingeführte Branching-Konzept \textit{Git Flow} verwendet wurde. Dies verfälscht eventuell die Daten, da es sich bei den manuell untersuchten Pull-Requests um grosse PRs (Churn) handelt, welche keinen Review erfordern. Aus diesem Grund werden die Analysen erneut durchgeführt, jedoch mit herausgefilterten Dev-Branches.
+Die für die \fref{forschungsfrage2} benötigte manuelle Untersuchung ergab, dass in einigen Klassen das in Kapitel \secref{sec:GitFlow} eingeführte Branching-Konzept Git Flow verwendet wurde. Dies verfälscht eventuell die Daten, da es sich bei den manuell untersuchten Pull-Requests um grosse PRs (Churn) handelt, welche keinen Review erfordern. Aus diesem Grund werden die Analysen erneut durchgeführt, jedoch mit herausgefilterten Dev-Branches.
 
 Da die Namen der Dev-Branches nicht einheitlich sind, werden alle Branches herausgefiltert, die das Wort Dev enthalten und auf den Main/Master Branch gemerged werden. Dabei ist zu beachten, dass GitHub den heutigen Haupt-Branch Main nennt, während dieser früher Master hiess. In der manuellen Analyse wurde festgestellt, dass einige Klassen aus dem Jahr 2021 immer noch solche Master-Branches verwenden. Zusätzlich wurden alle herausgefilterten Pull-Requests überprüft, um sicherzustellen, dass ausschliesslich Dev-Branches entfernt werden. Es wurden 75 Pull-Requests von Dev-Branches zu Main-Branches ermittelt.
 
@@ -747,7 +747,7 @@ Die \autoref{fig:anz-avg-prs-vs-latency-tv-no-dev} zeigt kaum Differenzen zur \a
 
 Ebenfalls bleibt das Bild, nach der Entfernung der Pull-Requests von Dev-Branches, in Bezug auf die Churn-Grössen weitgehend unverändert.
 
-Die \autoref{fig:anz-prs-vs-churn-size-tz-vz-ohne-dev} zeigt die durchschnittliche Anzahl von Pull-Requests pro Repository gruppiert nach ihrer Churn-Grösse, ohne Dev-Branch-Merges. Es ist ersichtlich, dass die Vollzeitklassen in allen Churn-Kategorien tendenziell mehr Pull-Requests pro Repository erstellen als die Teilzeitklassen. Besonders in den Kategorien \textit{M} (50–199 Änderungen) und \textit{L} (200–999 Änderungen) ist der Unterschied deutlich ausgeprägt. In den Kategorien \textit{XS} (0–9 Änderungen) und \textit{S} (10–49 Änderungen) ist der Abstand zwischen Teilzeit- und Vollzeitklassen zwar etwas geringer, aber immer noch zugunsten der Vollzeitklassen.
+Die \autoref{fig:anz-prs-vs-churn-size-tz-vz-ohne-dev} zeigt die durchschnittliche Anzahl von Pull-Requests pro Repository gruppiert nach ihrer Churn-Grösse, ohne Dev-Branch-Merges. Es ist ersichtlich, dass die Vollzeitklassen in allen Churn-Kategorien tendenziell mehr Pull-Requests pro Repository erstellen als die Teilzeitklassen. Besonders in den Kategorien M (50–199 Änderungen) und L (200–999 Änderungen) ist der Unterschied deutlich ausgeprägt. In den Kategorien XS (0–9 Änderungen) und S (10–49 Änderungen) ist der Abstand zwischen Teilzeit- und Vollzeitklassen zwar etwas geringer, aber immer noch zugunsten der Vollzeitklassen.
 
 \begin{figure}[htbp]
     \includegraphics[width=\textwidth]{Figures/avg-anz-prs-vs-churn-size-tz-vz-pro-repo-ohne-dev.pdf}
@@ -756,7 +756,7 @@ Die \autoref{fig:anz-prs-vs-churn-size-tz-vz-ohne-dev} zeigt die durchschnittlic
 \end{figure}
 
 \newpage
-Zum Vergleich zeigt die \autoref{fig:anz-prs-vs-churn-size-tz-vz-nur-dev} nur die PRs, die von Dev-Branches auf Main-Branches gemerged wurden. Hier zeigt sich, dass diese Pull-Requests insbesondere in den grösseren Churn-Kategorien (\textit{L} bis \textit{XXL}) auftreten. Auffällig ist zudem, dass in dieser Betrachtung die Vollzeitstudierenden mehr grosse Dev-Branch Pull-Requests erzeugen als die Teilzeitstudierenden.
+Zum Vergleich zeigt die \autoref{fig:anz-prs-vs-churn-size-tz-vz-nur-dev} nur die PRs, die von Dev-Branches auf Main-Branches gemerged wurden. Hier zeigt sich, dass diese Pull-Requests insbesondere in den grösseren Churn-Kategorien (L bis XXL) auftreten. Auffällig ist zudem, dass in dieser Betrachtung die Vollzeitstudierenden mehr grosse Dev-Branch Pull-Requests erzeugen als die Teilzeitstudierenden.
 
 \begin{figure}[htbp]
     \includegraphics[width=\textwidth]{Figures/avg-anz-prs-vs-churn-size-tz-vz-pro-repo-nur-dev.pdf}
@@ -775,7 +775,7 @@ Die Analyse zeigt Unterschiede zwischen Teilzeit- und Vollzeitstudierenden in de
 In diesem Kapitel wird die \fref{forschungsfrage6} "\textit{Welche Unterschiede zeigen sich in den Repository-Metriken
 zwischen den Studentenprojekten und professionellen GitHub-Organisationen?}" untersucht. Dazu werden zunächst die Metriken der Racetrack-Projekte analysiert und eine Korrelationsmatrix erstellt und anschliessend mit den Open-Source-Projekten der GitHub-Organisationen Ubique Innovation AG, Schweizerische Bundesbahnen (SBB) und Zalando SE verglichen.
 \subsection{Korrelationsanalyse der Racetrack-Repositories}
-Die Korrelationsmatrix der Racetrack-Projekte ist in \autoref{fig:korrelationsmatrix-racetrack} dargestellt. Auffällig ist die starke positive Korrelation, welche zwischen \textit{Churn} und \textit{Commits} (0.62) sowie zwischen \textit{Churn} und \textit{Changed Files Count} (0.70) besteht. 
+Die Korrelationsmatrix der Racetrack-Projekte ist in \autoref{fig:korrelationsmatrix-racetrack} dargestellt. Auffällig ist die starke positive Korrelation, welche zwischen Churn und Commits (0.62) sowie zwischen Churn und Changed Files Count (0.70) besteht. 
 
 \begin{figure}[htbp]
     \includegraphics[width=\textwidth]{Figures/racetrack-korrelationsmatrix.pdf}
@@ -786,12 +786,12 @@ Die Korrelationsmatrix der Racetrack-Projekte ist in \autoref{fig:korrelationsma
 
 \newpage
 \subsection{Vergleich mit professionellen GitHub-Organisationen}
-Zur besseren Einordnung der Ergebnisse der Racetrack-Projekte erfolgt nun ein Vergleich mit drei professionellen GitHub-Organisationen unterschiedlicher Grössenordnung. Die Auswahl der drei GitHub-Organisationen \textit{Ubique Innovation AG}, \textit{Schweizerische Bundesbahnen (SBB)} und \textit{Zalando} wird in \autoref{sec:VorstellungGithubOrgs} erläutert. 
+Zur besseren Einordnung der Ergebnisse der Racetrack-Projekte erfolgt nun ein Vergleich mit drei professionellen GitHub-Organisationen unterschiedlicher Grössenordnung. Die Auswahl der drei GitHub-Organisationen Ubique Innovation AG, Schweizerische Bundesbahnen (SBB) und Zalando wird in \autoref{sec:VorstellungGithubOrgs} erläutert. 
 
 
 \subsubsection{Ubique Innovation AG}
 Die Korrelationsmatrix von Ubique (siehe 
-\autoref{fig:korrelationsmatrix-ubique}) zeigt ebenfalls starke positive Zusammenhänge zwischen \textit{Churn}, \textit{Commits} (0.64) und \textit{Changed Files Count} (0.70). Jedoch zeigt sich bei Ubique eine positive Korrelation zwischen \textit{Latency} und \textit{Comments} (0.28), was auf umfangreichere Reviews bei längeren Bearbeitungszeiten hindeutet.
+\autoref{fig:korrelationsmatrix-ubique}) zeigt ebenfalls starke positive Zusammenhänge zwischen Churn, Commits (0.64) und Changed Files Count (0.70). Jedoch zeigt sich bei Ubique eine positive Korrelation zwischen Latency und Comments (0.28), was auf umfangreichere Reviews bei längeren Bearbeitungszeiten hindeutet.
 
 \begin{figure}[htbp]
 \includegraphics[width=\textwidth]{Figures/ubique-korrelationsmatrix.pdf}
@@ -800,7 +800,7 @@ Die Korrelationsmatrix von Ubique (siehe
 \end{figure}
 
 \newpage
-Um die Unterschiede zwischen den Racetrack-Repositories und den untersuchten OSS-Repositories besser zu erkennen, wurde eine Differenzanalyse durchgeführt. Hierbei wurden die Differenzen der einzelnen Korrelationen berechnet und in einer Heatmap dargestellt. Die Differenzanalyse zwischen Racetrack und Ubique (siehe \autoref{fig:diff-korrelationsmatrix-racetrack-ubique}) zeigt, dass die Racetrack-Projekte stärkere positive Korrelationen zwischen \textit{Description Length} und \textit{Commits} (0.38) sowie \textit{Description Length} und \textit{Churn} (0.34) aufweisen.
+Um die Unterschiede zwischen den Racetrack-Repositories und den untersuchten OSS-Repositories besser zu erkennen, wurde eine Differenzanalyse durchgeführt. Hierbei wurden die Differenzen der einzelnen Korrelationen berechnet und in einer Heatmap dargestellt. Die Differenzanalyse zwischen Racetrack und Ubique (siehe \autoref{fig:diff-korrelationsmatrix-racetrack-ubique}) zeigt, dass die Racetrack-Projekte stärkere positive Korrelationen zwischen Description Length und Commits (0.38) sowie Description Length und Churn (0.34) aufweisen.
 
 \begin{figure}[htbp]
 \includegraphics[width=\textwidth]{Figures/diff-korrelationsmatrix-racetrack-ubique.pdf}
@@ -810,7 +810,7 @@ Um die Unterschiede zwischen den Racetrack-Repositories und den untersuchten OSS
 
 \newpage
 \subsubsection{Schweizerische Bundesbahnen (SBB)}
-Die Korrelationsmatrix der SBB (\autoref{fig:korrelationsmatrix-sbb}) weist ebenfalls starke positive Korrelationen zwischen \textit{Churn} und \textit{Commits} (0.54) sowie \textit{Churn} und \textit{Changed Files Count} (0.81) auf. Auffällig bei der SBB ist die negative Korrelation zwischen \textit{Description Length} und \textit{Commits} (-0.33).
+Die Korrelationsmatrix der SBB (\autoref{fig:korrelationsmatrix-sbb}) weist ebenfalls starke positive Korrelationen zwischen Churn und Commits (0.54) sowie Churn und Changed Files Count (0.81) auf. Auffällig bei der SBB ist die negative Korrelation zwischen Description Length und Commits (-0.33).
 
 \begin{figure}[htbp]
     \includegraphics[width=\textwidth]{Figures/sbb-korrelationsmatrix.pdf}
@@ -819,7 +819,7 @@ Die Korrelationsmatrix der SBB (\autoref{fig:korrelationsmatrix-sbb}) weist eben
 \end{figure}
 
 \newpage
-Die Differenzanalyse zwischen Racetrack und SBB (\autoref{fig:diff-korrelationsmatrix-racetrack-sbb}) zeigt, dass Racetrack eine stärkere positive Korrelation zwischen \textit{Description Length} und einigen Metriken wie \textit{Churn}, \textit{Commits} sowie eine schwächere Korrelation mit der Anzahl \textit{Comments} aufweist.
+Die Differenzanalyse zwischen Racetrack und SBB (\autoref{fig:diff-korrelationsmatrix-racetrack-sbb}) zeigt, dass Racetrack eine stärkere positive Korrelation zwischen Description Length und einigen Metriken wie Churn, Commits sowie eine schwächere Korrelation mit der Anzahl Comments aufweist.
 
 \begin{figure}[htbp]
 \includegraphics[width=\textwidth]{Figures/diff-korrelationsmatrix-racetrack-sbb.pdf}
@@ -830,7 +830,7 @@ Die Differenzanalyse zwischen Racetrack und SBB (\autoref{fig:diff-korrelationsm
 \newpage
 
 \subsubsection{Zalando SE}
-Die Korrelationsmatrix von Zalando (\autoref{fig:korrelationsmatrix-zalando}) zeigt deutliche Unterschiede zu Racetrack, insbesondere eine starke negative Korrelation zwischen \textit{Churn} und \textit{Description Length} (-0.47), was darauf hindeutet, dass bei Zalando umfangreiche Änderungen oft weniger ausführlich beschrieben werden. Zudem zeigt sich eine positive Korrelation zwischen \textit{Churn} und \textit{Changed Files Count} (0.82), ähnlich wie bei den anderen Organisationen. Auch gibt es eine negative Korrelation zwischen \textit{Changed Files Count} und \textit{Description Length} (-0.41).
+Die Korrelationsmatrix von Zalando (\autoref{fig:korrelationsmatrix-zalando}) zeigt deutliche Unterschiede zu Racetrack, insbesondere eine starke negative Korrelation zwischen Churn und Description Length (-0.47), was darauf hindeutet, dass bei Zalando umfangreiche Änderungen oft weniger ausführlich beschrieben werden. Zudem zeigt sich eine positive Korrelation zwischen Churn und Changed Files Count (0.82), ähnlich wie bei den anderen Organisationen. Auch gibt es eine negative Korrelation zwischen Changed Files Count und Description Length (-0.41).
 
 \begin{figure}[htbp]
     \includegraphics[width=\textwidth]{Figures/zalando-korrelationsmatrix.pdf}
@@ -839,7 +839,7 @@ Die Korrelationsmatrix von Zalando (\autoref{fig:korrelationsmatrix-zalando}) ze
 \end{figure}
 
 \newpage
-Die Differenzanalyse zwischen Racetrack und Zalando (\autoref{fig:diff-korrelationsmatrix-racetrack-zalando}) verdeutlicht, dass Racetrack im Gegensatz zu Zalando deutliche positive Korrelationen zwischen \textit{Description Length} und sowohl \textit{Commits} als auch \textit{Churn} aufweist.
+Die Differenzanalyse zwischen Racetrack und Zalando (\autoref{fig:diff-korrelationsmatrix-racetrack-zalando}) verdeutlicht, dass Racetrack im Gegensatz zu Zalando deutliche positive Korrelationen zwischen Description Length und sowohl Commits als auch Churn aufweist.
 
 \begin{figure}[htbp]
 \includegraphics[width=\textwidth]{Figures/diff-korrelationsmatrix-racetrack-zalando.pdf}
@@ -850,12 +850,12 @@ Die Differenzanalyse zwischen Racetrack und Zalando (\autoref{fig:diff-korrelati
 \newpage
 
 \subsection{Zusammenfassung}
-Die Analyse zeigt, dass starke positive Korrelationen zwischen den Metriken \textit{Churn}, \textit{Commits} und \textit{Changed Files Count} sowohl in den Racetrack-Projekten als auch in den professionellen GitHub-Organisationen vorhanden sind. Diese Korrelationen deuten darauf hin, dass umfangreiche Änderungen häufig mit vielen Commits und vielen veränderten Dateien einhergehen.
+Die Analyse zeigt, dass starke positive Korrelationen zwischen den Metriken Churn, Commits und Changed Files Count sowohl in den Racetrack-Projekten als auch in den professionellen GitHub-Organisationen vorhanden sind. Diese Korrelationen deuten darauf hin, dass umfangreiche Änderungen häufig mit vielen Commits und vielen veränderten Dateien einhergehen.
 
-Unterschiede zeigen sich insbesondere bei der Korrelation mit der Metrik \textit{Description Length}. In den Racetrack-Projekten stehen längere Pull-Request-Beschreibungen in positivem Zusammenhang mit umfangreicheren Änderungen und mehr Commits. 
-In den professionellen Projekten hingegen, insbesondere bei Zalando, zeigt sich eine negative Korrelation zwischen \textit{Description Length} und \textit{Churn}. 
+Unterschiede zeigen sich insbesondere bei der Korrelation mit der Metrik Description Length. In den Racetrack-Projekten stehen längere Pull-Request-Beschreibungen in positivem Zusammenhang mit umfangreicheren Änderungen und mehr Commits. 
+In den professionellen Projekten hingegen, insbesondere bei Zalando, zeigt sich eine negative Korrelation zwischen Description Length und Churn. 
 
-Zusammenfassend lässt sich zur \fref{forschungsfrage6} feststellen, dass zwar einige Metriken in den Racetrack und in professionellen Projekten ähnlich korrelieren, insbesondere im Bereich \textit{Churn}, \textit{Commits} und \textit{Changed Files Count}, jedoch insbesondere die Beschreibungstexte der Pull-Requests unterschiedliche Zusammenhänge zu anderen Metriken aufweisen.
+Zusammenfassend lässt sich zur \fref{forschungsfrage6} feststellen, dass zwar einige Metriken in den Racetrack und in professionellen Projekten ähnlich korrelieren, insbesondere im Bereich Churn, Commits und Changed Files Count, jedoch insbesondere die Beschreibungstexte der Pull-Requests unterschiedliche Zusammenhänge zu anderen Metriken aufweisen.
 
 \newpage
 
