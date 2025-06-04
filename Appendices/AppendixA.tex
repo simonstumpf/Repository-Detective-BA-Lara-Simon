@@ -14,34 +14,35 @@ Für die durchgeführten Analysen wurden mehrere Python-Bibliotheken verwendet, 
 
 
 \subsection{Jupyter-Notebooks}  
-Jupyter-Notebooks sind ein Tool für interaktive Datenanalysen und die Visualisierung von Python-Code, Ergebnissen und Text. Sie ermöglichen die Erstellung von \textit{Notebooks}, die eine Kombination aus ausführbarem Python-Code, erklärenden Mark\-down-Texten und grafischen Darstellungen enthalten. \parencite{noauthor_project_nodate} 
+Jupyter-Notebooks sind ein Tool für interaktive Datenanalysen und die Visualisierung von Python-Code, Ergebnissen und Text. Sie ermöglichen die Erstellung von Notebooks, die eine Kombination aus ausführbarem Python-Code, erklärenden \linebreak Markdown-Texten und grafischen Darstellungen enthalten. \parencite{noauthor_project_nodate} 
 
 Im Rahmen dieses Projekts werden Jupyter-Notebooks zur Organisation und Dokumentation der Datenanalyse eingesetzt. 
 
 \subsection{NumPy}
-NumPy ist eine Bibliothek für numerische Berechnungen in Python, die effiziente Operationen mit Arrays und Matrizen ermöglicht. Sie bietet grundlegende Funktionen für lineare Algebra, Statistik und numerische Analysen. In diesem Projekt wird NumPy vor allem für statistische Analysen eingesetzt. Zudem erleichtert es die effiziente Verarbeitung grosser Datensätze und bildet die Grundlage für weiterführende Analysen mit \textit{SciPy}, \textit{Pandas} oder \textit{Matplotlib}. \parencite{noauthor_numpy_nodate}\parencite{noauthor_what_nodate}
+NumPy ist eine Bibliothek für numerische Berechnungen in Python, die effiziente Operationen mit Arrays und Matrizen ermöglicht. Sie bietet grundlegende Funktionen für lineare Algebra, Statistik und numerische Analysen. In diesem Projekt wird NumPy vor allem für statistische Analysen eingesetzt. Zudem erleichtert es die effiziente Verarbeitung grosser Datensätze und bildet die Grundlage für weiterführende Analysen mit SciPy, Pandas oder Matplotlib. \parencite{noauthor_numpy_nodate}\parencite{noauthor_what_nodate}
 
 
 \subsection{Pandas}
-Pandas ist eine Python-Bibliothek, die Werkzeuge für die Arbeit mit strukturierten Daten bereitstellt. Sie ermöglicht die einfache Manipulation und Analyse von Daten, die in tabellarischer Form vorliegen. Die Bibliothek basiert auf \textit{NumPy} und stellt Datenstrukturen wie \textit{DataFrame} und \textit{Series} zur Verfügung, welche tabellarische eindimensionale Daten repräsentieren  \parencite{noauthor_pandas_nodate}. Für die Analysen wird Pandas verwendet, um Daten zu bereinigen und zu transformieren. Dazu gehört das Entfernen ungültiger Werte, das Berechnen neuer Metriken wie Latenzzeiten und Churn sowie das Gruppieren der Daten nach relevanten Kategorien, um differenzierte Analysen und Visualisierungen zu ermöglichen.
+Pandas ist eine Python-Bibliothek, die Werkzeuge für die Arbeit mit strukturierten Daten bereitstellt. Sie ermöglicht die einfache Manipulation und Analyse von Daten, die in tabellarischer Form vorliegen. Die Bibliothek basiert auf NumPy und stellt Datenstrukturen wie DataFrame und Series zur Verfügung, welche tabellarische eindimensionale Daten repräsentieren  \parencite{noauthor_pandas_nodate}. Für die Analysen wird Pandas verwendet, um Daten zu bereinigen und zu transformieren. Dazu gehört das Entfernen ungültiger Werte, das Berechnen neuer Metriken wie Latenzzeiten und Churn sowie das Gruppieren der Daten nach relevanten Kategorien, um differenzierte Analysen und Visualisierungen zu ermöglichen.
 
 \subsection{Matplotlib}
-Matplotlib ist eine Bibliothek zur Erstellung von statistischen Visualisierungen in Python. Sie wird oftmals verwendet, um Diagramme (Linien-, Streu- und Histogramm-Diagramme) zu erstellen. Matplotlib ist sehr nützlich, um visuelle Einblicke in Datenverteilungen zu gewinnen. Dies erleichtert die Untersuchung komplexer Datensätze und die Präsentation der Ergebnisse. \parencite{noauthor_matplotlib_nodate}
+Matplotlib ist eine Bibliothek zur Erstellung von statistischen Visualisierungen in Python. Sie wird oftmals verwendet, um Diagramme (Linien-, Streu- und Histo\-gramm-Diagramme) zu erstellen. Matplotlib ist sehr nützlich, um visuelle Einblicke in Datenverteilungen zu gewinnen. Dies erleichtert die Untersuchung komplexer Datensätze und die Präsentation der Ergebnisse. \parencite{noauthor_matplotlib_nodate}
 
 \subsection{SciPy}
-SciPy ist eine Bibliothek, die auf \textit{NumPy} aufbaut und eine Vielzahl von Funktionen für wissenschaftliche Berechnungen bietet. In diesem Projekt wird insbesondere das Statistikmodul von SciPy verwendet, um verschiedene Metriken zu analysieren. \\
-Zur Untersuchung der Pull-Requests kommen statistische Methoden zum Einsatz, um Korrelationen zwischen unterschiedlichen Metriken wie \textit{Latency} und \textit{Churn} zu bestimmen. Dabei werden unter anderem der Pearson- und der Spearman-Korre\-lations\-koeffizient genutzt, um sowohl lineare als auch monotone Zusammenhänge zwischen den Daten zu quantifizieren. \parencite{noauthor_scipy_nodate}
+SciPy ist eine Bibliothek, die auf NumPy aufbaut und eine Vielzahl von Funktionen für wissenschaftliche Berechnungen bietet. In diesem Projekt wird insbesondere das Statistikmodul von SciPy verwendet, um verschiedene Metriken zu analysieren.
+
+Zur Untersuchung der Pull-Requests kommen statistische Methoden zum Einsatz, um Korrelationen zwischen unterschiedlichen Metriken wie Latency und Churn zu bestimmen. Dabei werden unter anderem der Pearson- und der Spearman-Korre\-lations\-koeffizient genutzt, um sowohl lineare als auch monotone Zusammenhänge zwischen den Daten zu quantifizieren. \parencite{noauthor_scipy_nodate}
 
 \subsection{Seaborn}
-Seaborn ist eine auf \textit{Matplotlib} aufbauende Bibliothek, die für statistische Datenvisualisierungen entwickelt wurde. Sie bietet eine benutzerfreundliche API sowie erweiterte Funktionen für die Erstellung von Diagrammen wie Heatmaps, Boxplots und Violinplots, die insbesondere in der Analyse von Mustern und Verteilungen komplexer Datensätze nützlich sind.
+Seaborn ist eine auf Matplotlib aufbauende Bibliothek, die für statistische Datenvisualisierungen entwickelt wurde. Sie bietet eine benutzerfreundliche API sowie erweiterte Funktionen für die Erstellung von Diagrammen wie Heatmaps, Boxplots und Violinplots, die insbesondere in der Analyse von Mustern und Verteilungen komplexer Datensätze nützlich sind.
 In diesem Projekt wird Seaborn primär für die Darstellung von Korrelationsmatrizen eingesetzt. \parencite{waskom_seaborn_2021}
 
 \section{GitHub GraphQL-API Octokit}
-Mithilfe der Octokit.GraphQL.NET-Bibliothek ist ein Zugriff auf die GraphQL-API von GitHub möglich. Diese ermöglicht es, die GraphQL-API aus einer C\#-Applikation aufzurufen. Die Bibliothek ist stark typisiert und nutzt C\#-Typen für eine einfache Integration.
+Mithilfe der Octokit.GraphQL.NET-Bibliothek ist ein Zugriff auf die GraphQL-API von GitHub möglich. Diese ermöglicht es, die GraphQL-API aus einer C\#-App\-likation aufzurufen. Die Bibliothek ist stark typisiert und nutzt C\#-Typen für eine einfache Integration.
 \parencite{noauthor_octokitoctokitgraphqlnet_2025}
 
 
 \section{Frontend Datenvisualisierung}
-Im Rahmen dieses Projekts wird die React-Komponentenbibliothek \textit{MUI X-Library} verwendet, die anpassbare und interaktive UI-Elemente für Datenvisualisierungen bereitstellt. Insbesondere die \textit{MUI X Charts}, die ein Teil dieser Bibliothek sind, ermöglichen die einfache Erstellung von Diagrammen.
+Im Rahmen dieses Projekts wird die React-Komponentenbibliothek MUI X-Library verwendet, die anpassbare und interaktive UI-Elemente für Datenvisualisierungen bereitstellt. Insbesondere die MUI X Charts, die ein Teil dieser Bibliothek sind, ermöglichen die einfache Erstellung von Diagrammen.
 
-Die Bibliothek wird in dieser Arbeit zur Darstellung von Commit-Daten verwendet. Dabei wird die \textit{LineChart}-Komponente verwendet, um benutzerdefinierte Datenachsen, Labels und verschiedene Diagrammserien darzustellen. \parencite{noauthor_react_nodate}
+Die Bibliothek wird in dieser Arbeit zur Darstellung von Commit-Daten verwendet. Dabei wird die LineChart-Komponente verwendet, um benutzerdefinierte Datenachsen, Labels und verschiedene Diagrammserien darzustellen. \parencite{noauthor_react_nodate}

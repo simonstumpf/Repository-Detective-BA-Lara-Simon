@@ -136,7 +136,6 @@ Apache Kibble ist ein Open-Source-Projekt zur Analyse von Softwareprojekten \lin
     \label{fig:apache-kibble}
 \end{figure}
 
-\newpage
 Augur ist ein Data-Engineering-Tool und REST-Webservice, welcher sich auf die Analyse von GitHub- und GitLab-Daten fokussiert. Der Hauptfokus von Augur liegt auf der Messung der allgemeinen Gesundheit und Nachhaltigkeit von Open-Source-Projekten. Das Tool sammelt und normalisiert Daten aus verschiedenen Repositories, um nützliche Metriken über den Zustand eines Projekts (GitHub-Organi\-sation) zu liefern. Diese Metriken ermöglichen eine umfassende Analyse der Entwickleraktivitäten, der Community-Dynamiken und der Stabilität von Projekten. Die Daten werden in einer relationalen Datenbank abgespeichert. Augur ist ein Projekt der CHAOSS (Community Health Analytics in Open-Source-Software) Community, welche selbst der Linux Foundation angehört. Die CHAOSS-Community beschäftigt sich mit der Analyse und Messung der Gesundheit und Nachhaltigkeit von Open-Source-Projekten. So werden Metriken entwickelt, die die langfristige Stabilität und das Wachstum der Projekte unterstützen sollen. Die Community verwaltet über 60 Repositories auf GitHub \parencite{noauthor_chaoss_nodate}.
 Obwohl Augur eine breite Palette an Metriken anbietet und als Teil der CHAOSS-Community kontinuierlich weiterentwickelt wird, eignet sich das Tool primär für die Analyse grossflächiger Open-Source-Organisationen. Es fehlen jedoch Funktionalitäten, die für kleinere, zeitlich begrenzte Projekte, wie etwa die Projektmodule, entscheidend sind. Dazu zählen unter anderem die Analyse der Pull-Request-Latency im zeitlichen Projektverlauf, die Erkennung von Arbeitstagen der Entwickler oder die spezifische Kategorisierung von PR-Schliessgründen. Auch die Visualisierung ist eher auf generelle Projektgesundheit als auf relevante Einblicke in Teamprozesse ausgelegt. \parencite{noauthor_about_nodate-1}\parencite{noauthor_chaossaugur_nodate}
 
@@ -148,8 +147,6 @@ Obwohl Augur eine breite Palette an Metriken anbietet und als Teil der CHAOSS-Co
     \caption{Analyse des Projektes Argo mittels Augur \& 8Knot \parencite{noauthor_metrixchaossio_nodate}\parencite{noauthor_argoprojargo-workflows_2025}}
     \label{fig:augur-8knot}
 \end{figure}
-
-
 
 
 \section{Projektmodule}
@@ -181,7 +178,6 @@ In den Projektmodulen der ZHAW nutzen die Studierenden, wie bereits in Kapitel \
 
 \subsection{Systemarchitektur}
 GitGauge ist als Webanwendung mit einer Client-Server-Architektur entworfen. Die 3 Hauptkomponenten sind in \autoref{fig:container-diagram-gitgauge} ersichtlich. 
-\newpage
 \begin{figure}[htbp]
     \centering
         \includegraphics[width=0.8\textwidth]{Figures/container-diagram-gitgauge.png}
@@ -208,5 +204,3 @@ Die Analyse der Daten erfolgt jeweils bei Abfrage der Statistik-API-Endpunkte de
     \caption{Übersicht Mining-Prozess \parencite{grand_joel_vt1_joelgrand_repository_2024}}
     \label{fig:overview-mining-steps}
 \end{figure}
-
-\pagebreak
