@@ -50,7 +50,7 @@ Ein ähnliches Bild zeigt sich beim Churn. Auch hier liegt der Mittelwert mit 27
 
 Diese Werte sind zusätzlich in den Boxplots in den Abbildungen \autoref{fig:boxplot-latency} und \autoref{fig:boxplot-churn} ersichtlich. 
 In beiden Abbildungen ist der Box-Bereich auf der linken Seite kompakt und nahe bei null. 
-Die \autoref{fig:boxplot-latency} zeigt ebenfalls, dass viele Pull-Requests schnell abgearbeitet werden, während wenige längere Bearbeitungszeiten aufweisen. Es zeigt ausserdem auf, dass es eine Reihe von Ausreissern gibt. Diese belaufen sich auf 14\,\% aller latencies.
+Die \autoref{fig:boxplot-latency} zeigt ebenfalls, dass viele Pull-Requests schnell abgearbeitet werden, während wenige längere Bearbeitungszeiten aufweisen. Es zeigt ausserdem auf, dass es eine Reihe von Ausreissern gibt. Diese belaufen sich auf 14\,\% aller Latencies.
 
 \begin{figure}[htbp]
     \includegraphics[width=0.8\textwidth]{Figures/boxplot-latency.pdf}
@@ -59,7 +59,7 @@ Die \autoref{fig:boxplot-latency} zeigt ebenfalls, dass viele Pull-Requests schn
     \label{fig:boxplot-latency}
 \end{figure}
 
-Der Boxplot in der \autoref{fig:boxplot-churn} zeigt, dass es viele kleine Pull-Requests mit wenigen Codezeilenänderungen gibt. Wie bereits bei der latency wird festgestellt, dass es eine Reihe von Ausreissern gibt, von denen einige besonders hervorstechen. Diese befinden sich bei über 10'000 Zeilenänderungen. In diesem Fall liegt die Anzahl der Ausreisser bei 9.6\,\%.
+Der Boxplot in der \autoref{fig:boxplot-churn} zeigt, dass es viele kleine Pull-Requests mit wenigen Codezeilenänderungen gibt. Wie bereits bei der Latency wird festgestellt, dass es eine Reihe von Ausreissern gibt, von denen einige besonders hervorstechen. Diese befinden sich bei über 10'000 Zeilenänderungen. In diesem Fall liegt die Anzahl der Ausreisser bei 9.6\,\%.
 
 \begin{figure}[htbp]
     \includegraphics[width=0.8\textwidth]{Figures/boxplot-churn.pdf}
@@ -71,7 +71,7 @@ Der Boxplot in der \autoref{fig:boxplot-churn} zeigt, dass es viele kleine Pull-
 Werden die Ausreisser beider Metriken kumulativ aus allen Datensätzen herausgefiltert, bleiben 1'887 Pull-Requests übrig, was 77.5\,\% entspricht. Das Herausfiltern dieser Daten stellt einen erheblichen Eingriff in die Datenbasis dar und wird daher nicht pauschal vorgenommen.
 
 \subsection{Ergebnisse}
-Um festzustellen, ob zwischen den Metriken latency und churn ein Zusammenhang besteht, wird die Spearman-Rangkorrelation angewendet. Dafür wird die oben erwähnte \autoref{eqn:spearman} verwendet. Diese wird mittels der Python-Bibliothek pandas berechnet. Als Ergebnis erreichte der Rangkorrelationskoeffizient einen Wert von 0.17. Dieser Wert liegt nahe bei null und zeigt somit keinen spezifischen Zusammenhang zwischen den beiden Metriken auf. 
+Um festzustellen, ob zwischen den Metriken Latency und Churn ein Zusammenhang besteht, wird die Spearman-Rangkorrelation angewendet. Dafür wird die oben erwähnte \autoref{eqn:spearman} verwendet. Diese wird mittels der Python-Bibliothek pandas berechnet. Als Ergebnis erreichte der Rangkorrelationskoeffizient einen Wert von 0.17. Dieser Wert liegt nahe bei null und zeigt somit keinen spezifischen Zusammenhang zwischen den beiden Metriken auf. 
 
 Wie bereits erwähnt, weisen die Daten einen hohen Anteil an Ausreissern auf. Deshalb soll überprüft werden, ob die Metriken eine Korrelation besitzen, wenn diese Ausreisser herausgefiltert werden. In diesem Fall erhöht sich der Koeffizient auf 0.2, zeigt aber weiterhin keinen eindeutigen Zusammenhang zwischen den Metriken.
 
@@ -79,7 +79,7 @@ Wie bereits erwähnt, weisen die Daten einen hohen Anteil an Ausreissern auf. De
 Die Analyse zeigt, dass die meisten Pull-Requests sehr schnell bearbeitet werden, mit einer Median-Bearbeitungszeit von 0.6 Stunden. Der Churn verteilt sich ebenfalls sehr ungleich, die meisten PRs enthalten wenige Änderungen, einige jedoch sehr viele. Der Mittelwert der Anzahl Codeänderungen (Churn) liegt bei 278 Zeilen.
 
 Die Berechnung der Spearman-Rangkorrelation ergibt einen Wert von 0.17, was auf keinen signifikanten Zusammenhang zwischen dem Churn und der Latency hindeutet. Auch nach Herausfiltern der Ausreisser bleibt der Zusammenhang mit 0.20 sehr schwach.
-Zusammenfassend lässt sich zur \fref{forschungsfrage1} feststellen, dass die Metriken latency und churn, bei den untersuchten Projekten, keinen Zusammenhang aufweisen.
+Zusammenfassend lässt sich zur \fref{forschungsfrage1} feststellen, dass die Metriken Latency und Churn, bei den untersuchten Projekten, keinen Zusammenhang aufweisen.
 
 %----------------------------------------------------------------------------------------
 % SECTION 2
@@ -175,6 +175,7 @@ V > 500& 8 & 0 & 1 & 4 & 6 & 0 \\
 \end{tabular}
 \end{table}
 
+\newpage
 \textbf{Legende:}
 
 \noindent
@@ -312,12 +313,12 @@ Im Gegensatz dazu zeigen Vollzeitklassen bei den grossen Pull-Requests häufiger
 % SECTION 3
 %----------------------------------------------------------------------------------------
 \section{Einfluss von Projektzeit}
-Als Nächstes wurde die \fref{forschungsfrage3} "\textit{Besteht ein Zusammenhang zwischen dem Zeitpunkt im Projektverlauf und der Review-Dauer von Pull-Requests?}" untersucht. Um zu ermitteln, ob die fortschreitende Projektzeit einen Einfluss auf das Bearbeiten der Pull-Requests hat. Zusätzlich werden auch die churns untersucht, um zu sehen, wie sich diese im Verlauf der Projektzeit verändern. 
+Als Nächstes wurde die \fref{forschungsfrage3} "\textit{Besteht ein Zusammenhang zwischen dem Zeitpunkt im Projektverlauf und der Review-Dauer von Pull-Requests?}" untersucht. Um zu ermitteln, ob die fortschreitende Projektzeit einen Einfluss auf das Bearbeiten der Pull-Requests hat. Zusätzlich werden auch die Churns untersucht, um zu sehen, wie sich diese im Verlauf der Projektzeit verändern. 
 
 
 Ein signifikanter Faktor, der bei den Projektmodulen eine Rolle spielt, ist der fest definierte Abgabetermin. Dies unterscheidet diese Projekte von Open-Source-Projek\-ten, die in der Literatur häufig untersucht werden. Um diese Untersuchung durchführen zu können, wird zusätzlich zu den oben genannten Metriken der Abgabetermin der einzelnen Klassen nachgeschlagen.
 
-Zur initialen Analyse wurden die Projekte in die entsprechenden Projektwochen aufgeteilt und die Mediane der latencies und churns der entsprechenden Wochen ermittelt. Dies soll eine allgemeine Übersicht der Veränderungen der Metriken aufzeigen.
+Zur initialen Analyse wurden die Projekte in die entsprechenden Projektwochen aufgeteilt und die Mediane der Latencies und Churns der entsprechenden Wochen ermittelt. Dies soll eine allgemeine Übersicht der Veränderungen der Metriken aufzeigen.
 
 \subsection{Projektwochen im Verhältnis zu Latency und Churn}
 \label{sec:ProjektwochenLatencyChurn}
@@ -638,7 +639,7 @@ Zur detaillierten Analyse der \fref{forschungsfrage5} "\textit{Welche Unterschie
 \subsection{Deskriptive Analyse der Metriken}
 Die latency zeigt, dass Teilzeitstudierende im Durchschnitt mehr Zeit benötigen, um einen PR zu bearbeiten. Der Median zeigt jedoch, dass Teilzeitstudierende häufiger sehr kurze Pull-Request-Latencies haben. Dabei ist bei beiden die Bearbeitungszeit im Median deutlich kürzer. Ausserdem ist zu erkennen, dass die Teilzeitstudierenden eine grössere Streuung der Bearbeitungszeiten aufweisen. Sie haben also einige Pull-Requests, die deutlich länger dauern. Dies ist auch im Maximum zu sehen, welches bei den Teilzeitstudierenden bei 416 Stunden liegt, was 17 Tagen entspricht. Wobei die Vollzeitstudierenden ein Maximum von 265 Stunden haben, was 11 Tagen entspricht.
 
-Der churn zeigt, dass Vollzeitstudierende sowohl im Durchschnitt als auch im Median mehr Zeilenänderungen pro Pull-Request vornehmen. Die Standardabweichung zeigt ebenfalls, dass Vollzeitstudierende grössere Schwankungen in der Anzahl der Zeilenänderungen haben. Im Maximum ist ersichtlich, dass beide sehr grosse PRs haben, wobei sich das Maximum der Vollzeitstudierenden nochmals um mehr als 4'000 Zeilen von dem Maximum der Teilzeitstudierenden unterscheidet.
+Der Churn zeigt, dass Vollzeitstudierende sowohl im Durchschnitt als auch im Median mehr Zeilenänderungen pro Pull-Request vornehmen. Die Standardabweichung zeigt ebenfalls, dass Vollzeitstudierende grössere Schwankungen in der Anzahl der Zeilenänderungen haben. Im Maximum ist ersichtlich, dass beide sehr grosse PRs haben, wobei sich das Maximum der Vollzeitstudierenden nochmals um mehr als 4'000 Zeilen von dem Maximum der Teilzeitstudierenden unterscheidet.
 
 Auch die Struktur der PRs unterscheidet sich leicht zwischen den Unterrichtsmodellen: Die durchschnittliche Anzahl bearbeiteter Dateien pro PR liegt insgesamt bei 5.66 Dateien. Teilzeitklassen weisen mit 5.85 im Schnitt mehr betroffene Dateien auf als Vollzeitklassen mit 5.42 Dateien. Ebenso zeigt sich bei der durchschnittlichen Anzahl Commits pro PR ein Unterschied: Insgesamt liegt der Durchschnitt bei 7.03 Commits pro PR, wobei Teilzeitklassen auf 6.50 und Vollzeitklassen auf 7.70 Commits pro PR kommen.
 
@@ -835,7 +836,7 @@ Die Korrelationsmatrix von Zalando (\autoref{fig:korrelationsmatrix-zalando}) ze
 
 Die Differenzanalyse zwischen Racetrack und Zalando (\autoref{fig:diff-korrelationsmatrix-racetrack-zalando}) verdeutlicht, dass Racetrack im Gegensatz zu Zalando deutliche positive Korrelationen zwischen Description Length und sowohl Commits als auch Churn aufweist.
 
-\begin{figure}[htbp]
+\begin{figure}[ht]
 \includegraphics[width=\textwidth]{Figures/diff-korrelationsmatrix-racetrack-zalando.pdf}
 \caption{Differenz der Korrelations-Heatmaps der Racetrack Repositories und der Zalando GitHub Organisation}
 \label{fig:diff-korrelationsmatrix-racetrack-zalando}
